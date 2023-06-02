@@ -1,0 +1,62 @@
+name: Project Radius Blog Website
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Hugo Website
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    env:
+      GOVER: '^1.17'
+      HUGO_ENV: production
+      SWA_BASE: 'orange-sand-0cb9fcb1e'
+    steps:
+      - name: Checkout website repo
+        uses: actions/checkout@v2
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.5.0
+        with:
+          hugo-version: 0.102.3
+          extended: true
+      - name: Build Hugo Site
+        run: |
+          if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
+            STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.3.azurestaticapps.net/"
+          fi
+          hugo ${STAGING_URL+-b "$STAGING_URL"}
+      - name: Upload Hugo artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: hugo_build
+          path: ./public/
+          if-no-files-found: error
+  
+  deploy:
+    name: Deploy Hugo Website
+    if: github.event_name == 'push'
+    needs: ['build']
+    runs-on: ubuntu-latest
+    environment:
+      name: latest
+      url: https://blog.radapp.dev
+    steps:
+      - name: Download Hugo artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: hugo_build
+          path: site/
+      - name: Deploy to WebApp
+        uses: Azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.ENV_APPSERVICE_NAME }}
+          publish-profile: ${{ secrets.ENV_APPSERVICE_PUBLISHPROFILE }}
+          package: site/
