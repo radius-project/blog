@@ -21,7 +21,7 @@ jobs:
       SWA_BASE: 'orange-sand-0cb9fcb1e'
     steps:
       - name: Checkout website repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.5.0
         with:
