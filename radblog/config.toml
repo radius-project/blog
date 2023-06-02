@@ -1,0 +1,66 @@
+# Site Configuration
+baseURL = "https://blog.radapp.dev"
+languageCode = "en-us"
+title = "Radius Blog"
+theme = "docsy"
+
+# Configure how URLs look like per section.
+[permalinks]
+posts = "/:section/:year/:month/:day/:slug/"
+
+# Google Analytics
+[services.googleAnalytics]
+id = "G-9JR8B6TPF9"
+
+enableGitInfo = true
+
+# Allow embedded HTML in pages
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Top Nav Bar
+[[menu.main]]
+    name = "Home"
+    weight = 10
+    url = "https://radapp.dev"
+    pre = "<i class='fas fa-home'></i>"
+[[menu.main]]
+    name = "Docs"
+    weight = 30
+    url = "https://docs.radapp.dev/"
+    pre = "<i class='fas fa-file'></i>"
+[[menu.main]]
+    name = "GitHub"
+    weight = 50
+    url = "https://github.com/project-radius"
+    pre = "<i class='fab fa-github'></i>"
+[[menu.main]]
+    name = "Community"
+    weight = 70
+    url = "https://aka.ms/projectradius"
+    pre = "<i class='fas fa-comment'></i>"
+[[menu.main]]
+    name = "Discord"
+    weight = 90
+    url = "https://discord.com/channels/1113519723347456110/1113519723930468455"
+    pre = "<i class='fab fa-discord'></i>"
+
+# UI Customization
+[params.ui]
+# navbar_logo = true
+sidebar_menu_compact = true
+sidebar_search_disable = true
+ul_show = 1
+
+copyright = "Project Radius"
+
+# Algolia Search
+algolia_docsearch = true
+
+# GitHub Information
+github_repo = "https://github.com/project-radius/blog"
+github_subdir = "blog"
+github_branch = "main"
+github_project_repo = "https://github.com/project-radius/radius"
