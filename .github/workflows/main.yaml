@@ -22,11 +22,36 @@ jobs:
     steps:
       - name: Checkout website repo
         uses: actions/checkout@v3
+      - name: Setup Go ${{ env.GOVER }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.GOVER }}
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.6.0
         with:
           hugo-version: 0.102.3
           extended: true
+      - name: Setup Docsy
+        run: |
+          cd radblog
+          sudo npm install -D --save autoprefixer
+          sudo npm install -D --save postcss-cli
+          cd themes/docsy
+          npm install
+      - name: Restore Go Modules Cache
+        uses: actions/cache@v3
+        if: steps.cli_cache.outputs.cache-hit != 'true'
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Build Hugo Site
         run: |
           cd radblog
@@ -55,9 +80,15 @@ jobs:
         with:
           name: hugo_build
           path: site/
+      - name: az CLI login
+        run: |
+          az login --service-principal \
+            --username ${{ secrets.AZURE_SP_TESTS_APPID }} \
+            --password ${{ secrets.AZURE_SP_TESTS_PASSWORD }} \
+            --tenant ${{ secrets.AZURE_SP_TESTS_TENANTID }}
       - name: Deploy to WebApp
         uses: Azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.ENV_APPSERVICE_NAME }}
-          publish-profile: ${{ secrets.ENV_APPSERVICE_PUBLISHPROFILE }}
+          app-name: ${{ vars.ENV_APPSERVICE_NAME }}
+          resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
           package: site/
