@@ -20,7 +20,7 @@ jobs:
       HUGO_ENV: production
       SWA_BASE: 'orange-sand-0cb9fcb1e'
     steps:
-      - name: Checkout website repo
+      - name: Checkout blog repo
         uses: actions/checkout@v3
       - name: Setup Go ${{ env.GOVER }}
         uses: actions/setup-go@v2
@@ -63,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: hugo_build
-          path: ./public/
+          path: ./blog/public/
           if-no-files-found: error
   
   deploy:
@@ -75,6 +75,10 @@ jobs:
       name: latest
       url: https://blog.radapp.dev
     steps:
+      - name: Checkout blog repo
+        uses: actions/checkout@v3
+        with:
+          submodules: false
       - name: Download Hugo artifacts
         uses: actions/download-artifact@v3
         with:
