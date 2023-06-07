@@ -64,7 +64,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: hugo_build
-          path: public/
+          path: ./radblog/public/
           if-no-files-found: error
   
   deploy:
