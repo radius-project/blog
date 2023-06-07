@@ -59,6 +59,7 @@ jobs:
             STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.3.azurestaticapps.net/"
           fi
           hugo ${STAGING_URL+-b "$STAGING_URL"}
+          ls
       - name: Upload Hugo artifacts
         uses: actions/upload-artifact@v3
         with:
