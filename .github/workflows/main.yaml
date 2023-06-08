@@ -59,7 +59,6 @@ jobs:
             STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.3.azurestaticapps.net/"
           fi
           hugo ${STAGING_URL+-b "$STAGING_URL"}
-          ls
       - name: Upload Hugo artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -72,9 +71,6 @@ jobs:
     if: github.event_name == 'push'
     needs: ['build']
     runs-on: ubuntu-latest
-    environment:
-      name: latest
-      url: https://blog.radapp.dev
     steps:
       - name: Checkout blog repo
         uses: actions/checkout@v3
