@@ -55,6 +55,8 @@ jobs:
       - name: Build Hugo Site
         run: |
           cd radblog
+          echo ${{ vars.ENV_APPSERVICE_NAME }}
+          echo ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
           if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
             STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.3.azurestaticapps.net/"
           fi
