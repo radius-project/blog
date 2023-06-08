@@ -66,30 +66,30 @@ jobs:
           path: ./radblog/public/
           if-no-files-found: error
   
-  deploy:
-    name: Deploy Hugo Website
-    if: github.event_name == 'push'
-    needs: ['build']
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout blog repo
-        uses: actions/checkout@v3
-        with:
-          submodules: false
-      - name: Download Hugo artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: hugo_build
-          path: site/
-      - name: az CLI login
-        run: |
-          az login --service-principal \
-            --username ${{ secrets.AZURE_SP_TESTS_APPID }} \
-            --password ${{ secrets.AZURE_SP_TESTS_PASSWORD }} \
-            --tenant ${{ secrets.AZURE_SP_TESTS_TENANTID }}
-      - name: Deploy to WebApp
-        uses: Azure/webapps-deploy@v2
-        with:
-          app-name: ${{ vars.ENV_STATICWEBAPP_NAME }}
-          resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
-          package: site/
+  # deploy:
+  #   name: Deploy Hugo Website
+  #   if: github.event_name == 'push'
+  #   needs: ['build']
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout blog repo
+  #       uses: actions/checkout@v3
+  #       with:
+  #         submodules: false
+  #     - name: Download Hugo artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: hugo_build
+  #         path: site/
+  #     - name: az CLI login
+  #       run: |
+  #         az login --service-principal \
+  #           --username ${{ secrets.AZURE_SP_TESTS_APPID }} \
+  #           --password ${{ secrets.AZURE_SP_TESTS_PASSWORD }} \
+  #           --tenant ${{ secrets.AZURE_SP_TESTS_TENANTID }}
+  #     - name: Deploy to WebApp
+  #       uses: Azure/webapps-deploy@v2
+  #       with:
+  #         app-name: ${{ vars.ENV_STATICWEBAPP_NAME }}
+  #         resource-group-name: ${{ vars.ENV_APPSERVICE_RESOURCEGROUP }}
+  #         package: site/
