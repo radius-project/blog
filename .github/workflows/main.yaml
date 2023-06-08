@@ -1,70 +1,70 @@
-name: Project Radius Blog Website
+# name: Project Radius Blog Website
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     types: [opened, synchronize, reopened, closed]
+#     branches:
+#       - main
 
-jobs:
-  build:
-    name: Build Hugo Website
-    if: github.event.action != 'closed'
-    runs-on: ubuntu-latest
-    env:
-      GOVER: '^1.17'
-      HUGO_ENV: production
-      SWA_BASE: 'orange-sand-0cb9fcb1e'
-    steps:
-      - name: Checkout blog repo
-        uses: actions/checkout@v3
-      - name: Setup Go ${{ env.GOVER }}
-        uses: actions/setup-go@v2
-        with:
-          go-version: ${{ env.GOVER }}
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2.6.0
-        with:
-          hugo-version: 0.102.3
-          extended: true
-      - name: Setup Docsy
-        run: |
-          cd radblog
-          sudo npm install -D --save autoprefixer
-          sudo npm install -D --save postcss-cli
-          cd themes/docsy
-          npm install
-      - name: Restore Go Modules Cache
-        uses: actions/cache@v3
-        if: steps.cli_cache.outputs.cache-hit != 'true'
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-      - name: Build Hugo Site
-        run: |
-          cd radblog
-          if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
-            STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.3.azurestaticapps.net/"
-          fi
-          hugo ${STAGING_URL+-b "$STAGING_URL"}
-      - name: Upload Hugo artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: hugo_build
-          path: ./radblog/public/
-          if-no-files-found: error
+# jobs:
+#   build:
+#     name: Build Hugo Website
+#     if: github.event.action != 'closed'
+#     runs-on: ubuntu-latest
+#     env:
+#       GOVER: '^1.17'
+#       HUGO_ENV: production
+#       SWA_BASE: 'orange-sand-0cb9fcb1e'
+#     steps:
+#       - name: Checkout blog repo
+#         uses: actions/checkout@v3
+#       - name: Setup Go ${{ env.GOVER }}
+#         uses: actions/setup-go@v2
+#         with:
+#           go-version: ${{ env.GOVER }}
+#       - name: Setup Node
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '14'
+#       - name: Setup Hugo
+#         uses: peaceiris/actions-hugo@v2.6.0
+#         with:
+#           hugo-version: 0.102.3
+#           extended: true
+#       - name: Setup Docsy
+#         run: |
+#           cd radblog
+#           sudo npm install -D --save autoprefixer
+#           sudo npm install -D --save postcss-cli
+#           cd themes/docsy
+#           npm install
+#       - name: Restore Go Modules Cache
+#         uses: actions/cache@v3
+#         if: steps.cli_cache.outputs.cache-hit != 'true'
+#         with:
+#           path: |
+#             ~/.cache/go-build
+#             ~/go/pkg/mod
+#           key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
+#           restore-keys: |
+#             ${{ runner.os }}-go-
+#       - name: Build Hugo Site
+#         run: |
+#           cd radblog
+#           if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
+#             STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.3.azurestaticapps.net/"
+#           fi
+#           hugo ${STAGING_URL+-b "$STAGING_URL"}
+#       - name: Upload Hugo artifacts
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: hugo_build
+#           path: ./radblog/public/
+#           if-no-files-found: error
   
   # deploy:
   #   name: Deploy Hugo Website

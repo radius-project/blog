@@ -10,5 +10,11 @@ bin/
 ../.cache/
 ../obj/
 ../bin/
+*/resources/_gen
+*/node_modules
+*/public
+*/.cache/
+*/obj/
+*/bin/
 
 *.DS_Store
