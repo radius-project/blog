@@ -48,13 +48,13 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      - name: Build And Deploy
+      - name: Build And Deploy Staging Site
+        if: github.event_name == 'pull_request' && github.event.action != 'closed'
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         env:
           HUGO_ENV: production
           GOVER: '^1.19'
-
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_SAND_0CB9FCB1E }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
@@ -65,6 +65,24 @@ jobs:
           api_location: "api" # Api source code path - optional
           app_artifact_location: 'public' # Built app content directory - optional
           app_build_command: hugo --buildFuture
+          ###### End of Repository/Build Configurations ######
+      - name: Build And Deploy Live Site
+        if: github.event_name == 'push'
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        env:
+          HUGO_ENV: production
+          GOVER: '^1.19'
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_SAND_0CB9FCB1E }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "radblog" # App source code path
+          api_location: "api" # Api source code path - optional
+          app_artifact_location: 'public' # Built app content directory - optional
+          app_build_command: hugo
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
