@@ -1,11 +1,14 @@
 ---
-date: "2023-06-02T07:00:00-07:00"
-title: "First Radius blog post"
-linkTitle: "First Radius blog post"
+date: "2100-06-02T07:00:00-07:00"
+title: "Template blog post"
+linkTitle: "Blog template"
 author: Radius project maintainers
 type: blog
 ---
 
-Introducing...Radius!
+Use this template to create new blog posts.
 
-Hello world.
+- `date` should be set to the date you want the post to appear on the blog
+- `title` is the title that will be the header of the post
+- `linkTitle` is the title that will be displayed in the blog table of contents
+- `author` and `type` should be set to the values shown above
