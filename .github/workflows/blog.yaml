@@ -1,0 +1,112 @@
+name: Radius Blog
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'radblog/**'
+      - '.github/workflows/blog.yaml'
+      - '.github/scripts/**'
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+    paths:
+      - 'radblog/**'
+      - '.github/workflows/blog.yaml'
+      - '.github/scripts/**'
+
+jobs:
+  build:
+    name: Build Hugo Website
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    env:
+      HUGO_ENV: production
+      SWA_BASE: 'orange-sand-0cb9fcb1e'
+    steps:
+      - name: Checkout blog repo
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.5.0
+        with:
+          hugo-version: 0.102.3
+          extended: true
+      - name: Setup Docsy
+        run: |
+          cd radblog
+          sudo npm install -D --save autoprefixer
+          sudo npm install -D --save postcss-cli
+          cd themes/docsy
+          npm install
+      - name: Build Hugo Site
+        run: |
+          cd radblog
+          if [ $GITHUB_EVENT_NAME == 'pull_request' ]; then
+            echo "Building for pull request ${{github.event.number}}"
+            STAGING_URL="https://${SWA_BASE}-${{github.event.number}}.westus2.azurestaticapps.net/"
+          fi
+          hugo ${STAGING_URL+-b "$STAGING_URL"} ${STAGING_URL+--buildFuture}
+      - name: Upload Hugo artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: hugo_build
+          path: ./radblog/public/
+          if-no-files-found: error
+
+  deploy:
+    name: Open Staging Site
+    needs: ['build']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Hugo artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: hugo_build
+          path: site/
+      - name: Deploy blog site
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_SAND_0CB9FCB1E }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "site/"
+          api_location: "site/" 
+          output_location: ""
+          skip_app_build: true
+      - name: Find SWA Comment
+        uses: peter-evans/find-comment@v2
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: 'Azure Static Web Apps:'
+          direction: last
+      - name: Update SWA Comment
+        if: steps.fc.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          body: |
+            
+            **Password**: `Radiu$1234`
+
+  close_pr_site:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v0.0.1-preview
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_SAND_0CB9FCB1E }}
+          action: "close"
