@@ -1,5 +1,5 @@
 ---
-date: "2100-06-02T07:00:00-07:00"
+date: "2050-06-02T07:00:00-07:00"
 title: "Template blog post"
 linkTitle: "Blog template"
 author: Radius project maintainers
