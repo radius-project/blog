@@ -34,7 +34,7 @@ enableGitInfo = true
 [[menu.main]]
     name = "GitHub"
     weight = 50
-    url = "https://github.com/project-radius"
+    url = "https://github.com/radius-project"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
     name = "Community"
@@ -60,7 +60,7 @@ copyright = "Radius"
 algolia_docsearch = true
 
 # GitHub Information
-github_repo = "https://github.com/project-radius/blog"
+github_repo = "https://github.com/radius-project/blog"
 github_subdir = "blog"
 github_branch = "main"
-github_project_repo = "https://github.com/project-radius/radius"
+github_project_repo = "https://github.com/radius-project/radius"
