@@ -1,6 +1,6 @@
 ---
 date: "2023-10-18T00:00:00"
-title: "Enabling developer collaboration with Radius"
+title: "Introducing Radius, a new open-source application platform for cloud-native apps"
 linkTitle: "Introducing Radius"
 author: Radius project maintainers
 type: blog
