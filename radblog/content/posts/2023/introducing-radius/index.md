@@ -1,5 +1,5 @@
 ---
-date: "2023-10-18T09:00:00-08:00"
+date: "2023-10-18T00:00:00"
 title: "Enabling developer collaboration with Radius"
 linkTitle: "Introducing Radius"
 author: Radius project maintainers
