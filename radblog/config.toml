@@ -48,6 +48,7 @@ enableGitInfo = true
 sidebar_menu_compact = true
 sidebar_search_disable = true
 ul_show = 1
+navbar_logo = true
 
 copyright = "Radius"
 
