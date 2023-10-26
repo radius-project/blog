@@ -1,5 +1,5 @@
 # Site Configuration
-baseURL = "https://blog.radapp.dev"
+baseURL = "https://blog.radapp.io"
 languageCode = "en-us"
 title = "Radius Blog"
 theme = "docsy"
