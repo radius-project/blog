@@ -10,7 +10,7 @@ In the complex landscape of cloud native architectures today, it can be difficul
 
 ## Application graph data that is inherently part of the development process
 
-With an application structure that includes environments, resource groups, and connections, applications deployed using Radius get represented into a graph-like dataset that reveals precisely how the resources within the application are interconnected. Operator teams that support developers are thus empowered to build visualizations using this graph data that help them intuitively understand what makes up an application. Best of all, this data is generated automatically as part of the development process with Radius inherent in the application declarations, so it is always up to date without requiring additional effort from developers.
+With an application structure that includes environments, resource groups, and connections, applications deployed using Radius get represented into a graph-like data set that reveals precisely how the resources within the application are interconnected. Operator teams that support developers are thus empowered to build visualizations using this graph data that help them intuitively understand what makes up an application. Best of all, this data is generated automatically as part of the development process with Radius inherent in the application declarations, so it is always up to date without requiring additional effort from developers.
 
 <img src="app-graph-overview.png" alt="Application graph overview diagram" width="600"/>
 
