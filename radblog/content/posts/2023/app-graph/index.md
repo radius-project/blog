@@ -1,6 +1,6 @@
 ---
 date: "2023-11-01T00:00:00"
-title: "Making sense of cloud native applications with the Radius application graph"
+title: "Making sense of your entire architecture with the Radius application graph"
 linkTitle: "Application graph"
 author: Radius project maintainers
 type: blog
