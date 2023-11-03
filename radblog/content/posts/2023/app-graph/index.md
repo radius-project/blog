@@ -24,6 +24,6 @@ Using Radius to declare [connections](https://docs.radapp.io/guides/author-apps/
 
 Instead of multiple views of logs, infrastructure, and code, Radius provides a single source of truth for your application. The application graph API provides a way to query the application graph data and build visualizations that help you understand how your application is structured and how its resources are connected. Radius provides an HTTP-based API that allow you to communicate with its control plane to query for the application graph data. The API can be hosted inside a Kubernetes cluster or as a standalone set of processes or containers. Visit the [Radius API documentation](https://docs.radapp.io/concepts/api-concept/) pages to learn more.
 
-<img src="app-graph-api.png" alt="Application graph API diagram" width="500" />
+<img src="app-graph-api.png" alt="Application graph API diagram" width="600" />
 
 <img src="app-graph-api-visualization.png" alt="Screenshot of application graph API query with arrow pointing to a visualization diagram" width="600" /> 
