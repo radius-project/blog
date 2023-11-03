@@ -10,14 +10,20 @@ In the complex landscape of cloud native architectures today, it can be difficul
 
 ## Application graph data that is inherently part of the development process
 
-With an application structure that includes environments, resource groups, and connections, applications deployed using Radius get represented into a graph-like dataset that reveals precisely how the application and its infrastructure are interconnected. Operator teams that support developers are thus empowered to build visualizations using this graph data that help them intuitively understand what makes up an application. Best of all, this data is generated automatically as part of the development and deployment process with Radius, so it is always up to date without requiring incremental effort from developers.
+With an application structure that includes environments, resource groups, and connections, applications deployed using Radius get represented into a graph-like dataset that reveals precisely how the resources within the application are interconnected. Operator teams that support developers are thus empowered to build visualizations using this graph data that help them intuitively understand what makes up an application. Best of all, this data is generated automatically as part of the development and deployment process with Radius, so it is always up to date without requiring additional effort from developers.
 
 <img src="app-graph-overview.png" alt="Application graph overview diagram" width="600"/>
 
-## Viewing application graph relationships with the Radius CLI
+## View application graph relationships with the Radius CLI
 
 TODO
 
-## Building visualizations using the Radius application graph API
+<img src="app-graph-connections.png" alt="Screenshot of application graph connections console output" width="600"/>
 
-TODO
+## Build visualizations using the Radius application graph API
+
+Instead of multiple views of logs, infrastructure, and code, Radius provides a single source of truth for your application. The application graph API provides a way to query the application graph data and build visualizations that help you understand how your application is structured and how its resources are connected. Radius provides an HTTP-based API that allow you to communicate with its control plane to query for the application graph data. The API can be hosted inside a Kubernetes cluster or as a standalone set of processes or containers. Visit the [Radius API documentation](https://docs.radapp.io/concepts/api-concept/) pages to learn more.
+
+<img src="app-graph-api.png" alt="Application graph API diagram" width="320" />
+
+<img src="app-graph-api-visualization.png" alt="Screenshot of application graph API query with arrow pointing to a visualization diagram" width="600" /> 
