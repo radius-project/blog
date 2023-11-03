@@ -1,12 +1,12 @@
 ---
 date: "2023-11-01T00:00:00"
-title: "Making sense of your entire architecture with the Radius application graph"
+title: "Making sense of the entire architecture with Radius application graph"
 linkTitle: "Application graph"
 author: Radius project maintainers
 type: blog
 ---
 
-In the complex landscape of cloud native architectures today, it can be difficult to understand how all the pieces of your application fit together. A single application can be composed of many different microservices, each with their own resources, dependencies, and relationships. Typically represented as lists of resources making up the application, these relationships can be difficult to visualize, and even more so if architectural design documents are lacking or out of date. Although engineers know all too well that applications are so much more than just Kubernetes and flat lists of resources, creating and maintaining a consistently up-to-date catalog of application components is a tall order for any organization.
+In the complex landscape of cloud native architectures today, it can be difficult to understand how all the pieces of an application fit together. A single application can be composed of many different microservices, each with their own resources, dependencies, and relationships. Typically represented as lists of resources making up the application, these relationships can be difficult to visualize, and even more so if architectural design documents are lacking or out of date. Although engineers know all too well that applications are so much more than just Kubernetes and flat lists of resources, creating and maintaining a consistently up-to-date catalog of application components is a tall order for any organization.
 
 ## Application graph data that is inherently part of the development process
 
@@ -22,7 +22,7 @@ Using Radius to declare [connections](https://docs.radapp.io/guides/author-apps/
 
 ## Build visualizations using the Radius application graph API
 
-Instead of multiple views of logs, infrastructure, and code, Radius provides a single source of truth for your application. The application graph API provides a way to query the application graph data and build visualizations that help you understand how your application is structured and how its resources are connected. Radius provides an HTTP-based API that allow you to communicate with its control plane to query for the application graph data. The API can be hosted inside a Kubernetes cluster or as a standalone set of processes or containers. Visit the [Radius API documentation](https://docs.radapp.io/concepts/api-concept/) pages to learn more.
+Instead of multiple views of logs, infrastructure, and code, Radius provides a single source of truth for the application. The application graph API provides a way to query the application graph data and build visualizations that help teams understand how their application is structured and how its resources are connected. Radius provides an HTTP-based API that allow users to communicate with its control plane to query for the application graph data. The API can be hosted inside a Kubernetes cluster or as a standalone set of processes or containers. Visit the [Radius API documentation](https://docs.radapp.io/concepts/api-concept/) pages to learn more.
 
 <img src="app-graph-api.png" alt="Application graph API diagram" width="600" />
 
