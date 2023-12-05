@@ -19,7 +19,7 @@ It is within this context that we are proud to be part of the select group of co
 
 In this technical case study, we will detail how Radius was adopted at Millenium bcp. We will walk through our target developer experience, the platform we began building on KubeVela, what we learned along the way, and why we decided to move to Radius. Throughout this case study we will highlight our methodologies, tools, and strategies that have empowered us to navigate the intricacies of effectively managing a large, complex application portfolio.
 
-## Scoping the Problem
+## Scoping the problem
 
 It was clear to us that the pressure to deliver new features and applications and the infrastructure to support them was ever-increasing while, unfortunately, the resources to support that drive were not infinite. Aligning expectations between the multiple teams involved was a challenge. We needed to find a way to accelerate the application lifecycle, from implementation to decommissioning while maintaining focus on all requirements that a financial services company has. Clear requirements definition was also a challenge, as development teams and infrastructure teams have different backgrounds and concerns. We needed to find a way to align these teams, and to ensure that the requirements were clear and unambiguous.
 
