@@ -10,7 +10,11 @@ The Radius project maintainers are excited to share our feature roadmap for Radi
 
 Please engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord) if you have any feedback, suggestions, or feature requests!
 
+## Summary
+
 At this stage of the project, building an active and diverse open-source community for Radius is our top priority and we will focus on work that accelerates the growth of our community and adopters. Items like testing, pipelines, automation, and bug fixes that make life easier for open-source contributors will be prioritized. In terms of feature work, we are investing in what our community and users have identified as our most strategic areas: Recipes, Dashboard, connecting to existing resources, and serverless integrations. Please follow the [Radius backlog](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities. Below we'll discuss the top priority areas and features for Radius in more detail.
+
+<img src="gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width=500 />
 
 ## Radius Recipes
 
