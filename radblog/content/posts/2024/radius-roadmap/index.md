@@ -10,8 +10,6 @@ The Radius project maintainers are excited to share our feature roadmap for Radi
 
 Please engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord) if you have any feedback, suggestions, or feature requests!
 
-## Summary
-
 At this stage of the project, building an active and diverse open-source community for Radius is our top priority and we will focus on work that accelerates the growth of our community and adopters. Items like testing, pipelines, automation, and bug fixes that make life easier for open-source contributors will be prioritized. In terms of feature work, we are investing in what our community and users have identified as our most strategic areas: Recipes, Dashboard, connecting to existing resources, and serverless integrations. Please follow the [Radius backlog](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities. Below we'll discuss the top priority areas and features for Radius in more detail.
 
 ## Radius Recipes
@@ -33,4 +31,14 @@ The Radius vision includes the capability to connect to existing resources that 
 
 ## Serverless integrations
 
-Given the importance of serverless infrastructure in the modern application landscape, it is a priority for Radius to support serverless resources. The initial expansion will focus on integrating with an unopinionated serverless infrastructure platform, specifically [Azure Container Instances](https://azure.microsoft.com/en-us/products/container-instances/) (ACI).
+Given the importance of serverless infrastructure in the modern application landscape, it is a priority for Radius to support serverless resources. The initial expansion will focus on integrating with an unopinionated serverless infrastructure platform, specifically [Azure Container Instances](https://azure.microsoft.com/en-us/products/container-instances/), before exploring integrations with more opinionated serverless platforms like [Azure Functions](https://azure.microsoft.com/en-us/services/functions/), [Azure Container Apps](https://azure.microsoft.com/en-us/services/azure-container-apps/), and [AWS Lambda](https://aws.amazon.com/lambda/).
+
+## Learn more and contribute
+
+The Radius maintainers are excited to continue collaborating with the open-source community to grow its feature set and welcome all contributions from the community.
+
+We’re looking for people to join us!  To get started with Radius today, please see:
+
+- Learn more from the [documentation](https://radapp.io/).
+- Explore the open-source [code repositories](https://github.com/radius-project).
+- Engage with the [community](https://aka.ms/radius/discord).
