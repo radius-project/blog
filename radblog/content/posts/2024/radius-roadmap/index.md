@@ -6,11 +6,9 @@ author: "Radius project maintainers"
 type: blog
 ---
 
-The Radius project maintainers are excited to share our feature roadmap for Radius! We are looking forward to working with the community to grow and enhance Radius and will keep this roadmap updated as we make progress. To remain agile and adaptive to community needs, after each release we will reassess and update the roadmap as necessary to reflect the latest priorities.
+The Radius project maintainers are excited to share our feature roadmap for Radius! We are looking forward to working with the community to grow and enhance Radius and will keep this roadmap updated as we make progress. To remain agile and adaptive to community needs, after each release we will reassess and update the roadmap as necessary to reflect the latest priorities. Please engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord) if you have any feedback, suggestions, or feature requests!
 
-Follow the [Radius backlog](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities.
-
-Please engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord) if you have any feedback, suggestions, or feature requests!
+Follow the [**Radius backlog**](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities.
 
 <img src="gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width=500 />
 
@@ -93,7 +91,7 @@ There are aspects of the Radius application model that we need to build upon, in
 
 ### Universal Control Plane improvements
 
-There are a few planned enhancements to the Radius Universal Control Plane (UCP), including UCP Proxy and memory/CPU optimizations, which will be prioiritized based on feedback and need.
+There are a few planned enhancements to the Radius Universal Control Plane (UCP), including UCP Proxy and memory/CPU optimizations, which will be prioritized based on feedback and need.
 
 ## Learn more and contribute
 
