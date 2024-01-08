@@ -8,13 +8,15 @@ type: blog
 
 The Radius project maintainers are excited to share our feature roadmap for Radius! We are looking forward to working with the community to grow and enhance Radius and will keep this roadmap updated as we make progress. To remain agile and adaptive to community needs, after each release we will reassess and update the roadmap as necessary to reflect the latest priorities.
 
+Follow the [Radius backlog](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities.
+
 Please engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord) if you have any feedback, suggestions, or feature requests!
 
 <img src="gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width=500 />
 
 ## Immediate priorities
 
-At this stage of the project, building an active and diverse open-source community for Radius is our top priority and we will focus on work that accelerates the growth of our community and adopters. Items like testing, pipelines, automation, and bug fixes that make life easier for open-source contributors will be prioritized. In terms of feature work, we are investing in what our community and users have identified as our most strategic areas: Recipes, Dashboard, connecting to existing resources, and serverless integrations. Please follow the [Radius backlog](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities. Below we'll discuss the top priority areas and features for Radius in more detail.
+At this stage of the project, building an active and diverse open-source community for Radius is our top priority and we will focus on work that accelerates the growth of our community and adopters. Items like testing, pipelines, automation, and bug fixes that make life easier for open-source contributors will be prioritized. In terms of feature work, we are investing in what our community and users have identified as our most strategic areas: Recipes, Dashboard, connecting to existing resources, and serverless integrations. Below we'll discuss the top priority areas and features for Radius in more detail.
 
 ### Radius Recipes
 
@@ -77,7 +79,7 @@ Today, Radius leverages the same identity and credentials as those used to authe
 
 Although the rad CLI is in a state that's useful for users beginning to build with Radius, there are some functionality gaps that need to be filled (e.g. lack of credential validation, environment scoped operations, etc.). The team will closely monitor community feedback and prioritize CLI functionality as appropriate.
 
-## Expand Kubernetes and Helm integrations
+### Expand Kubernetes and Helm integrations
 
 The first iteration of a Kubernetes Interop layer provides functionality to leverage Kubernetes YAML, PodSpec, and Helm Charts to deploy Radius-aware applications such that features like Connections, Recipes, and Application Graph can be incrementally adopted into an existing application. The Radius maintainers are closely monitoring feedback and issues coming from the community to expand on these features as necessary.
 
