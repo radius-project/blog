@@ -10,7 +10,7 @@ The Radius project maintainers are excited to share our feature roadmap for Radi
 
 Follow the [**Radius backlog**](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities.
 
-<img src="./gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width="500"/>
+<img src="./gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width="700"/>
 
 ## Immediate priorities
 
