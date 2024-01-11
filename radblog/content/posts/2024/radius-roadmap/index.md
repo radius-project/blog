@@ -1,14 +1,14 @@
 ---
 date: "3024-01-31T08:00:00-08:00"
-title: "Radius feature roadmap"
-linkTitle: "Roadmap"
+title: "Introducing the Radius feature roadmap"
+linkTitle: "Introducing the Radius roadmap"
 author: "Radius project maintainers"
 type: blog
 ---
 
 The Radius project maintainers are excited to share our [feature roadmap for Radius](https://github.com/orgs/radius-project/projects/8/views/1)! We are looking forward to working with the community to grow and enhance Radius and will keep this roadmap updated as we make progress. To remain agile and adaptive to community needs, after each release we will reassess and update the roadmap as necessary to reflect the latest priorities. Please engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord) if you have any feedback, suggestions, or feature requests!
 
-Follow the [**Radius roadmap**](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities.
+Bookmark the [**Radius roadmap**](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities.
 
 <img src="./gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width="700"/>
 
@@ -20,9 +20,9 @@ At this stage of the project, building an active and diverse open-source communi
 
 We believe Recipes to be one of the the highest value propositions of Radius, because they enable separation of concerns across developers and operators. The initial public release of Radius offers end-to-end Recipe deployment and deletion for both Bicep and Terraform templates. This unlocks a basic resource lifecycle for learning about and leveraging Recipes in simple applications. For Recipes to become a production-grade feature, there are a set of items we need to design and implement, with the following being our current priorities:
 
-- **Private Terraform modules**: Today Radius only supports public Terraform modules. The first addition to Terraform Recipes we need to add is support for private modules from the Terraform module gallery or from other private galleries.
+- **Private Terraform modules**: Today Radius only supports public Terraform modules. The first addition to Terraform Recipes we need to add is support for private modules from the Terraform module gallery or from other private sources.
 - **Recipe “stickiness” and versioning**: Operators need to be able to update & make changes to Recipes within an environment. Today this requires any resource using the Recipe to immediately start using the new Recipe template/version upon the next deployment. This may break developers not expecting changes to their infrastructure. We need a way to make this configurable, where teams can control how new Recipe templates are rolled out, along with a versioning strategy.
-- **Ability to configure which drivers are supported**: There has been some feedback around being able to selectively disable specified Recipe drivers, e.g. disable Bicep or Terraform Recipes per IT policies. Given the compliance-related nature of this ask, we have prioritized it.
+- **Ability to configure which IaC languages are supported**: There has been some feedback around being able to selectively disable specific Recipe languages (_e.g. disable Bicep or Terraform Recipes per IT policies_). Given the compliance-related nature of this ask, we have prioritized it.
 - **Recipes for any Resource**: Today we only support portable resources (Applications.Dapr, Applications.Datastores, Applications.Messaging) for Recipes. As part of our Recipes enhancement, we want to support any resource across Azure, AWS, and more. This would allow operators to define a template for something like an S3 bucket and the developer can request “an S3 bucket” without knowing the details.
 
 ### Radius Dashboard
@@ -39,7 +39,7 @@ Given the importance of serverless infrastructure in the modern application land
 
 ## On the horizon
 
-There is a lot of other work in the backlog that will ultimately be high value to Radius users, but is less time critical than the immediate priorities above that we have frontloaded. The following are some of the features on the Radius roadmap, but are not yet prioritized for the immediate future.
+There is a lot of other work in the backlog that will ultimately be high value to Radius users, but is less time critical than the immediate priorities above that we have frontloaded. The following are some of the features on the Radius roadmap that we intend to tackle as soon as we can. Feedback and upvotes are welcome in their respective issues.
 
 ### Further Recipes enhancements
 
@@ -73,7 +73,7 @@ Today, Radius leverages the same identity and credentials as those used to authe
 
 [Azure Arc](https://azure.microsoft.com/en-us/products/azure-arc/) is a set of technologies that extends the Azure platform to on-premises, multi-cloud, and edge environments. It allows customers to build applications and services with a consistent development, operations, and security model. It also enables customers to have a central, unified, and self-service approach to manage their Windows and Linux Servers, Kubernetes clusters, and Azure data services wherever they are. There has been interest expressed by the community and users for Radius and Azure Arc integration.
 
-### `rad` CLI enhancements
+### rad CLI enhancements
 
 Although the rad CLI is in a state that's useful for users beginning to build with Radius, there are some functionality gaps that need to be filled (e.g. lack of credential validation, environment scoped operations, etc.). The team will closely monitor community feedback and prioritize CLI functionality as appropriate.
 
@@ -81,13 +81,13 @@ Although the rad CLI is in a state that's useful for users beginning to build wi
 
 The first iteration of a Kubernetes Interop layer provides functionality to leverage Kubernetes YAML, PodSpec, and Helm Charts to deploy Radius-aware applications such that features like Connections, Recipes, and Application Graph can be incrementally adopted into an existing application. The Radius maintainers are closely monitoring feedback and issues coming from the community to expand on these features as necessary.
 
-### Terraform provider
+### Radius Terraform provider
 
-Radius currently supports Terraform in Recipes but does not have a dedicated Terraform Provider, which means Radius resource definitions must still be in Bicep. So far, the community has not expressed strong feedback about this limitation, but the Radius maintainers will continue monitoring to determine if deeper Terraform integration will be necessary.
+Today Radius supports the Bicep language for modeling applications, environments, and other Radius resources. We're considering adding other IaC languages, such as Terraform, for modeling resources as well.
 
 ### Application model maturation
 
-There are aspects of the Radius application model that we need to build upon, including support of sidecars, more standard resources like PostgreSQL, autoscaling of applications, etc. These enhancements will be prioritized based on community feedback and user need.
+There are aspects of the Radius application model we would love to continue to extend, such as support for sidecars, additional standard resources like PostgreSQL, autoscaling of applications, and more, These enhancements will be prioritized based on community feedback and user need.
 
 ### Universal Control Plane improvements
 
