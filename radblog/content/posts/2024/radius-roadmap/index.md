@@ -6,11 +6,11 @@ author: "Radius project maintainers"
 type: blog
 ---
 
-The Radius project maintainers are excited to share our [feature roadmap for Radius](https://github.com/orgs/radius-project/projects/8/views/1)! We are looking forward to working with the community to grow and enhance Radius and will keep this roadmap updated as we make progress. To remain agile and adaptive to community needs, after each release we will reassess and update the roadmap as necessary to reflect the latest priorities. Please engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord) if you have any feedback, suggestions, or feature requests!
+The Radius project maintainers are excited to share our [feature roadmap for Radius](https://aka.ms/radius-roadmap)! We are looking forward to working with the community to grow and enhance Radius and will keep this roadmap updated as we make progress. To remain agile and adaptive to community needs, after each release we will reassess and update the roadmap as necessary to reflect the latest priorities. Please engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord) if you have any feedback, suggestions, or feature requests!
 
 Bookmark the [**Radius roadmap**](https://github.com/orgs/radius-project/projects/8/views/1) for updates on the full set of roadmap priorities.
 
-<img src="./gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width="700"/>
+{{< image src="./gh-roadmap.png" width=700 alt="screenshot of the Radius roadmap board from GitHub" >}}
 
 ## Immediate priorities
 
