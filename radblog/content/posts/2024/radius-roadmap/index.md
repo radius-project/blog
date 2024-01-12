@@ -1,5 +1,5 @@
 ---
-date: "3024-01-31T08:00:00-08:00"
+date: "2024-01-12T08:00:00-08:00"
 title: "Introducing the Radius feature roadmap"
 linkTitle: "Introducing the Radius roadmap"
 author: "Radius project maintainers"
