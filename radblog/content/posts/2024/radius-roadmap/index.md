@@ -14,12 +14,12 @@ Bookmark the [**Radius roadmap**](https://aka.ms/radius-roadmap) for updates on 
 
 {{< image src="images/gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width=900 >}}
 
-## Provide feedback and contribute
+## Feedback and contributions
 
 All feedback and contributions are welcome! The community is encouraged to engage with the Radius project in the following ways: 
 
 - Provide feedback to influence roadmap decisions by commenting on and upvoting [existing items](https://aka.ms/radius-roadmap)
-- Submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E) to propose new functionality or and other [issue reports](https://github.com/radius-project/radius/issues/new/choose)
+- Submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E) to propose new functionality or other [issue reports](https://github.com/radius-project/radius/issues/new/choose)
 - Review in-progress [designs](https://github.com/radius-project/design-notes/pulls) and [code](https://github.com/radius-project/radius/pulls)
 - Contribute directly to fix [open issues](https://github.com/radius-project/radius/issues) and [documentation](https://github.com/radius-project/docs/issues)
 - Engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord)
@@ -35,7 +35,7 @@ The initial public release of Radius offers end-to-end Recipe deployment and del
 - [**Private Terraform modules**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47722965): Today Radius only supports public Terraform modules. The first addition to Terraform Recipes we need to add is support for private modules from the Terraform module gallery or from other private sources.
 - [**Recipe “stickiness” and versioning**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47749189): Operators need to be able to update & make changes to Recipes within an environment. Today this requires any resource using the Recipe to immediately start using the new Recipe template/version upon the next deployment. This may break developers not expecting changes to their infrastructure. We need a way to make this configurable, where teams can control how new Recipe templates are rolled out, along with a versioning strategy.
 - [**Ability to configure which IaC languages are supported**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47749391): There has been some feedback around being able to selectively disable specific Recipe languages (_e.g. disable Bicep or Terraform Recipes per IT policies_). Given the compliance-related nature of this ask, we have prioritized it.
-- [**Recipes for any Resource**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750131): Today we only support portable resources (Applications.Dapr, Applications.Datastores, Applications.Messaging) for Recipes. As part of our Recipes enhancement, we want to support any resource across Azure, AWS, and more. This would allow operators to define a template for something like an S3 bucket and the developer can request “an S3 bucket” without knowing the details.
+- [**Recipes for any Resource**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750131): Today we only support portable resources (Applications.Dapr, Applications.Datastores, Applications.Messaging) for Recipes. As part of our Recipes enhancement, we want to support any resource across AWS, Azure, and more. This would allow operators to define a template for something like an S3 bucket and the developer can request “an S3 bucket” without knowing the details.
 - [**Connecting to pre-provisioned resources**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750466): Users have consistently expressed a need for the capability to connect to existing resources that were previously provisioned and existed outside of the scope of the Radius application. The most immediately prioritized work is to enable Radius to connect to such existing pre-provisioned resources using Recipes.
 
 ### Radius Application Graph and Dashboard
