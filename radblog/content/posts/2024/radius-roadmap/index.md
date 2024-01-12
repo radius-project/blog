@@ -8,13 +8,11 @@ type: blog
 
 The Radius project maintainers are excited to share our [feature roadmap for Radius](https://aka.ms/radius-roadmap)! We are looking forward to working with the community to grow and enhance Radius and will keep this roadmap updated as we make progress.
 
+We hope to encourage transparency in community engagement and collaboration by sharing our roadmap and priorities. Please treat the roadmap as a living document that reflects the current goals and plans of the project, which may change based on the landscape and community needs. Thus, target delivery dates are deliberately avoided. To remain agile and adaptive, after each release the Radius maintainers will reassess and update the roadmap as necessary to reflect the latest priorities. Additionally, note that the roadmap currently reflects the priorities of the project maintainers, but as more partners join us these may change. The community may also work on things that aren't part of the roadmap.
+
 Bookmark the [**Radius roadmap**](https://aka.ms/radius-roadmap) for updates on the full set of roadmap priorities.
 
 {{< image src="images/gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width=900 >}}
-
-<br>
-
-We hope to encourage transparency in community engagement and collaboration by sharing our roadmap and priorities. Please treat the roadmap as a living document that reflects the current goals and plans of the project, which may change based on the landscape and community needs. Thus, target delivery dates are deliberately avoided. To remain agile and adaptive, after each release the Radius maintainers will reassess and update the roadmap as necessary to reflect the latest priorities. Additionally, note that the roadmap currently reflects the priorities of the project maintainers, but as more partners join us these may change. The community may also work on things that aren't part of the roadmap.
 
 ## Provide feedback and contribute
 
@@ -26,9 +24,9 @@ All feedback and contributions are welcome! The community is encouraged to engag
 - Contribute directly to fix [open issues](https://github.com/radius-project/radius/issues) and [documentation](https://github.com/radius-project/docs/issues)
 - Engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord)
 
-## Immediate priorities
+## Current priorities
 
-At this stage of the project, building an active and diverse open-source community for Radius is our top priority and we will focus on work that accelerates the growth of our community and adopters. Items like testing, pipelines, automation, and bug fixes that make life easier for open-source contributors will be prioritized. In terms of feature work, we are investing in what our community and users have identified as our most strategic areas: Recipes, Application Graph, and platform expansions. Below we'll discuss the top priority areas and features for Radius in more detail.
+At this stage of the project, building an active and diverse open-source community for Radius is our top priority and we will focus on work that accelerates the growth of our community and adopters. Items like testing, pipelines, automation, and bug fixes that make life easier for open-source contributors are our upcoming focus. In terms of feature work, we are currently focused on what our community and users have identified as our most strategic areas: Recipes, Application Graph, pre-provisioned resources, and serverless container runtimes.
 
 ### Radius Recipes
 
@@ -46,75 +44,23 @@ Users have expressed interest in leveraging the Radius application graph to powe
 - [**Application Graph API**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750561): The [Application Graph API](https://docs.radapp.io/concepts/application-graph/#mine-the-app-graph-api) was released as a part of v0.27 that allows users to mine the application graph data. We will continue to expand and improve upon the API to support more use cases.
 - [**Radius Dashboard**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750597): The goal is to deploy a lightweight developer portal alongside the Radius control plane to provide a developer dashboard that allows users to visualize and explore their application graph. Extensibility and ability to integrate into existing developer portals and tools will be key considerations for this feature.
 
-### Platform expansions
+### Pre-provisioned resources
 
-The Radius maintainers are committed to expanding the platform to support more infrastructure technologies and meet developers where they are. We are currently prioritizing the following platform expansions:
+Users have consistently expressed a need for the capability to connect to existing resources that were previously provisioned and existed outside of the scope of the Radius application. This is especially important to further enable incremental adoption of Radius.
 
-- [**Connecting to existing resources**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750466): Users have consistently expressed a need for the capability to connect to existing resources that were previously provisioned and existed outside of the scope of the Radius application. This is especially important to further enable incremental adoption of Radius. The most immediately prioritized work is to enable Radius to connect to such existing pre-provisioned resources using Recipes.
+- [**Connecting to pre-provisioned resources**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750466): The most immediately prioritized work is to enable Radius to connect to such existing pre-provisioned resources using Recipes.
+
+### Serverless container runtime
+
+The Radius maintainers are committed to expanding the platform to support more infrastructure technologies and meet developers where they are, beginning with serverless container runtimes.
 
 - [**Serverless container runtime**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750916): Given the importance of serverless infrastructure in the modern application landscape, it is a priority for Radius to support serverless resources. The initial expansion will focus on support for an unopinionated serverless container runtime before exploring integrations with other serverless platforms.
-
-## On the horizon
-
-There is a lot of other work in the backlog that will ultimately be high value to Radius users, but is less time critical than the immediate priorities above that we have frontloaded. The following are some of the features on the Radius roadmap that we intend to tackle as soon as we can. Feedback and upvotes are welcome in their respective issues.
-
-### Further Recipes enhancements
-
-- **Shared infrastructure**: Today a Recipe can either deploy all the infrastructure it needs, or existing infrastructure can be passed in as a parameter. The latter allows for shared accounts/servers with unique databases/tables. For example, an enterprise wouldn't want to spin up 20 CosmosDB accounts each with a single database. Further, an enterprise wouldn't want to spin up a CosmosDB account, SQL Server, and more just in case one of their developers might want to use one of the Recipes in an environment. We need a way for a “create if not exists” functionality to deploy a shared piece of infrastructure when it's first needed. On the flip-side a “delete if not used” capability is also needed for cleanup.
-
-- **Recipe packs**: Today Recipes are individually managed. Installing multiple Recipes at a time requires scripting the `rad` CLI or listing each individually in the environment's Bicep definition. We need a packaging mechanism to bundle related Recipes and version them, allowing organizations to share their Recipes, either private or public, with Radius users.
-
-- **Expand Recipe experience**: We currently provide Recipe support for Bicep and Terraform, but there is opportunity to expand Recipes experience to other IaC technologies, like Script and Helm.
-
-- **Recipes for Gateways**: Today we've “hard-coded” the mapping between a Radius Gateway and the Contour HttpRoute Kubernetes objects. This got us up and running with gateways and allowed offer basic internet-facing routing and termination. Customers have provided feedback that they want to use other ingress controllers (Nginx, Kong, Traefik, Azure Application Gateway) or customize how the underlying Kubernetes/Azure objects are created. Recipes present the perfect concept for managing how Gateway infrastructure is created.
-
-- **Recipes for user-defined types**: Further customization to allow for user-defined types in Recipes.
-
-### Further Dashboard enhancements
-
-Beyond the Application Graph API and simple dashboard via Backstage plugin, we would like to deliver additional Dashboard capabilities. These features tracked in our backlog include additional extensions for other developer tools like VSCode, other Backstage plugins for Recipes, Resource Provisioning, etc.
-
-### Dapr integration into control plane
-
-Improving observability and security of the Radius control plane itself includes adding more logging and metrics such as support for dependency service tracing and monitoring. Given that Dapr may offer many of these enhancements, we are inclined to integrate Dapr into the Radius Control Plane. We'll continue to gather the needs from the community to determine what other observability functionality is needed for using Radius in production scenarios.
-
-### Expanding AWS support
-
-The current implementation of AWS support is an important first step towards modeling AWS as a first-class citizen in Radius' multi-cloud strategy. We would like to further expand AWS support with additional key features, including support for non-idempotent AWS resources and for AWS Identity and Access Management (IAM).
-
-### Identity management
-
-Today, Radius leverages the same identity and credentials as those used to authenticate into accounts when the user registers a cloud provider via their respective CLIs. However, we often receive questions and even desire from users to be able to specify more explicit and precise RBAC policies within Radius.
-
-### Azure Arc integration
-
-[Azure Arc](https://azure.microsoft.com/en-us/products/azure-arc/) is a set of technologies that extends the Azure platform to on-premises, multi-cloud, and edge environments. It allows customers to build applications and services with a consistent development, operations, and security model. It also enables customers to have a central, unified, and self-service approach to manage their Windows and Linux Servers, Kubernetes clusters, and Azure data services wherever they are. There has been interest expressed by the community and users for Radius and Azure Arc integration.
-
-### rad CLI enhancements
-
-Although the rad CLI is in a state that's useful for users beginning to build with Radius, there are some functionality gaps that need to be filled (e.g. lack of credential validation, environment scoped operations, etc.). The team will closely monitor community feedback and prioritize CLI functionality as appropriate.
-
-### Expand Kubernetes and Helm integrations
-
-The first iteration of a Kubernetes Interop layer provides functionality to leverage Kubernetes YAML, PodSpec, and Helm Charts to deploy Radius-aware applications such that features like Connections, Recipes, and Application Graph can be incrementally adopted into an existing application. The Radius maintainers are closely monitoring feedback and issues coming from the community to expand on these features as necessary.
-
-### Radius Terraform provider
-
-Today Radius supports the Bicep language for modeling applications, environments, and other Radius resources. We're considering adding other IaC languages, such as Terraform, for modeling resources as well.
-
-### Application model maturation
-
-There are aspects of the Radius application model we would love to continue to extend, such as support for sidecars, additional standard resources like PostgreSQL, autoscaling of applications, and more, These enhancements will be prioritized based on community feedback and user need.
-
-### Universal Control Plane improvements
-
-There are a few planned enhancements to the Radius Universal Control Plane (UCP), including UCP Proxy and memory/CPU optimizations, which will be prioritized based on feedback and need.
 
 ## Learn more and contribute
 
 The Radius maintainers are excited to continue collaborating with the open-source community to grow its feature set and welcome all contributions from the community.
 
-We’re looking for people to join us!  To get started with Radius today, please see:
+We're looking for people to join us!  To get started with Radius today, please see:
 
 - Learn more from the [documentation](https://radapp.io/).
 - Explore the open-source [code repositories](https://github.com/radius-project).
