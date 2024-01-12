@@ -17,7 +17,7 @@ Bookmark the [**Radius roadmap**](https://aka.ms/radius-roadmap) for updates on 
 The Radius maintainers welcomes all feedback and contributions! The community is encouraged to engage with the Radius project in the following ways: 
 
 - Provide feedback to influence roadmap decisions by commenting on and upvoting [existing items](https://aka.ms/radius-roadmap)
-- Submit new [feature requests]((https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E) to propose new functionality or and other [issue reports](https://github.com/radius-project/radius/issues/new/choose)
+- Submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E) to propose new functionality or and other [issue reports](https://github.com/radius-project/radius/issues/new/choose)
 - Review in-progress [designs](https://github.com/radius-project/design-notes/pulls) and [code](https://github.com/radius-project/radius/pulls)
 - Contribute directly to fix [open issues](https://github.com/radius-project/radius/issues) and [documentation](https://github.com/radius-project/docs/issues)
 - Engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord)
