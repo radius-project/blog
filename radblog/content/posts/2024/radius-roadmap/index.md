@@ -26,7 +26,7 @@ All feedback and contributions are welcome! The community is encouraged to engag
 
 ## Current priorities
 
-At this stage of the project, building an active and diverse open-source community for Radius is our top priority and we will focus on work that accelerates the growth of our community and adopters. Items like testing, pipelines, automation, and bug fixes that make life easier for open-source contributors are our upcoming focus. In terms of feature work, we are currently focused on what our community and users have identified as our most strategic areas: Recipes, Application Graph, pre-provisioned resources, and serverless container runtimes.
+At this stage of the project, building an active and diverse open-source community for Radius is our top priority and we will focus on work that accelerates the growth of our community and adopters. Items like testing, pipelines, automation, and bug fixes that make life easier for open-source contributors are our upcoming focus. In terms of feature work, we are currently focused on what our community and users have identified as our most strategic areas: recipes, application graph and dashboard, and serverless container runtimes.
 
 ### Radius Recipes
 
@@ -36,19 +36,14 @@ The initial public release of Radius offers end-to-end Recipe deployment and del
 - [**Recipe “stickiness” and versioning**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47749189): Operators need to be able to update & make changes to Recipes within an environment. Today this requires any resource using the Recipe to immediately start using the new Recipe template/version upon the next deployment. This may break developers not expecting changes to their infrastructure. We need a way to make this configurable, where teams can control how new Recipe templates are rolled out, along with a versioning strategy.
 - [**Ability to configure which IaC languages are supported**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47749391): There has been some feedback around being able to selectively disable specific Recipe languages (_e.g. disable Bicep or Terraform Recipes per IT policies_). Given the compliance-related nature of this ask, we have prioritized it.
 - [**Recipes for any Resource**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750131): Today we only support portable resources (Applications.Dapr, Applications.Datastores, Applications.Messaging) for Recipes. As part of our Recipes enhancement, we want to support any resource across Azure, AWS, and more. This would allow operators to define a template for something like an S3 bucket and the developer can request “an S3 bucket” without knowing the details.
+- [**Connecting to pre-provisioned resources**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750466): Users have consistently expressed a need for the capability to connect to existing resources that were previously provisioned and existed outside of the scope of the Radius application. The most immediately prioritized work is to enable Radius to connect to such existing pre-provisioned resources using Recipes.
 
-### Radius Application Graph
+### Radius Application Graph and Dashboard
 
-Users have expressed interest in leveraging the Radius application graph to power visual experiences for operators and developers. Today we have [`rad app connections`](https://docs.radapp.io/reference/cli/rad_application_connections/) functionality in the CLI to list the connections and resources in a Radius application, which has garnered positive initial feedback and motivates the Radius maintainers to expand upon the Application Graph features:
+The application graph concept and experience introduced by Radius has enabled an application-centric approach in developing software. The Radius team is investing in both the API to interact with this graph, as well as new ways to enrich applications with additional information and capabilities. Users have expressed interest in leveraging the concept of the Radius application graph and its corresponding data to power visual experiences for operators and developers. Today we have [`rad app connections`](https://docs.radapp.io/reference/cli/rad_application_connections/) functionality in the CLI to list the connections and resources in a Radius application, which has garnered positive initial feedback and motivates the Radius maintainers to expand upon the features:
 
 - [**Application Graph API**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750561): The [Application Graph API](https://docs.radapp.io/concepts/application-graph/#mine-the-app-graph-api) was released as a part of v0.27 that allows users to mine the application graph data. We will continue to expand and improve upon the API to support more use cases.
 - [**Radius Dashboard**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750597): The goal is to deploy a lightweight developer portal alongside the Radius control plane to provide a developer dashboard that allows users to visualize and explore their application graph. Extensibility and ability to integrate into existing developer portals and tools will be key considerations for this feature.
-
-### Pre-provisioned resources
-
-Users have consistently expressed a need for the capability to connect to existing resources that were previously provisioned and existed outside of the scope of the Radius application. This is especially important to further enable incremental adoption of Radius.
-
-- [**Connecting to pre-provisioned resources**](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=47750466): The most immediately prioritized work is to enable Radius to connect to such existing pre-provisioned resources using Recipes.
 
 ### Serverless container runtime
 
