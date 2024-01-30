@@ -2,7 +2,7 @@
 date: "2026-02-01T00:00:00"
 title: "Understand your entire application with the Radius Application Graph"
 linkTitle: "Application Graph"
-author: [Will Tsai](https://www.github.com/willtsai)
+author: "[Will Tsai](https://www.github.com/willtsai)"
 type: blog
 ---
 
