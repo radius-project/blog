@@ -1,12 +1,14 @@
 ---
 date: "2023-11-01T00:00:00"
-title: "Making sense of the entire architecture with Radius application graph"
-linkTitle: "Application graph"
+title: "Understand your entire application with the Radius Application Graph"
+linkTitle: "Application Graph"
 author: Radius project maintainers
 type: blog
 ---
 
-In the complex landscape of cloud native architectures today, it can be difficult to understand how all the pieces of an application fit together. A single application can be composed of many different microservices, each with their own resources, dependencies, and relationships. Typically represented as lists of resources making up the application, these relationships can be difficult to visualize, and even more so if architectural design documents are lacking or out of date. Although engineers know all too well that applications are so much more than just Kubernetes and flat lists of resources, creating and maintaining a consistently up-to-date catalog of application components is a tall order for any organization.
+In today's complex landscape of cloud-native architectures, it can be difficult to understand how all the pieces of an application fit together. A single application can be composed of multiple microservices, each with their own resources, dependencies, and relationships. Typically defined in lists of Kubernetes YAML, infrastructure-as-code templates, and Helm charts, knowing "what is my app?" is hard to answer. Plus, there is no unified way to track the relationships and dependencies between resources. Instead, teams are left to recreate their architecture with network-packet diagrams, or with team wikis documented external to the app that quickly fall out of date.
+
+While Kubernetes has become the go-to platform for teams building cloud-native apps, an application is so much more than a flat list of Kubernetes resources. What's needed is a way to model an entire application and its relationships, consisting of both its Kubernetes components plus its external cloud/on-premises infrastructure, presented in a way that's always up to date and easy to consume by teams.
 
 ## Application graph data that is inherently part of the development process
 
