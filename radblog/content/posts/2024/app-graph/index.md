@@ -6,7 +6,7 @@ author: "[Will Tsai](https://www.github.com/willtsai)"
 type: blog
 ---
 
-In today's complex landscape of cloud-native architectures, it can be difficult to understand how all the pieces of an application fit together. With the advent of containers, microservices, serverless, and Kubernetes, applications are becoming more flexible yet resilient than ever before, but at the cost of increased complexity. As a result, developers and operators struggle to understand how their applications are structured and how their resources are connected. In this blog post, we'll discuss the challenges of understanding cloud-native applications and how the Radius Application Graph can help. We are very excited about the potential of the Application Graph and are looking forward to building upon it with the community!
+In today's complex landscape of cloud-native architectures, it can be difficult to understand how all the pieces of an application fit together. With the advent of containers, microservices, serverless, and Kubernetes, applications are becoming more flexible yet resilient than ever before, but at the cost of increased complexity. As a result, developers and operators struggle to understand how their applications are structured and how their resources are connected. In this blog post, we'll discuss the challenges of understanding cloud-native applications and how the Radius Application Graph can help. We are very excited about the potential of the [Application Graph](https://docs.radapp.io/guides/author-apps/application/overview/#query-and-understand-your-application-with-the-radius-application-graph) and are looking forward to building upon it with the community!
 
 ## Complicated cloud-native architectures are challenging to manage
 
