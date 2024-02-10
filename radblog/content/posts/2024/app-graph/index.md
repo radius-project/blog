@@ -28,8 +28,6 @@ Traditionally a manual task, documentation is labor intensive, inconsistent, or 
 
 The Application Graph is a core primitive of Radius applications and provides a comprehensive representation of an application and its resources, including its environments and connections. It is a graph-like data set that reveals precisely how the resources within the application are interconnected. This data is generated automatically as part of the development process with Radius inherent in the application declarations, so it is always up to date without requiring additional effort from developers. Below we'll explore how the application graph data is generated, as well as how it can be accessed and leveraged.
 
-{{< image src="images/app-graph-data.png" alt="Application graph data diagram" width="600" >}}
-
 {{< image src="images/app-graph-overview.png" alt="Application graph overview diagram" width="600" >}}
 
 ### Application graph data that is inherently part of the development process
