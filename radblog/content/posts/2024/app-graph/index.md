@@ -36,7 +36,7 @@ With an application structure that includes environments, resource definitions, 
 
 ### Visualize the application graph on the Radius Dashboard
 
-During our most recent [community meeting](https://youtu.be/JDYmY1IRVOs?si=dgTV1fHWXyv8oihe&t=1950), a preview of the Radius Dashboard prototype was shared. Serving as the frontend experience for Radius, the Dashboard provides a visualization of the application graph data, providing both textual and visual representations of the Radius applications and resources, as well as a directory of [Recipes](https://docs.radapp.io/guides/recipes/overview/) that are available to the user. Work is currently underway to package Dashboard into future releases as a ready-to-use Radius feature. In the meantime, you may visit the [Dashboard repo](https://github.com/radius-project/dashboard) to try it out today as a prototype feature.
+During our most recent [community meeting](https://youtu.be/JDYmY1IRVOs?si=dgTV1fHWXyv8oihe&t=1950), a preview of the Radius Dashboard prototype was shared. Serving as the frontend experience for Radius, the Dashboard provides a visualization of the application graph data, providing both textual and visual representations of the Radius Applications and resources, as well as a directory of [Recipes](https://docs.radapp.io/guides/recipes/overview/) that are available to the user. Work is currently underway to package Dashboard into future releases as a ready-to-use Radius feature. In the meantime, you may visit the [Dashboard repo](https://github.com/radius-project/dashboard) to try it out today as a prototype feature.
 
 {{< image src="images/app-graph-dashboard-graph.png" alt="Screenshot of application graph visualization on the Radius Dashboard" width="600" >}}
 
