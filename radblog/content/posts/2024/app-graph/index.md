@@ -26,7 +26,7 @@ Traditionally a manual task, documentation is labor intensive, inconsistent, or 
 
 ## Introducing the Radius Application Graph
 
-The Application Graph is a core primitive of Radius applications and provides a comprehensive representation of an application and its resources, including its environments and connections. It is a graph-like data set that reveals precisely how the resources within the application are interconnected. This data is generated automatically as part of the development process with Radius inherent in the application declarations, so it is always up to date without requiring additional effort from developers. Below we'll explore how the application graph data is generated, as well as how it can be accessed and leveraged.
+The Application Graph is a core primitive of Radius Applications and provides a comprehensive representation of an application and its resources, including its environments and connections. It is a graph-like data set that reveals precisely how the resources within the application are interconnected. This data is generated automatically as part of the development process with Radius inherent in the application declarations, so it is always up to date without requiring additional effort from developers. Below we'll explore how the application graph data is generated, as well as how it can be accessed and leveraged.
 
 {{< image src="images/app-graph-overview.png" alt="Application graph overview diagram" width="600" >}}
 
@@ -34,7 +34,7 @@ The Application Graph is a core primitive of Radius applications and provides a 
 
 With an application structure that includes environments, resource definitions, and connections, applications deployed using Radius get represented into a graph-like data set that reveals precisely how the resources within the application are interconnected. For example, using Radius to declare [connections](https://docs.radapp.io/guides/author-apps/containers/overview/#connections) between dependencies to simplify the provisioning and deployment of resources directly results in the documentation of the application. These resource and connection declarations are used by Radius to construct the application graph data. Best of all, this data is generated automatically as part of the development process with Radius application definitions, so it is always up to date without requiring additional effort from developers. In short, a Radius application is self-describing and self-documenting!
 
-### Visualize the application graph on the Radius dashboard
+### Visualize the application graph on the Radius Dashboard
 
 During our most recent [community meeting](https://youtu.be/JDYmY1IRVOs?si=dgTV1fHWXyv8oihe&t=1950), a preview of the Radius Dashboard prototype was shared. Serving as the frontend experience for Radius, the Dashboard provides a visualization of the application graph data, providing both textual and visual representations of the Radius applications and resources, as well as a directory of [Recipes](https://docs.radapp.io/guides/recipes/overview/) that are available to the user. Work is currently underway to package Dashboard into future releases as a ready-to-use Radius feature. In the meantime, you may visit the [Dashboard repo](https://github.com/radius-project/dashboard) to try it out today as a prototype feature.
 
