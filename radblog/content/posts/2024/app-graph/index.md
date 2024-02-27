@@ -1,5 +1,5 @@
 ---
-date: "2024-02-23T00:00:00"
+date: "2024-02-27T00:00:00"
 title: "Understand your entire application with the Radius Application Graph"
 linkTitle: "Application Graph"
 author: "[Will Tsai](https://www.github.com/willtsai)"
@@ -32,11 +32,11 @@ The Application Graph is a core primitive of Radius Applications and provides a 
 
 ### Application graph data that is inherently part of the development process
 
-With an application structure that includes environments, resource definitions, and connections, applications deployed using Radius get represented into a graph-like data set that reveals precisely how the resources within the application are interconnected. For example, using Radius to declare [connections](https://docs.radapp.io/guides/author-apps/containers/overview/#connections) between dependencies to simplify the provisioning and deployment of resources directly results in the documentation of the application. These resource and connection declarations are used by Radius to construct the application graph data. Best of all, this data is generated automatically as part of the development process with Radius application definitions, so it is always up to date without requiring additional effort from developers. In short, a Radius application is self-describing and self-documenting!
+With an application structure that includes environments, resource definitions, and connections, applications deployed using Radius get represented into a graph-like data set that reveals precisely how the resources within the application are interconnected. When you declare a [connection](https://docs.radapp.io/guides/author-apps/containers/overview/#connections) between two resources, Radius injects resource related information into environment variables that are then used to access the respective resource without having to hard code URIs, connection strings, access keys, or anything that application code needs to successfully communicate. By leveraging Radius to simplify the provisioning, deployment, and connecting of resources, your application becomes self-describing. Best of all, this data is generated automatically as part of the Radius application development process, so it is always up to date without requiring additional effort from developers.
 
 ### Visualize the application graph on the Radius Dashboard
 
-During a recent [community meeting](https://youtu.be/JDYmY1IRVOs?si=dgTV1fHWXyv8oihe&t=1950), a preview of the Radius Dashboard prototype was shared. Serving as the frontend experience for Radius, the Dashboard provides a visualization of the application graph data, providing both textual and visual representations of the Radius Applications and resources, as well as a directory of [Recipes](https://docs.radapp.io/guides/recipes/overview/) that are available to the user. Work is currently underway to package Dashboard into future releases as a ready-to-use Radius feature. In the meantime, you may visit the [Dashboard repo](https://github.com/radius-project/dashboard) to try it out today as a prototype feature.
+During a recent [community meeting](https://youtu.be/JDYmY1IRVOs?si=dgTV1fHWXyv8oihe&t=1950), a preview of the Radius Dashboard prototype was shared. Serving as the frontend experience for Radius, the Dashboard provides a visualization of the application graph data, providing both textual and visual representations of the Radius Applications and resources, as well as a directory of [Recipes](https://docs.radapp.io/guides/recipes/overview/) that are available to the user. Work is currently underway to package Dashboard into future releases as a ready-to-use Radius feature. In the meantime, you may visit the [Dashboard repo](https://github.com/radius-project/dashboard) to try it out today as a prototype feature. The Radius Dashboard is in its early days and maintainers are looking forward to working with the community to grow its feature set. If you are interested in contributing to the Dashboard, please visit the [issues board](https://github.com/radius-project/dashboard/issues). Items tagged with [`good first issue`](https://github.com/radius-project/dashboard/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) are a great place to start for new contributors.
 
 [{{< image src="images/app-graph-dashboard-graph.png" alt="Screenshot of application graph visualization on the Radius Dashboard" width="800" >}}](https://youtu.be/JDYmY1IRVOs?si=dgTV1fHWXyv8oihe&t=1950)
 
@@ -44,7 +44,7 @@ During a recent [community meeting](https://youtu.be/JDYmY1IRVOs?si=dgTV1fHWXyv8
 
 Instead of needing multiple views for Kubernetes and cloud resources, Radius provides a single source of truth for the application. The application graph API provides a way to query the application graph data, empowering operators and developers to mine the data for insights or even build additional visualizations to suit their needs. Radius provides an HTTP-based API that allow users to communicate with its control plane to query for the application graph data. The API can be hosted inside a Kubernetes cluster or as a standalone set of processes or containers. Visit the [Radius API documentation](https://docs.radapp.io/concepts/api-concept/) pages to learn more.
 
-{{< image src="images/app-graph-api-visualization.png" alt="Screenshot of application graph API query with arrow pointing to a visualization diagram" width="900" >}}
+{{< image src="images/app-graph-api-visualization.png" alt="Screenshot of application graph API query with arrow pointing to a visualization diagram" width="500" >}}
 
 ### View application graph relationships using the Radius CLI
 
