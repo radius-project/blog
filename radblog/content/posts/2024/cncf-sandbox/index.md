@@ -27,8 +27,6 @@ The Radius team and community have released six monthly releases of Radius since
 
 You can review the Radius CNCF Sandbox submission [here](https://github.com/cncf/sandbox/issues/65).  To get started and learn more about Radius, visit [radapp.io](http://radapp.io/), join the discussions on [Discord](https://aka.ms/radius/discord), or dial into an upcoming [community meeting](https://github.com/radius-project/community).
 
-## Learn more and contribute
-
 The Radius team is excited to continue collaborating with the CNCF as the Radius community grows and the project evolves based on community engagement and contributions.
 
 We're looking for people to join us!  To get started with Radius today, please see:
