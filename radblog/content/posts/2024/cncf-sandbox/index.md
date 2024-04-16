@@ -1,5 +1,5 @@
 ---
-date: "2024-04-09T00:00:00"
+date: "2024-04-16T00:00:00"
 title: "Radius Accepted as Cloud Native Compute Foundation (CNCF) Sandbox Project"
 linkTitle: "CNCF Sandbox"
 author: "[Mark Russinovich](https://www.linkedin.com/in/markrussinovich/)"
