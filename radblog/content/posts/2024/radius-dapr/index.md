@@ -49,6 +49,6 @@ The Radius maintainers are excited to continue collaborating with the open-sourc
 
 We’re looking for people to join us! To get started with Radius today, please see:
 
-Learn more from the documentation.
-Explore the open-source code repositories.
-Engage with the community.
+- Learn more from the [documentation](https://radapp.io/).
+- Explore the open-source [code repositories](https://github.com/radius-project).
+- Engage with the [community](https://aka.ms/radius/discord).
