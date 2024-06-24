@@ -7,6 +7,9 @@ type: blog
 ---
 # Radius & Dapr: Building Portable Cloud Apps that Follow Best Practices by Default
 
+# Prerequisites
+This post assumes you understand Radius and have at least completed the Radius "Getting Started Guide."  If you are not familiar with Radius you can get an introduction and complete the getting started guide here https://docs.radapp.io/here. This post does not assume you are familiar with Dapr but that familiarity is helpful.  If you are not familiar with Dapr, please see https://docs.dapr.io/.
+
 # Summary
 Enterprise application teams face daunting challenges as they work to continually deliver business value, learn and adopt new cloud technologies, and address an ever expanding matrix of of compliance requirements and security threats. Dapr and Radius make it easier for applications teams to address these competing interests by simplifying the task of building cloud native applications that are portable, scaleable and follow best practices at the source code level (via Dapr) and the deployment level (via Radius). Dapr and Radius are complimentary technologies which are valuable standalone but are more powerful when used together.  Dapr enables developers to easily write application code that is portable across clouds and on-premise and which follows industry best practices for common cloud patterns like pub/sub and secrets management by default. Radius, on the otherhand, makes it easy for applications teams to describe and deploy applications in a consistent way across private and public clouds while enforcing IT defined best practices for things like cost, security and operations.  Radius natively supports Dapr so using them together is seamless. This post summarizes the two technologies, how they compliment each other and provides references to additional resources for getting started with Dapr plus Radius. 
 
