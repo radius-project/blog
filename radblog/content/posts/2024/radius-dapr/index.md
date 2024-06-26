@@ -16,7 +16,7 @@ Many enterprise applications teams prioritize the ability to build portable appl
 
 # Developer Challenge
 
-Let's assume you are a developer who is very familar with building applications on AWS. You are experimenting with Radius to make your application and its infrastructure deployable to your on-premise cloud and to Azure, in addtion to AWS. You have described a simple Radius application per the snippet below. That application includes a front end container connected to AWS DynamoDB for state storage.  Given this Radius application definition, the application can successfully deploy to AWS, Azure and on-premise via Radius, which is great!  However, because the applicatoin depends on DynamoDB, a proprietary AWS service, the application can only run succesfully on AWS.  That is, the application and infrastructure definition and deploynment are portable via Radius, but the application runtime code is not.  
+Let's assume you are a developer who is very familiar with building applications on AWS. You are experimenting with Radius to make your application and its infrastructure deployable to your on-premise cloud and to Azure, in addition to AWS. You have described a simple Radius application per the snippet below. That application includes a front end container connected to AWS DynamoDB for state storage. Given this Radius application definition, the application can successfully deploy to AWS, Azure and on-premise via Radius, which is great!  However, because the application depends on DynamoDB, a proprietary AWS service, the application can only run successfully on AWS. That is, the application and infrastructure definition and deployment are portable via Radius, but the application runtime code is not.  
 
 ```
 import radius as radius
