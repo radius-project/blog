@@ -14,7 +14,7 @@ This post assumes you understand Radius and have at least completed the Radius "
 
 Many enterprise applications teams prioritize the ability to build portable applications that can run on-premise or on their public cloud of choice. Enabling such application portability requires solving two basic problems: 1) your application code itself must be compatible with each of those environments; and 2) your application definition and deployment must be compatible as well. As you have learned, Radius addresses #2, defining and deploying applications in a consistent manner compatible across on-premise, Azure and AWS. This post shows how you can use Dapr's cloud-agnostic building blocks to help address #1, making your application runtime code portable. 
 
-# Developer Challenge
+# Portability is needed in both the application deployment and runtime
 
 Let's assume you are a developer who is very familiar with building applications on AWS. You are experimenting with Radius to make your application and its infrastructure deployable to your on-premise cloud and to Azure, in addition to AWS. You have described a simple Radius application per the snippet below. That application includes a front end container connected to AWS DynamoDB for state storage. Given this Radius application definition, the application can successfully deploy to AWS, Azure and on-premise via Radius, which is great!  However, because the application depends on DynamoDB, a proprietary AWS service, the application can only run successfully on AWS. That is, the application and infrastructure definition and deployment are portable via Radius, but the application runtime code is not.  
 
