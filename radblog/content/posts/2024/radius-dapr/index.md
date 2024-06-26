@@ -80,7 +80,7 @@ Dapr is a portable, event-driven runtime that makes it easy for developers to bu
 
 # How to use Dapr Building Blocks in Radius applications
 
-The following code shows how the same Radius application above can reference the Dapr State Store building block instead of DynamoDB.  In addition to adding the Dapr state store to your applicatoin definition, you'll need to change your application code to call the Dapr state store API vs the DynamoDB API.  With that work complete, and with the Radius applicatoin definition below, your application code will be fully portable across on-premise and public clouds.  
+The following code shows how the same Radius application above can reference the Dapr State Store building block instead of DynamoDB.  In addition to adding the Dapr state store to your application definition, you'll need to change your application code to call the Dapr state store API vs the DynamoDB API.  With that work complete, and with the Radius application definition below, your application code will be fully portable across on-premise and public clouds.  
 
 ```
 //You still import Radius, but not AWS
