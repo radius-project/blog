@@ -8,7 +8,7 @@ type: blog
 
 # Prerequisites
 
-This post assumes you understand Radius and have at least completed the Radius "Getting Started Guide."  If you are not familiar with Radius you can get an introduction and complete the getting started guide at https://docs.radapp.io/  This post does not assume you are familiar with Dapr but that familiarity is helpful.  To learn about Dapr, please see https://docs.dapr.io/.
+This post assumes you understand Radius and have at least completed the Radius "Getting Started Guide."  If you are not familiar with Radius you can get an introduction and complete the getting started guide at [https://docs.radapp.io/](https://docs.radapp.io/getting-started/). This post does not assume you are familiar with Dapr but that familiarity is helpful.  To learn about Dapr, please see [https://docs.dapr.io/](https://docs.dapr.io/).
 
 # Summary
 
