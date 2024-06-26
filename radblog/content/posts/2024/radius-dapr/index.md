@@ -12,7 +12,7 @@ This post assumes you understand Radius and have at least completed the Radius "
 
 # Summary
 
-Many enterprise applications teams prioritize the ability to build portable applications that can run on-premise or on their public cloud of choice.  Enabling such application portability requires solving two basic problems: 1)your application code itself must be compatible with each of those environments; and 2)your application definition and deployment must be compatible as well. As you have learned, Radius addresses #2, defining and deploying applications in a manner compatible across on-premise, Azure and AWS. This post shows how you can use Dapr's cloud-agnostic building blocks to help address #1, making your application runtime code portable. 
+Many enterprise applications teams prioritize the ability to build portable applications that can run on-premise or on their public cloud of choice. Enabling such application portability requires solving two basic problems: 1) your application code itself must be compatible with each of those environments; and 2) your application definition and deployment must be compatible as well. As you have learned, Radius addresses #2, defining and deploying applications in a consistent manner compatible across on-premise, Azure and AWS. This post shows how you can use Dapr's cloud-agnostic building blocks to help address #1, making your application runtime code portable. 
 
 # Developer Challenge
 
