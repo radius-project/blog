@@ -134,7 +134,8 @@ There are several resources for learning more about using Dapr and Radius togeth
 These Open at Microsoft videos have great introductory content 
 
 -[Introduction to Dapr](https://learn.microsoft.com/en-us/shows/open-at-microsoft/introduction-to-dapr)
--[Introduction to Radius](https://www.youtube.com/watch?v=mT_NWFnYn0A)
+[Introduction to Radius](https://www.youtube.com/watch?v=mT_NWFnYn0A)
+
 -[Create Truly Portable Applications with Dapr and Radius](https://learn.microsoft.com/en-us/shows/open-at-microsoft/create-truly-portable-applications-with-dapr-and-radius)
 
 ## Tutorials and How-To Guides
