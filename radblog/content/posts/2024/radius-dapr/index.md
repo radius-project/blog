@@ -8,7 +8,8 @@ type: blog
 
 # Multi-Cloud Usage Models
 
-Most enterprises today use public clouds from multiple vendors like Amazon AWS and Microsoft Azure, or they plan to do so in the near future. Reasons vary from company to company and industry to industry. Financial services providers face regulatory constraints that may only be addressed via multiple cloud providers in different geographic regions. Many enterprises have varied teams, each with specific skills, preferences and technical requirements that, in aggregate, require multiple clouds. Other enterprises simply hope to avoid lock-in to a particular vendor. While the specific scenarios and requirements vary, there is growing trend toward using clouds from multiple vendors. In discussing Radius with scores of enterprises, we found three primary models among enterprises using clouds from more than one vendor:
+Most enterprises today use public clouds from multiple vendors like Amazon AWS and Microsoft Azure, or they plan to do so in the near future. Reasons vary from company to company and industry to industry. Financial services providers face regulatory constraints that may only be addressed via multiple cloud providers in different geographic regions. Many enterprises have varied teams, each with specific skills, preferences and technical requirements that, in aggregate, require multiple clouds. Other enterprises simply hope to avoid lock-in to a particular vendor. While the specific scenarios and requirements vary, there is a growing trend toward using clouds from multiple vendors. In discussing Radius with scores of enterprises, we found three primary models among enterprises using clouds from more than one vendor:
+
 
 1. Multi-cloud enterprise: these enterprises deploy some applications to one cloud provider and other applications to another cloud provider.
 2. Cloud-agnostic applications: these enterprises deploy the same application to different cloud providers. 
