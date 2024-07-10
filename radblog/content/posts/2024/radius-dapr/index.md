@@ -14,7 +14,8 @@ Most enterprises today use public clouds from multiple vendors like Amazon AWS a
 2. Cloud-agnostic applications: these enterprises deploy the same application to different cloud providers. 
 3. Multi-cloud applications: these enterprises have a single application that is distributed across multiple clouds.
 
-The third case, a single application that is running across multiple clouds, was incredibly rare. Enterprises that had experimented with multi-cloud applications cited almost insurmountable challenges with operations, security, and performance management. While Radius can help with this third type of application, supporting these kinds of applications was not a design goal for Radius.  Radius is designed to meet the first two types of multi-cloud use. And, if a given application is designed to be fully cloud agnostic it meets the requirements of both case one and two above. This post focuses on how to use Radius together with Dapr to deliver fully cloud-agnostic applications.
+The third case, a single application that is running across multiple clouds, we found to be incredibly rare. Enterprises that had experimented with multi-cloud applications cited almost insurmountable challenges with operations, security, and performance management. While Radius can help with this third type of application, supporting these kinds of applications was not a design goal for Radius.  Radius is designed to meet the first two types of multi-cloud use. And, if a given application is designed to be fully cloud agnostic it meets the requirements of both case one and two above. This post focuses on how to use Radius together with Dapr to deliver fully cloud-agnostic applications.
+
 
 # How Radius and Dapr Help
 
