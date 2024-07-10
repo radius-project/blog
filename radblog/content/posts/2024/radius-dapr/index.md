@@ -27,7 +27,8 @@ Dapr's value is in providing cloud-agnostic API building blocks that also reduce
 
 {{< image src="images/DaprOverview.png" alt="Dapr Overview Diagram" width="600" >}}
 
-The rest of this article assumes you have used Dapr and you are familiar with the basics of Radius, by at least completing the [Radius Getting Started Guide](https://docs.radapp.io/getting-started). If you want to brush up on Radius or Dapr please check out the [Radius documentation](https://radapp.io/) and [Dapr Documentation](https://dapr.io/).
+The rest of this article assumes you have used Dapr and you are familiar with the basics of Radius, by at least completing the [Radius Getting Started Guide](https://docs.radapp.io/getting-started). If you want to brush up on Radius or Dapr, please check out the [Radius documentation](https://radapp.io/) and [Dapr Documentation](https://dapr.io/).
+
 
 # How it Works
 
