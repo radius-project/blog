@@ -1,7 +1,7 @@
 ---
 date: "2024-07-11T08:00:00-08:00"
 title: "Building Cloud Agnostic Applications with Radius and Dapr"
-linkTitle: "Radius plus Dapr"
+linkTitle: "Radius and Dapr"
 author: "[Jonathan Smith](https://www.github.com/jonvsm)"
 type: blog
 ---
