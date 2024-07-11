@@ -142,7 +142,7 @@ These How-To Guides walk you through targeted, common steps you will complete wh
 
 - [Dapr Overview](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
 - [Add a Dapr sidecar to a container in your Radius application](https://docs.radapp.io/guides/author-apps/dapr/how-to-dapr-sidecar/).
-- [Add a Dapr Building Block to your Radius application](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
+- [Add a Dapr Building Block to your Radius application](https://docs.radapp.io/guides/author-apps/dapr/how-to-dapr-building-block/) 
 
 ### Other Community Resources
 
