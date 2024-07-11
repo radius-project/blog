@@ -18,7 +18,11 @@ The third case, a single application that is running across multiple clouds, we 
 
 ## How Radius and Dapr Help
 
-Delivering cloud-agnostic applications is challenging and requires solving two basic problems: 1) Your runtime application code itself must be cloud-agnostic, i.e. Your application can’t call APIs specific to a given proprietary cloud. Dapr, the Distributed Application Runtime was designed to solve this problem; and 2) Your application and infrastructure deployment must be cloud agnostic, i.e. your deployment can’t assume infrastructure and configuration that is specific to a given cloud.  Radius was designed to solve this problem. Because Radius natively supports Dapr, you can use the two together to build truly cloud-agnostic applications. This post will show you how simple it is to use Dapr and Radius together. (A later post will focus on using Radius with open-source technologies like Redis, the combination of which also enables fully cloud agnostic applications.)
+Delivering cloud-agnostic applications is challenging and requires solving two basic problems:
+1. Your runtime application code itself must be cloud-agnostic, i.e. Your application can’t call APIs specific to a given proprietary cloud. Dapr, the Distributed Application Runtime was designed to solve this problem.
+2. Your application and infrastructure deployment must be cloud agnostic, i.e. your deployment can’t assume infrastructure and configuration that is specific to a given cloud. Radius was designed to solve this problem. 
+
+Because Radius natively supports Dapr, you can use the two together to build truly cloud-agnostic applications. This post will show you how simple it is to use Dapr and Radius together. (A later post will focus on using Radius with open-source technologies like Redis, the combination of which also enables fully cloud agnostic applications.)
 
 Dapr's value is in providing cloud-agnostic API building blocks that also reduce the complexity of building distributed, cloud-native applications. These API building blocks abstract away services that provide state management, secrets management, or publish and subscribe systems. Developers can code an application using the Dapr SDK and platform engineering teams can use Radius to provide the underlying infrastructure for these Dapr based applications. For example, a Dapr application that persists state could use Azure Blob Storage or Amazon DynamoDB as the underlying state store depending on which cloud provider was used to host the application. Here is a summary of the Dapr stack.
 
@@ -32,7 +36,12 @@ Both Dapr and Radius are valuable standalone solutions but are ‘better togethe
 
 This is where the close integration between Radius and Dapr comes in handy. Radius supports the three most popular Dapr resource types: State Stores, Secret Stores, Pub/Sub Brokers.  So, you can easily define your application as-is in Radius and reference the Dapr State Store building block. Once you have described your application in Radius you can deploy it across your private cloud and your public cloud of choice without further modification to the Radius application definition, and without learning all the intricacies of how each public cloud works.
 
-It only takes three steps to describe your Dapr application in Radius: 1) add a Dapr sidecar; 2) declare the building block your app uses; 3) declare a connection from your application container to the building block. Here’s how it works. We’ll start with this simple Radius application, which includes a container wherein you will enable Dapr. 
+It only takes three steps to describe your Dapr application in Radius: 
+1. Add a Dapr sidecar
+2. Declare the building block your app uses
+3. Declare a connection from your application container to the building block
+
+Here’s how it works. We’ll start with this simple Radius application, which includes a container wherein you will enable Dapr. 
 
 ```
 import radius as radius
@@ -51,7 +60,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 }
 ```
 
-  1)To add the sidecar to this container, you add an extension of kind ‘daprSidecar.’ This enables Dapr within this container.
+To add the sidecar to this container, you add an extension of kind `daprSidecar`. This enables Dapr within this container:
  
  ```
  resource demo 'Applications.Core/containers@2023-10-01-preview' = {
@@ -72,7 +81,8 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 }
  ```
 
- 2)With Dapr enabled in your container, you declare a reference to the State Store building block your app uses.
+With Dapr enabled in your container, you declare a reference to the State Store building block your app uses:
+
  ```
  resource stateStore 'Applications.Dapr/stateStores@2023-10-01-preview' = {
   name: 'statestore'
@@ -83,7 +93,8 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 }
  ```
 
-  3)Lastly, you’ll declare a connection between the container where Dapr is enabled and the State Store building block.
+Lastly, you’ll declare a connection between the container where Dapr is enabled and the State Store building block:
+
 
 ```
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
@@ -114,13 +125,13 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 }
 ```
 
-At this point, you can use the command *rad run* or *rad deploy* to deploy the application to AWS and to Azure. As part of the deployment, Radius will automatically run a Radius [Recipe](https://docs.radapp.io/guides/recipes/overview/) which will create a lightweight Redis container (the default backing store for Dapr State Store) plus a Dapr component configuration. So, you don’t even have to setup and configure Dapr or the State Store on either cloud. Radius takes care of that for you. 
+At this point, you can use the command `rad run` or `rad deploy` to deploy the application to AWS and to Azure. As part of the deployment, Radius will automatically run a Radius [Recipe](https://docs.radapp.io/guides/recipes/overview/) which will create a lightweight Redis container (the default backing store for Dapr State Store) plus a Dapr component configuration. So, you don’t even have to setup and configure Dapr or the State Store on either cloud. Radius takes care of that for you. 
 
 ## Alternative Approaches
 
 Hopefully, the information and examples above make clear the power and simplicity of using Radius and Dapr for building cloud agnostic applications. To further reinforce that point, let’s think through the experience using other technologies for enabling cloud agnostic applications. For example, many developers would package and deploy a Dapr application to Kubernetes using a Helm chart and use Terraform to deploy the application's dependent cloud infrastructure. In many cases, deployment of even simple applications may also require Bash scripts for command execution.
 
-Using Helm charts and Terraform involves several manual steps that Radius automates. With Helm, you would typically first create multiple Helm charts to deploy the application container with a Dapr sidecar, Dapr state store, and securely managed cloud provider credentials. Then you would use Terraform to provision and manage infrastructure resources on AWS or Azure, requiring managing yet more configuration and tooling. Next, to automate execution of commands across Helm, Dapr, and Terraform, you would then create Bash scripts, adding more complexity with additional files to manage. In contrast, Radius simplifies this entire process as a part of an application deployment using ‘rad deploy’ as demonstrated above.
+Using Helm charts and Terraform involves several manual steps that Radius automates. With Helm, you would typically first create multiple Helm charts to deploy the application container with a Dapr sidecar, Dapr state store, and securely managed cloud provider credentials. Then you would use Terraform to provision and manage infrastructure resources on AWS or Azure, requiring managing yet more configuration and tooling. Next, to automate execution of commands across Helm, Dapr, and Terraform, you would then create Bash scripts, adding more complexity with additional files to manage. In contrast, Radius simplifies this entire process as a part of an application deployment using `rad deploy` as demonstrated above.
 
 ## Learn More and Contribute 
 
