@@ -19,7 +19,9 @@ The third case, a single application that is running across multiple clouds, we 
 ## How Radius and Dapr Help
 
 Delivering cloud-agnostic applications is challenging and requires solving two basic problems:
+
 1. Your runtime application code itself must be cloud-agnostic, i.e. Your application can’t call APIs specific to a given proprietary cloud. Dapr, the Distributed Application Runtime was designed to solve this problem.
+
 2. Your application and infrastructure deployment must be cloud agnostic, i.e. your deployment can’t assume infrastructure and configuration that is specific to a given cloud. Radius was designed to solve this problem. 
 
 Because Radius natively supports Dapr, you can use the two together to build truly cloud-agnostic applications. This post will show you how simple it is to use Dapr and Radius together. (A later post will focus on using Radius with open-source technologies like Redis, the combination of which also enables fully cloud agnostic applications.)
