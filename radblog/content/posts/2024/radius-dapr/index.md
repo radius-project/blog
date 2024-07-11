@@ -131,9 +131,7 @@ There are several resources for learning more about using Dapr and Radius togeth
 These Open at Microsoft videos have great introductory content 
 
 - [Introduction to Dapr](https://learn.microsoft.com/en-us/shows/open-at-microsoft/introduction-to-dapr)
-
 - [Introduction to Radius](https://www.youtube.com/watch?v=mT_NWFnYn0A)
-
 - [Create Truly Portable Applications with Dapr and Radius](https://learn.microsoft.com/en-us/shows/open-at-microsoft/create-truly-portable-applications-with-dapr-and-radius)
 
 ## Tutorials and How-To Guides
@@ -143,9 +141,7 @@ This [tutorial](https://docs.radapp.io/tutorials/dapr/) provides a hands on end-
 These How-To Guides walk you through targeted, common steps you will complete whenever using Dapr with Radius. 
 
 - [Dapr Overview](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
-
 - [Add a Dapr sidecar to a container in your Radius application](https://docs.radapp.io/guides/author-apps/dapr/how-to-dapr-sidecar/).
-
 - [Add a Dapr Building Block to your Radius application](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
 
 ## Other Community Resources
