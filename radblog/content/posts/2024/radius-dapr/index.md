@@ -10,27 +10,21 @@ type: blog
 
 Most enterprises today use public clouds from multiple vendors like Amazon AWS and Microsoft Azure, or they plan to do so in the near future. Reasons vary from company to company and industry to industry. Financial services providers face regulatory constraints that may only be addressed via multiple cloud providers in different geographic regions. Many enterprises have varied teams, each with specific skills, preferences and technical requirements that, in aggregate, require multiple clouds. Other enterprises simply hope to avoid lock-in to a particular vendor. While the specific scenarios and requirements vary, there is a growing trend toward using clouds from multiple vendors. In discussing Radius with scores of enterprises, we found three primary models among enterprises using clouds from more than one vendor:
 
-
 1. Multi-cloud enterprise: these enterprises deploy some applications to one cloud provider and other applications to another cloud provider.
 2. Cloud-agnostic applications: these enterprises deploy the same application to different cloud providers. 
 3. Multi-cloud applications: these enterprises have a single application that is distributed across multiple clouds.
 
-The third case, a single application that is running across multiple clouds, we found to be incredibly rare. Enterprises that had experimented with multi-cloud applications cited almost insurmountable challenges with operations, security, and performance management. While Radius can help with this third type of application, supporting these kinds of applications was not a design goal for Radius.  Radius is designed to meet the first two types of multi-cloud use. And, if a given application is designed to be fully cloud agnostic it meets the requirements of both case one and two above. This post focuses on how to use Radius together with Dapr to deliver fully cloud-agnostic applications.
-
+The third case, a single application that is running across multiple clouds, we found to be incredibly rare. Enterprises that had experimented with multi-cloud applications cited almost insurmountable challenges with operations, security, and performance management. While Radius can help with this third type of application, supporting these kinds of applications was not a design goal for Radius. Radius is designed to meet the first two types of multi-cloud use. And, if a given application is designed to be fully cloud agnostic it meets the requirements of both case one and two above. This post focuses on how to use Radius together with Dapr to deliver fully cloud-agnostic applications.
 
 # How Radius and Dapr Help
 
-
 Delivering cloud-agnostic applications is challenging and requires solving two basic problems: 1) Your runtime application code itself must be cloud-agnostic, i.e. Your application can’t call APIs specific to a given proprietary cloud. Dapr, the Distributed Application Runtime was designed to solve this problem; and 2) Your application and infrastructure deployment must be cloud agnostic, i.e. your deployment can’t assume infrastructure and configuration that is specific to a given cloud.  Radius was designed to solve this problem. Because Radius natively supports Dapr, you can use the two together to build truly cloud-agnostic applications. This post will show you how simple it is to use Dapr and Radius together. (A later post will focus on using Radius with open-source technologies like Redis, the combination of which also enables fully cloud agnostic applications.)
 
-
 Dapr's value is in providing cloud-agnostic API building blocks that also reduce the complexity of building distributed, cloud-native applications. These API building blocks abstract away services that provide state management, secrets management, or publish and subscribe systems. Developers can code an application using the Dapr SDK and platform engineering teams can use Radius to provide the underlying infrastructure for these Dapr based applications. For example, a Dapr application that persists state could use Azure Blob Storage or Amazon DynamoDB as the underlying state store depending on which cloud provider was used to host the application. Here is a summary of the Dapr stack.
-
 
 {{< image src="images/DaprOverview.png" alt="Dapr Overview Diagram" width="600" >}}
 
 The rest of this article assumes you have used Dapr and you are familiar with the basics of Radius, by at least completing the [Radius Getting Started Guide](https://docs.radapp.io/getting-started). If you want to brush up on Radius or Dapr, please check out the [Radius documentation](https://radapp.io/) and [Dapr Documentation](https://dapr.io/).
-
 
 # How it Works
 
@@ -38,8 +32,7 @@ Both Dapr and Radius are valuable standalone solutions but are ‘better togethe
 
 This is where the close integration between Radius and Dapr comes in handy. Radius supports the three most popular Dapr resource types: State Stores, Secret Stores, Pub/Sub Brokers.  So, you can easily define your application as-is in Radius and reference the Dapr State Store building block. Once you have described your application in Radius you can deploy it across your private cloud and your public cloud of choice without further modification to the Radius application definition, and without learning all the intricacies of how each public cloud works.
 
-
-It only takes three steps to describe your Dapr application in Radius: 1) add a  Dapr sidecar; 2) declare the building block your app uses; 3) declare a connection from your application container to the building block. Here’s how it works. We’ll start with this simple Radius application, which includes a container wherein you will enable Dapr. 
+It only takes three steps to describe your Dapr application in Radius: 1) add a Dapr sidecar; 2) declare the building block your app uses; 3) declare a connection from your application container to the building block. Here’s how it works. We’ll start with this simple Radius application, which includes a container wherein you will enable Dapr. 
 
 ```
 import radius as radius
@@ -58,7 +51,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 }
 ```
 
- 1)To add the sidecar to this container, you add an extension of kind ‘daprSidecar.’  This enables Dapr within this container.
+  1)To add the sidecar to this container, you add an extension of kind ‘daprSidecar.’ This enables Dapr within this container.
  
  ```
  resource demo 'Applications.Core/containers@2023-10-01-preview' = {
@@ -90,7 +83,7 @@ resource demo 'Applications.Core/containers@2023-10-01-preview' = {
 }
  ```
 
-3)Lastly, you’ll declare a connection between the container where Dapr is enabled and the State Store building block.
+  3)Lastly, you’ll declare a connection between the container where Dapr is enabled and the State Store building block.
 
 ```
 resource demo 'Applications.Core/containers@2023-10-01-preview' = {
@@ -137,23 +130,23 @@ There are several resources for learning more about using Dapr and Radius togeth
 
 These Open at Microsoft videos have great introductory content 
 
-[Introduction to Dapr](https://learn.microsoft.com/en-us/shows/open-at-microsoft/introduction-to-dapr)
+- [Introduction to Dapr](https://learn.microsoft.com/en-us/shows/open-at-microsoft/introduction-to-dapr)
 
-[Introduction to Radius](https://www.youtube.com/watch?v=mT_NWFnYn0A)
+- [Introduction to Radius](https://www.youtube.com/watch?v=mT_NWFnYn0A)
 
-[Create Truly Portable Applications with Dapr and Radius](https://learn.microsoft.com/en-us/shows/open-at-microsoft/create-truly-portable-applications-with-dapr-and-radius)
-
+- [Create Truly Portable Applications with Dapr and Radius](https://learn.microsoft.com/en-us/shows/open-at-microsoft/create-truly-portable-applications-with-dapr-and-radius)
 
 ## Tutorials and How-To Guides
 
 This [tutorial](https://docs.radapp.io/tutorials/dapr/) provides a hands on end-end experience of adding a Dapr state store to a Radius application then deploying and testing that application.
 
 These How-To Guides walk you through targeted, common steps you will complete whenever using Dapr with Radius. 
-[Dapr Overview](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
 
-[Add a Dapr sidecar to a container in your Radius application](https://docs.radapp.io/guides/author-apps/dapr/how-to-dapr-sidecar/).
+- [Dapr Overview](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
 
-[Add a Dapr Building Block to your Radius application](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
+- [Add a Dapr sidecar to a container in your Radius application](https://docs.radapp.io/guides/author-apps/dapr/how-to-dapr-sidecar/).
+
+- [Add a Dapr Building Block to your Radius application](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
 
 ## Other Community Resources
 
