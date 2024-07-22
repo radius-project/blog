@@ -96,7 +96,7 @@ The Radius Dashboard is a new part of Radius, and as a result, there is lots to 
 
 #### Contributing to Radius Recipes
 
-If you or your organization have authored custom [Radius Recipes](https://docs.radapp.io/guides/recipes/overview/), we would love to see what you have built! So far, we have authored some recipes for our [supported resources](https://docs.radapp.io/guides/recipes/supported-resources/), but we are always looking for more contributions and examples for our community.
+If you or your organization have authored custom [Radius Recipes](https://docs.radapp.io/guides/recipes/overview/), we would love to see what you have built! So far, we have authored some recipes for our [supported resources](https://docs.radapp.io/guides/author-apps/portable-resources/overview/#available-resources), but we are always looking for more contributions and examples for our community.
 
 ##### Prerequisites
 
