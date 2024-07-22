@@ -75,7 +75,7 @@ Contributing to the Radius CLI is a great way to get started with the project, a
 
 ##### Getting started
 
-We have authored a guide to help you get started with contributing to the Radius CLI. You can find it [here](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-first-commit/first-commit-00-prerequisites.md). This guide will walk you through the process of setting up your development environment, building the CLI, running tests, and submitting a pull request to the Radius repo.
+We have authored a guide to help you get started with contributing to the Radius CLI. You can find it [here](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-first-commit/first-commit-00-prerequisites/index.md). This guide will walk you through the process of setting up your development environment, building the CLI, running tests, and submitting a pull request to the Radius repo.
 
 [Here](https://github.com/radius-project/radius/labels/good%20first%20issue) is a list of good first issues to get you started. Look for the issues that specify commands (`rad <command>`) or the CLI in general.
 
