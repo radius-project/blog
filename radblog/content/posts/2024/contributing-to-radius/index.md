@@ -22,7 +22,7 @@ Here are a few tips and things you'll need to get started with contributing to R
 
 We welcome contributions of all kinds to Radius, not just code! Here are a few ways you can contribute to the project without writing a single line of code.
 
-- **Radius Roadmap**: Help shape the future of Radius by upvoting or commenting on the features in our [public roadmap](https://github.com/orgs/radius-project/projects/8).
+- **Radius Roadmap**: Help shape the future of Radius by upvoting or commenting on the features in our [public roadmap](https://aka.ms/radius-roadmap).
 
 - **Documentation**: Help improve the [Radius documentation](https://docs.radapp.io/) by fixing typos, adding examples, or suggesting new content. If you see anything that can be improved, check out the menu on the right side of the page and use the *New docs issue* link to suggest changes or *Edit this page* link to create a pull request with your changes.
 
@@ -64,59 +64,59 @@ Since Radius encompasses multiple components, we'll cover how to contribute to t
 
 - [Contributing to the Radius control plane](#contributing-to-the-radius-control-plane)
 
-### Contributing to the Radius CLI
+#### Contributing to the Radius CLI
 
 Contributing to the Radius CLI is a great way to get started with the project, and we recommend it for anyone starting out with Radius.
 
-#### Prerequisites
+##### Prerequisites
 
 - General knowledge of the [Go programming language](https://golang.org/)
 - A fork and local clone of the [radius-project/radius](https://github.com/radius-project/radius) repository
 
-### Getting started
+##### Getting started
 
 We have authored a guide to help you get started with contributing to the Radius CLI. You can find it [here](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-first-commit/first-commit-00-prerequisites.md). This guide will walk you through the process of setting up your development environment, building the CLI, running tests, and submitting a pull request to the Radius repo.
 
 [Here](https://github.com/radius-project/radius/labels/good%20first%20issue) is a list of good first issues to get you started. Look for the issues that specify commands (`rad <command>`) or the CLI in general.
 
-### Contributing to the Radius Dashboard
+#### Contributing to the Radius Dashboard
 
 If you're interested in front-end development, contributing to the Radius Dashboard is a great way to get involved with the project. The Radius Dashboard is built on [Backstage](https://backstage.io/), an open-source platform for building developer portals. 
 
-#### Prerequisites
+##### Prerequisites
 
 - General knowledge of front-end development with React
 - A fork and local clone of the [radius-project/dashboard](https://github.com/radius-project/dashboard) repository
 
-#### Getting started
+##### Getting started
 
 The Radius Dashboard is a new part of Radius, and as a result, there is lots to do! We have authored a guide to help you get started with contributing to the Radius Dashboard. You can find it [here](https://github.com/radius-project/dashboard/tree/main/docs/contributing/contributing-code/contributing-code-building).
 
 [Here](https://github.com/radius-project/dashboard/labels/good%20first%20issue) is a list of good first issues to get you started.
 
-### Contributing to Radius Recipes
+#### Contributing to Radius Recipes
 
 If you or your organization have authored custom [Radius Recipes](https://docs.radapp.io/guides/recipes/overview/), we would love to see what you have built! So far, we have authored some recipes for our [supported resources](https://docs.radapp.io/guides/recipes/supported-resources/), but we are always looking for more contributions and examples for our community.
 
-#### Prerequisites
+##### Prerequisites
 - A fork and local clone of the [radius-project/recipes](https://github.com/radius-project/recipes) repository
 
-#### Getting started
+##### Getting started
 
 We have authored a guide to help you get started with contributing to Radius Recipes. You can find it [here](https://github.com/radius-project/recipes/blob/main/docs/contributing/contributing-recipes.md). In the [radius-project/recipes](https://github.com/radius-project/recipes) repo, there are many examples of recipes that you can use as a starting point for your own contributions. For example, a custom [Azure Service Bus](https://github.com/radius-project/recipes/blob/main/azure/extender-servicebus.bicep) recipe or an [AWS Redis](https://github.com/radius-project/recipes/blob/main/aws/rediscaches.bicep) recipe that leverages AWS MemoryDB.
 
-### Contributing to the Radius control plane
+#### Contributing to the Radius control plane
 
 Most of the Radius functionality exists within the control plane, which is a set of services that exist as part of your Radius installation. 
 
-#### Prerequisites
+##### Prerequisites
 
 - General knowledge of the [Go programming language](https://golang.org/)
 - Prerequisites mentioned [here](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-prerequisites/README.md#basic-prerequisites), including Go, Make, Docker, and so on
 - A [supported Kubernetes cluster](https://docs.radapp.io/guides/operations/kubernetes/overview)
 - A fork and local clone of the [radius-project/radius](https://github.com/radius-project/radius) repository
 
-#### Getting started
+##### Getting started
 
 To get started with contributing to the Radius control plane, the general flow is as follows:
 1. Install Radius onto your Kubernetes cluster
@@ -127,7 +127,7 @@ To get started with contributing to the Radius control plane, the general flow i
 
 We have written a more detailed guide to help you get started with contributing to the Radius control plane. You can find it [here](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-control-plane/generating-and-installing-custom-build.md).
 
-####  Advanced inner-loop development
+#####  Advanced inner-loop development
 
 If you want to run the control plane locally, we have a guide for that as well. You can find it [here](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-control-plane/running-controlplane-locally.md). This is useful for debugging and testing changes to the control plane, but comes with some additional setup requirements.
 
