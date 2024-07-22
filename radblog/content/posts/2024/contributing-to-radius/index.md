@@ -1,5 +1,5 @@
 ---
-date: "2024-07-29T00:00:00"
+date: "2024-07-22T00:00:00"
 title: "Learn how to fork, build, and contribute to Radius"
 linkTitle: "Contributing to Radius"
 author: "[Will Smith](https://www.github.com/willdavsmith)"
