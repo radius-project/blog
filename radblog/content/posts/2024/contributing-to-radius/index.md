@@ -16,7 +16,7 @@ Here are a few tips and things you'll need to get started with contributing to R
 
 - Radius is composed of multiple components and repositories. You can find the main Radius repository [here](https://github.com/radius-project/radius) and the other repositories in the [radius-project GitHub organization](https://github.com/radius-project). It may help to consult our [contributing guide](https://github.com/radius-project/radius/tree/main/docs/contributing/contributing-code) to understand the different components of the project and how to contribute to each.
 
-- If you want to contribute but don't know where to start, feel free to reach out to the community on the [Radius Discord](https://aka.ms/radius/discord) or look for issues labeled as [good first issue](https://github.com/radius-project/radius/labels/good%20first%20issue). We are happy to help and we appreciate your interest in contributing to the project, so no question is too small!
+- If you want to contribute but don't know where to start, feel free to reach out to the community on the [Radius Discord](https://aka.ms/radius/discord) or look for issues labeled as [good first issue](https://aka.ms/radius-first-issues). We are happy to help and we appreciate your interest in contributing to the project, so no question is too small!
 
 ## Non-code contributions
 
