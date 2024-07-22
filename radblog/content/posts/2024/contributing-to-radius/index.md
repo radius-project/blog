@@ -42,7 +42,7 @@ Before you start contributing code to Radius, there are a few general prerequisi
 
 - Radius leverages the [Developer Certificate of Origin](https://github.com/apps/dco) to certify that you have the right to submit the code you are contributing to the project. Make sure to include the `Signed-off-by` line in your commit message, or use the `-s` flag when committing.
 
-- Radius uses [GitHub forks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) for contributions. This means that you will need to fork the repository you're interested in to your GitHub account before making any changes. Please see the [documentation](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-first-commit/first-commit-06-creating-a-forked-repo/index.md) for instructions and best practices for using forks with Radius.
+- Radius uses [GitHub forks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) for contributions. This means that you will need to fork the repository you're interested in to your GitHub account before making any changes. Please see the [documentation](https://github.com/radius-project/radius/blob/main/docs/contributing/contributing-code/contributing-code-forks/index.md) for instructions and best practices for using forks with Radius.
 
 ### What to expect
 
