@@ -6,7 +6,7 @@ author: "[Will Smith](https://www.github.com/willdavsmith)"
 type: blog
 ---
 
-Hello future Radius contributor! This blog post will guide you through the process of contributing to the Radius project. Contributions can come in many forms, such as code contributions, documentation updates, bug reports, feature requests, and more. We welcome contributions from developers of all skill levels, so don't hesitate to get involved!
+Hello future Radius contributor! This blog post will guide you through the process of contributing to the Radius project. Contributions can come in many forms, such as code contributions, documentation updates, bug reports, feature requests, and more. We welcome contributions from users of all skill levels, so don't hesitate to get involved!
 
 ## Getting started
 
