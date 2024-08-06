@@ -32,11 +32,11 @@ The Radius project maintainers are excited to collaborate with the community to 
 
  - If you are interested in proposing new feature design, you can do the following
         
-        - Make sure a Github issue is present in the [Radius repository](https://github.com/radius-project/radius) or Submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E)
+    - Make sure a Github issue is present in the [Radius repository](https://github.com/radius-project/radius) or submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E)
 
-        - Create a feature specification document following the template [here](https://github.com/radius-project/design-notes/blob/main/template/YYYY-MM-feature-spec-template.md) and submit a pull request to the design notes repository following the guidelines [here](https://github.com/radius-project/design-notes/blob/main/README.md#creating-a-pull-request)
+    - Create a feature specification document following the template [here](https://github.com/radius-project/design-notes/blob/main/template/YYYY-MM-feature-spec-template.md) and submit a pull request to the design notes repository following the guidelines [here](https://github.com/radius-project/design-notes/blob/main/README.md#creating-a-pull-request)
 
-        - Once the feature specification is approved, create a design proposal document following the template [here] (https://github.com/radius-project/design-notes/blob/main/template/YYYY-MM-feature-spec-template.md). This document can be authored in parallel with the feature specification document. Submit a pull request to the design notes repository following the guidelines [here](https://github.com/radius-project/design-notes/blob/main/README.md#creating-a-pull-request)
+    - Once the feature specification is approved, create a design proposal document following the template [here] (https://github.com/radius-project/design-notes/blob/main/template/YYYY-MM-feature-spec-template.md). This document can be authored in parallel with the feature specification document. Submit a pull request to the design notes repository following the guidelines [here](https://github.com/radius-project/design-notes/blob/main/README.md#creating-a-pull-request)
 
 The design proposals are reviewed by the Radius maintainers and the community within a week of submission. If you have any questions or need help with design proposal, you can reach out to the Radius maintainers on the [Designs channel in Discord](https://discord.com/channels/1113519723347456110/1267883683302473834).
 
