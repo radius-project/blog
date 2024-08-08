@@ -2,7 +2,7 @@
 date: "2024-08-10T00:00:00"
 title: "How to participate in the Radius design process"
 linkTitle: "Radius Design Process"
-author: "Reshma Abdul Rahim(https://github.com/Reshrahim)"
+author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
 ---
 
@@ -25,7 +25,7 @@ Once a feature is accepted into the Radius roadmap, any contributor may author a
 
 - **Feature Specification proposal**: This document covers the _how_ and _why_ of a feature. It includes the problem statement, user personas, user experience and impact of the feature on the Radius community. The feature specification document always precedes the design proposal. For example, the [Feature Specification for Gitops support in Radius](https://github.com/radius-project/design-notes/blob/main/tools/2024-06-gitops-feature-spec.md) covers the why and how of Radius integration with GitOps tools.
 
-- **Design Proposal**: This document covers the technical design details of the feature, including design decisions, architecture, implementation details, and testing strategy. For example, <link doc> covers <TODO>.
+- **Technical Design proposal**: This document covers the technical design details of the feature, including design decisions, architecture, implementation details, and testing strategy. The technical design proposal always precedes any code changes and implementation. For example, <link doc> covers <TODO>.
 
 These documents are reviewed by the community, who may provide valuable feedback and suggestions to ensure that the feature is well-designed and meets the requirements of potential users. Feature specifications and designs must be approved by a Radius maintainer before it may be merged into the design notes repo and implementation may begin.
 
@@ -37,7 +37,7 @@ The Radius project maintainers are excited to collaborate with the community to 
 
  - If you are interested in proposing new feature design, you can do the following:
         
-    - Make sure a Github issue is present in the [Radius repository](https://github.com/radius-project/radius) or submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E)
+    - Make sure a GitHub Issue describing the desired feature is present in the [Radius repository](https://github.com/radius-project/radius) or submit a new [feature request](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E) if not
 
     - Create a feature specification document following the template [here](https://github.com/radius-project/design-notes/blob/main/template/YYYY-MM-feature-spec-template.md) and submit a pull request to the design notes repository following the guidelines [here](https://github.com/radius-project/design-notes/blob/main/README.md#creating-a-pull-request)
 
