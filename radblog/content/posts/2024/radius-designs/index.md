@@ -8,7 +8,12 @@ type: blog
 
 If you are interested in collaborating with the community to influence, design, and build the newest cutting-edge features in Radius, then you've come to the right place. From upvoting on roadmap items that interest you the most to authoring and submitting design proposals, this blog post will walk through all the ways you may participate in the Radius feature and technology design process. The core focus of Radius is to provide a seamless experience for platform engineers and developers to build, collaborate on, and deploy cloud native applications. What better way to achieve this than to engage with the community in building better features and experiences for Radius!
 
-The [feature roadmap for Radius](https://aka.ms/radius-roadmap) is a living document that reflects the current goals and plans of the project, which may change based on the community needs. After every release, the roadmap will be updated to reflect the latest priorities and the in-progress features. 
+## The Radius feature roadmap
+
+The [feature roadmap for Radius](https://aka.ms/radius-roadmap) is a living document that reflects the current goals and plans of the project, which may change based on the community needs. After every release, the roadmap will be updated to reflect the latest priorities and the in-progress features. You can engage with the roadmap in the following ways:
+
+    - Provide feedback to influence roadmap decisions by commenting on and upvoting [existing items](https://aka.ms/radius-roadmap)
+    - To add a new roadmap item, submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E). The Radius maintainers will review and add it to the roadmap if it aligns with the project goals.
 
 Bookmark the [**Radius roadmap**](https://aka.ms/radius-roadmap) for updates on the full set of roadmap priorities.
 
