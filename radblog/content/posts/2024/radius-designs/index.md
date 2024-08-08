@@ -10,7 +10,7 @@ If you are interested in collaborating with the community to influence, design, 
 
 ## The Radius feature roadmap
 
-The [feature roadmap for Radius](https://aka.ms/radius-roadmap) is a living document that reflects the current goals and plans of the project, which may change based on the community needs. After every release, the roadmap will be updated to reflect the latest priorities and the in-progress features. You can engage with the roadmap in the following ways:
+The [feature roadmap for Radius](https://aka.ms/radius-roadmap) is a living document that reflects the current goals and plans of the project, which may change based on community needs. After every release, the roadmap will be updated to reflect the latest priorities and in-progress features. You can engage with the roadmap in the following ways:
 
 - Provide feedback to influence roadmap decisions by commenting on and upvoting [existing items](https://aka.ms/radius-roadmap)
 
