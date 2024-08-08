@@ -1,5 +1,5 @@
 ---
-date: "2024-08-10T00:00:00"
+date: "2024-08-12T00:00:00"
 title: "How to participate in the Radius design process"
 linkTitle: "Radius Design Process"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
