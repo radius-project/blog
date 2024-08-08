@@ -454,3 +454,6 @@ daprSidecar
 ghcr
 SDK
 hoc
+Gitops
+Reshma
+Rahim
