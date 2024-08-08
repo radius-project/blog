@@ -12,8 +12,9 @@ If you are interested in collaborating with the community to influence, design, 
 
 The [feature roadmap for Radius](https://aka.ms/radius-roadmap) is a living document that reflects the current goals and plans of the project, which may change based on the community needs. After every release, the roadmap will be updated to reflect the latest priorities and the in-progress features. You can engage with the roadmap in the following ways:
 
-    - Provide feedback to influence roadmap decisions by commenting on and upvoting [existing items](https://aka.ms/radius-roadmap)
-    - To add a new roadmap item, submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E). The Radius maintainers will review and add it to the roadmap if it aligns with the project goals.
+- Provide feedback to influence roadmap decisions by commenting on and upvoting [existing items](https://aka.ms/radius-roadmap)
+
+- To add a new roadmap item, submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E). The Radius maintainers will review the feature request and add it to the roadmap.
 
 Bookmark the [**Radius roadmap**](https://aka.ms/radius-roadmap) for updates on the full set of roadmap priorities.
 
@@ -23,9 +24,9 @@ All design proposals, enhancements and architectural decisions for Radius are do
 
 Once a feature is accepted into the Radius roadmap, any contributor may author and submit a design proposal to the design notes repository, which can then be reviewed and iterated upon by the Radius maintainers and community. There are two types of design proposals:
 
-- **Feature Specification proposal**: This document covers the _how_ and _why_ of a feature. It includes the problem statement, user personas, user experience and impact of the feature on the Radius community. The feature specification document always precedes the design proposal. For example, the [Feature Specification for Gitops support in Radius](https://github.com/radius-project/design-notes/blob/main/tools/2024-06-gitops-feature-spec.md) covers the why and how of Radius integration with GitOps tools.
+- **Feature Specification proposal**: This document covers the _how_ and _why_ of a feature. It includes the problem statement, user personas, user experience and impact of the feature on the Radius community. The feature specification document always precedes the technical design proposal. For example, the [Feature Specification for Gitops support in Radius](https://github.com/radius-project/design-notes/blob/main/tools/2024-06-gitops-feature-spec.md) covers the why and how of Radius integration with GitOps tools.
 
-- **Technical Design proposal**: This document covers the technical design details of the feature, including design decisions, architecture, implementation details, and testing strategy. The technical design proposal always precedes any code changes and implementation. For example, <link doc> covers <TODO>.
+- **Technical Design proposal**: This document covers the technical design details of the feature, including design decisions, architecture, implementation details, and testing strategy. The technical design proposal always precedes any code changes and implementation. For example, the [Technical Design for supporting any Terraform providers](https://github.com/radius-project/design-notes/blob/main/recipe/2024-02-terraform-providers.md) covers the in-depth design and implementation of supporting any Terraform provider in Radius.
 
 These documents are reviewed by the community, who may provide valuable feedback and suggestions to ensure that the feature is well-designed and meets the requirements of potential users. Feature specifications and designs must be approved by a Radius maintainer before it may be merged into the design notes repo and implementation may begin.
 
