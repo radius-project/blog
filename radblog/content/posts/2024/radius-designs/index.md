@@ -32,7 +32,7 @@ All design proposals, enhancements and architectural decisions for Radius are do
 
  - If you are interested in contributing to existing designs, you can do so by reviewing the in-progress [design proposals](https://github.com/radius-project/design-notes/pulls). You can provide feedback and suggestions by commenting directly on the proposals to help shape the design of the feature.
 
-These documents are reviewed by the Radius maintainers and community members within a week of submission. They provide feedback and suggestions to ensure that the feature is well-designed and meets the requirements of potential users.Feature specifications and technical designs must be approved by a Radius maintainer before they can be merged into the design notes repository and implementation may begin. If you have any questions or need help with design proposal, you can reach out in the [Designs channel in Discord](https://discord.com/channels/1113519723347456110/1267883683302473834).
+These documents are reviewed by the Radius maintainers and community members within a week of submission. They provide feedback and suggestions to ensure that the feature is well-designed and meets the requirements of potential users. Feature specifications and technical designs must be approved by a Radius maintainer before they can be merged into the design notes repository and implementation may begin. If you have any questions or need help with design proposal, you can reach out in the [Designs channel in Discord](https://discord.com/channels/1113519723347456110/1267883683302473834).
 
 ## Learn more and contribute
 
