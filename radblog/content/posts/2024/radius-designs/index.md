@@ -6,7 +6,7 @@ author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
 ---
 
-If you are interested in collaborating with the community to influence, design, and build the newest features in Radius, then you've come to the right place. From upvoting roadmap items to authoring and submitting design proposals, this blog post will walk you through all the ways you can participate in the Radius design process. The core focus of Radius is to provide a seamless experience for platform engineers and developers to build, collaborate on, and deploy cloud native applications. What better way to achieve this than to engage with the community in building better features and experiences for Radius!
+If you are interested in collaborating with the community to influence, design, and build the newest features in Radius, then you've come to the right place. From upvoting roadmap items to authoring and submitting design proposals, this blog post will walk you through all the ways you can participate in the Radius design process. Radius enables developers and platform engineers who support them to collaborate on delivering and managing cloud-native applications that follow corporate best practices for cost, operations, and security by default. You can help realize this vision by providing your input on the Radius roadmap and by engaging in the community design process to improve Radius features.
 
 ## Help shape the Radius feature roadmap
 
