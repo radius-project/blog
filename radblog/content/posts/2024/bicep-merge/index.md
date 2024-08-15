@@ -59,24 +59,29 @@ Radius also maintains a custom builds of the ARM deployment engine that is used 
 
 The newly generated type defintions for Radius and AWS types have to be uploaded to an OCI registry as an extension that Bicep can pull and read from. This is made possible using [`bicep publish-extension`](https://github.com/Azure/bicep/blob/4139b6c21237c238ca483ebea32e4a463b441d90/docs/experimental/publish-provider-command.md). We run this command as part of our CI/CD pipelines so we have updated type definitions for releases and on edge. 
 
-Bicep pulls from our OCI registry through the use of a `bicepconfig.json`. This is a newly required file that specifies the configuration needed to use Radius with Bicep and which extensions to enable to use Radius and AWS resources. The key challenge with the `bicepconfig.json` is making it easy for users to understand the file and use it with their applications. To help streamline creating a `bicepconfig.json`, we added the option of automatically generating the file for easy setup during [`rad init`](https://github.com/radius-project/radius/pull/7664). More information on the `bicepconfig.json` can be found in our docs [TBD --- add link] 
+Bicep pulls from our OCI registry through the use of a [`bicepconfig.json`](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-config). This is a newly required file that specifies the configuration needed to use Radius with Bicep and which extensions to enable to use Radius and AWS resources. The key challenge with the `bicepconfig.json` is making it easy for users to understand the file and use it with their applications. To help streamline creating a `bicepconfig.json`, we added the option of automatically generating the file for easy setup during [`rad init`](https://github.com/radius-project/radius/pull/7664). More information on structure and setup of the `bicepconfig.json` can be found in our docs [TBD --- add link] 
 
 ## How to Get Started 
+[open question here -- for the first two sections, the docs have information on what to do. should we rehash or just link to there? my thought is to link there since it'll already be defined]
 
+### New users
+If you're a new user of Radius, please see our docs about getting started [TBD -- add link]. This will contain all the necessary information about setting up any tooling like the `bicepconfig.json` and the Bicep VSCode extension and using Radius with Bicep
+
+### Existing users
+If you're an existing user of Radius, please see this page about what updates are needed to move to using the official Bicep compiler. The latest `v0.37` release has a number of breaking changes as a result of this transition. The `v0.37` release of Radius now installs the official Bicep instead of Radius-Bicep, so you'll need to make updates to your setup to ensure that your application deploys as usual. Generally, creating a `bicepconfig.json` and updating your import statements should get you started if you're working on `v0.37`. 
+
+### Contributors 
+If you're a contributor of Radius, you may notice some changes to our repository. 
+
+1. A new `bicepconfig.json` file. Now that configuration file is required to use Radius with Bicep, we also need to have one in our repository so our files can compile and be tested in workflow. This file follows the same structure as outlined in our docs. 
+1. A dependency on the `bicep-types` submodules. As part of updating our generator, we made the decision to use the `bicep-types` repository code as opposed to maintaing our own tools. There is ongoing work to ensure that our dependency is kept up to date. 
+[should we add info here on how to use the module and generate? the docs in the repo are updated so I'm not sure it's needed]
 
 ## Learn More and Contribute 
 
-There are several resources for learning more about using Radius and Bicep together.  
+There are several resources for learning more about using Radius and Bicep together.
 
-### Tutorials and How-To Guides
-
-This [tutorial](https://docs.radapp.io/tutorials/dapr/) provides a hands on end-end experience of adding a Dapr state store to a Radius application then deploying and testing that application.
-
-These How-To Guides walk you through targeted, common steps you will complete whenever using Dapr with Radius. 
-
-- [Dapr Overview](https://docs.radapp.io/guides/author-apps/dapr/overview/) 
-- [Add a Dapr sidecar to a container in your Radius application](https://docs.radapp.io/guides/author-apps/dapr/how-to-dapr-sidecar/).
-- [Add a Dapr Building Block to your Radius application](https://docs.radapp.io/guides/author-apps/dapr/how-to-dapr-building-block/) 
+[TODO -- add links]
 
 ### Other Community Resources
 
