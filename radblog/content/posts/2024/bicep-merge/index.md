@@ -7,15 +7,6 @@ type: blog
 ---
 
 ## Radius and Bicep 
-What problem were we trying to solve?
-1. Since we were using Bicep as our templating language, we needed a way to define Radius types in Bicep files. 
-2. However, Bicep only guarantees first-class support for defining and deploying Azure resources declaratively.
-3. Radius is designed to be a cloud-agnostic platform and so we need more types than just those of the typical ARM resource
-4. This is where Bicep extensibility came in. Bicep extensibility is an effort by the ARM and Bicep team to allow for types outside of the typical ARM resources to be defined in Bicep and deployed as part of the Deployment Engine. The source code lives in https://github.com/azure/bicep-extensibility. 
-5. Bicep relies on type definitions to define resources and properties. An example for Azure resources lives in https://github.com/Azure/bicep-types-az. These are schemas that contain the properties and metadata about resources in Bicep.
-6. If all we needed to do was create type definitions for Radius and AWS resources, we may have been okay relying on the Bicep compiler. However, we also needed to be able to call on methods on our resources, things like getting sensitive date like connectionStrings and 
-7. Bicep does allow method definitions on Azure resources, but they didn't provide a way to do this for Radius resources. 
-8. Because of this, having our own fork that we could maintain and define methods on made most sense. 
 
 Radius uses Bicep for defining applications and Recipes and validating that these templates are able to be compiled. Up until now, Radius has used a temporary fork of Bicep to add support for resources that are unique to Radius. We did so to address the challenge of integrating Radius types with Bicep. Bicep is a great tool for defining and deploying resources, but it mainly supports Azure-specific resources. Radius, however, is designed to be a cloud-agnostic platform, which means we needed to handle a variety of resource types beyond just those used by Azure. 
 
@@ -28,10 +19,6 @@ We decided to create and maintain our own version of Bicep, called Radius-Bicep,
 [Question -- should we mention Kubernetes here? I know we built the k8s provider and now they maintain it but wondering how relevant it is to the post]
 
 ## How Maintaining a Radius-Bicep Forked Help Solve Extensibility Challenges (and Not)
-
-1. Bicep processes resources using a [`TypeSystem`](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem) with different providers. There is currently support for Azure, Kubernetes, etc but not custom providers like Radius or AWS.
-2. With a fork, we could define our own providers for [Radius and AWS](https://github.com/radius-project/bicep/tree/bicep-extensibility/src/Bicep.Core/TypeSystem). 
-3. The structure of our providers is based off of the structure of the supported providers in Bicep. The difference is that we could now customize these providers to fit our needs, implementing logic like [method support](https://github.com/radius-project/bicep/blob/8af459c1d59eae9c2f5289b3d203df66288704cf/src/Bicep.Core/TypeSystem/Radius/RadiusResourceTypeProvider.cs#L50) and special behaviors on [properties](https://github.com/radius-project/bicep/commit/e5bcc4f3f21ba3ce8243f3814fb687738467246e)
 
 Bicep uses a [`TypeSystem`](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem) to manage resources for different providers, such as Azure and Kubernetes. At the time, it didn't support custom providers like Radius or AWS. By forking Bicep, we were able to create our own providers for [Radius and AWS](https://github.com/radius-project/bicep/tree/bicep-extensibility/src/Bicep.Core/TypeSystem). This allowed us to add features such as [method support](https://github.com/radius-project/bicep/blob/8af459c1d59eae9c2f5289b3d203df66288704cf/src/Bicep.Core/TypeSystem/Radius/RadiusResourceTypeProvider.cs#L50) and special behaviors on [properties](https://github.com/radius-project/bicep/commit/e5bcc4f3f21ba3ce8243f3814fb687738467246e). Similar to how Bicep uses Azure type defintions mentioned earlier, we implemented a [generator](https://github.com/radius-project/radius/commit/e77b87838d3886a761c01725ad9fe491a2f0d5b7) that serialized Radius and AWS type definitions so they could be consumed by the Radius-Bicep compiler.
 
@@ -91,3 +78,20 @@ We’re looking for people to join us! To get started with Radius today, please 
 - Learn more from the [documentation](https://radapp.io/).
 - Explore the open-source [code repositories](https://github.com/radius-project).
 - Engage with the [community](https://aka.ms/radius/discord)
+
+
+### Appendix [will be deleted, keeping for now as notes]
+What problem were we trying to solve?
+1. Since we were using Bicep as our templating language, we needed a way to define Radius types in Bicep files. 
+2. However, Bicep only guarantees first-class support for defining and deploying Azure resources declaratively.
+3. Radius is designed to be a cloud-agnostic platform and so we need more types than just those of the typical ARM resource
+4. This is where Bicep extensibility came in. Bicep extensibility is an effort by the ARM and Bicep team to allow for types outside of the typical ARM resources to be defined in Bicep and deployed as part of the Deployment Engine. The source code lives in https://github.com/azure/bicep-extensibility. 
+5. Bicep relies on type definitions to define resources and properties. An example for Azure resources lives in https://github.com/Azure/bicep-types-az. These are schemas that contain the properties and metadata about resources in Bicep.
+6. If all we needed to do was create type definitions for Radius and AWS resources, we may have been okay relying on the Bicep compiler. However, we also needed to be able to call on methods on our resources, things like getting sensitive date like connectionStrings and 
+7. Bicep does allow method definitions on Azure resources, but they didn't provide a way to do this for Radius resources. 
+8. Because of this, having our own fork that we could maintain and define methods on made most sense. 
+
+How Maintaining a Radius-Bicep Forked Help Solve Extensibility Challenges
+1. Bicep processes resources using a [`TypeSystem`](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem) with different providers. There is currently support for Azure, Kubernetes, etc but not custom providers like Radius or AWS.
+2. With a fork, we could define our own providers for [Radius and AWS](https://github.com/radius-project/bicep/tree/bicep-extensibility/src/Bicep.Core/TypeSystem). 
+3. The structure of our providers is based off of the structure of the supported providers in Bicep. The difference is that we could now customize these providers to fit our needs, implementing logic like [method support](https://github.com/radius-project/bicep/blob/8af459c1d59eae9c2f5289b3d203df66288704cf/src/Bicep.Core/TypeSystem/Radius/RadiusResourceTypeProvider.cs#L50) and special behaviors on [properties](https://github.com/radius-project/bicep/commit/e5bcc4f3f21ba3ce8243f3814fb687738467246e)
