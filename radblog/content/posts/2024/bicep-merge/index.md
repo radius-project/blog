@@ -22,9 +22,6 @@ The key gap we needed to address with the Radius-Bicep compiler was extensibilit
 2. Independent versions: We would be relying on Bicep code as the basis for the fork, but we would not coordinate with Bicep on releases or code updates to the upstream project. Any changes made by Radius would be exclusive to the Radius-Bicep fork.
 3. Commitment to open-source: Extensibility would be for anyone to use. It would not be unique to the Radius project and could be implemented by any user. 
 
-These requirements would correspond the maintenance of different components in Radius: 
-[TODO -- clarify diagram and add here]
-
 ## Maintaining a Radius-Bicep Fork 
 
 The first step to implementing extensibility was finding a way to serialize types in a way that Radius-Bicep could compile. Similar to how Bicep uses Azure type defintions mentioned earlier, Radius, Kubernetes, and AWS types needed to be compiled into type definitions. We implemented a [generator](https://github.com/radius-project/radius/commit/e77b87838d3886a761c01725ad9fe491a2f0d5b7) that serialized type definitions so they could be consumed by the Radius-Bicep compiler. 
@@ -39,7 +36,11 @@ While the Radius-Bicep fork was the best way to ensure that Radius and Bicep wer
 
 ## Using Bicep to Solve Extensibility in Radius 
 
-Enabling Radius to work with Bicep took a collaborative effort. The Bicep project required a way for Radius resources to be processed by the compiler and Radius had to ensure that our resources were serialized in a way that could be understood by the compiler. Bicep recently added support for [`ThirdPartyProviders`](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem/Providers/ThirdParty), giving us a way to define custom resource types that could be understood by the Bicep compiler. We would provide the type definitions for Radius and AWS types in the form of JSON schema files and publish the schema files to an OCI registry using Bicep. Then, we'd be able to import these types as an "`extension`" and use them in our Bicep templates. This required some work on our end to make Radius and AWS types compatible with this process. 
+Enabling Radius to work with Bicep took a collaborative effort. The Bicep project required a way for Radius resources to be processed by the compiler and Radius had to ensure that our resources were serialized in a way that could be understood by the compiler. Bicep recently added support for [`ThirdPartyProviders`](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem/Providers/ThirdParty), giving us a way to define custom resource types that could be understood by the Bicep compiler. We would provide the type definitions for Radius and AWS types in the form of JSON schema files and publish the schema files to an OCI registry using Bicep. Then, we'd be able to import these types as an "`extension`" and use them in our Bicep templates. The following diagrams highlight the different components in Radius that required changes. 
+
+{{< image src="images/radius-types-generation-flow.png" alt="Radius Types Generation Flow" width="600" >}}
+
+{{< image src="images/radius-e2e-flow.png" alt="Radius End-to-End Flow" width="600" >}}
 
 ### Serializing Radius and AWS types
 
