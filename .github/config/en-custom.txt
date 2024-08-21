@@ -458,3 +458,10 @@ Gitops
 Reshma
 Rahim
 YYYY
+Shruthi
+Kumar
+intellisense
+upmerged
+OpenAPI
+TypeSpec
+CloudControl
