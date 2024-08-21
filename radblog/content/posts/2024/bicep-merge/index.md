@@ -50,7 +50,7 @@ Bicep manages a repository called [`bicep-types`](https://github.com/Azure/bicep
 
 ### Adding Resource Functions 
 
-A key requirement for Radius compatibility with Bicep is a way to serialize resource functions in the `index.json` and `types.json` files. As part of the work for third party providers, Bicep now supports [resource functions](https://github.com/Azure/bicep/commit/0cc1d30854284d25c9a67e31c8660f68d76b2834). This feature allows us to add functions on Radius resources in our generator. We look for resource functions in our OpenAPI specs and add all the needed parameter and output data into the type defintion files. The logic for how we process resource functions can be found [here](https://github.com/radius-project/radius/blob/fb0287389e392f97f8bcb28bc03827420ad8fc8c/hack/bicep-types-radius/src/autorest.bicep/src/type-generator.ts#L141).
+A key requirement for Radius compatibility with Bicep is a way to serialize resource functions in the `index.json` and `types.json` files. As part of the work for third party providers, Bicep now supports [resource functions](https://github.com/Azure/bicep/commit/0cc1d30854284d25c9a67e31c8660f68d76b2834). This feature allows us to add functions on Radius resources in our generator. We look for resource functions in our OpenAPI specs and add all the needed parameter and output data into the type definition files. The logic for how we process resource functions can be found [here](https://github.com/radius-project/radius/blob/fb0287389e392f97f8bcb28bc03827420ad8fc8c/hack/bicep-types-radius/src/autorest.bicep/src/type-generator.ts#L141).
 
 ### Updating the Deployment Engine  
 
