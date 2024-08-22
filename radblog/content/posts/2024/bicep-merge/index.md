@@ -67,6 +67,7 @@ Radius type definitions can be downloaded from `biceptypes.azurecr.io/radius` an
 ## How to Get Started 
 
 ### New users
+
 If you're a new user of Radius, please see our [docs](https://docs.radapp.io/getting-started/) about getting started. This will contain all the necessary information about setting up any tooling like the `bicepconfig.json` and the Bicep VSCode extension and using Radius with Bicep.
 
 ### Existing users
