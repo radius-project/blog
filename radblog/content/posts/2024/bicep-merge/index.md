@@ -18,7 +18,7 @@ Up until now, Radius has used a temporary fork of Bicep to add support for resou
 
 Radius resource types also needed to have the same level of functionality as built-in resource types in Bicep. This included defining functions for resources that would enable users to access properties like secrets, connection strings, passwords, etc. Bicep supports method definitions for Azure resources through their built-in [Azure type provider](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem/Providers/Az), but not for functions on other resources. Because of this limitation, relying solely on the Bicep compiler did not meet all our requirements.
 
-The `rad-bicep` compiler needed to address extensibility with the following specific requirements:
+The `rad-bicep` compiler needed to address extensibility with the following requirements:
 
 1. Seamless resource type integration: Adding new resource types and functionality should be an easy and automated process without needing to rebuild the Bicep compiler and tools. 
 2. Independent versions: Radius will use Bicep as an IaC tool, but the projects will operate separately. Radius and Bicep will release new versions independently, with no coordination between the two. 
