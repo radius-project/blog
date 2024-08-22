@@ -73,6 +73,7 @@ If you're a new user of Radius, please see our [docs](https://docs.radapp.io/get
 If you're an existing user of Radius, please see the [release notes](https://github.com/radius-project/radius/releases/tag/v0.37.0) about what updates are needed to move to using the official Bicep compiler. The latest `v0.37` release has a number of breaking changes as a result of this transition. This release of Radius now installs the official Bicep instead of `rad-bicep`, so you'll need to make updates to your setup to ensure that your application deploys as usual. Generally, creating a `bicepconfig.json` and updating your import statements should get you started if you're working on `v0.37`. 
 
 ### Contributors 
+
 If you're a contributor of Radius, you may notice some changes to our repository. 
 
 1. A new `bicepconfig.json` file. Now that a configuration file is required to use Radius with Bicep, we also need to have one in our repository so our files can compile locally and be tested in workflow runs. This file follows the same structure as outlined in our docs. 
