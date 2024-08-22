@@ -70,6 +70,7 @@ Radius type definitions can be downloaded from `biceptypes.azurecr.io/radius` an
 If you're a new user of Radius, please see our [docs](https://docs.radapp.io/getting-started/) about getting started. This will contain all the necessary information about setting up any tooling like the `bicepconfig.json` and the Bicep VSCode extension and using Radius with Bicep.
 
 ### Existing users
+
 If you're an existing user of Radius, please see the [release notes](https://github.com/radius-project/radius/releases/tag/v0.37.0) about what updates are needed to move to using the official Bicep compiler. The latest `v0.37` release has a number of breaking changes as a result of this transition. This release of Radius now installs the official Bicep instead of `rad-bicep`, so you'll need to make updates to your setup to ensure that your application deploys as usual. Generally, creating a `bicepconfig.json` and updating your import statements should get you started if you're working on `v0.37`. 
 
 ### Contributors 
