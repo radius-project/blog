@@ -36,7 +36,7 @@ While the `rad-bicep` fork was the best way to ensure that Radius and Bicep were
 
 ## Using Bicep to Solve Extensibility in Radius 
 
-Enabling Radius to work with Bicep took a collaborative effort, and we worked with the Bicep maintainers to help design extensibility over a period of months. This feature would enable Bicep to load type definitions from an external source. Instead of building our definitions into the compiler binary, we could upload the type definition files to a public store. When this capability was added, we were ready to start the merge with BIcep and migrate off of our fork.
+Enabling Radius to work with Bicep took a collaborative effort, and we worked with the Bicep maintainers to help design extensibility over a period of months. This feature would enable Bicep to load type definitions from an external source. Instead of building our definitions into the compiler binary, we could upload the type definition files to a public store. When this capability was added, we were ready to start the merge with Bicep and migrate off of our fork.
 
 Bicep has added support for [`ThirdPartyResourceTypeProvider`](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem/Providers/ThirdParty), giving us a way to define custom resource types that could be understood by the Bicep compiler. We would provide type definitions for Radius and AWS types in the form of JSON schema files and publish the schema files to an OCI registry using Bicep. Then, we'd be able to import Radius and AWS types as an "`extension`" and use them in our Bicep templates. The following diagram highlights the updated process for generating Radius types with Bicep.
 
@@ -78,7 +78,7 @@ If you're a new user of Radius, please see our [docs](https://docs.radapp.io/get
 
 The latest `v0.37` release has a number of breaking changes as a result of the merge to Bicep. This release of Radius now installs the official Bicep instead of `rad-bicep`, so you'll need to make updates to your setup to ensure that your application deploys as usual. Generally, creating a [`bicepconfig.json`](https://docs.radapp.io/guides/tooling/bicepconfig/overview/) and updating your import statements should get you started if you're working on `v0.37`. More information on what updates are needed can be found in the [release notes](https://github.com/radius-project/radius/releases/tag/v0.37.0).
 
-We expect the merge to Bicep to have a number of positive changes for Radius users. We now have a single, extensibile implementation of Bicep with Radius so users only need to keep track of a single version. There will be less time spent maintaining the fork and we can focus on investing in other parts of Radius. Radius users will also get the latest and greatest features from Bicep instead of being stuck on an old build.
+We expect the merge to Bicep to have a number of positive changes for Radius users. We now have a single, extensible implementation of Bicep with Radius so users only need to keep track of a single version. There will be less time spent maintaining the fork and we can focus on investing in other parts of Radius. Radius users will also get the latest and greatest features from Bicep instead of being stuck on an old build.
 
 ### Contributors 
 
