@@ -52,7 +52,7 @@ A key requirement for Radius compatibility with Bicep is a way to serialize reso
 
 ### Updating the Deployment Engine  
 
-Radius also maintains a custom builds of the ARM deployment engine that is used for any Radius deployment. A lot of the work during the transition introduced breaking changes to how Radius is used, so we had to make sure that the deployment engine is compatible with both the Bicep compiler and the `rad-bicep` compiler. The addition of resource functions also means that the ARM JSON templates that Bicep builds could have added schema properties. Updates were made so that the deployment engine could process the new template properties. 
+Radius also maintains a custom build of the ARM deployment engine that is used for any Radius deployment. A lot of the work during the transition introduced breaking changes to how Radius is used, so we had to make sure that the deployment engine is compatible with both the Bicep compiler and the `rad-bicep` compiler. The addition of resource functions also means that the ARM JSON templates that Bicep builds could have added schema properties. Updates were made so that the deployment engine could process the new template properties. 
 
 ### Publishing and pulling from an OCI registry with a `bicepconfig.json`
 
