@@ -68,7 +68,7 @@ Radius type definitions can be downloaded from `biceptypes.azurecr.io/radius` an
 
 The following diagram highlights the updated flow for using Radius end-to-end. 
 
-{{< image src="images/radius-e2e-flow.png" alt="Radius End-to-End Flow" width="600" >}}
+{{< image src="images/radius-e2e-flow.png" alt="Radius End-to-End Flow" width="1000" >}}
 
 ### New users
 
