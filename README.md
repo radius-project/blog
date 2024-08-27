@@ -1,6 +1,6 @@
 # Radius blog repo
 
-This repo contains the markdown files which generate the Radius blog site at https://blog.radapp.dev/. Head over there to read the blog and learn more about the latest Radius news! Read on to get up and running with a local environment to contribute to the blog.
+This repo contains the markdown files which generate the Radius blog site at https://blog.radapp.io/. Head over there to read the blog and learn more about the latest Radius news! Read on to get up and running with a local environment to contribute to the blog.
 
 ## Overview
 
