@@ -40,7 +40,7 @@ Enabling Radius to work with Bicep took a collaborative effort, and we worked wi
 
 Bicep has added support for [`ThirdPartyResourceTypeProvider`](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem/Providers/ThirdParty), giving us a way to define custom resource types that could be understood by the Bicep compiler. We would provide type definitions for Radius and AWS types in the form of JSON schema files and publish the schema files to an OCI registry using Bicep. Then, we'd be able to import Radius and AWS types as an "`extension`" and use them in our Bicep templates. The following diagram highlights the updated process for generating Radius types with Bicep.
 
-{{< image src="images/radius-types-generation-flow.png" alt="Radius Types Generation Flow" width="600" >}}
+{{< image src="images/radius-types-generation-flow.png" alt="Radius Types Generation Flow" width="1000" >}}
 
 ### Serializing Radius and AWS types
 
