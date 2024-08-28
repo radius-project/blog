@@ -66,19 +66,26 @@ Radius type definitions can be downloaded from `biceptypes.azurecr.io/radius` an
 
 ## How to Get Started 
 
-The following diagram highlights the updated flow for using Radius end-to-end. 
+The following diagram depicts the flow on getting started with Radius. 
 
 {{< image src="images/radius-e2e-flow.png" alt="Radius End-to-End Flow" width="1000" >}}
 
-### New users
+1. Install rad CLI now installs the official Bicep compiler along with the Radius Binary.
+2. In addition to the radius installation and environment creation, `rad init` creates the `bicepconfig.json` file. This file is used by Bicep to pull type definitions of Radius and AWS resources from a Radius managed OCI registry.
+3. Edit the app.bicep file to add Radius and AWS resources.
+4. Run `rad up` to deploy the application.
 
-If you're a new user of Radius, please see our [docs](https://docs.radapp.io/getting-started/) about getting started. This will contain all the necessary information about setting up any tooling like the `bicepconfig.json` and the Bicep VSCode extension and using Radius with Bicep.
+Below section details on how to get started with Radius based on your journey with Radius.
 
 ### Existing users
 
 The latest `v0.37` release introduces breaking changes as a result of the merge to Bicep. This release of Radius now installs the official Bicep instead of `rad-bicep`, so you'll need to make updates to your setup to ensure that your application deploys as usual. Creating a [`bicepconfig.json`](https://docs.radapp.io/guides/tooling/bicepconfig/overview/) and updating your import statements should get you started if you're working on `v0.37`. More information on what updates are needed can be found in the [release notes](https://github.com/radius-project/radius/releases/tag/v0.37.0).
 
 The merge to Bicep has a number of positive changes for Radius users. We now have a single, extensible implementation of Bicep with Radius so users only need to keep track of a single version. Radius users will also get the latest and greatest features from Bicep instead of being stuck on an old Bicep build. There will be less time spent maintaining the fork and we can focus on investing in other parts of Radius.
+
+### New users
+
+If you're a new user of Radius, please see our [docs](https://docs.radapp.io/getting-started/) about getting started. This will contain all the necessary information about setting up any tooling like the `bicepconfig.json` and the Bicep VSCode extension and using Radius with Bicep.
 
 ### Contributors 
 
