@@ -75,7 +75,7 @@ The following diagram depicts the flow on getting started with Radius.
 3. Edit the app.bicep file to add Radius and AWS resources.
 4. Run `rad up` to deploy the application.
 
-Below section details on how to get started with Radius based on your journey with Radius.
+Below section details on how to get started based on your journey with Radius.
 
 ### Existing users
 
