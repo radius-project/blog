@@ -18,7 +18,7 @@ Per above, up to now, Radius used a temporary fork of Bicep to add support for r
 
 Radius resource types also needed to have the same level of functionality as built-in resource types in Bicep. This included defining functions for resources that would enable users to access properties like secrets, connection strings, passwords, etc. Bicep supports method definitions for Azure resources through their built-in [Azure type provider](https://github.com/Azure/bicep/tree/main/src/Bicep.Core/TypeSystem/Providers/Az), but not for functions on other resources. Because of this limitation, relying solely on the Bicep compiler did not meet all our requirements.
 
-For the `rad-bicep` compiler to support extensibility it had to meet the following requirements:
+For Radius to leverage extensibility in the official Bicep compiler, it had to meet the following requirements:
 
 1. Seamless resource type integration: Adding new resource types and functionality should be an easy and automated process without needing to rebuild the Bicep compiler and tools. 
 2. Independent versions: Radius will use Bicep as an IaC tool, but the projects will operate separately. Radius and Bicep will release new versions independently, with no coordination between the two. 
@@ -26,7 +26,7 @@ For the `rad-bicep` compiler to support extensibility it had to meet the followi
 
 ## Building the `rad-bicep` compiler
 
-The first step to using extensibility was finding a way to serialize resource types in a way that `rad-bicep` could compile. Similar to how Bicep uses Azure type definitions mentioned earlier, Radius, Kubernetes, and AWS resource types needed to be compiled into type definitions. We implemented a [generator](https://github.com/radius-project/radius/commit/e77b87838d3886a761c01725ad9fe491a2f0d5b7) that serialized type definitions so they could be consumed by the `rad-bicep` compiler. 
+The first step was finding a way to serialize resource types in a way that `rad-bicep` could compile. Similar to how Bicep uses Azure type definitions mentioned earlier, Radius, Kubernetes, and AWS resource types needed to be compiled into type definitions. We implemented a [generator](https://github.com/radius-project/radius/commit/e77b87838d3886a761c01725ad9fe491a2f0d5b7) that serialized type definitions so they could be consumed by the `rad-bicep` compiler. 
 
 The Bicep type definitions for [Kubernetes resources](https://github.com/Azure/bicep-types-k8s), in particular, was an early collaboration and success in addressing the extensibility gap. Radius supports deploying Kubernetes resources, something that Bicep at the time did not. As part of the `rad-bicep` fork, we implemented the Kubernetes [generator](https://github.com/Azure/bicep-types-k8s/pull/11) that pulled Kubernetes resource specs and compiled them into type definitions. The next step for us would have been implementing a Kubernetes provider in the `rad-bicep` fork. Instead, we contributed the Kubernetes generator to Bicep as a repository that Bicep would maintain for Kubernetes type definitions. Bicep would later on support a built-in Kubernetes provider similar to the Azure provider. This was the start of what became [Bicep extensibility]((https://github.com/azure/bicep-extensibility))--a feature added to the Bicep project to enable the definition and deployment of resource types outside of Azure's resource framework. 
 
@@ -71,7 +71,7 @@ The following diagram depicts the flow on getting started with Radius.
 {{< image src="images/radius-e2e-flow.png" alt="Radius End-to-End Flow" width="1000" >}}
 
 1. Install rad CLI now installs the official Bicep compiler along with the Radius Binary.
-2. In addition to the radius installation and environment creation, `rad init` creates the `bicepconfig.json` file. This file is used by Bicep to pull type definitions of Radius and AWS resources from a Radius managed OCI registry.
+2. In addition to the Radius installation and environment creation, `rad init` creates the `bicepconfig.json` file. This file is used by Bicep to pull type definitions of Radius and AWS resources from a Radius managed OCI registry.
 3. Edit the app.bicep file to add Radius and AWS resources.
 4. Run `rad up` to deploy the application.
 
