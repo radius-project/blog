@@ -73,7 +73,7 @@ The following diagram depicts the flow on getting started with Radius.
 1. Install rad CLI now installs the official Bicep compiler along with the Radius Binary.
 2. In addition to the radius installation and environment creation, `rad init` creates the `bicepconfig.json` file. This file is used by Bicep to pull type definitions of Radius and AWS resources from a Radius managed OCI registry.
 3. Edit the app.bicep file to add Radius and AWS resources.
-4. Run `rad up` to deploy the application.
+4. Run `rad deploy` to deploy the application.
 
 Below section details on how to get started based on your journey with Radius.
 
