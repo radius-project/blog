@@ -1,6 +1,6 @@
 ---
 date: "2024-08-27T08:00:00-08:00"
-title: "How Radius leveraged Bicep extensibility"
+title: "How Radius Leveraged Bicep Extensibility"
 linkTitle: "Radius and Bicep"
 author: "[Shruthi Kumar](https://www.github.com/sk593)"
 type: blog
