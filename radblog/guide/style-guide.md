@@ -1,6 +1,6 @@
-## Guide for Blog Posts
+## Guide for Writing Blog Posts
 
-### Picking a topic
+### Picking a Topic
 
 Any content that is relevant to the Radius project and the open-source community is welcome. Think about the topics in Radius that you are passionate about and would like to share with the community. Some of the examples includes, but is not limited to:
 
@@ -14,7 +14,7 @@ Any content that is relevant to the Radius project and the open-source community
 - Milestones and achievements of the Radius project
 - Any problem that you solved in Radius that might be useful for others
 
-### Blog post structure
+### Blog Post Structure
 
 - **Title**: The title should be clear, concise and should give a brief idea about the content of the blog post.
 
@@ -26,7 +26,7 @@ Any content that is relevant to the Radius project and the open-source community
 
 - **References**: If you are referring to any external sources, make sure to provide the references at the end of the blog post. This will help the reader to understand the context better and also to explore more about the topic.
 
-### Writing style 
+### Writing Style 
 
 - **Tone**: The tone of the blog post should be friendly and conversational. It should be easy to read and understand. Active voice is preferred over passive voice.
 
@@ -35,6 +35,7 @@ Any content that is relevant to the Radius project and the open-source community
     1. Avoid condescending language. Assume that the reader is new to the topic and explain things in a simple way.
     1. Avoid using phrases that are not open-source friendly. For example, instead of using "master" branch, use "main" branch. instead of using "team" refer to them as "community"
     1. Avoid using superlatives and exaggerations. Be honest and transparent in your writing.
+    1. Use present tense. Avoid using `will` or `would` in the blog post.
 
 - **Casing**: Capitalize the proper nouns eg: Radius, Bicep, Recipes. Use [sentence casing](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case) for title and section headings.
 
