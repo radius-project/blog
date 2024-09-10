@@ -12,41 +12,33 @@ In Radius, we have both unit tests and functional tests. As you may know, unit t
 
 Functional tests in Radius create resources in Kubernetes clusters that are spun up specifically for the tests. These clusters are destroyed at the end of each test run. Additionally, some functional tests create cloud resources on Azure and AWS, which are also deleted after the tests finish.
 
-To see the functional tests Radius has, you can visit [this link](https://github.com/radius-project/radius/tree/main/test/functional-portable).
-
-The functional tests that use cloud resources require some sensitive data, such as provider secrets, to be used in the tests. For example, when one of our functional tests creates a Radius environment, that environment needs credentials to create cloud resources on Azure or AWS. Some of this sensitive information is stored at the organization level in the radius-project on GitHub, while other sensitive data is kept at the repository level.
+The functional tests that use cloud resources require some sensitive data, such as provider secrets, to be used in the tests. For example, when one of our functional tests creates a Radius environment, that environment needs credentials to create cloud resources on Azure or AWS. Some of this sensitive information is stored at the organization level in GitHub, while other sensitive data is kept at the repository level.
 
 Because we are dealing with sensitive information in the functional tests and need to run these tests for each pull request opened by our contributors, we implemented a process where a Radius maintainer or approver must approve the functional test run. This approval occurs after reviewing the code to ensure there is nothing malicious, such as attempts to extract sensitive information.
 
-## Description of the Challenge
+### Challenges with Functional Testing in Radius
 
-Contributors to open-source projects can sometimes face different challenges when contributing to the main repository. As mentioned above, one such challenge identified by the Radius development team is the need to check pull requests from forked repositories for attempts to expose sensitive data, such as cloud credentials, other secrets, or configurations. After an initial review of the pull request by a team member, a maintainer or approver of the main repository must approve and initiate the functional test check. If all tests pass, the pull request can be marked as good-to-go.
+As discussed above, in Radius, we have two types of functional tests: those that create and use cloud resources, and those that do not require any cloud resources. You can see our functional tests by visiting this [link](https://github.com/radius-project/radius/tree/main/test/functional-portable). For functional tests that create and use cloud resources, we have added several tests that create resources on different clouds, such as Azure and AWS.
 
-This process can sometimes slow down pull request turnover, so we knew we needed to improve the efficiency of our pull request process. By doing so, we aimed to provide a smoother experience for our contributors. At Radius, we are always striving to enhance the experience for our users and all types of contributors.
+One of the most important challenges identified by the Radius development team with the functional testing workflow is the need to validate pull requests from forked repositories for attempts to expose sensitive data, such as cloud credentials, other secrets, or configurations. After an initial review of the pull request, a maintainer or approver of the main repository must approve and initiate the functional test check. If all tests pass, the pull request can be marked as good-to-go.
 
-With this in mind, we started working on splitting our functional tests into those that use cloud resources and those that don't. By separating these tests, we aimed to make the functional test runs on pull requests faster. Pull requests would still require approval for tests that use cloud resources, but the other tests would start running immediately as soon as a pull request is opened.
+This process can sometimes slow down pull request turnaround (the time it takes from PR creation to merging into the main branch). We knew we needed to improve the efficiency of our pull request process to provide a smoother experience for our contributors. At Radius, we are always striving to enhance the experience for our users and all types of contributors.
 
 **In brief, the challenge was to separate the functional tests that use cloud resources from those that don't, reducing the number of tests requiring maintainer approval.**
 
-### Functional Tests that Use Cloud Resources
-
-Radius helps you define and deploy your cloud-native applications across different clouds and your private infrastructure. For functional tests, we have added several tests that create resources on different clouds, such as Azure and AWS. You can see our functional tests at this [link](https://github.com/radius-project/radius/tree/main/test/functional-portable).
-
-## Solution
-
-To improve the efficiency of our pull request process, the Radius development team decided to separate the functional tests into those that use cloud resources and those that don't. The tests that don't use cloud resources start as soon as a pull request is opened, without requiring approval from a maintainer or approver of Radius. This change significantly reduces the time it takes to run all the functional tests.
-
-The tests that use cloud resources still require approval from a maintainer or approver of Radius. However, by reducing the number of tests that need approval, the overall testing time decreases. This means that pull requests can be ready for merging faster than before, provided all checks have passed.
-
 ### Description of the Old Workflow
 
-The previous workflow, now renamed to [`functional-test-cloud.yaml`](https://github.com/radius-project/radius/blob/main/.github/workflows/functional-test-cloud.yaml), remains largely the same with a few changes. Before running the functional tests, we need to create the necessary images with the changes introduced in the pull request and push them to a container registry accessible by the host machine created by the workflow. Radius uses GHCR as the container registry and pushes all the images used by the tests there.
+Previously, we ran all the functional tests together in a single workflow. That workflow, now renamed to [`functional-test-cloud.yaml`](https://github.com/radius-project/radius/blob/main/.github/workflows/functional-test-cloud.yaml), remains largely the same with a few changes. The most important change, as you can guess, is that now it only runs the functional tests that create and use cloud resources. Before running the functional tests, we need to create the necessary images with the changes introduced in the pull request and push them to a container registry accessible by the host machine created by the workflow. Radius uses GHCR as the container registry and pushes all the images used by the tests there.
 
-{{< image src="images/functional-tests-cloud-ghcr.png" alt="Simple representation of how functional tests cloud use GHCR" width="300" >}}
+{{< image src="images/functional-tests-cloud-ghcr.png" alt="Simple representation of how functional tests cloud use GHCR" width="500" >}}
 
 In the new workflow that runs functional tests that don't use cloud resources, we wanted to avoid the need for all pull requests to build and push images to the Radius GHCR. This requirement was something we specifically wanted to eliminate to make it easier for contributors to work from their forks without unnecessary complications. Additionally, we didn't want to clutter our container registry, as this could easily become a security and resource issue.
 
 In the new workflow for functional tests that don't use cloud resources, we aimed to eliminate the need for all pull requests to build and push images to the Radius GHCR. This change simplifies the process for contributors of Radius working from their forks and helps avoid cluttering our container registry, which could lead to security and resource issues.
+
+## Our Solution
+
+To improve the efficiency of our pull request process, the Radius development team decided to separate the functional tests into those that use cloud resources and those that don't. The tests that don't use cloud resources start as soon as a pull request is opened, without requiring approval from a maintainer or approver of Radius. This change significantly reduces the time it takes to run all the functional tests.
 
 ### Adding the New Workflow
 
@@ -56,21 +48,21 @@ In this new workflow, we aimed to eliminate any dependency on cloud resources; e
 
 The decision was to use a [KinD cluster](https://kind.sigs.k8s.io/) and a secure [Docker registry](https://hub.docker.com/_/registry) for uploading the images specific to each run. Each test would create its own KinD cluster and secure Docker registry on the host machine, and after each run, they would be destroyed. This approach ensured that we wouldn't have any dangling resources in the cloud or leftover images on GHCR. Additionally, we wouldn’t need any secrets for this workflow or approval from a maintainer or approver.
 
-{{< image src="images/functional-tests-noncloud-arch.png" alt="Simple representation of how functional tests noncloud workflow works" width="600" >}}
+{{< image src="images/functional-tests-noncloud-arch.png" alt="Simple representation of how functional tests noncloud workflow works" width="700" >}}
 
-## Creating the Secure Docker Registry
+### Creating the Secure Docker Registry
 
-You may find multiple documentation on how to create an insecure (HTTP) Docker registry but there are not a lot of them for the secure one. [This user guide on creating a KinD cluster and a local registry](https://kind.sigs.k8s.io/docs/user/local-registry/) might be a good place to start if you are experimenting with KinD cluster and Docker registry.
+Documentation on how to create an unsecured (HTTP) Docker registry is widely available, but there are not a lot of geared towards creating secure (HTTPS) ones. [This user guide on creating a KinD cluster and a local registry](https://kind.sigs.k8s.io/docs/user/local-registry/) is a good place to start if you are experimenting with KinD cluster and Docker registry.
 
 Here are the steps to create a secure Docker registry:
 
 1. Create a directory for the certificates that you will be generating for the HTTPS (HTTP over TLS) communication.
-1. Create certificates for the Docker registry. You can see how we did this in Radius here: <https://github.com/radius-project/radius/blob/main/.github/actions/create-local-registry/action.yaml#L39>.
+1. Create certificates for the Docker registry. You can see how we did this in Radius [here](https://github.com/radius-project/radius/blob/main/.github/actions/create-local-registry/action.yaml#L39).
 1. Add the certificate to the system trust store in the host machine.
 1. If you have a specific registry name, you should add it to `/etc/hosts` so that it can point to the localhost in the host machine.
 1. Create the secure Docker registry by running `docker run` command. You need to pass in certificate details to the command.
 
-## Creating the KinD Cluster
+### Creating the KinD Cluster
 
 After setting up the secure Docker registry on the host machine, the next step is to create the Kubernetes cluster for running the functional tests. We chose KinD (Kubernetes in Docker) for managing these clusters. Here is an example of how you can create a KinD cluster:
 
