@@ -5,13 +5,13 @@
 Any content that is relevant to the Radius project and the open-source community is welcome. Think about the topics in Radius that you are passionate about and would like to share with the community. Some of the examples includes, but is not limited to:
 
 - New features in the Radius project
-    - Getting started with a particular feature
-    - Technical deep dives into the feature
-- Customer case studies
-    - How customers are using Radius to solve their problems
+    - Understanding and getting started with a particular feature For eg : [Application graph blog post](https://blog.radapp.io/posts/2024/02/27/understand-your-entire-application-with-the-radius-application-graph/)
+    - Technical deep dives into the feature. For eg : [Bicep blog post](https://blog.radapp.io/posts/2024/08/28/how-radius-leveraged-bicep-extensibility/)
+- Customer case studies and success stories 
+    - How customers are using Radius to solve their problems  For eg : [MBCP case study](https://blog.radapp.io/posts/2023/12/06/case-study-how-millennium-bcp-leverages-radius/)
     - Success stories of customers using Radius
 - Comparison with other similar projects and how Radius is different
-- Milestones and achievements of the Radius project
+- Milestones and achievements of the Radius project For eg : [Radius acceptance to CNCF as sandbox project](https://blog.radapp.io/posts/2024/04/16/radius-accepted-as-cloud-native-compute-foundation-cncf-sandbox-project/)
 - Any problem that you solved in Radius that might be useful for others
 
 ### Blog Post Structure
