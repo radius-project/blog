@@ -8,13 +8,11 @@ type: blog
 
 ## Functional Testing in Radius
 
-In Radius, we have both unit tests and functional tests. As you may know, unit tests check the functionality of individual units, such as a function. On the other hand, functional tests check the integration and interaction of multiple components of Radius to ensure they work together as expected.
+Radius applies the [test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html) to divide the tests into groups for each feature. We have unit tests to check the functionality of individual units, such as a function and  functional tests to check the integration and interaction of multiple components of Radius to ensure they work together as expected.
 
-Functional tests in Radius create resources in Kubernetes clusters that are spun up specifically for the tests. These clusters are destroyed at the end of each test run. Additionally, some functional tests create cloud resources on Azure and AWS, which are also deleted after the tests finish.
+Functional tests in Radius create resources in Kubernetes clusters that are spun up specifically for the tests and destroyed at the end of each test run. Additionally, some functional tests create cloud resources on Azure and AWS, which require sensitive data, such as provider secrets, to be used in the tests. For example, when one of our functional tests creates a Radius environment, that environment needs credentials to create cloud resources on Azure or AWS. Some of this sensitive information is stored at the organization level in GitHub, while other sensitive data is kept at the repository level. 
 
-The functional tests that use cloud resources require some sensitive data, such as provider secrets, to be used in the tests. For example, when one of our functional tests creates a Radius environment, that environment needs credentials to create cloud resources on Azure or AWS. Some of this sensitive information is stored at the organization level in GitHub, while other sensitive data is kept at the repository level.
-
-Because we are dealing with sensitive information in the functional tests and need to run these tests for each pull request opened by our contributors, we implemented a process where a Radius maintainer or approver must approve the functional test run. This approval occurs after reviewing the code to ensure there is nothing malicious, such as attempts to extract sensitive information.
+Given that we handle sensitive information in the functional tests and the need to run these tests for every pull request, we implemented a process where a Radius maintainer or approver must approve the functional test run. This blog explores on the challenges faced with the functional testing workflow and how we implemented a new workflow to streamline our development process, reduce the bottlenecks in contributing and enhance the overall contributor experience.
 
 ### Challenges with Functional Testing in Radius
 
