@@ -42,7 +42,7 @@ The decision was to use a [KinD cluster](https://kind.sigs.k8s.io/) and a secure
 
 ### Creating the Secure Docker Registry
 
-Documentation on how to create an unsecured (HTTP) Docker registry is widely available, but there are not a lot of geared towards creating secure (HTTPS) ones. [This user guide on creating a KinD cluster and a local registry](https://kind.sigs.k8s.io/docs/user/local-registry/) is a good place to start if you are experimenting with KinD cluster and Docker registry.
+Documentation on how to create an unsecured (HTTP) Docker registry is widely available, but there are not a lot of them geared towards creating secure (HTTPS) ones. [This user guide on creating a KinD cluster and a local registry](https://kind.sigs.k8s.io/docs/user/local-registry/) is a good place to start if you are experimenting with KinD cluster and Docker registry.
 
 Here are the steps to create a secure Docker registry:
 
