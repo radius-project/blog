@@ -1,5 +1,5 @@
 ---
-date: "2024-09-10T00:00:00"
+date: "2024-09-18T00:00:00"
 title: "Separating Cloud and Non-Cloud Functional Tests in PR Workflows"
 linkTitle: "Cloud and Non-Cloud Functional Tests"
 author: "[Yetkin Timocin](https://www.github.com/ytimocin)"
