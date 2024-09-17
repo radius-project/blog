@@ -34,7 +34,7 @@ rad credential register azure wi --client-id <client id> --tenant-id <tenant id>
 rad credential register aws irsa --iam-role <roleARN>
 ```
 
-## Radius with Workload Identity 
+## Radius and Workload Identity 
 
 A software workload such as a container-based application, service or script needs an identity to authenticate, access, and communicate with services that are distributed across different platforms and/or cloud providers. Workload identity is a security concept that allows applications (workloads) running on cloud platforms to securely access and interact with cloud resources using managed identities, rather than relying on static credentials. This approach enhances security by reducing the need to manage secrets and credentials manually.As mentioned above, Azure workload identity and AWS IRSA (IAM Role for Service Accounts) are the implmentations of this concept on Azure and AWS respectively. Some benefits of using workload identities are:
 
