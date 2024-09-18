@@ -2,9 +2,12 @@
 
 ### Picking a Topic
 
-Any content that is relevant to the Radius project and the open-source community is welcome. Think about the topics in Radius that you are passionate about and would like to share with the community. Some of the examples includes, but is not limited to:
+Any content that is relevant to the Radius project and the open-source community is welcome. Think about the topics in Radius that you are passionate about and would like to share with the community. When you a pick a topic, also think about the target audience for the blog post. Audiences could be a decision maker (CTO, Solution Architect) who is looking to understand how Radius can help with their cloud native strategy, a platform engineer who is looking to extend Radius for their internal developer platform or a developer who is looking to get started with using a Radius feature or a open-source contributor who is looking to contribute to Radius.
+Defining a target audience for your blog post will help you understand how you should frame the content in the blog post and the level of detail that you should go into to satisfy the target audience.
 
-- New features in the Radius project
+Some of the examples includes, but is not limited to:
+
+- New features in the Radius project that helps solve a particular problem 
     - Understanding and getting started with a particular feature For eg : [Application graph blog post](https://blog.radapp.io/posts/2024/02/27/understand-your-entire-application-with-the-radius-application-graph/)
     - Technical deep dives into the feature. For eg : [Bicep blog post](https://blog.radapp.io/posts/2024/08/28/how-radius-leveraged-bicep-extensibility/)
 - Customer case studies and success stories 
