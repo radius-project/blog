@@ -31,9 +31,24 @@ one of the radius pods , OIDC provider, Azure
 
 #### AWS IAM roles 
 
-#### STS AssumeRole operation in a  nutshell
+An AWS IAM (Identity and Access Management) role is a set of permissions that define what actions are allowed and denied for an AWS service or resource. 
+The roles are can be assumed by entities such as AWS services, or Kubernetes service-accounts.
 
-#### AWS IRSA
+#### STS AssumeRole 
+
+The sts:AssumeRole operation is a key feature of AWS Security Token Service (STS) that allows obtaintaining temporary security credentials for 
+managing AWS resources. In a nutshell, this is how it works:
+
+1. Configure Trust Policy: The IAM role to be assumed must have a trust policy entity that specifies which entities (users, groups, services) are allowed 
+   to assume this role.
+2. AssumeRoleWithWebIdentity API Call: An entity makes an AssumeRoleWithWebIdentity API call to STS, specifying the ARN of the role to assume.
+
+#### AWS IAM Role for Service Accounts
+
+AWS IRSA (IAM Role for Service Accounts) is the AWS feature that allows kubernetes service-account to assume an AWS Role. 
+When configured for IRSA, service-account token that serves as ID for cluster: namespace: service-account is mounted as projected volume in the pod. 
+
+The pod sends this token to STS to receive temporary short-lived credentials. These credentials can be used to manage AWS resources. 
 
 #### Radius with AWS IRSA setup
 
@@ -41,9 +56,14 @@ one of the radius pods , OIDC provider, Azure
 
 ## More details
 
-Add relevant snippet of pod spec and explain details
+Add 
+- relevant snippet of pod spec and explain details
+- relevent trust policy and explain details
 
 Refer https://docs.radapp.io/guides/operations/providers/aws-provider/howto-aws-provider-irsa/ for how to guide.
+
+## Challenges 
+
 
 ## Comparison between providers
 
