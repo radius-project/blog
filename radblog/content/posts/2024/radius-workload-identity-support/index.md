@@ -54,7 +54,7 @@ The pod sends this token to STS to receive temporary short-lived credentials. Th
 
 {{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
 
-## More details
+#### More details
 
 Add 
 - relevant snippet of pod spec and explain details
@@ -62,15 +62,16 @@ Add
 
 Refer https://docs.radapp.io/guides/operations/providers/aws-provider/howto-aws-provider-irsa/ for how to guide.
 
-## Challenges 
+#### Challenges and solutions
 
+Add details on challenge with annotating service-account as outlined in AWS document
 
 ## Comparison between providers
 
-- common positives 
+common positives 
   - Good documentation
   - Providers make WI configuration easy assuming the audience to be a simple workload that deploys to the provider. 
-- shortcomings among the providers. 
+shortcomings among the providers. 
   - Much of the documented solution poses challenges for  multicloud and  multi tenancy scenarios. explain the disadvantage of provided webhook for Radius.
 
 ## Contributors 
