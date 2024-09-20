@@ -6,43 +6,19 @@ author: "[]()"
 type: blog
 ---
 
-## Configuring Workload Identity for Cloud Providers in Radius
+## What is Workload Identity 
 
-Radius enables developers and the operators to define, deploy, and collaborate on cloud-native applications across public clouds and private infrastructure. In order to deploy cloud resources, Radius has to be configured with cloud provider's credentials. 
-
-Radius can be configured with static credentials to interact with Azure and AWS:
- 
-```
-rad credential register azure sp --client-id <client id> --client-secret <client secret> --tenant-id <tenant id>
-``` 
-
-```
-rad credential register aws --access-key-id <access-key-id> --secret-access-key <secret-access-key>
-```
- 
-These credentials should be rotated regularly to reduce the chance of unauthorized access. A more secure option than using these credentials is to use Workload identity. Workload identity is a concept that allows applications (workloads) running on cloud platforms to securely access and interact with cloud resources using managed identities, rather than relying on static credentials. This enhances security by reducing the need to manage secrets and credentials manually.
-
-In Azure, this is implemented through Azure Workload Identity, which uses Azure Active Directory (AAD) to provide pods with their own first-class identity. In AWS, the equivalent technology is Amazon IRSA ( IAM Role for Service Accounts), which allows Kubernetes service-accounts to assume an IAM Role configured with fine-grained permissions.
-
-Radius can be configured with workload identity for deploying AWS and Azure resources:
-
-```
-rad credential register azure wi --client-id <client id> --tenant-id <tenant id>
-```
-
-```
-rad credential register aws irsa --iam-role <roleARN>
-```
-
-## Radius and Workload Identity 
-
-A software workload such as a container-based application, service or script needs an identity to authenticate, access, and communicate with services that are distributed across different platforms and/or cloud providers. Workload identity is a security concept that allows applications (workloads) running on cloud platforms to securely access and interact with cloud resources using managed identities, rather than relying on static credentials. This approach enhances security by reducing the need to manage secrets and credentials manually.As mentioned above, Azure workload identity and AWS IRSA (IAM Role for Service Accounts) are the implmentations of this concept on Azure and AWS respectively. Some benefits of using workload identities are:
+A software workload such as a container-based application, service or script needs an identity to authenticate, access, and communicate with services that are distributed across different platforms and/or cloud providers. Workload identity is a security concept that allows applications (workloads) running on cloud platforms to securely access and interact with cloud resources using managed identities, rather than relying on static credentials. Some benefits of using workload identities are:
 
 * Reduced Credential Management: No need to manage and rotate static credentials manually.
 * Enhanced Security: Minimizes the risk of credential leakage and unauthorized access.
 * Simplified Access Control: Permissions are managed centrally through cloud provider IAM policies.
 
-The following sections explain how Radius uses Workload Identity to securely deploy and manage cloud resources.
+## Radius and Cloud Providers
+
+Radius makes it easy for developers and operators to define, deploy, and collaborate on cloud-native applications across public clouds and private infrastructure. To deploy cloud resources, Radius needs to be set up with cloud provider credentials. From the get-go, Radius has supported static credentials to communicate with both Azure and AWS. You can store credentials like Azure client-secret and AWS access-key in Radius Credential. Details about the scope of resource deployment, such as subscription-key and resource-group for Azure, and account-id and region for AWS, can be stored as Radius provider in a Radius Environment. Check out [Radius Cloud Providers](https://docs.radapp.io/guides/operations/providers/overview/)  for more info. While this approach is straightforward, it relies on users to secure the credentials by following good security practices like credential rotation.
+
+Now, we support Workload Identity to leverage the security benefits mentioned in Workload Identity.
 
 ### How Radius works with Azure Workload Identity
 
@@ -56,59 +32,7 @@ one of the radius pods , OIDC provider, Azure
 
 ### How Radius works with AWS IRSA
 
--  component diagram / sequence diagram higlighting the flow between
-one of the radius pods , OIDC provider, AWS
-
-what tools can I use?
-
-- explanation of the diagram
-
-
-
-#### Token Injection: 
-
-When Radius is installed with IRSA enabled, the deployment spec associated with UCP and Applications-RP includes a projected volume with serviceAccountToken as source. This OIDC token contains claims that identify the Kubernetes service account and the cluster.
-
-```
-{{- if eq .Values.global.aws.irsa.enabled true }}
-        - name: aws-iam-token
-          mountPath: /var/run/secrets/eks.amazonaws.com/serviceaccount 
-{{- end }}
-:
-:
-{{- if eq .Values.global.aws.irsa.enabled true }}
-        - name: aws-iam-token
-          projected:
-            sources:
-            - serviceAccountToken:
-                path: token
-                expirationSeconds: 86400
-                audience: "sts.amazonaws.com"
-```
-
-#### Application Reads Token: 
-
-UCP and Applications-RP pods then read the OIDC token from the mounted volume. This token is used to authenticate with AWS.
-
-#### AssumeRoleWithWebIdentity API Call: 
-
-UCP and Applications-RP uses the AWS SDK to call the sts:AssumeRoleWithWebIdentity API. This API call includes the OIDC token and the ARN of the IAM role associated with the Kubernetes service account.
-
-#### STS Validates Token: 
-
-AWS Security Token Service (STS) validates the OIDC token. It checks the token's claims, such as the subject (sub) and audience (aud), against the trust policy of the IAM role.
-
-#### Temporary Credentials Issued:
-
-If the token is valid and the trust policy conditions are met, STS issues temporary security credentials (access key ID, secret access key, and session token) to the application.
-
-#### Deploy to AWS: 
-
-The application uses these temporary credentials to make authenticated requests to AWS services, such as deploying resources. The temporary credentials have a limited lifetime and are automatically refreshed as needed.
-
-#### Adapting IRSA Solution for Radius
-
-Talk about webhook, service-account annotation, decision to move away due to the vision for multicloud and multitenancy which requires multi credential, undesirable service restarts upon service-account annotation.
+{{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
 
 ## How to configure Radius with Workload Identities
 
