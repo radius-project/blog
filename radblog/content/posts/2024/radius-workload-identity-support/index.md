@@ -16,7 +16,7 @@ A software workload such as a container-based application, service or script nee
 
 ## Radius and Cloud Providers
 
-Radius makes it easy for developers and operators to define, deploy, and collaborate on cloud-native applications across public clouds and private infrastructure. To deploy cloud resources, Radius needs to be set up with cloud provider credentials. From the get-go, Radius has supported static credentials to communicate with both Azure and AWS. You can store credentials like Azure client-secret and AWS access-key in Radius Credential. Details about the scope of resource deployment, such as subscription-key and resource-group for Azure, and account-id and region for AWS, can be stored as Radius provider in a Radius Environment. Check out [Radius Cloud Providers](https://docs.radapp.io/guides/operations/providers/overview/)  for more info. While this approach is straightforward, it relies on users to secure the credentials by following good security practices like credential rotation.
+Radius makes it easy for developers and operators to define, deploy, and collaborate on cloud-native applications across public clouds and private infrastructure. To deploy cloud resources, Radius needs to be set up with cloud provider credentials. From the get-go, Radius has supported static credentials to communicate with both Azure and AWS. You can store credentials like Azure client-secret and AWS access-key in Radius Credential. Details about the scope of resource deployment, such as subscription-key and resource-group for Azure, and account-id and region for AWS, can be stored as Radius provider in a Radius Environment. Check out [Radius Cloud Providers](https://docs.radapp.io/guides/operations/providers/overview/) for more info. While this approach is straightforward, it relies on users to secure the credentials by following good security practices like credential rotation.
 
 Now, we support Workload Identity to leverage the security benefits mentioned in Workload Identity.
 
@@ -27,16 +27,23 @@ one of the radius pods , OIDC provider, Azure
 
 - explanation of the diagram
 
-- Adapting to Radius (explain decisions to not use pod identitity plugins)
-
-
 ### How Radius works with AWS IRSA
+
+#### AWS IAM roles 
+
+#### STS AssumeRole operation in a  nutshell
+
+#### AWS IRSA
+
+#### Radius with AWS IRSA setup
 
 {{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
 
-## How to configure Radius with Workload Identities
+## More details
 
-Could we point them to https://docs.radapp.io/guides/operations/providers/aws-provider/howto-aws-provider-irsa/ etc ?
+Add relevant snippet of pod spec and explain details
+
+Refer https://docs.radapp.io/guides/operations/providers/aws-provider/howto-aws-provider-irsa/ for how to guide.
 
 ## Comparison between providers
 
@@ -44,12 +51,12 @@ Could we point them to https://docs.radapp.io/guides/operations/providers/aws-pr
   - Good documentation
   - Providers make WI configuration easy assuming the audience to be a simple workload that deploys to the provider. 
 - shortcomings among the providers. 
-  - Much of the documented solution poses challenges for  multicloud and  multi tenancy scenarios .  
-  - We can/ did stick to the requisites of the solution and evolve credential management in a way that suits to our application
+  - Much of the documented solution poses challenges for  multicloud and  multi tenancy scenarios. explain the disadvantage of provided webhook for Radius.
 
 ## Contributors 
 
 ### Learn More and Contribute 
+
 The Radius maintainers are excited to continue collaborating with the open-source community to grow its feature set and welcome all contributions from the community. We’re looking for people to join us! To get started with Radius today, please see:
 
 - Learn more from the [documentation](https://docs.radapp.io/guides/operations/providers/).
