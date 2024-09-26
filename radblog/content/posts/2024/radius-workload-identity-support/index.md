@@ -16,16 +16,24 @@ A software workload such as a container-based application, service or script nee
 
 ## Radius and Cloud Providers
 
-Radius makes it easy for developers and operators to define, deploy, and collaborate on cloud-native applications across public clouds and private infrastructure. To deploy cloud resources, Radius needs to be set up with cloud provider credentials. From the get-go, Radius has supported static credentials to communicate with both Azure and AWS. You can store credentials like Azure client-secret and AWS access-key in Radius Credential. Details about the scope of resource deployment, such as subscription-key and resource-group for Azure, and account-id and region for AWS, can be stored as Radius provider in a Radius Environment. Check out [Radius Cloud Providers](https://docs.radapp.io/guides/operations/providers/overview/) for more info. While this approach is straightforward, it relies on users to secure the credentials by following good security practices like credential rotation.
+Radius makes it easy for developers and operators to define, deploy, and collaborate on cloud-native applications across public clouds. To deploy cloud resources, Radius needs to be set up with cloud provider credentials. From the get-go, Radius has supported static credentials to communicate with both Azure and AWS. You can store credentials like Azure client-secret and AWS access-key in Radius Credential. Details about the scope of resource deployment, such as subscription-key and resource-group for Azure, and account-id and region for AWS, can be stored as Radius provider in a Radius Environment. Check out [Radius Cloud Providers](https://docs.radapp.io/guides/operations/providers/overview/) for more info. While this approach is straightforward, it relies on users to secure the credentials by following good security practices like credential rotation.
 
-Now, we support Workload Identity to leverage the security benefits mentioned in Workload Identity.
+Now, we support Workload Identity to leverage the security benefits mentioned in [What is Workload Identity](#what-is-workload-identity)
 
 ### How Radius works with Azure Workload Identity
 
-- component diagram / sequence diagram higlighting the flow between
-one of the radius pods , OIDC provider, Azure
+#### various Azure Workload Identity terms introduction (AAD, Client ID ...)
 
-- explanation of the diagram
+
+
+#### Radius with AWS IRSA setup
+
+Radius with Azure Workload Identity setup
+  component diagram / sequence diagram higlighting the flow between
+one of the radius pods , OIDC provider, Azure with some explanation
+
+#### More Details
+
 
 ### How Radius works with AWS IRSA
 
@@ -39,8 +47,7 @@ The roles are can be assumed by entities such as AWS services, or Kubernetes ser
 The sts:AssumeRole operation is a key feature of AWS Security Token Service (STS) that allows obtaintaining temporary security credentials for 
 managing AWS resources. In a nutshell, this is how it works:
 
-1. Configure Trust Policy: The IAM role to be assumed must have a trust policy entity that specifies which entities (users, groups, services) are allowed 
-   to assume this role.
+1. Configure Trust Policy: The IAM role to be assumed must have a trust policy entity that specifies which entities (users, groups, services) are allowed to assume this role.
 2. AssumeRoleWithWebIdentity API Call: An entity makes an AssumeRoleWithWebIdentity API call to STS, specifying the ARN of the role to assume.
 
 #### AWS IAM Role for Service Accounts
