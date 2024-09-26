@@ -10,7 +10,7 @@ posts = "/:section/:year/:month/:day/:slug/"
 
 # Google Analytics
 [services.googleAnalytics]
-id = "G-SZ71KL0YSK"
+id = "G-5E6YHP8ET8"
 
 enableGitInfo = true
 
