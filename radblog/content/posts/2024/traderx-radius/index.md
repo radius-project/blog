@@ -122,7 +122,7 @@ rad deploy app.bicep -w prod-aws
 rad deploy app.bicep -w prod-azure
 ```
 
-The deployment process was identical across local, AWS, and Azure environments, with Radius handling the provisioning of the necessary Kubernetes resources across both local and cloud environments. The consistent deployment experience across environments clearly demonstrated how Radius enables developers to deploy applications across multiple environments without needing to configure cloud-specific infrastructure.
+The deployment experience was identical across local, AWS, and Azure environments, with Radius handling the provisioning of the necessary Kubernetes resources across the local k3d, AWS Elastic Kubernetes Service, and Azure Kubernetes Service environments. The consistent deployment experience across environments clearly demonstrated how Radius enables developers to deploy applications across multiple environments without needing to fuss with configuring cloud-specific infrastructure.
 
 ### View the application graph
 
