@@ -36,24 +36,21 @@ Docker: The containerization technology for packaging TraderX.
 Prometheus/Grafana: Potential tools for monitoring and observability.
 
 here is a tasklist: https://gist.github.com/willtsai/6f45fceb91d1acdbbe7ba2fcef6acd08
-
  -->
 
-<!-- TODO: Introduction to FINOS, TraderX, and how Radius can help deploy it.-->
-
-The Radius maintainers have been collaborating with members of the [Fintech Open Source Foundation (FINOS)](https://www.finos.org/) community to participate in their [Tech Sprint 2024](https://www.finos.org/blog/finos-tech-sprint-2024) event, during which we worked on a project to [deploy the TraderX application using Radius](https://github.com/finos/traderX/discussions/190). Our working group was able to *Radify* the TraderX application and deploy it to local, AWS, and Azure environments using Radius, which was demonstrated in a [session](https://sched.co/1i6ud) at the [Open Source in Finance Forum 2024](https://events.linuxfoundation.org/open-source-finance-forum-new-york) event in New York. This blog post will walk through our journey in detail of how we integrated Radius into TraderX, the challenges we faced, and what's next for TraderX and Radius.
+The Radius maintainers have been collaborating with members of the [Fintech Open Source Foundation (FINOS)](https://www.finos.org/) community in participation of their [Tech Sprint 2024](https://www.finos.org/blog/finos-tech-sprint-2024) event, during which we worked on a project to [deploy the TraderX application using Radius](https://github.com/finos/traderX/discussions/190). Our working group was able to build a CI pipeline for the application containers and *Radify* the TraderX application to deploy on local, AWS, and Azure environments using Radius. The project was demonstrated in a [session](https://sched.co/1i6ud) at the [Open Source in Finance Forum 2024](https://events.linuxfoundation.org/open-source-finance-forum-new-york) event in New York. In this blog post, we assume the persona of an application developer who is ready to deploy and test TraderX across local and cloud environments. We will walk through our journey in detail of how we integrated Radius into TraderX, the challenges we faced, and what's next for TraderX and Radius.
 
 ## Overview of the TraderX application
 
-<!-- TODO: Provide an overview of the TraderX application, including its background, architecture, components, and how it's currently being packaged and deployed. -->
-
-[TraderX](https://github.com/finos/traderX) is a sample application created and maintained by members of the FINOS community to serve as a reference application for developers in the financial services industry looking to build cloud-native applications and leverage open source projects. It is a distributed application that consists of multiple services, including a front-end web application, various back-end services, a message bus, and a SQL database. The application was originally packaged and deployed using Docker Compose, which worked well for local development and testing but lacked the scalability and robust orchestration capabilities required for large-scale production environments in the cloud. This is where Radius comes in.
+[TraderX](https://github.com/finos/traderX) is a sample application created and maintained by members of the FINOS community to serve as a reference application for developers in the financial services industry looking to build cloud-native applications and leverage open source projects. It is a distributed application that consists of multiple services, including a front-end web service, various back-end services, a message bus, and a SQL database. The application was originally packaged and deployed using Docker Compose, which worked well for local development and testing but lacked the scalability and robust orchestration capabilities required for large-scale production environments in the cloud. This is where Radius comes in.
 
 {{< image src="images/traderx-overview.png" alt="Architecture diagram of the TraderX application" width="600" >}}
 
 ## Integrating TraderX with Radius
 
-TODO: Provide and introduction to why Radius is a good fit for deploying TraderX, including details like the TraderX being readily containerized, the need for a consistent yet flexible deployment model that accomodates multiple environments and a self-documenting application model (benefits of the app graph). Emphasize the importance of cross-cloud deployment for regulated industries like finance and healthcare. Reference the getting started guide for readers who may not understand the basics of radius. Set up the persona of a developer whose organization has already set up the environment and containerized the application, to provide context before diving into the specific tasks.
+With TraderX being readily containerized and leveraging cloud agnostic technologies like Docker containers and Java libraries, it was a natural fit to deploy the application to multiple environments using Radius. Radius provides a consistent yet flexible deployment model that allows developers to deploy applications across multiple environments without needing to configure cloud-specific infrastructure. This is particularly important for regulated industries like finance and healthcare, where applications may be required to be deployed across multiple cloud providers. Radius also provides a self-documenting application model that generates an application graph, which helps developers and operators understand the application architecture and dependencies. If you're new to Radius, you can learn more by following the [getting started guide](https://docs.radapp.io/getting-started/).
+
+Below we'll cover in more detail the tasks involved in deploying TraderX using Radius.
 
 ### Publish images to a container registry
 
@@ -62,10 +59,6 @@ TODO: Provide overview of publishing TraderX images to a container registry (GHC
 ### Author the TraderX application definition using Radius
 
 TODO: Provide an overview of authoring the TraderX application definition using Radius, including the necessary configurations and showing snippets of the `app.bicep` file that gets authored. Describe how the TraderX application containers are defined, how they are connected using Radius connections, and how the application graph will be generated.
-
-### Modify TraderX to use a portable database resource
-
-TODO: This actual task is yet to be done, but we can describe the code and configuration changes we made to the TraderX database service that allows us to decouple the database from the application such that it no longer has a hard dependency on an H2 database implementation. This will allow us to use cloud resources like Azure SQL Database or AWS RDS for the database service.
 
 ### Deploy the TraderX application using Radius
 
@@ -80,6 +73,8 @@ TODO: Show the application graph that gets generated as part of the deployment p
 TODO: Describe the challenges faced and lessons learned during the process of deploying TraderX using Radius to serve as a reference for others starting their Radification journey.
 
 ## What's next for TraderX and Radius
+
+<!-- TODO: This actual task is yet to be done, but we can describe the code and configuration changes we made to the TraderX database service that allows us to decouple the database from the application such that it no longer has a hard dependency on an H2 database implementation. This will allow us to use cloud resources like Azure SQL Database or AWS RDS for the database service. -->
 
 TODO: Describe what more we can do with TraderX and Radius, including:
 - Setting up a CI/CD pipeline for TraderX using GitHub Actions and a GitOps platform.
