@@ -48,7 +48,7 @@ The Radius maintainers have been collaborating with members of the [Fintech Open
 
 ## Integrating TraderX with Radius
 
-With TraderX being readily containerized and leveraging cloud agnostic open source technologies like Docker containers and Nginx, it was a natural fit to deploy the application to multiple environments using Radius. Radius provides a consistent yet flexible deployment model that allows developers to deploy applications across multiple environments without needing to configure cloud-specific infrastructure. This is particularly important for regulated industries like finance and healthcare, where applications may be required to be deployed across multiple cloud providers. Radius also provides a self-documenting application model that generates an application graph, which helps developers and operators understand the application architecture and dependencies. If you're new to Radius, you can learn more by following the [getting started guide](https://docs.radapp.io/getting-started/). Below we'll cover in more detail the tasks involved in deploying TraderX using Radius.
+With TraderX being readily containerized and leveraging cloud agnostic open source technologies like Docker containers and Nginx, it was a natural fit to add Radius for application deployment. Radius provides a consistent yet flexible deployment model that allows developers to deploy applications across multiple environments without needing to configure cloud-specific infrastructure. This is particularly important for regulated industries like finance and healthcare, where applications may be required to be deployed across multiple cloud providers. Radius also provides a self-documenting application model that generates an application graph, which helps developers and operators understand the application architecture and dependencies. If you're new to Radius, you can learn more by following the [getting started guide](https://docs.radapp.io/getting-started/). Below we'll cover in more detail the tasks involved in deploying TraderX using Radius.
 
 ### Publish images to a container registry
 
@@ -56,7 +56,7 @@ Even though the TraderX is readily containerized with Dockerfiles for building e
 
 ### Author the TraderX application definition using Radius
 
-With the CI pipeline in place, we were ready to set up TraderX for deployment using Radius. The starting point for deploying an application with Radius is to author the application definition. To do this, we created an application definition file called [`app.bicep`](https://github.com/finos/traderX/blob/main/radius-traderx/app.bicep) within the TraderX repo. It defines the TraderX application using the Radius application model, which includes the application containers, required environment variables, and connections between the containers. This `app.bicep` Radius application definition file captures all the necessary configurations (namely the container images, ports, and environment variables) from the exising [`docker-compose` file](https://github.com/finos/traderX/blob/main/docker-compose.yml) into a cloud-agnostic application model that allows TraderX to be deployed across local and cloud environments. For example, the resource definition for `position-service` looks like this:
+With the CI pipeline in place, we were ready to set up TraderX for deployment using Radius. The starting point for deploying an application with Radius is to author the application definition. To do this, we created an application definition file called [`app.bicep`](https://github.com/finos/traderX/blob/main/radius-traderx/app.bicep) within the TraderX repo. It defines the TraderX application using the Radius application model, which includes the application containers, required environment variables, and connections between the containers. This `app.bicep` Radius application definition file captures all the necessary configurations (namely the container images, ports, and environment variables) from the exising [`docker-compose` file](https://github.com/finos/traderX/blob/main/docker-compose.yml) into a cloud-agnostic application model that allows TraderX to be deployed across local and cloud environments. For example, the resource definition for [`position-service`](https://github.com/finos/traderX/tree/main/position-service) looks like this: 
 
 ```bicep
 resource positionservice 'Applications.Core/containers@2023-10-01-preview' = {
@@ -89,7 +89,40 @@ Additionally, the `app.bicep` application definition file includes [connection](
 
 ### Deploy the TraderX application using Radius
 
-TODO: Describe the three environments that had been made available to me as a developer, including how the operations teams had set up all the Recipes needed to provision the necessary infrastructure for the TraderX application. Show the commands used and their corresponding output to deploy the TraderX application using Radius across local, AWS, and Azure. Emphasize that the same application definition is reused to deploy across the different environments. Show the various local and cloud resources that were provisioned as part of the deployment process.
+<!-- TODO: Describe the three environments that had been made available to me as a developer, including how the operations teams had set up the necessary EKS and AKS clusters to provision the necessary infrastructure for the TraderX application. Show the commands used and their corresponding output to deploy the TraderX application using Radius across local, AWS, and Azure. Emphasize that the same application definition is reused to deploy across the different environments. Show the various local and cloud resources that were provisioned as part of the deployment process. -->
+
+With the TraderX application definition authored, we were ready to deploy the application using the Radius toolset. We began with deploying TraderX to a local [k3d](https://k3d.io/v5.6.3/) cluster:
+
+```bash
+rad deploy app.bicep                      
+Building app.bicep...
+.
+.
+.
+Deployment Complete
+
+Resources:
+    account-service Applications.Core/containers
+    database        Applications.Core/containers
+    ingress         Applications.Core/containers
+    people-service  Applications.Core/containers
+    position-service Applications.Core/containers
+    reference-data  Applications.Core/containers
+    trade-feed      Applications.Core/containers
+    trade-processor Applications.Core/containers
+    trade-service   Applications.Core/containers
+    web-front-end-angular Applications.Core/containers
+```
+
+After validating that the application was deployed and running successfully on our local cluster, we sought to deploy TraderX to AWS and Azure. This proved to be very easy (almost no-op, in fact) because we could re-use the cloud environments and resources that had already been previously put in place by our operations team. We used the same application definition file (`app.bicep`) to deploy TraderX to AWS and Azure. The only difference was that we specified the target cloud environment using the `-w` flag:
+
+```bash
+rad deploy app.bicep -w prod-aws
+
+rad deploy app.bicep -w prod-azure
+```
+
+The deployment process was identical across local, AWS, and Azure environments, with Radius handling the provisioning of the necessary Kubernetes resources across both local and cloud environments. The consistent deployment experience across environments clearly demonstrated how Radius enables developers to deploy applications across multiple environments without needing to configure cloud-specific infrastructure.
 
 ### View the application graph
 
