@@ -48,17 +48,44 @@ The Radius maintainers have been collaborating with members of the [Fintech Open
 
 ## Integrating TraderX with Radius
 
-With TraderX being readily containerized and leveraging cloud agnostic technologies like Docker containers and Java libraries, it was a natural fit to deploy the application to multiple environments using Radius. Radius provides a consistent yet flexible deployment model that allows developers to deploy applications across multiple environments without needing to configure cloud-specific infrastructure. This is particularly important for regulated industries like finance and healthcare, where applications may be required to be deployed across multiple cloud providers. Radius also provides a self-documenting application model that generates an application graph, which helps developers and operators understand the application architecture and dependencies. If you're new to Radius, you can learn more by following the [getting started guide](https://docs.radapp.io/getting-started/).
-
-Below we'll cover in more detail the tasks involved in deploying TraderX using Radius.
+With TraderX being readily containerized and leveraging cloud agnostic open source technologies like Docker containers and Nginx, it was a natural fit to deploy the application to multiple environments using Radius. Radius provides a consistent yet flexible deployment model that allows developers to deploy applications across multiple environments without needing to configure cloud-specific infrastructure. This is particularly important for regulated industries like finance and healthcare, where applications may be required to be deployed across multiple cloud providers. Radius also provides a self-documenting application model that generates an application graph, which helps developers and operators understand the application architecture and dependencies. If you're new to Radius, you can learn more by following the [getting started guide](https://docs.radapp.io/getting-started/). Below we'll cover in more detail the tasks involved in deploying TraderX using Radius.
 
 ### Publish images to a container registry
 
-TODO: Provide overview of publishing TraderX images to a container registry (GHCR), including the necessary configurations and commands that were run. Describe why this was needed and how it fits into the TraderX deployment process.
+Even though the TraderX is readily containerized with Dockerfiles for building each service, we needed to publish the images to a container registry to make them available for deployment using Radius. GitHub Container Registry (GHCR) is a fully integrated container registry that allows us to publish and share Docker images within the GitHub ecosystem and thus is a good fit for an open source project hosted on GitHub like FINOS and TraderX. To publish the TraderX container images into the [FINOS GitHub registry](https://github.com/orgs/finos/packages), we created a [GitHub Actions CI pipeline](https://github.com/finos/traderX/actions/workflows/build-and-publish.yml) to automate the build and publish process. The CI pipeline is defined in a GitHub Actions workflow file called [`build-and-publish.yml`](https://github.com/finos/traderX/blob/main/.github/workflows/build-and-publish.yml) within the TraderX repo. The workflow triggers on every push to the `main` branch and builds the Docker images for each service in the application. The images are then scanned for vulnerabilities before being tagged with the `latest` label and pushed to the GHCR. The CI pipeline ensures that the TraderX images are always up to date and available for deployment using Radius.
 
 ### Author the TraderX application definition using Radius
 
-TODO: Provide an overview of authoring the TraderX application definition using Radius, including the necessary configurations and showing snippets of the `app.bicep` file that gets authored. Describe how the TraderX application containers are defined, how they are connected using Radius connections, and how the application graph will be generated.
+With the CI pipeline in place, we were ready to set up TraderX for deployment using Radius. The starting point for deploying an application with Radius is to author the application definition. To do this, we created an application definition file called [`app.bicep`](https://github.com/finos/traderX/blob/main/radius-traderx/app.bicep) within the TraderX repo. It defines the TraderX application using the Radius application model, which includes the application containers, required environment variables, and connections between the containers. This `app.bicep` Radius application definition file captures all the necessary configurations (namely the container images, ports, and environment variables) from the exising [`docker-compose` file](https://github.com/finos/traderX/blob/main/docker-compose.yml) into a cloud-agnostic application model that allows TraderX to be deployed across local and cloud environments. For example, the resource definition for `position-service` looks like this:
+
+```bicep
+resource positionservice 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'position-service'
+  properties: {
+    application: application
+    container: {
+      image: 'ghcr.io/finos/traderx/position-service:latest'
+      ports: {
+        web: {
+          containerPort: 18090
+        }
+      }
+      env: {
+        DATABASE_TCP_HOST: {
+          value: database.name
+        }
+      }
+    }
+    connections: {
+      db: {
+        source: database.id
+      }
+    }
+  }
+}
+```
+
+Additionally, the `app.bicep` application definition file includes [connection](https://docs.radapp.io/guides/author-apps/containers/overview/#connections) declarations between containers and is thus a self-documenting artifact that serves as the single source of truth for the TraderX application and used by Radius establish connections between containers and generate the application graph (more on this later).
 
 ### Deploy the TraderX application using Radius
 
