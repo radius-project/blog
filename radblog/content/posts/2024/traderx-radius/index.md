@@ -1,5 +1,5 @@
 ---
-date: "2024-10-06T00:00:00"
+date: "2024-10-10T00:00:00"
 title: "Deploying the FINOS TraderX Application Using Radius"
 linkTitle: "TraderX deployment"
 author: "[Will Tsai](https://www.github.com/willtsai)"
