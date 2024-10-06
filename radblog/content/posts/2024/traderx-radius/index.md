@@ -126,20 +126,31 @@ The deployment experience was identical across local, AWS, and Azure environment
 
 ### View the application graph
 
-TODO: Show the application graph that gets generated as part of the deployment process and compare it to the TraderX architecture diagram. Emphasize that the application graph is automatically generated as a part of the Radius application authoring and deployment process and is always up to date.
+<!-- TODO: Show the application graph that gets generated as part of the deployment process and compare it to the TraderX architecture diagram. Emphasize that the application graph is automatically generated as a part of the Radius application authoring and deployment process and is always up to date. -->
+
+One of the key features of Radius is the [Application Graph](https://docs.radapp.io/guides/author-apps/application/overview/#query-and-understand-your-application-with-the-radius-application-graph), which provides a visual representation of the application architecture and is automatically generated. Using Radius to deploy TraderX, we were able to generate its Application Graph data and visualize the application architecture in the Radius Dashboard. The Application Graph is a valuable tool for developers and operators to understand the application architecture and dependencies, and can be used to troubleshoot issues and optimize the application deployment. Below is the Radius Application Graph for TraderX -- you can see that it closely resembles the TraderX architecture diagram we showed earlier:
+
+{{< image src="images/traderx-app-graph.png" alt="Application graph of the TraderX application" width="600" >}}
 
 ## Challenges and lessons learned
 
-TODO: Describe the challenges faced and lessons learned during the process of deploying TraderX using Radius to serve as a reference for others starting their Radification journey.
+<!-- TODO: Describe the challenges faced and lessons learned during the process of deploying TraderX using Radius to serve as a reference for others starting their Radification journey. -->
 
 ## What's next for TraderX and Radius
 
-<!-- TODO: This actual task is yet to be done, but we can describe the code and configuration changes we made to the TraderX database service that allows us to decouple the database from the application such that it no longer has a hard dependency on an H2 database implementation. This will allow us to use cloud resources like Azure SQL Database or AWS RDS for the database service. -->
+While being able to deploy TraderX across local and cloud environments using Radius is a great start, there are many more exciting things we can do with TraderX and Radius to further enhance the deployment experience and portability of the application. Some future areas of focus for the TraderX and Radius project include:
 
-TODO: Describe what more we can do with TraderX and Radius, including:
-- Setting up a CI/CD pipeline for TraderX using GitHub Actions and a GitOps platform.
-- Modifying the message bus service to use a portable resource.
-- Reference architecture to help users enable "one-click deployment" of TraderX to local, Azure, AWS
+### Configurable database and message bus resources
+
+The TraderX [database](https://github.com/finos/traderX/tree/main/database) container today hosts an H2 SQL database as a standalone server. The TraderX [`trade-feed`](https://github.com/finos/traderX/tree/main/trade-feed) container today hosts a simple pub-sub server that uses [Socket.IO](https://socket.io/). We can use Radius to enable dynamic deploy-time provisioning of the database and message bus, both driven by configured Recipes. This will enable users to deploy TraderX with a compatible SQL database and message bus of their choice that's hosted either on-prem or in the cloud, all without needing to modify the application code or deployment definition.
+
+### Automated CD via GitOps
+
+We would like to integrate a GitOps platform coupled with Radius to enable continuous deployment of TraderX. Coupled with the GitHub Actions CI pipeline in place from our tech sprint efforts, TraderX will thus have an end-to-end automated CI/CD pipeline. This will enable developers to push code changes to the repository and have the application automatically built, tested, and deployed to the target environment.
+
+### Complete multi-environment deployment experience
+
+Finally, we want to demonstrate that TraderX can be deployed to multiple cloud environments using Radius. We will create a reference architecture that can serve as a user guide for deploying TraderX to local, Azure, and AWS environments. Done thoughtfully, this would provide users with a one-click deployment experience that allows developers to experience TraderX on any cloud with minimal effort.
 
 ## Learn more and contribute
 
