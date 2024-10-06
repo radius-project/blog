@@ -6,39 +6,9 @@ author: "[Will Tsai](https://www.github.com/willtsai)"
 type: blog
 ---
 
-<!-- Here is some context for this blog post:
+The Radius maintainers have been collaborating with members of the [Fintech Open Source Foundation (FINOS)](https://www.finos.org/) community in participation of their [Tech Sprint 2024](https://www.finos.org/blog/finos-tech-sprint-2024) event, during which we worked on a project to [deploy the TraderX application using Radius](https://github.com/finos/traderX/discussions/190). Our working group was able to build a CI pipeline for the application containers and *Radify* the TraderX application to deploy on local, AWS, and Azure environments using Radius. The project was demonstrated in a [session](https://sched.co/1i6ud) at the [Open Source in Finance Forum 2024](https://events.linuxfoundation.org/open-source-finance-forum-new-york) event in New York. 
 
-Radius is a new Cloud Native Computing Foundation (CNCF) project. It is a cloud-native application platform that enables developers and platform engineers who support them to collaborate on delivering and managing cloud-native applications that follow corporate best practices for security, cost and operations by default. It supports deploying applications across private cloud, Amazon Web Services (AWS) and Microsoft Azure, with more cloud providers to come. This talk will show how easy it is to deploy and manage a popular open-source trading application, TraderX, to multi-cloud environments without requiring the developer to configure cloud-specific infrastructure. The session will also illustrate how Radius enables better collaboration across developers and operators through features like: the Radius application dashboard, which provides developers and operators a common graphical view of TraderX, as deployed across clouds and; Radius Recipes, which give TraderX developers self-serve access to cloud resources, such as SQL databases, while enabling operators to define and enforce best practices for security, cost and operations regarding how cloud resources are consumed.
-
-Business Problem
-TraderX is currently deployed using Docker Compose, which is an excellent tool for local development and testing. However, it lacks the scalability and robust orchestration capabilities required for large-scale production environments. This limitation hinders TraderX's ability to handle increased traffic and maintain high availability.
-
-Proposed Solution
-Migrate TraderX from Docker Compose to Radius, a cloud-native application platform designed for scalability and portability. Radius, recently open-sourced and accepted as a CNCF sandbox project, offers a comprehensive solution for managing and orchestrating containerized applications.
-
-Roadmap
-"Radify" the components of TraderX:
-
-Configurable database and message bus resources
-End-to-end automated CI/CD:
-
-Build a CI pipeline with GitHub Actions
-Integrate a GitOps platform (e.g. Flux, ArgoCD) for CD
-Multi-environment deployment:
-
-Reference architecture for deploying to local, Azure, AWS
-One-click deployment to experience TraderX on any cloud
-Developer dashboardd experience with application graph
-Related Technologies/Platforms
-Radius: The core platform for application deployment and management.
-Kubernetes: The underlying container orchestration engine.
-Docker: The containerization technology for packaging TraderX.
-Prometheus/Grafana: Potential tools for monitoring and observability.
-
-here is a tasklist: https://gist.github.com/willtsai/6f45fceb91d1acdbbe7ba2fcef6acd08
- -->
-
-The Radius maintainers have been collaborating with members of the [Fintech Open Source Foundation (FINOS)](https://www.finos.org/) community in participation of their [Tech Sprint 2024](https://www.finos.org/blog/finos-tech-sprint-2024) event, during which we worked on a project to [deploy the TraderX application using Radius](https://github.com/finos/traderX/discussions/190). Our working group was able to build a CI pipeline for the application containers and *Radify* the TraderX application to deploy on local, AWS, and Azure environments using Radius. The project was demonstrated in a [session](https://sched.co/1i6ud) at the [Open Source in Finance Forum 2024](https://events.linuxfoundation.org/open-source-finance-forum-new-york) event in New York. In this blog post, we assume the persona of an application developer who is ready to deploy and test TraderX across local and cloud environments. We will walk through our journey in detail of how we integrated Radius into TraderX, the challenges we faced, and what's next for TraderX and Radius.
+In this blog post we will assume the persona of an application developer and walk through our journey in detail of how we integrated Radius into TraderX, the challenges we faced, and what's next for TraderX and Radius.
 
 ## Overview of the TraderX application
 
