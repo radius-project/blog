@@ -47,7 +47,7 @@ Some examples include, but is not limited to:
 
 - **Casing**: Capitalize the proper nouns, e.g. Radius, Bicep, Recipes. Use [sentence casing](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case) for title and section headings.
 
-- **Length**: The blog post should be concise and to the point. For a technical blog, you can go deep into the details Avoid long paragraphs and try to split the content into multiple sections.
+- **Length**: The blog post should be concise and to the point. It should be readable within 3-5 minutes. For a technical blog, you can go deep into the details. Avoid long paragraphs and try to split the content into multiple sections.
 
 - **Diagrams**: Add diagrams and visualizations wherever you can help the reader understand the content. This could be an architecture diagram, or a simple flow diagram that conveys the overall. If you are adding diagrams to the blog post, make sure to use the following `image` shortcode. 
 

@@ -1,6 +1,6 @@
-# Radius blog repo
+# Radius blog 
 
-This repo contains the markdown files which generate the Radius blog site at https://blog.radapp.dev/. Head over there to read the blog and learn more about the latest Radius news! Read on to get up and running with a local environment to contribute to the blog.
+The Radius blog is a place to share the latest news, updates, features, customer stories, and more about the Radius project. This repository contains the markdown files which generate the Radius blog site at https://blog.radapp.io/. Head over there to read the blog and learn more about the latest Radius news! Read on to get up and running with a local environment to contribute to the blog.
 
 ## Overview
 
@@ -24,7 +24,7 @@ The [radblog](./radblog) directory contains the hugo project, markdown files, an
 
 ## Run local server
 
-1. Make sure you're still in the daprblog directory
+1. Make sure you're still in the radblog directory
 1. Run `hugo server --disableFastRender`
 1. Navigate to `http://localhost:1313/posts`
 
@@ -52,3 +52,6 @@ type: blog
 
 Blog post content here.
 ```
+## Style guide
+
+Follow the [style guide](radblog/guide/style-guide.md) to write blog posts.
