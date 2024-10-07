@@ -52,6 +52,3 @@ type: blog
 
 Blog post content here.
 ```
-## Style guide
-
-Follow the [style guide](radblog/guide/style-guide.md) to write blog posts.

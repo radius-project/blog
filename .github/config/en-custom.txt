@@ -466,3 +466,9 @@ OpenAPI
 TypeSpec
 CloudControl
 submodule
+KinD
+Timocin
+Yetkin
+noncloud
+non-cloud
+sigs
