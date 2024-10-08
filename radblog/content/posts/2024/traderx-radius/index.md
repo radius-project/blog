@@ -14,7 +14,7 @@ In this blog post we will assume the persona of an application developer and wal
 
 [TraderX](https://github.com/finos/traderX) is a sample application created and maintained by members of the FINOS community to serve as a reference application for developers in the financial services industry looking to build cloud-native applications and leverage open source projects. It is a distributed application that consists of multiple services, including a front-end web service, various back-end services, a message bus, and a SQL database. The application was originally packaged and deployed using Docker Compose, which worked well for local development and testing but lacked the scalability and robust orchestration capabilities required for large-scale production environments in the cloud. This is where Radius comes in.
 
-{{< image src="images/traderx-overview.png" alt="Architecture diagram of the TraderX application" width="600" >}}
+{{< image src="images/traderx-overview.png" alt="Architecture diagram of the TraderX application" width="800" >}}
 
 ## Integrating TraderX with Radius
 
@@ -59,8 +59,6 @@ Additionally, the `app.bicep` application definition file includes [connection](
 
 ### Deploy the TraderX application using Radius
 
-<!-- TODO: Describe the three environments that had been made available to me as a developer, including how the operations teams had set up the necessary EKS and AKS clusters to provision the necessary infrastructure for the TraderX application. Show the commands used and their corresponding output to deploy the TraderX application using Radius across local, AWS, and Azure. Emphasize that the same application definition is reused to deploy across the different environments. Show the various local and cloud resources that were provisioned as part of the deployment process. -->
-
 With the TraderX application definition authored, we were ready to deploy the application using the Radius toolset. We began with deploying TraderX to a local [k3d](https://k3d.io/v5.6.3/) cluster:
 
 ```bash
@@ -96,15 +94,19 @@ The deployment experience was identical across local, AWS, and Azure environment
 
 ### View the application graph
 
-<!-- TODO: Show the application graph that gets generated as part of the deployment process and compare it to the TraderX architecture diagram. Emphasize that the application graph is automatically generated as a part of the Radius application authoring and deployment process and is always up to date. -->
-
 One of the key features of Radius is the [Application Graph](https://docs.radapp.io/guides/author-apps/application/overview/#query-and-understand-your-application-with-the-radius-application-graph), which provides a visual representation of the application architecture and is automatically generated. Using Radius to deploy TraderX, we were able to generate its Application Graph data and visualize the application architecture in the Radius Dashboard. The Application Graph is a valuable tool for developers and operators to understand the application architecture and dependencies, and can be used to troubleshoot issues and optimize the application deployment. Below is the Radius Application Graph for TraderX -- you can see that it closely resembles the TraderX architecture diagram we showed earlier:
 
-{{< image src="images/traderx-app-graph.png" alt="Application graph of the TraderX application" width="600" >}}
+{{< image src="images/traderx-app-graph.png" alt="Application graph of the TraderX application" width="800" >}}
 
 ## Challenges and lessons learned
 
 <!-- TODO: Describe the challenges faced and lessons learned during the process of deploying TraderX using Radius to serve as a reference for others starting their Radification journey. -->
+
+Overall, the process of deploying TraderX using Radius was smooth and straightforward, thanks to the well-structured application architecture and the containerized nature of the application. However, we did encounter a few challenges along the way that we'll share here to help others who are starting their Radification journey:
+
+<!-- permissions for container registry, setting environment variables -->
+
+- 
 
 ## What's next for TraderX and Radius
 
