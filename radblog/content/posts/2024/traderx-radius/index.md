@@ -14,7 +14,7 @@ In this blog post we will assume the persona of an application developer and wal
 
 [TraderX](https://github.com/finos/traderX) is a sample application created and maintained by members of the FINOS community to serve as a reference application for developers in the financial services industry looking to build cloud-native applications and leverage open source projects. It is a distributed application that consists of multiple services, including a front-end web service, various back-end services, a message bus, and a relational database. The application was originally packaged and deployed using Docker Compose, which worked well for local development and testing but lacked the scalability and robust orchestration capabilities required for large-scale production environments in the cloud. This is where Radius comes in.
 
-{{< image src="images/traderx-overview.png" alt="Architecture diagram of the TraderX application" width="800" >}}
+{{< image src="images/traderx-overview.png" alt="Architecture diagram of the TraderX application" width="1200" >}}
 
 ## Integrating TraderX with Radius
 
@@ -55,7 +55,7 @@ resource positionservice 'Applications.Core/containers@2023-10-01-preview' = {
 }
 ```
 
-Additionally, the `app.bicep` application definition file includes [connection](https://docs.radapp.io/guides/author-apps/containers/overview/#connections) declarations between containers and is thus a self-documenting artifact that serves as the single source of truth for the TraderX application and used by Radius establish connections between containers and generate the application graph (more on this later).
+Notice that the `app.bicep` application definition file snippet above includes a declared [connection](https://docs.radapp.io/guides/author-apps/containers/overview/#connections) to the database. Connections is how Radius establishes and tracks dependencies between applications and application components. This connection data is used to generate the Radius Application Graph which we will discuss later. The full `app.bicep` application definition file for TraderX can be found [here](https://github.com/finos/traderX/blob/main/radius-traderx/app.bicep).
 
 ### Deploy the TraderX application using Radius
 
@@ -86,8 +86,10 @@ After validating that the application was deployed and running successfully on o
 
 ```bash
 rad deploy app.bicep --workspace prod-aws
+```
 
-rad deploy app.bicep -w prod-azure
+```bash
+rad deploy app.bicep --workspace prod-azure
 ```
 
 The deployment experience was identical across local, AWS, and Azure environments, with Radius handling the provisioning of the necessary Kubernetes resources across the local k3d, AWS Elastic Kubernetes Service, and Azure Kubernetes Service environments. The consistent deployment experience across environments clearly demonstrated how Radius enables developers to deploy applications across multiple environments without needing to fuss with configuring cloud-specific infrastructure.
@@ -96,7 +98,7 @@ The deployment experience was identical across local, AWS, and Azure environment
 
 One of the key features of Radius is the [Application Graph](https://docs.radapp.io/guides/author-apps/application/overview/#query-and-understand-your-application-with-the-radius-application-graph), which provides a visual representation of the application architecture and is automatically generated. Using Radius to deploy TraderX, we were able to view dependencies between application components in the Radius dashboard. The Application Graph is a valuable tool for developers and operators to understand the application architecture and dependencies, and can be used to troubleshoot issues and optimize the application deployment. Below is the Radius Application Graph for TraderX--you can see that it closely resembles the TraderX architecture diagram we showed earlier:
 
-{{< image src="images/traderx-app-graph.png" alt="Application graph of the TraderX application" width="800" >}}
+{{< image src="images/traderx-app-graph.png" alt="Application graph of the TraderX application" width="1200" >}}
 
 ## Challenges and Lessons Learned
 
