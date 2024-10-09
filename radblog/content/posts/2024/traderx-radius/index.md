@@ -124,7 +124,7 @@ We would like to integrate a GitOps platform coupled with Radius to enable conti
 
 ### Complete Multi-Environment Deployment Experience
 
-Finally, we want to demonstrate that TraderX can be deployed to multiple cloud environments using Radius. We will create a reference architecture that can serve as a user guide for deploying TraderX to local, Azure, and AWS environments. Done thoughtfully, this would provide users with a one-click deployment experience that allows developers to experience TraderX on any cloud with minimal effort.
+Finally, once the database and message bus resources are changed to be configurable and portable, we want to demonstrate using Radius to deploy TraderX to multiple environments leveraging platform-specific resources (e.g. local PostgreSQL Database, AWS RDS for PostgreSQL, Azure Database for PostgreSQL). We will create a reference architecture that can serve as a user guide for deploying TraderX to multiple environments. These will include sample templates for environment configurations and Recipes for local, AWS, and Azure environments. Done thoughtfully, this would provide users with a one-click deployment experience that allows developers to experience TraderX on any cloud with minimal effort.
 
 ## Learn More and Contribute
 
