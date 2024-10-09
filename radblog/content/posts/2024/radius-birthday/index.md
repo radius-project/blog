@@ -2,7 +2,7 @@
 date: "2024-10-18T08:00:00-08:00"
 title: "Happy birthday, Radius!"
 linkTitle: "Happy birthday, Radius!"
-author: "Reshma Abdul Rahim"
+author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
 ---
 
@@ -22,9 +22,9 @@ After the launch of Radius on October 18, 2023, we received a lot of positive fe
 
 Following the launch of Radius on October 18, 2023, we received positive feedback regarding the project and its relevance to solving challenges in building cloud native applications. Our launch at the Linux Foundation Member Summit and presentation at Microsoft Ignite raised awareness about Radius among diverse communities of developers, open-source advocates, and enterprise decision-makers. We gathered numerous suggestions and ideas on enhancing Radius for enterprise applications and its integration with other cloud native technologies. Community members began contributing by tackling various tasks, from straightforward good-first-issues to more complex features.
 
-This past year we have learned a lot from our community both in terms of making the platform better and building an ecosystem for them to thrive and succeed in their ventures with Radius. We have about ~820 members engaging in Discord and a total of ~554 contributions from the community on a wide range of areas some of which were huge features that unblocked scenarios for users. Since Radius is fully committed to becoming an industry stand for enterprises, we submitted our project to CNCF (Cloud Native Compute Foundation) and got accepted as CNCF sandbox project this year. This approval is a key milestone towards building a vibrant community and addressing the key emphasis of enterprises leveraging CNCF technologies for their cloud native strategies.
+This past year we have learned a lot from our community both in terms of making the platform better and building an ecosystem for them to thrive and succeed in their ventures with Radius. We have about ~820 members engaging in Discord and a total of ~568 contributions from the community on a wide range of areas some of which were huge features that unblocked scenarios for users. Since Radius is fully committed to becoming an industry stand for enterprises, we submitted our project to CNCF (Cloud Native Compute Foundation) and got accepted as CNCF sandbox project this year. This approval is a key milestone towards building a vibrant community and addressing the key emphasis of enterprises leveraging CNCF technologies for their cloud native strategies.
 
-Radius has evolved as platform in the past year with lots of features and capabilities. Our primary focus was to unblock enterprises working on extending Radius for their internal developer platforms. Some of the major capabilities that we enabled together with the community in the past year are 
+Radius has evolved as platform in the past year with lots of features and capabilities. Our primary focus was to unblock the community working on extending Radius for their internal developer platforms. Some of the major capabilities that we enabled together with the community in the past year are 
 
 1. Radius Dashboard : One of the key value propositions of Radius is the application graph. The Radius Dashboard built on top of Backstage provides visualization of the application graph data including applications, environments, resources and Recipes. The application graph API which powers the Radius Dashboard provides a way to query the application graph data.
  
@@ -32,18 +32,19 @@ Radius has evolved as platform in the past year with lots of features and capabi
 
 3. Workload / Federated identity support: Radius Cloud providers can be configured with AWS IAM roles for service accounts and Azure workload identity to interact and deploy resources on the respective clouds. With this, infrastructure operators are not burdened with the rotation of credentials anymore.
 
+## What’s, Next for Radius 
 
-## What’s, next for Radius 
+We have miles to go!, problems to solve!, solutions to deliver! 
 
-We have a long journey ahead! Problems to solve! And solutions to deliver! Our current focus is on developing the following major capabilities:
+Our current focus is on developing the following major capabilities:
 
 Radius Integration with GitOps : We learned that enterprise teams are burdened with the challenges around continuous deployment of cloud native applications and infrastructure. GitOps framework implemented as popular tools like Flux and ArgoCD helps in mitigating these challenges by providing a declarative approach to manage infrastructure and automatically reconciles the state of the infrastructure using Git as the single source of truth. Enterprise that uses GitOps and Radius do not have a clear path for how to use both technologies together. Hence, Radius is working towards providing a consistent Radius +GitOps model for both existing and future GitOps solutions.
 
-Resource extensibility with User Defined Types : Providing enough extensibility points within Radius is key area to enable enterprises to extend Radius and build custom platforms. Many enterprises use a wide range of services in their applications for achieving their cloud-native strategy. Providing resource extensibility with User defined types enable users to easily define their services as a custom resource type, deploy and leverage all the goodness of Radius such as Recipes and Application graph. Additionally, we want to empower the open-source community to publish these resource type definitions and Recipes as community supported assets for the community to discover and consume.
+Resource extensibility with User Defined Types: Providing enough extensibility points within Radius is key area to enable enterprises to extend Radius and build custom platforms. Many enterprises use a wide range of services in their applications for achieving their cloud-native strategy. Providing resource extensibility with User defined types enable users to easily define their services as a custom resource type, deploy and leverage all the goodness of Radius such as Recipes and Application graph. Additionally, we want to empower the open-source community to publish these resource type definitions and Recipes as community supported assets for the community to discover and consume.
 
-Production Readiness: As we are working with enterprises to run their production workloads on Radius, we want to evolve the operational maturity of Radius. We wanted to enable capabilities that make Radius a highly resilient, scalable and flexible platform.
+Production Readiness: As we are working with enterprises to run their production workloads on Radius, we want to evolve the operational maturity of Radius. We wanted to enable capabilities that make Radius a highly resilient, scalable and flexible platform. Integration of Dapr workflows to the Radius control plane and containerization of Recipes are some of the key areas we are focusing on to make Radius production ready.
 
-## Learn more and contribute 
+## Learn More and Contribute 
 
 The Radius maintainers are excited to continue collaborating with the open-source community to grow its feature set and welcome all contributions from the community. We're looking for people to join us!
 
