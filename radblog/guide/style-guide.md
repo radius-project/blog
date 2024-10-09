@@ -58,7 +58,7 @@ Some examples include, but is not limited to:
     1. Avoid blurry images and make sure the width of the image is set to 750px.
     1. You can use [Excalidraw](https://excalidraw.com/) tool to create diagrams. 
 
-- **Code snippets**: If you are using code snippets in the blog post, make sure to use triple backticks ```<language> to wrap the code. This will help the reader to understand that it is a code snippet. 
+- **Code snippets**: If you are using code snippets in the blog post, make sure to use triple backticks ```<language> to wrap the code. This will help the reader to understand that it is a code snippet. If there are multiple commands, please split them into separate code blocks.
 
     ```bash
     rad deploy app.bicep
