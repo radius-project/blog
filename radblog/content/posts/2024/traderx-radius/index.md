@@ -85,7 +85,7 @@ Resources:
 After validating that the application was deployed and running successfully on our local cluster, we sought to deploy TraderX to AWS and Azure. This proved to be very easy because we could reuse the cloud environments and resources that had already been previously put in place by our operations team. We used the same application definition file to deploy TraderX to AWS and Azure. The only difference was that we specified the target cloud environment using the `-w` flag:
 
 ```bash
-rad deploy app.bicep -w prod-aws
+rad deploy app.bicep --workspace prod-aws
 
 rad deploy app.bicep -w prod-azure
 ```
