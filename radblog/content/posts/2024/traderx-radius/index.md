@@ -100,13 +100,13 @@ One of the key features of Radius is the [Application Graph](https://docs.radapp
 
 ## Challenges and lessons learned
 
-<!-- TODO: Describe the challenges faced and lessons learned during the process of deploying TraderX using Radius to serve as a reference for others starting their Radification journey. -->
-
 Overall, the process of deploying TraderX using Radius was smooth and straightforward, thanks to the well-structured application architecture and the containerized nature of the application. However, we did encounter a few challenges along the way that we'll share here to help others who are starting their Radification journey:
 
-<!-- permissions for container registry, setting environment variables -->
+- **Permissions for FINOS container registry**: When publishing the container images to the FINOS GHCR, we were not able to directly push the images to the registry given that none of us were maintainers of TraderX. This made it challenging to incrementally test the building and publishing steps of the CI workflow. Thus, we tested the Docker build and push steps manually in our local environment and private GHCR registry first before submitting a PR with the CI workflow changes to the TraderX repo. The manual validation of the CI steps ensured a smoother PR review process and quicker turnaround time for getting the CI pipeline merged and operational. The CI pipeline was then easily built using the [Checkout](https://github.com/marketplace/actions/checkout) and [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images) workflows available on the GitHub Actions marketplace.
 
-- 
+- **Scanning for vulnerabilities in container images**: The TraderX maintainers were keen on ensuring that the container images were free of vulnerabilities before being published to the GHCR, and recommended that we build a vulnerability scanning step into the CI pipeline. Fortunately, there are several GitHub Actions available on the marketplace that can be leveraged for image scanning. Following the lead of existing TraderX workflows, we opted for the [Container Scan](https://github.com/marketplace/actions/container-scan) GitHub Action that leverages [Trivy](https://github.com/aquasecurity/trivy) for scanning, which worked perfectly for our use case.
+
+- **Setting environment variables in the application definition**: When authoring the TraderX application definition using Radius, we needed to specify environment variables for the application containers. This took some research into the internals of the TraderX application to understand which environment variables were required for each service. We found that the environment variables were mostly defined in the `docker-compose.yml` file, which we then translated into the Radius application model. We learned that it's important to have a good understanding of the application architecture and dependencies when authoring the application definition to ensure that the application is configured correctly and runs successfully.
 
 ## What's next for TraderX and Radius
 
