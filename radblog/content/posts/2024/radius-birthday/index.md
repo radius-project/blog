@@ -1,7 +1,7 @@
 ---
 date: "2024-10-18T08:00:00-08:00"
-title: "Happy birthday, Radius!"
-linkTitle: "Happy birthday, Radius!"
+title: "Happy 1st Birthday, Radius!"
+linkTitle: "Happy 1st Birthday, Radius!"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
 ---
