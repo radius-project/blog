@@ -472,3 +472,10 @@ Yetkin
 noncloud
 non-cloud
 sigs
+FINOS
+TraderX
+traderx
+Trivy
+scalability
+Fintech
+Radify
