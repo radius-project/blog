@@ -6,7 +6,7 @@ author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
 ---
 
-Today marks the one-year anniversary of open-sourcing Radius! We are thrilled to celebrate this milestone with the community and reflect on the progress we have made together. In the past year, we have seen tremendous growth with the Radius community. We have welcomed new contributors, received valuable feedback, and collaborated on exciting new features. We have also expanded our documentation, improved our tooling, and released new versions of Radius with enhanced capabilities. Furthermore, we are grateful to everyone who has contributed to Radius, whether through code, documentation, testing, or feedback. Your support has been invaluable, and we look forward to continuing to work together to build an even better platform.
+Today marks the one-year anniversary of open-sourcing Radius! We are thrilled to celebrate this milestone with the community and reflect on the progress we have made together. In the past year, we have seen tremendous growth with the Radius community. We have welcomed new contributors, received valuable feedback, and collaborated on exciting new features. We have also expanded our documentation, improved our tooling, and released new versions of Radius with more capabilities. Furthermore, we are grateful to everyone who has contributed to Radius, whether through code, documentation, testing, or feedback. Your support has been invaluable, and we look forward to continuing to work together to build an even better platform.
 
 ## Conception of Radius
 
