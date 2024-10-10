@@ -40,7 +40,7 @@ Our current focus is on developing the following major capabilities:
 
 **Resource extensibility with User Defined Types**: Providing enough extensibility points within Radius is key area to enable enterprises to extend Radius and build custom platforms. Many enterprises use a wide range of services in their applications for achieving their cloud-native strategy. Providing resource extensibility with User defined types enable users to easily define their services as a custom resource type, deploy and leverage all the goodness of Radius such as Recipes and Application graph. Additionally, we want to empower the open-source community to publish these resource type definitions and Recipes as community supported assets for the community to discover and consume.
 
-**Production Readiness**: As we are working with enterprises to run their production workloads on Radius, we want to evolve the operational maturity of Radius. We wanted to enable capabilities that make Radius a highly resilient, scalable and flexible platform. Integration of Dapr workflows to the Radius control plane and containerization of Recipes are some of the key areas we are focusing on to make Radius production ready.
+**Operational Maturity**: As we are working with enterprises to run their production workloads on Radius, we want to evolve the operational maturity of Radius. We wanted to enable capabilities that make Radius a highly resilient, scalable and flexible platform. Integration of Dapr workflows to the Radius control plane, containerization of Recipes execution are some of the key areas we are focusing on to make Radius scale to satisfy enterprise needs.
 
 ## Learn More and Contribute 
 
