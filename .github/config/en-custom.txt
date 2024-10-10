@@ -472,3 +472,5 @@ Yetkin
 noncloud
 non-cloud
 sigs
+Keda
+OSI
