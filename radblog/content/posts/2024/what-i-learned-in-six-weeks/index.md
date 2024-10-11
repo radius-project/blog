@@ -2,7 +2,7 @@
 date: "2024-10-11T00:00:00"
 title: "What I learned in six working with Radius"
 linkTitle: "What I learned in six weeks"
-author: [Zach Casper](https://www.linkedin.com/in/zcasper/)
+author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
 type: blog
 ---
 
