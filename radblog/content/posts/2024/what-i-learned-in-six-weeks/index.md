@@ -28,7 +28,7 @@ After getting some hands-on time, talking with a few enterprise platform enginee
 
 Since Radius has deep insight into each application, Radius can track dependencies between applications and application components. If you have ever operated a complex landscape of applications and infrastructure, you know how hard it is to understand dependencies. For example, a database outage can cause a ripple effect through multiple applications and affect many different business functions. When developers use Radius to model their application, Radius keeps track of connections between cloud resources and between other applications. This enables Radius to show operators an application graph showing dependencies across the entire landscape. This graph can be used to identify business impacts of even the smallest component outage and enrich data in incident management and observability systems.
 
-**Platform agnostic** – Radius decouples the application implementation from thre infrastructure implementation. Since the contract between developers and cloud environments is defined by a set of abstract resource types published by the platform engineering team, and not by which cloud provider is being used, Radius makes applications highly portable both between not only different cloud providers but between different container platforms.
+**Platform agnostic** – Radius decouples the application implementation from the infrastructure implementation. Since the contract between developers and cloud environments is defined by a set of abstract resource types published by the platform engineering team, and not by which cloud provider is being used, Radius makes applications highly portable both between not only different cloud providers but between different container platforms.
 
 **Cloud resource manager** – Radius manages cloud resources locally, in Azure, AWS, and in the future Google Cloud. When a platform engineer creates an environment in Radius, he or she also creates a recipe which implements each of the resource types. Radius recipes are very flexible. They can be implemented declaratively using existing Terraform modules or Bicep. Platform engineers can also perform operations pre- and post-deployment of resources using webhooks and Dapr workflows. Radius ships with recipes for managing out-of-the-box resource types on each cloud provider, but most platform engineering teams will customize these recipes to meet their organization's requirements. For example, a recipe could be written to deploy an Envoy proxy with mTLS enforced without any developer involvement.
 
@@ -42,7 +42,7 @@ Radius enforces a clear separation of duties between developers and platform eng
 
 ![Radius developer and platform engineer workflow](images/workflow.png)
 
-### Logical Data Model 
+### Logical Data Model
 
 The diagram below shows the various objects and their relationships. I simplified some of the details for clarity, so this is not quite accurate with how Radius is implemented.
 
@@ -90,7 +90,7 @@ So far, we have ignored what is possible today and what is coming. There are sev
 
 You can monitor the Radius roadmap on the [Radius GitHub](https://github.com/orgs/radius-project/projects/8/views/1) page.
 
-## What's Next for Me 
+## What's Next for Me
 
 There is still a lot for me to learn. I plan to spend more hands-on time modeling existing applications with Radius. The [eShop example](https://docs.radapp.io/tutorials/eshop/) seems like a good real-world application to start with. I also want to learn more about [Dapr](https://dapr.io/). It seems like combining Dapr with Radius is a powerful combination.
 
