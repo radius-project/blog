@@ -20,29 +20,18 @@ Radius makes it easy for developers and operators to define, deploy, and collabo
 
 Now, we support Workload Identity to leverage the security benefits mentioned in [What is Workload Identity](#what-is-workload-identity)
 
-### How Radius works with Azure Workload Identity
-
-#### various Azure Workload Identity terms introduction (AAD, Client ID ...)
 
 
+### How Radius leverages AWS IRSA 
 
-#### Radius with AWS IRSA setup
+#### Key Concepts
 
-Radius with Azure Workload Identity setup
-  component diagram / sequence diagram higlighting the flow between
-one of the radius pods , OIDC provider, Azure with some explanation
-
-#### More Details
-
-
-### How Radius works with AWS IRSA
-
-#### AWS IAM roles 
+##### AWS IAM roles 
 
 An AWS IAM (Identity and Access Management) role is a set of permissions that define what actions are allowed and denied for an AWS service or resource. 
 The roles are can be assumed by entities such as AWS services, or Kubernetes service-accounts.
 
-#### STS AssumeRole 
+##### STS AssumeRole 
 
 The sts:AssumeRole operation is a key feature of AWS Security Token Service (STS) that allows obtaintaining temporary security credentials for 
 managing AWS resources. In a nutshell, this is how it works:
@@ -60,6 +49,18 @@ The pod sends this token to STS to receive temporary short-lived credentials. Th
 #### Radius with AWS IRSA setup
 
 {{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
+
+Radius allows management of AWS resources as part of your application. There are two 
+Radius services that communicates with AWS to achieve this:
+
+UCP (Universal Control Plane) uses AWS cloud control APIs to create and manage AWS resources. 
+
+Applications RP supports terraform recipes for managing AWS resources. Terraform provider (subcomponent of Applications RP) communicates directly with AWS.
+
+The above image shows how Radius UCP leverages AWS IRSA to deploy and mange AWS resources. The flow is identical for Applications RP. In a nutshell, 
+
+1. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. This token should be mounted to the pod as a poject volume to enable workload identity( AWS IRSA). 
+2. 
 
 #### More details
 
