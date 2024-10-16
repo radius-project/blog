@@ -44,7 +44,7 @@ Radius enforces a clear separation of duties between developers and platform eng
 
 ### Logical Data Model
 
-The diagrem below is a conceptual representation of the various Radius objects and how they are related. I simplified some of the details for clarity, so this is not technically accurate with how Radius is implemented. For example, Radius implements applications and environments as a resource, but that is just an implementation detail.
+The diagram below is a conceptual representation of the various Radius objects and how they are related. I simplified some of the details for clarity, so this is not technically accurate with how Radius is implemented. For example, Radius implements applications and environments as a resource, but that is just an implementation detail.
 
 ![Radius data model](images/data-model.png)
 
