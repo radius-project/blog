@@ -236,9 +236,7 @@ IRSA. While this is simpler compared to Azure in cases where we do not need mult
 eks.amazonaws.com/role-arn: arn:aws:iam::<account-number>:role/<role-name> 
 ```
 
-## Contributors 
-
-### Learn More and Contribute 
+## Learn More and Contribute 
 
 The Radius maintainers are excited to continue collaborating with the open-source community to grow its feature set and welcome all contributions from the community. We’re looking for people to join us! To get started with Radius today, please see:
 
