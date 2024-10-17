@@ -48,11 +48,7 @@ When configured for IRSA, service-account token that serves as ID for cluster: n
 
 {{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
 
-Radius allows management of AWS resources as part of your application. There are two Radius services that communicates with AWS to achieve this:
-
-1. UCP (Universal Control Plane) uses AWS cloud control APIs to create and manage AWS resources. 
-
-2. Applications RP supports terraform recipes for managing AWS resources. Terraform provider (subcomponent of Applications RP) communicates directly with AWS.
+Radius allows management of AWS resources as part of your application. There are two Radius services that communicates with AWS to achieve this UCP and Applications RP.
 
 The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP. 
 Below are the key points in the flow:
@@ -99,57 +95,7 @@ Volumes:
   :
 ```
 
-Sample trust policy of the Radius credential IAM role looks as below. 
-
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Federated": "arn:aws:iam::<account-id>:oidc-provider/<oidc-url>"
-            },
-            "Action": "sts:AssumeRoleWithWebIdentity",
-            "Condition": {
-                "StringEquals": {
-                    "<oidc-url>:aud": "sts.amazonaws.com",
-                    "<oidc-url>:sub": "system:serviceaccount:radius-system:ucp"
-                }
-            }
-        },
-        {
-            "Sid": "Statement1",
-            "Effect": "Allow",
-            "Principal": {
-                "Federated": "arn:aws:iam::<account-id>:oidc-provider/<oidc-url>"
-            },
-            "Action": "sts:AssumeRoleWithWebIdentity",
-            "Condition": {
-                "StringEquals": {
-                    "<oidc-url>:aud": "sts.amazonaws.com",
-                    "<oidc-url>:sub": "system:serviceaccount:radius-system:applications-rp"
-                }
-            }
-        }
-    ]
-}
-```
-
-In the about trust policy,
-
-Effect: Both statements have an "Effect": "Allow", meaning they permit the specified actions.
-
-Principal: "Federated" Indicates that the principal is a federated identity, specifically an OIDC provider (arn:aws:iam::<account-id>:oidc-provider/<oidc-url>).
-
-Action: "sts:AssumeRoleWithWebIdentity": Allows the federated identity to assume the role using web identity federation.
-Condition:
-
-StringEquals: Specifies conditions that must be met for the role to be assumed.
-
-aud: Is "sts.amazonaws.com" since STS is the intended recipent of the JWT (service-account token). 
-
-sub: The sub claim identifies the specific service account that is allowed to assume the IAM role. 
+[Radius Setup AWS IRSA](https://docs.radapp.io/guides/operations/providers/azure-provider/howto-azure-provider-wi/#setup-the-azure-workload-identity-for-radius) contains information on configuring the trust for the IAM Roles in AWS.
 
 ### Challenges and Solutions
 
@@ -218,6 +164,39 @@ Below are the key points in the flow:
 5. At this point, the service-account associated with the workload (ucp or applications-rp) making the request is both authenticated and authorized. Entra therefore issues a temporary credential back.
    
 6. ucp (applications-rp) uses this temporary credentials to make suitable API requests to mange the Azure resources. 
+
+### More details
+
+Below is the relevant information from pod spec when Radius is installed with Workload Identity enabled. Radius annotates the pods with  ```azure.workload.identity/use=true``` label.
+service-account token is injected by the AzWI mutating admission webhook because of the label.
+
+```
+nithya@MacBook-Pro ~ % k describe pod -n radius-system ucp        
+Name:             ucp-cf657446-h6f7r
+Namespace:        radius-system
+Priority:         0
+Service Account:  ucp
+Labels:           :
+                  azure.workload.identity/use=true
+                  :
+Containers:
+  ucp:
+    Container ID:   containerd://e16d41dde8248a623f1a46dea6632c5eaa72906f9f3ffc16c0d19cedd5f21a21
+    :
+    Mounts:
+      /etc/config from config-volume (rw)
+      /var/run/secrets/azure/tokens from azure-identity-token (ro) (Injected by the webhook)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jhmdl (ro)
+      /var/tls/cert from cert (ro)
+      :
+    Volumes:
+      azure-identity-token:
+      Type:                    Projected (a volume that contains injected data from multiple sources)
+      TokenExpirationSeconds:  3600
+      :
+```
+
+[Radius Setup Az Workload Identity](https://docs.radapp.io/guides/operations/providers/azure-provider/howto-azure-provider-wi/#setup-the-azure-workload-identity-for-radius) contains information on configuring the trust (federated credential) for the workloads in Azure.
 
 
 ## Comparison between providers
