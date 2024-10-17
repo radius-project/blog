@@ -1,15 +1,14 @@
 ---
 date: "2024-09-T08:00:00-08:00"
-title: "Workload Identity Support in Radius"
-linkTitle: "Managing cloud provider credentials in Radius"
-author: "[]()"
+title: "Introducing integration with Workload Identity in Radius"
+linkTitle: "Introducing integration with Workload Identity in Radius"
+author: "[Nithya Subramanian](https://www.github.com/nithyatsu)"
 type: blog
 ---
 
 ## What is Workload Identity 
 
-A workload refers to any containerized application, service, or script that runs on a cloud platform. Much like users need usernames and passwords to access cloud resources, a software workload needs an identity to authenticate and access resources on cloud. 
-This identity is known as workload identity. It allows workloads to interact with cloud resources using managed identities, rather than relying on static credentials. Some benefits of using workload identities are:
+A workload refers to any containerized application, service, or script that runs on a cloud platform. Much like users need usernames and passwords to access cloud resources, a software workload needs an identity to authenticate and access resources on cloud. This identity is known as workload identity. It allows workloads to interact with cloud resources using managed identities, rather than relying on static credentials. Some benefits of using workload identities are:
 
 * Reduced Credential Management: No need to manage and rotate static credentials manually.
 * Enhanced Security: Minimizes the risk of credential leakage and unauthorized access.
@@ -118,6 +117,7 @@ Volumes:
 ```
 
 We did not choose this solution because
+
 * The approach requires roleARN to be injected at install time. Radius should not restart for credentials registration.
 * Radius will evolve to support multi-tenancy. There is no support in the webhook to handle multiple role-arns.  
 
@@ -208,8 +208,8 @@ azure.workload.identity/use: "true"
 azure.workload.identity/client-id: "<your-client-id>"
 ```
 
-However, AWS's webhook utilized just one annotation, tightly coupling a specific IAM role ARN with the intent to enable
-IRSA. While this is simpler compared to Azure in cases where we do not need multi-tenancy, it was not suitable for Radius.
+However, AWS's webhook utilizes just one annotation, coupling a specific IAM role ARN with the intent to enable
+IRSA. While this is simpler compared to Azure, it is not suitable for Radius due to the need to support multi-tenancy.
 
 ```
 eks.amazonaws.com/role-arn: arn:aws:iam::<account-number>:role/<role-name> 
@@ -224,3 +224,12 @@ The Radius maintainers are excited to continue collaborating with the open-sourc
 - Engage with the [community](https://aka.ms/radius/discord)
 
 Please refer to  [Radius Workload Identity Setup Guide](https://docs.radapp.io/guides/operations/providers/overview/) for setting up Radius with Workload Identities.
+
+## References
+
+https://azure.github.io/azure-workload-identity/docs/introduction.html
+https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview?tabs=dotnet
+https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+https://medium.com/@ankit.wal/the-how-of-iam-roles-for-service-accounts-irsa-on-aws-eks-3d76badb8942
+
+
