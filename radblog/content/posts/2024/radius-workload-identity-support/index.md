@@ -47,10 +47,8 @@ When configured for IRSA, service-account token that serves as ID for cluster: n
 ### Radius and AWS IRSA
 
 {{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
-[iamge](images/radius-irsa.png)
 
-Radius allows management of AWS resources as part of your application. There are two 
-Radius services that communicates with AWS to achieve this:
+Radius allows management of AWS resources as part of your application. There are two Radius services that communicates with AWS to achieve this:
 
 1. UCP (Universal Control Plane) uses AWS cloud control APIs to create and manage AWS resources. 
 
@@ -100,8 +98,6 @@ Volumes:
     TokenExpirationSeconds:  86400
   :
 ```
-
-
 
 Sample trust policy of the Radius credential IAM role looks as below. 
 
@@ -155,25 +151,25 @@ aud: Is "sts.amazonaws.com" since STS is the intended recipent of the JWT (servi
 
 sub: The sub claim identifies the specific service account that is allowed to assume the IAM role. 
 
-
-### How to setup Radius with IRSA
-
-Refer https://docs.radapp.io/guides/operations/providers/aws-provider/howto-aws-provider-irsa/ for how to guide on setting up Radius with AWS IRSA.
-
 ### Challenges and Solutions
 
-Much like Azure workload identity, AWS provides [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-identity-webhook#amazon-eks-pod-identity-webhook). When installed on the cluster, the webhook adds configurations neccesary for IRSA to the pods using relevant service-accounts. Specifically, the webhook adds two additional configurations to the relevant pods on creation:
-1. Environment variables which the supporting AWS SDK read from automatically to detect IRSA role:
+AWS provides [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-identity-webhook#amazon-eks-pod-identity-webhook). 
+When installed on the cluster, the webhook configures the necessary settings for IRSA on pods that use the relevant service accounts.Specifically, the webhook adds two additional configurations to the relevant pods on creation:
+* Environment variables which the supporting AWS SDK read from automatically to detect IRSA role:
+```
 Environment:
-        :
-        AWS_ROLE_ARN:                 arn:aws:iam::817312594854:role/my-role
-        AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
-        :
-2. Mount the service-account token as projected volume:
-  Volumes:
-    aws-iam-token:
-      Type:                    Projected (a volume that contains injected data from multiple sources)
-    TokenExpirationSeconds:  86400
+  :
+  AWS_ROLE_ARN:                 arn:aws:iam::817312594854:role/my-role
+  AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+  :
+```
+* Mount the service-account token as projected volume:
+```
+Volumes:
+  aws-iam-token:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+  TokenExpirationSeconds:  86400
+```
 
 We did not choose this solution because
 * The approach requires roleARN to be injected at install time. Radius should not restart for credentials registration.
@@ -181,13 +177,64 @@ We did not choose this solution because
 
 Radius found its solution by falling back to the basics of how workload identity works and adopting it as required. 
 
+## How Radius Utilizes Azure Workload Identity
+
+### Key Concepts
+
+<u> Azure Active Directory</u>
+
+Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service
+
+<u> Entra ID</u>
+
+Microsoft Entra ID is a suite of identity and access management solutions that includes Azure AD along with other services designed to secure access to resources and manage identities across various environments.
+
+<u> Entra ID Application </u>
+
+An application that is registered in Azure Active Directory (Azure AD) and is used to authenticate with Azure resources.
+
+<u> Azure Workload Identity </u>
+
+Azure Workload Identity is a security feature that allows applications running on Azure to securely access and interact with Azure resources using managed identities, rather than relying on static credentials.
+
+### Radius and Azure Workload Identity
+
+{{< image src="images/radius-az-wi.png" alt="using Az Workload Identity to deploy an Az resource" width="750">}}
+
+Radius allows management of Azure resources as part of your application. There are three Radius services that communicates with AWS to achieve this: UCP, Applications RP and Deployment Engine.
+
+The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP and Deployment Engine.
+
+Below are the key points in the flow:
+
+1. In Kubernetes world, service accounts are used to provide an identity for applications running in pods. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. When Radius is installed with Azure Workload Identity enabled in a cluster which has AzWI mutating admission webhook installed,  the webhook  mounts the service-account token to the pod as a project volume.
+   
+2. When ucp/ applications-rp has to communicate with Azure for deloying / managing a resource, it first sends request to Entra with its App ID and service-account token (JWT). 
+   
+3. Entra uses the claim from this JWT to verify that it is indeed k8s_cluster:radius-system:ucp that is making the request. It verifies by communicating with the cluster's configured OIDC provider. 
+   
+4. Once the identity of service is confirmed, Entra checks the trust policy of the App registeration to make sure service-account is trusted to perform the operation.
+   
+5. At this point, the service-account associated with the workload (ucp or applications-rp) making the request is both authenticated and authorized. Entra therefore issues a temporary credential back.
+   
+6. ucp (applications-rp) uses this temporary credentials to make suitable API requests to mange the Azure resources. 
+
+
 ## Comparison between providers
 
-common positives 
-  - Good documentation
-  - Providers make WI configuration easy assuming the audience to be a simple workload that deploys to the provider. 
-shortcomings among the providers. 
-  - Much of the documented solution poses challenges for  multicloud and  multi tenancy scenarios. explain the disadvantage of provided webhook for Radius.
+AWS and Azure provide very similar solutions for adopting workload identities. They also provide mutating webhooks that allow configuring workloads to use Workload Identity easily. However, Azure's mutating webhook supports its usage to just mount the service token account where as with AWS, it was not easy to do so.  This was because Azure's webhook utilized two annotations as part of workload identity configuration. We could choose to utilize ```azure.workload.identity/use: "true"``` to mount the service-token.
+
+```
+azure.workload.identity/use: "true"
+azure.workload.identity/client-id: "<your-client-id>"
+```
+
+However, AWS's webhook utilized just one annotation, tightly coupling a specific IAM role ARN with the intent to enable
+IRSA. While this is simpler compared to Azure in cases where we do not need multi-tenancy, it was not suitable for Radius.
+
+```
+eks.amazonaws.com/role-arn: arn:aws:iam::<account-number>:role/<role-name> 
+```
 
 ## Contributors 
 
@@ -198,3 +245,5 @@ The Radius maintainers are excited to continue collaborating with the open-sourc
 - Learn more from the [documentation](https://docs.radapp.io/guides/operations/providers/).
 - Explore the open-source [code repositories](https://github.com/radius-project).
 - Engage with the [community](https://aka.ms/radius/discord)
+
+Please refer to  [Radius Workload Identity Setup Guide](https://docs.radapp.io/guides/operations/providers/overview/) for setting up Radius with Workload Identities.
