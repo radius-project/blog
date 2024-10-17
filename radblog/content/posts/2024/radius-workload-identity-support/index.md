@@ -6,6 +6,8 @@ author: "[Nithya Subramanian](https://www.github.com/nithyatsu)"
 type: blog
 ---
 
+This blog will delve into the details on how Radius enables workload (federated) identity to deploy resources in AWS and Azure. We will explore the mechanisms and configurations involved in using AWS IAM Roles for Service Accounts (IRSA) and Azure Managed Identities to securely manage and access cloud resources, and understand how Radius leverages them.
+
 ## What is Workload Identity 
 
 A workload refers to any containerized application, service, or script that runs on a cloud platform. Much like users need usernames and passwords to access cloud resources, a software workload needs an identity to authenticate and access resources on cloud. This identity is known as workload identity. It allows workloads to interact with cloud resources using managed identities, rather than relying on static credentials. Some benefits of using workload identities are:
@@ -185,9 +187,7 @@ Containers:
     :
     Mounts:
       /etc/config from config-volume (rw)
-      /var/run/secrets/azure/tokens from azure-identity-token (ro) (Injected by the webhook)
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jhmdl (ro)
-      /var/tls/cert from cert (ro)
+      /var/run/secrets/azure/tokens from azure-identity-token (ro) 
       :
     Volumes:
       azure-identity-token:
