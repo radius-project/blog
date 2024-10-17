@@ -8,19 +8,15 @@ type: blog
 
 This blog will delve into the details on how Radius enables workload (federated) identity to deploy resources in AWS and Azure. We will explore the mechanisms and configurations involved in using AWS IAM Roles for Service Accounts (IRSA) and Azure Managed Identities to securely manage and access cloud resources, and understand how Radius leverages them.
 
-## What is Workload Identity 
+## Introduction 
+
+Radius makes it easy for developers and operators to define, deploy, and collaborate on cloud-native applications across public clouds. To deploy cloud resources, Radius should be set up with cloud provider credentials. From the get-go, Radius has supported static credentials to communicate with both Azure and AWS. You can store credentials like Azure client-secret and AWS access-key in Radius Credential. Details about the scope of resource deployment, such as subscription-key and resource-group for Azure, and account-id and region for AWS, can be stored as Radius Provider in a Radius Environment. Check out [Radius Cloud Providers](https://docs.radapp.io/guides/operations/providers/overview/) for more information on these concepts. While this approach is straightforward, it relies on users to secure the credentials by following good security practices like credential rotation. Now, Radius supports Workload Identity to overcome the challenges associated with static credentials.
 
 A workload refers to any containerized application, service, or script that runs on a cloud platform. Much like users need usernames and passwords to access cloud resources, a software workload needs an identity to authenticate and access resources on cloud. This identity is known as workload identity. It allows workloads to interact with cloud resources using managed identities, rather than relying on static credentials. Some benefits of using workload identities are:
 
 * Reduced Credential Management: No need to manage and rotate static credentials manually.
 * Enhanced Security: Minimizes the risk of credential leakage and unauthorized access.
 * Simplified Access Control: Permissions are managed centrally through cloud provider IAM (Identity Access and Management) policies.
-
-## Radius and Cloud Providers
-
-Radius makes it easy for developers and operators to define, deploy, and collaborate on cloud-native applications across public clouds. To deploy cloud resources, Radius should be set up with cloud provider credentials. From the get-go, Radius has supported static credentials to communicate with both Azure and AWS. You can store credentials like Azure client-secret and AWS access-key in Radius Credential. Details about the scope of resource deployment, such as subscription-key and resource-group for Azure, and account-id and region for AWS, can be stored as Radius Provider in a Radius Environment. Check out [Radius Cloud Providers](https://docs.radapp.io/guides/operations/providers/overview/) for more information on these concepts. While this approach is straightforward, it relies on users to secure the credentials by following good security practices like credential rotation.
-
-Now, Radius supports Workload Identity to leverage the security benefits mentioned in [What is Workload Identity](#what-is-workload-identity)
 
 ## How Radius Utilizes AWS IAM Roles for Service Accounts (IRSA) 
 
