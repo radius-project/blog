@@ -24,7 +24,7 @@ Radius has evolved as a platform in the past year with many new features and cap
 
 4. [**Workload / Federated identity support**](https://docs.radapp.io/guides/operations/providers/overview/): Radius Cloud providers can be configured with AWS IAM roles for service accounts and Azure workload identity to interact and deploy resources on the respective clouds. With this, infrastructure operators are not burdened with the rotation of credentials anymore.
 
-## What is Next for Radius 
+## What's Next for Radius 
 
 We have an exciting journey ahead, with problems to solve, and solutions to deliver! 
 
