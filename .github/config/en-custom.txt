@@ -472,6 +472,8 @@ Yetkin
 noncloud
 non-cloud
 sigs
+Keda
+OSI
 FINOS
 TraderX
 traderx
