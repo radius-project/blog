@@ -26,7 +26,7 @@ Radius has evolved as a platform in the past year with many new features and cap
 
 ## What is Next for Radius 
 
-We have miles to go, problems to solve, and solutions to deliver! 
+We have a long journey ahead, with problems to solve, and solutions to deliver! 
 
 Our current focus is on developing the following major capabilities:
 
