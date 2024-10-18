@@ -20,7 +20,7 @@ Radius has evolved as platform in the past year with many new features and capab
 
 2. **Secrets management**: Community members have contributed capabilities to reference secrets as environments variables in containers and to reference any secret in Dapr components. This enables users to securely manage and reference secrets in their Radius applications.
 
-3. [**Terraform Recipes**](https://docs.radapp.io/guides/recipes/terraform/): We have added features to Terraform Recipes which includes the use of Terraform modules from private Git repositories and from any Terraform provider allowing users to interact with and manage resources of any specific infrastructure platform or service, such as AWS, Azure, or Google Cloud.
+3. [**Terraform Recipes Enhancements**](https://docs.radapp.io/guides/recipes/terraform/): We have added features to Terraform Recipes which includes the use of Terraform modules from private Git repositories and from any Terraform provider allowing users to interact with and manage resources of any specific infrastructure platform or service, such as AWS, Azure, or Google Cloud.
 
 4. [**Workload / Federated identity support**](https://docs.radapp.io/guides/operations/providers/overview/): Radius Cloud providers can be configured with AWS IAM roles for service accounts and Azure workload identity to interact and deploy resources on the respective clouds. With this, infrastructure operators are not burdened with the rotation of credentials anymore.
 
@@ -39,7 +39,7 @@ Our current focus is on developing the following major capabilities:
  To learn more about everything that's upcoming for Radius, visit our roadmap published in GitHub: https://aka.ms/radius-roadmap
 ## Learn More and Contribute 
 
-The Radius maintainers are excited to continue collaborating with the open-source community to grow its feature set and welcome all contributions from the community. We're looking for people to join us!
+Happy birthday Radius, and thanks to this great community for such a productive year!  We look forward to many more to come!
 
 To get started with Radius today, please see:
 
