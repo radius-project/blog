@@ -21,7 +21,7 @@ This blog will delve into the details on how Radius enabled workload (federated)
 Radius allows management of AWS resources as part of your application. In order to achieve this, Radius stores 2 essential pieces of information -
 
 1. Cloud Provider Scope: This is the account-id and region to which the AWS resources are deployed. Cloud Provider Scope is stored as part of Radius environment. 
-2. AWS Credential:  An AWS IAM role is a set of permissions that define what actions are allowed and denied for an entity. The roles are can be assumed by entities such as AWS services or Kubernetes service-accounts. The Role ARN of IAM Role which would be assumed by Radius to deploy the AWS resources is stored as Radius AWS Credential.
+2. AWS Credential:  An AWS IAM role is a set of permissions that define what actions are allowed and denied for an entity. The roles can be assumed by entities such as AWS services or Kubernetes service-accounts. The Role ARN of IAM Role which would be assumed by Radius to deploy the AWS resources is stored as Radius AWS Credential.
 
 There are two Radius services that communicate with AWS to deploy the resources - UCP and Applications RP.
 
@@ -34,7 +34,8 @@ Below are the key points in the flow:
 
 1. In Kubernetes world, service accounts are used to provide an identity for applications running in pods. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. When Radius is installed with IRSA enabled, this token is mounted to the pod as a project volume.
    
-2. When ucp/ applications-rp has to communicate with AWS for deploying / managing a resource, it first sends an Assume Role request to AWS STS. The AssumeRole operation enables an entity to assume an IAM role and receive temporary security credentials associated with it. AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users. The request from UCP to AWS STS contains role ARN of the role to assume as well as the JWT (service account token) from projected volume. 
+2. When ucp/ applications-rp has to communicate with AWS for deploying / managing a resource, it first sends an Assume Role request to AWS STS. The AssumeRole operation enables an entity to assume an IAM role and receive temporary security credentials associated with it. AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users. 
+The request from UCP to AWS STS contains role ARN of the role to assume as well as the JWT (service account token) from projected volume. 
    
 3. STS uses the claim from this JWT to verify that it is indeed k8s_cluster:radius-system:ucp that is making the request. It verifies this by communicating with the cluster's configured OIDC provider. 
    
