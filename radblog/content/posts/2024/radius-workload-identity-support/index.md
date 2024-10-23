@@ -1,22 +1,18 @@
 ---
 date: "2024-09-T08:00:00-08:00"
-title: "Introducing integration with Workload Identity in Radius"
-linkTitle: "Introducing integration with Workload Identity in Radius"
+title: "How workload identity federation for cloud providers work in Radius"
+linkTitle: "How workload identity federation for cloud providers work in Radius"
 author: "[Nithya Subramanian](https://www.github.com/nithyatsu)"
 type: blog
 ---
 
-This blog will delve into the details on how Radius enables workload (federated) identity to deploy resources in AWS and Azure. We will explore the mechanisms and configurations involved in using AWS IAM Roles for Service Accounts (IRSA) and Azure Managed Identities to securely manage and access cloud resources, and understand how Radius leverages them.
-
 ## Introduction 
 
-Radius makes it easy for developers and operators to define, deploy, and collaborate on cloud-native applications across public clouds. To deploy cloud resources, Radius needs to be set up with cloud provider credentials. From the get-go, Radius has supported static credentials to communicate with both Azure and AWS. You can store credentials like Azure client-secret and AWS access-key in Radius Credential. Details about the scope of resource deployment, such as subscription-key and resource-group for Azure, and account-id and region for AWS, can be stored as Radius Provider in a Radius Environment. Check out [Radius Cloud Providers](https://docs.radapp.io/guides/operations/providers/overview/) for more info. While this approach is straightforward, it relies on users to secure the credentials by following good security practices like periodic credential rotation and update. Now, Radius supports Workload Identity to overcome the challenges associated with static credentials.
-
-A workload refers to any containerized application, service, or script that runs on a cloud platform. Much like users need usernames and passwords to access cloud resources, a software workload needs an identity to authenticate and access resources on cloud. This identity is known as workload identity. It allows workloads to interact with cloud resources using managed identities, rather than relying on static credentials. Some benefits of using workload identities are:
-
-* Reduced Credential Management: No need to manage and rotate static credentials manually.
-* Enhanced Security: Minimizes the risk of credential leakage and unauthorized access.
-* Simplified Access Control: Permissions are managed centrally through cloud provider IAM (Identity Access and Management) policies.
+Radius enables infrastructure operators and application developers to define, deploy, and collaborate on cloud-native applications across public clouds. To deploy cloud resources, Radius needs an identity to authenticate, access, and communicate with cloud providers. These identities are stored as Radius credentials. From the get-go, Radius supports Azure service principal identity and AWS IAM User as Radius credentials to deploy Azure and AWS resources. 
+ 
+While this approach is straightforward, it relies on users to secure the credentials by following good security practices like periodic credential rotation and update. With the 0.37 release, Radius supports Workload/Federated Identity to deploy cloud resources in AWS and Azure. Workload identity helps avoid the maintenance challenge of manually managing the credentials and eliminates the risk of exposing secrets or having certificates expire.
+ 
+This blog will delve into the details on how Radius enabled workload (federated) identity to deploy resources in AWS and Azure. We will explore the mechanisms and configurations involved in using AWS IAM Roles for Service Accounts (IRSA) and Azure Workload Identities to securely manage and access cloud resources, and understand how Radius leverages them.
 
 ## How Radius Utilizes AWS IAM Roles for Service Accounts (IRSA) 
 
@@ -43,9 +39,14 @@ When configured for IRSA, service-account token that serves as ID for cluster: n
 
 ### Radius and AWS IRSA
 
-{{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
+Radius allows management of AWS resources as part of your application. In order to achieve this, Radius stores 2 essential pieces of information -
 
-Radius allows management of AWS resources as part of your application. There are two Radius services that communicate with AWS to achieve this - UCP and Applications RP.
+1. Cloud Provider Scope: This is the account-id and region to which the AWS resources are deployed. Cloud Provider Scope is stored as part of Radius environment. 
+2. AWS Credential: THis is the RoleARN which would be assumed by Radius to deploy the AWS resources.
+
+There are two Radius services that communicate with AWS to deploy the resources - UCP and Applications RP.
+
+{{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
 
 The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP. 
 Below are the key points in the flow:
@@ -62,7 +63,7 @@ Below are the key points in the flow:
    
 6. ucp (applications-rp) uses this temporary credentials to make suitable API requests to manage the AWS resources. 
 
-### More details
+### Pod Spec when IRSA is enabled
 
 Below is the relevant information from pod spec when Radius is installed with IRSA enabled. Note that aws-iam-token is added as a projected volume and mounted to ucp pod.
 
@@ -143,9 +144,14 @@ Azure Workload Identity is a security feature that allows applications running o
 
 ### Radius and Azure Workload Identity
 
-{{< image src="images/radius-az-wi.png" alt="using Az Workload Identity to deploy an Az resource" width="750">}}
+Radius allows management of Azure resources as part of your application. In order to achieve this, Radius stores 2 essential pieces of information -
 
-Radius allows management of Azure resources as part of your application. There are three Radius services that communicates with AWS to achieve this: UCP, Applications RP and Deployment Engine.
+1. Cloud Provider Scope: This is the subscription id and resource group to which the Azure resources are deployed. Cloud Provider Scope is stored as part of Radius environment. 
+2. Azure Credential: This is the client-id and tenant-id of teh Azure AD application that Radius uses to deploy the Azure resources.
+
+There are three Radius services that communicates with AWS to achieve this: UCP, Applications RP and Deployment Engine.
+
+{{< image src="images/radius-az-wi.png" alt="using Az Workload Identity to deploy an Az resource" width="750">}}
 
 The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP and Deployment Engine.
 
@@ -163,7 +169,7 @@ Below are the key points in the flow. Notice the flow is very similar to AWS IRS
    
 6. ucp (applications-rp or bicep-de) uses this temporary credentials to make suitable API requests to mange the Azure resources. 
 
-### More details
+### Pod spec when Azure Workload Identity is enabled
 
 Below is the relevant information from pod spec when Radius is installed with Workload Identity enabled. Radius annotates the pods with  ```azure.workload.identity/use=true``` label.
 service-account token is injected by the AzWI mutating admission webhook because of the label.
