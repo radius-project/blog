@@ -25,7 +25,9 @@ Radius allows management of AWS resources as part of your application. In order 
 
 There are two Radius services that communicate with AWS to deploy the resources - UCP and Applications RP.
 
-{{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="750">}}
+
+{{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="1200">}}
+
 
 The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP. 
 Below are the key points in the flow:
@@ -112,7 +114,9 @@ Radius allows management of Azure resources as part of your application. In orde
 
 There are three Radius services that communicates with AWS to achieve this: UCP, Applications RP and Deployment Engine.
 
-{{< image src="images/radius-az-wi.png" alt="using Az Workload Identity to deploy an Az resource" width="1000">}}
+
+{{< image src="images/radius-az-wi.png" alt="using Az Workload Identity to deploy an Az resource" width="1200">}}
+
 
 The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP and Deployment Engine.
 
