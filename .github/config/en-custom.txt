@@ -33,6 +33,7 @@ Deployable
 Dockerfiles
 Docsy
 DocumentDB
+Drasi
 EKS
 entrypoint
 EOF
