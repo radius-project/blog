@@ -502,3 +502,8 @@ badb
 dotnet
 irsa
 wal
+Nithya
+Subramanian
+RoleARN
+AssumeRole
+roleARN
