@@ -16,33 +16,12 @@ This blog will delve into the details on how Radius enabled workload (federated)
 
 ## How Radius Utilizes AWS IAM Roles for Service Accounts (IRSA) 
 
-### Key Concepts
-
-<u>AWS IAM role </u>
-
-An AWS IAM role is a set of permissions that define what actions are allowed and denied for an entity. 
-The roles are can be assumed by entities such as AWS services or Kubernetes service-accounts.
-
-<u>AWS STS </u>
-
-AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users.
-
-<u> AWS STS AssumeRole </u>
-
-The AssumeRole operation lets an entity to assume an IAM role and receive temporary security credentials associated with it. 
-STS provides the temperory credentials to the requesting entity after authenticating and authorizing it.
-
-<u> AWS IAM Role for Service Accounts </u>
-
-AWS IRSA (IAM Role for Service Accounts) is the AWS feature that allows kubernetes service-account to assume an AWS Role. 
-When configured for IRSA, service-account token that serves as ID for cluster: namespace: service-account is mounted as projected volume in the pod. This token is sent to STS to receive temporary short-lived credentials. These credentials can be used to manage AWS resources. 
-
 ### Radius and AWS IRSA
 
 Radius allows management of AWS resources as part of your application. In order to achieve this, Radius stores 2 essential pieces of information -
 
 1. Cloud Provider Scope: This is the account-id and region to which the AWS resources are deployed. Cloud Provider Scope is stored as part of Radius environment. 
-2. AWS Credential: THis is the RoleARN which would be assumed by Radius to deploy the AWS resources.
+2. AWS Credential:  An AWS IAM role is a set of permissions that define what actions are allowed and denied for an entity. The roles are can be assumed by entities such as AWS services or Kubernetes service-accounts. The RoleARN of IAM Role which would be assumed by Radius to deploy the AWS resources is stored as Radius AWS Credential.
 
 There are two Radius services that communicate with AWS to deploy the resources - UCP and Applications RP.
 
@@ -53,7 +32,7 @@ Below are the key points in the flow:
 
 1. In Kubernetes world, service accounts are used to provide an identity for applications running in pods. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. When Radius is installed with IRSA enabled, this token is mounted to the pod as a project volume.
    
-2. When ucp/ applications-rp has to communicate with AWS for deloying / managing a resource, it first sends an assume role request to AWS STS. This request contains role ARN of the role to assume as well as the JWT (service account token) from projected volume.
+2. When ucp/ applications-rp has to communicate with AWS for deloying / managing a resource, it first sends an Assume Role request to AWS STS. The AssumeRole operation enables an entity to assume an IAM role and receive temporary security credentials associated with it. AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users. The request from UCP to AWS STS contains role ARN of the role to assume as well as the JWT (service account token) from projected volume. 
    
 3. STS uses the claim from this JWT to verify that it is indeed k8s_cluster:radius-system:ucp that is making the request. It verifies this by communicating with the cluster's configured OIDC provider. 
    
@@ -124,24 +103,6 @@ Radius found its solution by falling back to the basics of how workload identity
 
 ## How Radius Utilizes Azure Workload Identity
 
-### Key Concepts
-
-<u> Azure Active Directory</u>
-
-Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service
-
-<u> Entra ID</u>
-
-Microsoft Entra ID is a suite of identity and access management solutions that includes Azure AD along with other services designed to secure access to resources and manage identities across various environments.
-
-<u> Entra ID Application </u>
-
-An application that is registered in Azure Active Directory (Azure AD) and is used to authenticate with Azure resources.
-
-<u> Azure Workload Identity </u>
-
-Azure Workload Identity is a security feature that allows applications running on Azure to securely access and interact with Azure resources using managed identities, rather than relying on static credentials.
-
 ### Radius and Azure Workload Identity
 
 Radius allows management of Azure resources as part of your application. In order to achieve this, Radius stores 2 essential pieces of information -
@@ -159,7 +120,8 @@ Below are the key points in the flow. Notice the flow is very similar to AWS IRS
 
 1. In Kubernetes world, service accounts are used to provide an identity for applications running in pods. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. When Radius is installed with Azure Workload Identity enabled in a cluster which has AzWI mutating admission webhook installed,  the webhook  mounts the service-account token to the pod as a project volume.
    
-2. When ucp/ applications-rp/ bicep-de has to communicate with Azure for managing a resource, it first sends request to Entra with its App ID and service-account token (JWT). 
+2. When ucp/ applications-rp/ bicep-de has to communicate with Azure for managing a resource, it first sends request to Entra ID with its App ID and service-account token (JWT). 
+Microsoft Entra ID is a suite of identity and access management solutions that includes Azure AD along with other services designed to secure access to resources and manage identities across various environments. App ID is an application that is registered in Azure Active Directory (Azure AD) and is used to authenticate with Azure resources.
    
 3. Entra uses the claim from this JWT to verify that it is indeed k8s_cluster:radius-system:ucp that is making the request. It verifies by communicating with the cluster's configured OIDC provider. 
    
