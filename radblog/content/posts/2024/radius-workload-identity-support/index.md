@@ -21,7 +21,7 @@ This blog will delve into the details on how Radius enabled workload (federated)
 Radius allows management of AWS resources as part of your application. In order to achieve this, Radius stores 2 essential pieces of information -
 
 1. Cloud Provider Scope: This is the account-id and region to which the AWS resources are deployed. Cloud Provider Scope is stored as part of Radius environment. 
-2. AWS Credential:  An AWS IAM role is a set of permissions that define what actions are allowed and denied for an entity. The roles are can be assumed by entities such as AWS services or Kubernetes service-accounts. The RoleARN of IAM Role which would be assumed by Radius to deploy the AWS resources is stored as Radius AWS Credential.
+2. AWS Credential:  An AWS IAM role is a set of permissions that define what actions are allowed and denied for an entity. The roles are can be assumed by entities such as AWS services or Kubernetes service-accounts. The Role ARN of IAM Role which would be assumed by Radius to deploy the AWS resources is stored as Radius AWS Credential.
 
 There are two Radius services that communicate with AWS to deploy the resources - UCP and Applications RP.
 
@@ -96,7 +96,7 @@ Volumes:
 
 We did not choose this solution because
 
-* The approach requires role ARN to be injected at install time. Radius considers this roleARN as AWS credential. Radius should not restart for credentials registration.
+* The approach requires role ARN to be injected at install time. Radius considers this role ARN as AWS credential. Radius should not restart for credentials registration.
 * Radius will evolve to support multi-tenancy. There is no support in the webhook to handle multiple role ARNs.  
 
 Radius found its solution by falling back to the basics of how workload identity works and adopting it as required. 
