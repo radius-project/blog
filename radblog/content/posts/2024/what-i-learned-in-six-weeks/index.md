@@ -1,76 +1,82 @@
 ---
-date: "2024-10-23T00:00:00"
+date: "2024-10-30T00:00:00"
 title: "What I learned in six weeks working with Radius"
-linkTitle: "What I learned in six weeks"
+linkTitle: "What I learned in six weeks working with Radius"
 author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
 type: blog
 ---
 
-I recently joined the Azure Incubations team at Microsoft. In addition to Radius, the Azure Incubations team has helped build several open-source projects including [Dapr](https://dapr.io/), [KEDA](https://keda.sh/), and [Copacetic](https://project-copacetic.github.io/copacetic/website/), all of which are CNCF projects. Before joining the team, I knew very little about Radius aside from watching [Brendan Burns and Mark Russinovich talk about it](https://www.youtube.com/watch?v=gaG77PiYv5w). Over the last six weeks I've learned a lot about how Radius is built, what it can do today, and what is in store for the future. I suspect many readers of this blog are new to Radius just like I was, so let me share with you what I have learned.
+I recently joined the Azure Incubations team at Microsoft. In addition to Radius, the Azure Incubations team has helped build several open-source projects including [Dapr](https://dapr.io/), [KEDA](https://keda.sh/) and [Copacetic](https://project-copacetic.github.io/copacetic/website/) all of which are CNCF projects. [Drasi](https://drasi.io/) is the team's latest project which was just submitted to CNCF. Before joining the team, I knew very little about Radius aside from watching [Brendan Burns and Mark Russinovich talk about it](https://www.youtube.com/watch?v=gaG77PiYv5w). Over the last six weeks I've learned a lot about how Radius is built, what it can do today, and what is in store for the future. I suspect many readers of this blog are new to Radius just like I was, so let me share with you what I have learned.
 
-## Why Radius
+## Platform engineering landscape
 
-I've been working with large organizations for many years helping them adopt cloud-native technologies—mostly managing Kubernetes and serverless infrastructure. Each week, I try to talk with at least one large organization in order to keep a pulse on what challenges are top of mind in the community and what engineering efforts are a priority. I've noticed a few consistent challenges and trends which help me understand why Radius today.
+I've been working with large organizations for many years helping them adopt cloud-native technologies—mostly managing Kubernetes and serverless infrastructure. Each week, I try to talk with at least one large organization in order to keep a pulse on what challenges are top of mind in the community and what engineering efforts are a priority. I've observed several things about the platform engineering landscape recently.
 
 **Increased pressure on platform teams** – Platform teams are being asked to do the same amount of work with fewer resources. In some cases, this is driven by economic reasons. In other cases, it is because companies are shifting resources to make investments in AI. Not only do platform teams have fewer engineers, they are also leading the charge on increasing the efficiency of their cloud environments to reduce operational expense.
 
 **The internal developer platform is becoming standardized** – Internal developer platforms have existed for many years. These platforms shield developers from having to know cloud infrastructure and Kubernetes in-depth as well as to provide CI/CD and observability capabilities. Internal development platforms have become more important as organizations prioritize enforcing security requirements and driving standardization and efficiency. The CNCF platform engineering landscape has also matured. Projects like Backstage, Crossplane, ArgoCD, Flux, and Terraform are popular building blocks. KubeCon now has several co-located events including ArgoCon, BackstageCon, and Platform Engineering Day. And projects like [Cloud Native Operational Excellence](https://cnoe.io/) are starting up to help standardize how internal developer platforms are built.
 
-**Cloud is more than Kubernetes** – There is no need to convince this audience of the power of Kubernetes. It is highly customizable, there is a huge ecosystem around it, and it gives you portability between cloud environments. One thing it does not do is make it possible to provision and manage other cloud services such as managed databases, message queues, networks, and storage services. Teams are often using an infrastructure as code tool such as Terraform for these managed services and Kubernetes tooling for their application.
+**Cloud is more than Kubernetes** – There is no need to convince this audience of the power of Kubernetes. It is highly customizable, there is a huge ecosystem around it, and it gives you portability between cloud environments. One thing it does not do is make it possible to manage or describe an applications end to end. Many applications use manage cloud services running outside of Kubernetes such as managed databases, message queues, networks, and storage services and Kubernetes does not have a concept of an application. Teams are often using a mixture of Kubernetes tooling, basic label functionality in Kubernetes, and infrastructure as code tools for managing their applications.
 
-**Containers don't just run on Kubernetes** – Standing up and operating a production-ready Kubernetes environment is not exactly easy and, for many organizations, it can be overkill. There are many easier-to-operate container platforms such as Azure Container Instances, Azure Container Apps, Amazon ECS/Fargate, and Google CloudRun. I've talked with a surprising number of organizations that are moving from Kubernetes to a non-Kubernetes container platform for lower operational overhead and greater ease of use. The opposite is true as well. Many organizations move from one of these platforms to Kubernetes because they want to take advantage of the Kubernetes ecosystem and are ready to make the investment to setup and operate a Kubernetes environment. Since it takes a significant amount of effort to move between these platforms, engineering teams are making long-term, difficult to reverse, platform decisions well before they have built their application, much less operated it in production.
+**Containers don't just run on Kubernetes** – Standing up and operating a production-ready Kubernetes environment is not easy and, for many organizations, it can be overkill. There are many easier-to-operate container platforms such as Azure Container Instances, Azure Container Apps, Amazon ECS/Fargate, and Google CloudRun. I've talked with a growing number of organizations that are moving from Kubernetes to non-Kubernetes container platforms for lower operational overhead and greater ease of use. The opposite is true as well. Many organizations move from one of these platforms to Kubernetes because they want to take advantage of the Kubernetes ecosystem and are ready to make the investment in an internal developer platform and to setup and operate Kubernetes. Since it takes a significant amount of effort to move between these platforms, engineering teams are making long-term, difficult to reverse, platform decisions well before they have built their application, much less operated it in production.
 
-With these trends and challenges in mind, I've begun to build a vision in my mind of what Radius is and will be.
+With these trends and challenges in mind, I've begun to understand what makes Radius unique.
 
-## Envisioning a Radius of the future
+## What makes Radius unique
 
-After getting some hands-on time, talking with a few platform engineering teams, and getting a tutorial from a few Radius maintainers, I've built up my own personal vision for Radius: *Radius is as an application-centric, platform-agnostic, cloud resource manager. It decouples developer's application implementation and platform engineer's cloud infrastructure configuration*. That's a mouthful—let's unpack that ignoring for a moment what is possible today and what is on the roadmap. I will discuss what is possible today and what is on the roadmap later.
+After getting some hands-on time, talking with a few platform engineering teams, and getting a tutorial from a few Radius maintainers, I've built up my own understanding of what makes Radius unique. I summarize it as: *Radius is an application-centric, platform-agnostic, cloud resource manager which decouples developer's applications from platform engineer's cloud infrastructure*. That's a mouthful—let's unpack that ignoring for a moment what is possible today and what is on the roadmap. I will discuss what is possible today and what is on the roadmap later.
 
-**Application centric** – Unlike similar tools, Radius is application centric. Rather than having to know cloud platform-specific details, developers build their application using a set of application building block resources published by the platform engineering team. These resources can be simple, such as a web service or a database, or they can be complex composite resources such as a *highly available auto-scaling web service with an API gateway, database, and memory cache*. Basic resource types ship with Radius today, but the most interesting resource types will come from community contributors or developed in-house to meet organizational-specific needs.
+**Application centric** – Unlike similar tools, Radius is application centric. Rather than having to know cloud platform-specific details, developers build their application using a set of application building block resources published by the platform engineering team. These resources can be simple, such as a web service or a database, or they can be complex composite resources such as a *highly available auto-scaling web service with an API gateway, database, and memory cache*. Radius ships with basic resource types today, but the most interesting resource types will come from community contributors or developed in-house to meet organizational-specific needs.
 
 Since Radius has deep insight into each application, Radius can track dependencies between applications and application components. If you have ever operated a complex landscape of applications and infrastructure, you know how hard it is to understand dependencies. A single database outage can cause a ripple effect through multiple applications and affect many different business functions. When developers use Radius to model their application, Radius keeps track of connections between cloud resources and between other applications. This enables Radius to show operators an application graph showing dependencies across the entire landscape. This graph can be used to identify business impacts of even the smallest component outage and enrich data in incident management and observability systems.
 
 **Platform agnostic** – Radius enforces separation of duties between platform teams and application developers. The application implementation is decoupled from the infrastructure implementation. Since the contract between developers and cloud environments is defined by a set of abstract resource types published by the platform engineering team, and not by which cloud provider is being used, Radius makes applications highly portable both between different cloud providers and between different container platforms.
 
-**Cloud resource manager** – Radius manages cloud resources locally, in Azure, AWS, and in the future Google Cloud. When a platform engineer creates an environment in Radius, he or she also creates a recipe which implements each of the resource types. Radius recipes are very flexible. They can be implemented using existing Terraform modules or Bicep, an open-source infrastructure as code language for declaratively defining cloud resources. Radius ships with recipes for managing out-of-the-box resource types on each cloud provider, but most platform engineering teams will customize these recipes to meet their organization's unique requirements. For example, a recipe could be written to deploy an Envoy proxy with mTLS enforced without any developer involvement.
+**Cloud resource manager** – When Radius deploys an application, it manages the cloud resources for that application. These resources could be containers running on Kubernetes or managed services from Azure, AWS, or in the future Google Cloud. When a platform engineer creates an environment in Radius, he or she also creates a recipe which implements each of the resource types. Radius recipes are very flexible. They can be implemented using existing Terraform modules or Bicep, an open-source infrastructure as code language for declaratively defining cloud resources. Radius ships with recipes for managing out-of-the-box resource types on each cloud provider, but most platform engineering teams will customize these recipes to meet their organization's unique requirements. For example, a recipe could be written to deploy an Envoy proxy with mTLS enforced without any developer involvement.
 
-## System Architecture
+## System architecture
 
 I'm fortunate enough to have had plenty of time to get hands-on with Radius. I will try to explain my understanding of the system through a series of diagrams.
 
 ### Usage workflow
 
-Radius enforces a clear separation of duties between developers and platform engineers. You can see in the diagram below that the developer models their application using Bicep. When they deploy their application, they select which environment to deploy it to. Radius deploys the application to the selected environment which has customized recipes configured by the platform engineer.
+Radius enforces a clear separation of duties between developers and platform engineers. You can see in the diagram below that the platform engineer has defined the resource types, created an environment, and configured environment-specific recipes. The developer then uses those resource types to model their application.
 
 ![Radius developer and platform engineer workflow](images/workflow.png)
 
-### Logical Data Model
+**Steps 1–4:** The platform engineer installs Radius on a Kubernetes cluster (Radius runs on Kubernetes today, but it is designed to have other deployment options in the future). Then he or she configures the resource types developers will use, the environment applications will be deployed to, and the recipes which implement how each resource type is deployed in that environment.
 
-The diagram below is a conceptual representation of the various Radius objects and how they are related. I simplified some of the details for clarity, so this is not technically accurate. For example, Radius implements applications and environments as a resource, but that is just an implementation detail.
+**Steps 5–6:** The developer uses the resource types to build his or her application. Once the application has been defined in a Bicep file, the developer can use the Radius CLI to deploy the application to one of the environments or rely on their [GitOps CI/CD pipeline](https://github.com/radius-project/design-notes/blob/main/tools/2024-06-gitops-feature-spec.md).
+
+**Step 7:** Radius then uses the application definition from the develop and the recipes from the platform engineer to create resources and deploy the application to the selected environment.
+
+As you can see, Radius gives platform engineers the tools to define a clear contract with their developers via resource types. Recipes give them full control of the underlying infrastructure without having to expose those details to developers. Developers then have self-service access to deploy their application without needing knowledge of Kubernetes or a specific cloud provider's APIs.
+
+### Logical data model
+
+The diagram below is a conceptual representation of the various Radius objects and how they are related. It is simplified from the actual implementation to make it easier to understand.
 
 ![Radius data model](images/data-model.png)
 
-Applications and environments seem obvious, but the other objects are not. Let's walk through each one.
-
-**Application** – This is a Radius object representing your application. Radius is not opinionated about how you define an application so it's up to you. It could be a small microservice or a complex set of containers, databases, message queues, etc. An application is modeled in Radius using Bicep.
+**Application** – This is a Radius object representing an actual application. Radius is not opinionated about how you define an application so it's up to you. It could be a microservice or a complex set of containers, databases, message queues, etc. 
 
 **Resource** – A resource is an application component which is requested in the application's definition. Developers use resources to model their application. Each resource has a type and a version.
 
-**Resource Type** – Radius ships with several [resource types out of the box](https://docs.radapp.io/guides/author-apps/portable-resources/overview/). Out-of-the-box resource types include `Application.Core/containers` and `Application.Core/mongoDatabases` for example. It could be a resource type you have added to your Radius configuration from another community member, or a resource type you have defined and customized for your organization.
+**Resource type** – Radius ships with several [resource types out of the box](https://docs.radapp.io/guides/author-apps/portable-resources/overview/) such as `Application.Core/containers` and `Application.Core/mongoDatabases`. It could be a resource type you have added to your Radius configuration from another community member, or a resource type you have defined and customized for your organization.
 
-**Resource Group** – If you are an Azure user, you may be familiar with Azure resource groups. Radius takes inspiration from these resource groups, and Radius' resource groups are similar. Radius resource groups are a logical grouping of applications and their resources. When you deploy an application with Radius, you choose which resource group to place it in. In the future, resource groups will have their own RBAC rules, so you will be able to group applications together with a shared set of permissions.
-
-**Connection** – Earlier, I talked about the benefits of Radius to operational teams because it tracks dependencies. Connections are how those dependencies are modeled. Each connection denotes which parent resource is connected to, or depends upon, which source resource.
+**Recipe** – I talked about recipes quite a bit above. The only thing to emphasize here is that a recipe is specific to an environment. You could have different sets of recipes for a test environment versus a production environment. In the Envoy mTLS example, a recipe could be written for a test environment that does not deploy an Envoy proxy, but the production environment does without the developer having to worry about Envoy at all.
 
 **Environment** – Environments are straight forward. They are a single place to run applications and all the supporting services. An environment can be your local workstation, an Azure subscription, an AWS account, or a Google Cloud project. You can organize your cloud provider environments the same or completely different than the Radius environments, e.g., one of more Radius environments can use the same Azure subscription or AWS account.
 
-**Recipe** – I talked about recipes quite a bit in the vision section. The only thing to emphasize here is that a recipe is specific to an environment. You could have different sets of recipes for a test environment versus a production environment. In the Envoy mTLS example, a recipe could be written for a test environment that does not deploy an Envoy proxy, but the production environment does without the developer having to worry about Envoy at all.
+**Resource group** – If you are an Azure user, you may be familiar with Azure resource groups. Radius takes inspiration from these resource groups, and Radius' resource groups are similar. Radius resource groups are a logical grouping of applications and their resources. When you deploy an application with Radius, you choose which resource group to place it in. In the future, resource groups will have their own RBAC rules, so you will be able to group applications together with a shared set of permissions.
 
-### Deployment Model
+**Connection** – Earlier, I talked about the benefits of Radius to operational teams because it tracks dependencies. Connections are how those dependencies are modeled. Each connection denotes which parent resource is connected to, or depends upon, which source resource.
+
+### Deployment model
 
 One of my first questions was what does a Radius deployment look like? The diagram below shows a management environment where Radius runs and several application environments. In this example, Radius deploys applications to AWS, Azure, and Google Cloud. Each cloud environment can be configured differently using recipes. You can see that in AWS, Radius is deploying the application to ECS/Fargate, creating an RDS database, and configuring the VPC. In Azure, Radius is creating a resource group for the application, then deploying it using Azure Container Instances and Azure Database. Finally, in Google Cloud, Radius is deploying the application using the Kubernetes API to a GKE cluster and creating a Cloud SQL database and API Gateway.
 
-Remember that in all three of these deployment scenarios, the developer never has to know these details. The application and the application definition never change. In all scenarios, the developer's containers are deployed along with a database. It is the platform engineer who configures the recipes for each cloud environment.
+Remember that in all three of these deployment scenarios, the developer never has to know these details. The application and the application definition never changes. It is the platform engineer who configures the recipes for each cloud environment.
 
 ![Radius deployment model](images/deployment.png)
 
@@ -78,11 +84,11 @@ In addition to deploying the application's containers and databases, recipes can
 
 There are a few other interesting, non-obvious things about how Radius is deployed. You will notice that when the user deploys the application, the Radius CLI makes an API call to the Kubernetes API server for cluster running Radius. This is because Radius uses the [Kubernetes API aggregation layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/). This means that the Kubernetes API server proxies API calls to Radius' control plane running on the same cluster. This also means that identity and RBAC is handled by Kubernetes. When you deploy an application using Radius, the Radius control plane (called the Universal Control Plane) creates applications and resources which are stored in the same etcd as the Kubernetes control plane.
 
-## Radius Roadmap
+## Radius roadmap
 
 So far, we have ignored what is possible today and what is coming. There are several features discussed here which are not available today, but are on the roadmap including:
 
-- The ability to define your own resource types is very basic today. Developers can use the [extender resource type](https://docs.radapp.io/reference/resource-schema/core-schema/extender/) and specify their own recipe. This breaks the hard separation between developer and platform engineer. The ability to specify types beyond the extender type is under development now. You can read more in the [user-defined types technical design](https://github.com/radius-project/design-notes/blob/main/architecture/2024-07-user-defined-types.md).
+- The ability to define your own resource types is very basic today. Developers can use the [extender resource type](https://docs.radapp.io/reference/resource-schema/core-schema/extender/) and specify their own recipe. But this breaks the hard separation between developer and platform engineer since the developer is specifying the recipe. The ability to specify types beyond the extender type is under development now. You can read more in the [user-defined types technical design](https://github.com/radius-project/design-notes/blob/main/architecture/2024-07-user-defined-types.md).
 
 - Radius will only deploy containers to the same Kubernetes cluster that is running Radius today. The ability to deploy to [other Kubernetes clusters](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=55074612&issue=radius-project%7Croadmap%7C42) and to other [serverless container platforms](https://github.com/radius-project/roadmap/issues/23) are on the roadmap.
 
@@ -92,8 +98,15 @@ So far, we have ignored what is possible today and what is coming. There are sev
 
 You can monitor the Radius roadmap on the [Radius GitHub](https://github.com/orgs/radius-project/projects/8/views/1) page.
 
-## What's Next for Me
+## What's next
 
-There is still a lot for me to learn. I plan to spend more hands-on time modeling existing applications with Radius. The [eShop example](https://docs.radapp.io/tutorials/eshop/) seems like a good real-world application to start with. I also want to learn more about [Dapr](https://dapr.io/). It seems like combining Dapr with Radius is a powerful combination.
+If you want to learn more about Radius, one of the best resources is the monthly Radius community call. Each call has a demo by one of the contributing engineers. Here is a set of deep links to some of the best demos:
 
-I hope this blog post was helpful for others new to Radius. I'm very excited about where we can take Radius. If you have ideas or want to get involved in the project, visit the [Radius Community](https://github.com/radius-project/community) page to learn about our community calls and Discord channel. Or if you have questions or ideas for me, feel free to reach out on [X](https://x.com/zachcasperatx) or [LinkedIn](https://www.linkedin.com/in/zcasper/).
+- [Introductory demo](https://youtu.be/EfGAwli5W4U?si=Wq8S74iUX5iKNVaG&t=1665) (29 minutes)
+- [Recipes](https://youtu.be/DtZnb-uD84I?si=Fj0Hl1GOKGTTaR8T&t=780) (19 minutes)
+- [Radius dashboard](https://youtu.be/JIATTuvsXCs?si=DIp_Spp2OlWCGVkv&t=1500) (9 minutes)
+- [Dapr](https://youtu.be/DtZnb-uD84I?si=59xPFH4gV_FavfL1&t=2211) (16 minutes)
+- [Terraform submodules](https://youtu.be/JDYmY1IRVOs?si=tw6nbpOhgoJsGKYs&t=659) (7 minutes)
+- [Azure workload identity](https://youtu.be/6u014xn_tDA?si=bRkSPkdzuB7i4Bua&t=665) (11 minutes)
+
+I hope this blog post was helpful for others new to Radius. If you have ideas or want to get involved in the project, visit the [Radius Community](https://github.com/radius-project/community) page to learn about our community calls and Discord channel.
