@@ -32,7 +32,7 @@ Below are the key points in the flow:
 
 1. In Kubernetes world, service accounts are used to provide an identity for applications running in pods. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. When Radius is installed with IRSA enabled, this token is mounted to the pod as a project volume.
    
-2. When ucp/ applications-rp has to communicate with AWS for deloying / managing a resource, it first sends an Assume Role request to AWS STS. The AssumeRole operation enables an entity to assume an IAM role and receive temporary security credentials associated with it. AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users. The request from UCP to AWS STS contains role ARN of the role to assume as well as the JWT (service account token) from projected volume. 
+2. When ucp/ applications-rp has to communicate with AWS for deploying / managing a resource, it first sends an Assume Role request to AWS STS. The AssumeRole operation enables an entity to assume an IAM role and receive temporary security credentials associated with it. AWS Security Token Service (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users. The request from UCP to AWS STS contains role ARN of the role to assume as well as the JWT (service account token) from projected volume. 
    
 3. STS uses the claim from this JWT to verify that it is indeed k8s_cluster:radius-system:ucp that is making the request. It verifies this by communicating with the cluster's configured OIDC provider. 
    
@@ -96,8 +96,8 @@ Volumes:
 
 We did not choose this solution because
 
-* The approach requires roleARN to be injected at install time. Radius considers this roleARN as AWS credential. Radius should not restart for credentials registration.
-* Radius will evolve to support multi-tenancy. There is no support in the webhook to handle multiple role-arns.  
+* The approach requires role ARN to be injected at install time. Radius considers this roleARN as AWS credential. Radius should not restart for credentials registration.
+* Radius will evolve to support multi-tenancy. There is no support in the webhook to handle multiple role ARNs.  
 
 Radius found its solution by falling back to the basics of how workload identity works and adopting it as required. 
 
@@ -108,7 +108,7 @@ Radius found its solution by falling back to the basics of how workload identity
 Radius allows management of Azure resources as part of your application. In order to achieve this, Radius stores 2 essential pieces of information -
 
 1. Cloud Provider Scope: This is the subscription id and resource group to which the Azure resources are deployed. Cloud Provider Scope is stored as part of Radius environment. 
-2. Azure Credential: This is the client-id and tenant-id of teh Azure AD application that Radius uses to deploy the Azure resources.
+2. Azure Credential: This is the client-id and tenant-id of the Azure AD application that Radius uses to deploy the Azure resources.
 
 There are three Radius services that communicates with AWS to achieve this: UCP, Applications RP and Deployment Engine.
 

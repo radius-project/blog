@@ -481,3 +481,24 @@ Trivy
 scalability
 Fintech
 Radify
+STS
+Webhook
+role ARN
+ARNs
+IRSA
+Entra
+JWT
+Entra
+registeration
+Entra
+AzWI
+webhook
+webhook
+webhooks
+IRSA
+webhook
+ankit
+badb
+dotnet
+irsa
+wal
