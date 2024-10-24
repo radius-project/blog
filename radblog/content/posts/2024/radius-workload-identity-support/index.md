@@ -192,6 +192,10 @@ Please refer to  [Radius Workload Identity Setup Guide](https://docs.radapp.io/g
 ## References
 
 https://azure.github.io/azure-workload-identity/docs/introduction.html
+
 https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview?tabs=dotnet
+
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+
 https://medium.com/@ankit.wal/the-how-of-iam-roles-for-service-accounts-irsa-on-aws-eks-3d76badb8942
+
