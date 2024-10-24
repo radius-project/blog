@@ -165,7 +165,7 @@ Checkout the guide on how to [Radius Setup Az Workload Identity](https://docs.ra
 
 ## Comparison between providers
 
-AWS and Azure provide very similar solutions for adopting workload identities. They also provide mutating webhooks that allow configuring workloads to use Workload Identity easily. However, Azure's mutating webhook supports mount the service token account where as with AWS, it was not easy to do so. This was because Azure's webhook utilized two annotations as part of workload identity configuration. We could choose to utilize ```azure.workload.identity/use: "true"``` to mount the service-token which is the key requirement for enabling workload identity.
+AWS and Azure provide very similar solutions for adopting workload identities. They also provide mutating webhooks that allow configuring workloads to use Workload Identity easily. However, while we adopted Azure's mutating webhook for enabling Azure Workload Identity in Radius, it was not easy to take a similar approach with AWS. This was because Azure's webhook utilized two annotations as part of workload identity configuration. We could choose to utilize ```azure.workload.identity/use: "true"``` to mount the service-token which is the key requirement for enabling workload identity.
 
 ```
 azure.workload.identity/use: "true"
