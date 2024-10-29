@@ -16,7 +16,7 @@ This blog post will describe how federated identity is implemented within Radius
 
 ### Radius and AWS IRSA
 
-Radius enables management of AWS resources as part of your application. In order to achieve this, Radius stores two essential pieces of information -
+Radius enables management of AWS resources as part of your application. In order to achieve this, Radius stores two essential pieces of information:
 
 1. Cloud Provider Scope: This is the AWS account ID and region to which the AWS resources are deployed. Cloud Provider Scope is stored as part of Radius environment. 
 2. AWS Credential: This is the ARN for the AWS IAM role Radius will use. The role defines what actions are allowed within the AWS account. The IAM role is assumed by Radius to deploy the AWS resources.
@@ -102,7 +102,7 @@ Radius implements configurations in a way that avoids these drawbacks, ensuring 
 
 ### Radius and Azure Workload Identity
 
-Radius allows management of Azure resources as part of your application. In order to achieve this, Radius stores 2 essential pieces of information -
+Radius allows management of Azure resources as part of your application. In order to achieve this, Radius stores two essential pieces of information:
 
 1. Cloud Provider Scope: This is the subscription ID and resource group to which the Azure resources are deployed. Cloud Provider Scope is stored as part of Radius Environment. 
 2. Azure Credential: This is the client id and tenant id of the Azure AD application that Radius uses to deploy the Azure resources.
