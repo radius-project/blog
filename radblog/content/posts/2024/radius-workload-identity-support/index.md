@@ -12,7 +12,7 @@ Radius enables infrastructure operators and application developers to define, de
  
 This blog post will describe how federated identity is implemented within Radius. We will explore the mechanisms and configurations involved in using AWS IAM Roles for Service Accounts (IRSA) and Azure Workload Identities to securely manage and access cloud resources, and understand how Radius leverages them. If you are only interested in how to setup federated identity for your Radius installation, see the documentation for using Radius with [AWS IRSA](https://docs.radapp.io/guides/operations/providers/aws-provider/howto-aws-provider-irsa/) and [Azure Workload Identity](https://docs.radapp.io/guides/operations/providers/azure-provider/howto-azure-provider-wi/).
 
-## How Radius Utilizes AWS IAM Roles for Service Accounts (IRSA) 
+## How Radius utilizes AWS IAM Roles for Service Accounts (IRSA) 
 
 ### Radius and AWS IRSA
 
@@ -35,11 +35,11 @@ Below are the key points in the flow:
    
 3. STS uses the claim from this JWT to verify that it is indeed the `radius-system:ucp` service account that is making the request and verifies this by communicating with the cluster's configured OIDC provider. 
    
-4. Once the identity of service is confirmed, STS checks the trust policy of the IAM role available in the request to make sure IAM role trusts the service-account to assume it.
+4. Once the identity of service is confirmed, STS checks the trust policy of the IAM role to make sure that the IAM role trusts the service account.
    
 5. At this point, the service account associated with the UCP and Applications RP pod is both authenticated and authorized. STS therefore issues a temporary credential. UCP and Applications RP uses this temporary credential to make API requests to manage the AWS resources.
    
-### Pod Spec when IRSA is enabled
+### Pod spec when IRSA is enabled
 
 Below is the UCP pod spec when Radius is installed with IRSA enabled. Note that `aws-iam-token` is added as a projected volume and mounted to pod.
 
@@ -71,7 +71,7 @@ Volumes:
 
 See the how-to guide [setup Radius with AWS IRSA](https://docs.radapp.io/guides/operations/providers/aws-provider/howto-aws-provider-irsa/) for information on configuring the trust for the IAM Roles in AWS.
 
-### Challenges and Solutions
+### Challenges and solutions
 
 AWS provides a webhook which can configure the necessary settings for IRSA on pods that use the relevant service accounts. This is the [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-identity-webhook#amazon-eks-pod-identity-webhook).
 We could have used this webhook to configure Radius for IRSA. The webhook adds two additional configurations to the relevant pods on creation:
@@ -98,7 +98,7 @@ We opted against this solution for the following reasons:
 
 Radius implements configurations in a way that avoids these drawbacks, ensuring seamless credential management and multi-tenancy support.
 
-## How Radius Utilizes Azure Workload Identity
+## How Radius utilizes Azure Workload Identity
 
 ### Radius and Azure Workload Identity
 
@@ -166,7 +166,7 @@ eks.amazonaws.com/role-arn: arn:aws:iam::<account-number>:role/<role-name>
 ```
 We solved this problem by mounting the service account token as part of pod spec when user chooses to enable IRSA for Radius, instead of utilizing AWS webhook.  
 
-## Learn More and Contribute 
+## Learn more and contribute 
 
 The Radius maintainers are excited to continue collaborating with the open-source community to grow its feature set and welcome all contributions from the community. We’re looking for people to join us! To get started with Radius today, please see:
 
