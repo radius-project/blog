@@ -495,3 +495,6 @@ webhooks
 mTLS
 etcd
 LinkedIn
+VNets
+VPCs
+balancers
