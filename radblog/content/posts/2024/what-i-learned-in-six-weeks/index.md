@@ -92,7 +92,7 @@ So far, we have ignored what is possible today and what is coming. There are sev
 
 - The ability to define your own resource types is very basic today. Developers can use the [extender resource type](https://docs.radapp.io/reference/resource-schema/core-schema/extender/) and specify their own recipe. But this breaks the hard separation between developer and platform engineer since the developer is specifying the recipe. The ability to specify types beyond the extender type is under development now. You can read more in the [user-defined types technical design](https://github.com/radius-project/design-notes/blob/main/architecture/2024-07-user-defined-types.md).
 
-- Radius will only deploy containers to the same Kubernetes cluster that is running Radius today. The ability to deploy to [other Kubernetes clusters](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=55074612&issue=radius-project%7Croadmap%7C42) and to other [serverless container platforms](https://github.com/radius-project/roadmap/issues/23) are on the roadmap.
+- Radius will only deploy containers to the same Kubernetes cluster that is running Radius today. The ability to deploy to [other Kubernetes clusters](https://github.com/radius-project/roadmap/issues/42) and to other [serverless container platforms](https://github.com/radius-project/roadmap/issues/23) are on the roadmap.
 
 - Radius can only deploy to a local developer workstation, Azure, and AWS. Support for Google Cloud is on the [roadmap](https://github.com/radius-project/roadmap/issues/38).
 
