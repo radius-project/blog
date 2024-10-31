@@ -1,5 +1,5 @@
 ---
-date: "2024-10-30T00:00:00"
+date: "2024-10-31T00:00:00"
 title: "What I learned in six weeks working with Radius"
 linkTitle: "What I learned in six weeks working with Radius"
 author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
@@ -32,9 +32,9 @@ Since Radius has deep insight into each application, Radius can track dependenci
 
 **Platform agnostic** – Radius enforces separation of duties between platform teams and application developers. The application implementation is decoupled from the infrastructure implementation. Since the contract between developers and cloud environments is defined by a set of application resource types published by the platform engineering team, and not by which cloud provider is being used, Radius makes applications highly portable both between different cloud providers and between different container platforms.
 
-**Cloud resource manager** – When Radius deploys an application, it translates the application resources used by developers into infrastructure resources. This translation is handled by recipes in Radius. Each application resource type has a recipe which specifies how to deploy and run that resource. Since recipes are implemented using Terraform or Bicep modules, they are very flexible. They can be composed of almost any infrastructure resource such as containers, managed databases, VPCs and VNets, load balancers, or any other cloud service from Azure, AWS, or in the future Google Cloud.
+**Cloud resource manager** – When Radius deploys an application, it translates the application resources used by developers into infrastructure resources. This translation is handled by Recipes in Radius. Each application resource type has a Recipe which specifies how to deploy and run that resource. Since recipes are implemented using Terraform or Bicep modules, they are very flexible. They can be composed of almost any infrastructure resource such as containers, managed databases, VPCs and VNets, load balancers, or any other cloud service from Azure, AWS, or in the future Google Cloud.
 
-Recipes become powerful when combined with Radius environments. Developers can choose which environment to deploy their application to with Radius. These environments are created by platform engineers and point to a cloud provider and region. Each environment has a unique set of recipes. The platform engineer can configure, for example, a set of recipes for a production environment which deploys an Envoy proxy with mTLS enforced, storage encryption, and other production requirements. Then the recipes for the test environment, would not need these production security controls. The configuration of the application and cloud infrastructure when the application is deployed depends entirely on which environment is selected. The developer never has to modify their application definition or code or have intimate knowledge of the cloud environment.
+Recipes become powerful when combined with Radius environments. Developers can choose which environment to deploy their application to with Radius. These environments are created by platform engineers and point to a cloud provider and region. Each environment has a unique set of Recipes. The platform engineer can configure, for example, a set of Recipes for a production environment which deploys an Envoy proxy with mTLS enforced, storage encryption, and other production requirements. Then the Recipes for the test environment, would not need these production security controls. The configuration of the application and cloud infrastructure when the application is deployed depends entirely on which environment is selected. The developer never has to modify their application definition or code or have intimate knowledge of the cloud environment.
 
 ## System architecture
 
@@ -42,15 +42,15 @@ I'm fortunate enough to have had plenty of time to get hands-on with Radius. I w
 
 ### Usage workflow
 
-Radius enforces a clear separation of duties between developers and platform engineers. You can see in the diagram below that the platform engineer has defined the resource types, created an environment, and configured environment-specific recipes. The developer then uses those resource types to model their application.
+Radius enforces a clear separation of duties between developers and platform engineers. You can see in the diagram below that the platform engineer has defined the resource types, created an environment, and configured environment-specific Recipes. The developer then uses those resource types to model their application.
 
 ![Radius developer and platform engineer workflow](images/workflow.png)
 
-**Steps 1–4:** The platform engineer installs Radius on a Kubernetes cluster (Radius runs on Kubernetes today, but it is designed to have other deployment options in the future). Then he or she configures the resource types developers will use, the environment applications will be deployed to, and the recipes which implement how each resource type is deployed in that environment.
+**Steps 1–4:** The platform engineer installs Radius on a Kubernetes cluster (Radius runs on Kubernetes today, but it is designed to have other deployment options in the future). Then he or she configures the resource types developers will use, the environment applications will be deployed to, and the Recipes which implement how each resource type is deployed in that environment.
 
 **Steps 5–6:** The developer uses the resource types to build his or her application. Once the application has been defined in a Bicep file, the developer can use the Radius CLI to deploy the application to one of the environments or rely on their [GitOps CI/CD pipeline](https://github.com/radius-project/design-notes/blob/main/tools/2024-06-gitops-feature-spec.md).
 
-**Step 7:** Radius then uses the application definition from the develop and the recipes from the platform engineer to create resources and deploy the application to the selected environment.
+**Step 7:** Radius then uses the application definition from the develop and the Recipes from the platform engineer to create resources and deploy the application to the selected environment.
 
 As you can see, Radius gives platform engineers the tools to define a clear contract with their developers via resource types. Recipes give them full control of the underlying infrastructure without having to expose those details to developers. Developers then have self-service access to deploy their application without needing knowledge of Kubernetes or a specific cloud provider's APIs.
 
@@ -66,7 +66,7 @@ The diagram below is a conceptual representation of the various Radius objects a
 
 **Resource type** – Radius ships with several [resource types out of the box](https://docs.radapp.io/guides/author-apps/portable-resources/overview/) such as `Application.Core/containers` and `Application.Core/mongoDatabases`. It could be a resource type you have added to your Radius configuration from another community member, or a resource type you have defined and customized for your organization.
 
-**Recipe** – We covered recipes quite a bit in the previous section. Remember that recipes translate resources such as `Application.Core/containers` into deployable infrastructure components such as Kubernetes deployment. Radius ships with recipes for managing out-of-the-box resource types for local development and on each cloud provider.
+**Recipe** – We covered Recipes quite a bit in the previous section. Remember that Recipes translate resources such as `Application.Core/containers` into deployable infrastructure components such as Kubernetes deployment. Radius ships with Recipes for managing out-of-the-box resource types for local development and on each cloud provider.
 
 **Environment** – Environments are straight forward. They are a single place to run applications and all the supporting services. An environment can be your local workstation, an Azure subscription, an AWS account, or a Google Cloud project. You can organize your cloud provider environments the same or completely different than the Radius environments, e.g., one of more Radius environments can use the same Azure subscription or AWS account.
 
@@ -94,7 +94,7 @@ So far, we have ignored what is possible today and what is coming. There are sev
 
 - Radius will only deploy containers to the same Kubernetes cluster that is running Radius today. The ability to deploy to [other Kubernetes clusters](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=55074612&issue=radius-project%7Croadmap%7C42) and to other [serverless container platforms](https://github.com/radius-project/roadmap/issues/23) are on the roadmap.
 
-- Radius can only deploy to a local developer workstation, Azure, and AWS. Support for Google Cloud is on the [roadmap](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=49752139&issue=radius-project%7Croadmap%7C38).
+- Radius can only deploy to a local developer workstation, Azure, and AWS. Support for Google Cloud is on the [roadmap](https://github.com/radius-project/roadmap/issues/38).
 
 - While you can use Terraform and Bicep to deploy cloud resources today, we are implementing several enhancements to make deploying resources more powerful and flexible including using Dapr workflows as part of your recipe.
 
@@ -111,4 +111,4 @@ If you want to learn more about Radius, one of the best resources is the monthly
 - [Terraform submodules](https://youtu.be/JDYmY1IRVOs?si=tw6nbpOhgoJsGKYs&t=659) (7 minutes)
 - [Azure workload identity](https://youtu.be/6u014xn_tDA?si=bRkSPkdzuB7i4Bua&t=665) (11 minutes)
 
-I hope this blog post was helpful for others new to Radius. If you have ideas or want to get involved in the project, visit the [Radius Community](https://github.com/radius-project/community) page to learn about our community calls and Discord channel.
+I hope this blog post was helpful for others new to Radius. If you have ideas or want to get involved in the project, visit the [Radius Community](https://github.com/radius-project/community/blob/main/README.md) page to learn about our community calls and Discord channel.
