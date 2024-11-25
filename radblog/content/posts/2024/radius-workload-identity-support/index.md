@@ -18,26 +18,19 @@ This blog post will describe how federated identity is implemented within Radius
 
 Radius enables management of AWS resources as part of your application. In order to achieve this, Radius stores two essential pieces of information:
 
-1. Cloud Provider Scope: This is the AWS account ID and region to which the AWS resources are deployed. Cloud Provider Scope is stored as part of Radius environment. 
+1. Cloud Provider Scope: This is the AWS account ID and region to which the AWS resources are deployed. Cloud Provider Scope is stored as part of Radius environment.
 2. AWS Credential: This is the ARN for the AWS IAM role Radius will use. The role defines what actions are allowed within the AWS account. The IAM role is assumed by Radius to deploy the AWS resources.
-
-There are two Radius services that communicate with AWS to deploy the resources: the Universal Control Plane (UCP) and the Applications Resource Provider (Applications RP).
+   
+In the Kubernetes world, service accounts are used to provide an identity for applications running in pods. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. There are two Radius services that communicate with AWS to deploy the resources: the Universal Control Plane (UCP) and the Applications Resource Provider (Applications RP). When Radius is installed with IRSA enabled, the service-account token is mounted to the UCP and Applications RP pods as a projected volume. 
 
 {{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="1200">}}
 
-<br>
-The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP. 
-Below are the key points in the flow:
-
-1. In the Kubernetes world, service accounts are used to provide an identity for applications running in pods. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. When Radius is installed with IRSA enabled, this token is mounted to the pod as a project volume.
-   
-2. When the UCP or Applications RP service needs to communicate with AWS, it first sends an AssumeRole request to AWS Secure Token Service (STS). AWS STS is a web service that enables you to request temporary, limited-privilege credentials for AWS IAM users. The AssumeRole operation enables Radius to assume an IAM role and receive temporary, limited-privilege credentials.
-   
-3. STS uses the claim from this JWT to verify that it is indeed the `radius-system:ucp` service account that is making the request and verifies this by communicating with the cluster's configured OIDC provider. 
-   
-4. Once the identity of service is confirmed, STS checks the trust policy of the IAM role to make sure that the IAM role trusts the service account.
-   
-5. At this point, the service account associated with the UCP and Applications RP pod is both authenticated and authorized. STS therefore issues a temporary credential. UCP and Applications RP uses this temporary credential to make API requests to manage the AWS resources.
+The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP. Below are the key points in the flow:
+1. When the UCP or Applications RP service needs to communicate with AWS, it first sends an AssumeRole request to AWS Secure Token Service (STS). AWS STS is a web service that enables you to request temporary, limited-privilege credentials for AWS IAM users. The AssumeRole operation enables Radius to assume an IAM role and receive temporary, limited-privilege credentials
+2. a. STS uses the claim from this JWT to verify that it is indeed the radius-system:ucp service account that is making the request and verifies this by communicating with the cluster's configured OIDC provider.
+   b. Once the identity of service is confirmed, STS checks the trust policy of the IAM role to make sure that the IAM role trusts the service account.
+3.  At this point, the service account associated with the UCP and Applications RP pod is both authenticated (2a) and authorized (2b). STS therefore issues a temporary credential.
+4.  UCP and Applications RP uses this temporary credential to make API requests to manage the AWS resources.
    
 ### Pod spec when IRSA is enabled
 
