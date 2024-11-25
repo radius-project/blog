@@ -1,6 +1,6 @@
 ---
 date: "2024-11-25T08:00:00-08:00"
-title: "How workload identity federation for cloud providers work in Radius"
+title: "How Workload Identity Federation for Cloud Providers Work in Radius"
 linkTitle: "Cloud identity federation in Radius"
 author: "[Nithya Subramanian](https://www.github.com/nithyatsu)"
 type: blog
