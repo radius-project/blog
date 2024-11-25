@@ -106,12 +106,11 @@ There are three Radius services that communicates with Azure to achieve this: UC
 
 The above image shows how Radius UCP leverages Azure Workload Identity to deploy and manage Azure resources. The flow is identical for Applications RP and Deployment Engine.
 
-Below are the key points in the flow. Notice the flow is very similar to AWS IRSA:
-1. Just like in the AWS flow, the pod service account requests a JWT from Microsoft Entra ID via a mutating admission webhook, which mounts the service account token to the pod as a volume.
+Below are the key points in the flow. Notice the flow is very similar to AWS IRSA. In this case, the pod service account requests a JWT from Microsoft Entra ID via a mutating admission webhook, which mounts the service account token to the pod as a volume.
    
-2. When UCP, Applications RP or  Deployment Engine has to communicate with Azure for managing a resource, it first sends request to Entra ID with its Application ID and service account token (JWT). 
+1. When UCP, Applications RP or  Deployment Engine has to communicate with Azure for managing a resource, it first sends request to Entra ID with its Application ID and service account token (JWT). 
    
-At this point, the flow completes similar to step 3, 4, 5, and 6 in the AWS example above.
+At this point, the flow completes similar to step 2a, 2b, 3, and 4 in the AWS example above.
 
 ### Pod spec when Azure Workload Identity is enabled
 
