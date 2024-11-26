@@ -102,7 +102,7 @@ Radius allows management of Azure resources as part of your application. In orde
 
 There are three Radius services that communicates with Azure to achieve this: UCP, Applications RP and Deployment Engine.
 
-{{< image src="images/radius-az-wi.png" alt="using Az Workload Identity to deploy an Az resource" width="1200">}}
+{{< image src="images/radius-az-wi.png" alt="using Az Workload Identity to deploy an Az resource" width="800">}}
 
 The above image shows how Radius UCP leverages Azure Workload Identity to deploy and manage Azure resources. The flow is identical for Applications RP and Deployment Engine.
 
