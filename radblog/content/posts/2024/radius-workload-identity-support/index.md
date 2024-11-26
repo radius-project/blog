@@ -23,7 +23,7 @@ Radius enables management of AWS resources as part of your application. In order
    
 In the Kubernetes world, service accounts are used to provide an identity for applications running in pods. Kubernetes provides a service-account token in the form of a JWT (JSON Web Token). This token contains claims about the cluster, namespace and service-account. There are two Radius services that communicate with AWS to deploy the resources: the Universal Control Plane (UCP) and the Applications Resource Provider (Applications RP). When Radius is installed with IRSA enabled, the service-account token is mounted to the UCP and Applications RP pods as a projected volume. 
 
-{{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="1200">}}
+{{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="800">}}
 
 The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP. Below are the key points in the flow:
 1. When the UCP or Applications RP service needs to communicate with AWS, it first sends an AssumeRole request to AWS Secure Token Service (STS). AWS STS is a web service that enables you to request temporary, limited-privilege credentials for AWS IAM users. The AssumeRole operation enables Radius to assume an IAM role and receive temporary, limited-privilege credentials
