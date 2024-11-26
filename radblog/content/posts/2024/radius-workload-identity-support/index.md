@@ -26,11 +26,11 @@ In the Kubernetes world, service accounts are used to provide an identity for ap
 {{< image src="images/radius-irsa.png" alt="using IRSA to deploy an AWS resource" width="800">}}
 
 The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS resources. The flow is identical for Applications RP. Below are the key points in the flow:
-1. When the UCP or Applications RP service needs to communicate with AWS, it first sends an AssumeRole request to AWS Secure Token Service (STS). AWS STS is a web service that enables you to request temporary, limited-privilege credentials for AWS IAM users. The AssumeRole operation enables Radius to assume an IAM role and receive temporary, limited-privilege credentials.
-2. a. STS uses the claim from this JWT to verify that it is indeed the `radius-system:ucp` service account that is making the request and verifies this by communicating with the cluster's configured OIDC provider.
-2. b. Once the identity of service is confirmed, STS checks the trust policy of the IAM role to make sure that the IAM role trusts the service account.
-3.  At this point, the service account associated with the UCP and Applications RP pod is both authenticated (2a) and authorized (2b). STS therefore issues a temporary credential.
-4.  UCP and Applications RP uses this temporary credential to make API requests to manage and deploy the AWS resources.
+- (1) When the UCP or Applications RP service needs to communicate with AWS, it first sends an AssumeRole request to AWS Secure Token Service (STS). AWS STS is a web service that enables you to request temporary, limited-privilege credentials for AWS IAM users. The AssumeRole operation enables Radius to assume an IAM role and receive temporary, limited-privilege credentials.
+- (2a) STS uses the claim from this JWT to verify that it is indeed the `radius-system:ucp` service account that is making the request and verifies this by communicating with the cluster's configured OIDC provider.
+- (2b) Once the identity of service is confirmed, STS checks the trust policy of the IAM role to make sure that the IAM role trusts the service account.
+- (3) At this point, the service account associated with the UCP and Applications RP pod is both authenticated (2a) and authorized (2b). STS therefore issues a temporary credential.
+- (4) UCP and Applications RP uses this temporary credential to make API requests to manage and deploy the AWS resources.
    
 ### Pod spec when IRSA is enabled
 
@@ -117,7 +117,7 @@ At this point, the flow completes similar to step 2a, 2b, 3, and 4 in the AWS ex
 Below is pod spec for the UCP service when Radius is installed with Azure Workload Identity enabled. Radius annotates the pods with ```azure.workload.identity/use=true``` label.
 
 ```
-nithya@MacBook-Pro ~ % kubectl describe pod -n radius-system ucp        
+% kubectl describe pod -n radius-system ucp        
 Name:             ucp-cf657446-h6f7r
 Namespace:        radius-system
 Priority:         0
@@ -140,7 +140,7 @@ Containers:
       :
 ```
 
-Check out the guide on how to [Setup Az Workload Identity](https://docs.radapp.io/guides/operations/providers/azure-provider/howto-azure-provider-wi/#setup-the-azure-workload-identity-for-radius) in Radius. This contains information on configuring the trust for for the workloads in Azure.
+Check out the guide on how to [Setup Az Workload Identity](https://docs.radapp.io/guides/operations/providers/azure-provider/howto-azure-provider-wi/#setup-the-azure-workload-identity-for-radius) in Radius. This contains information on configuring the trust for the workloads in Azure.
 
 ## Comparison between providers
 
@@ -166,7 +166,7 @@ The Radius maintainers are excited to continue collaborating with the open-sourc
 - Explore the open-source [code repositories](https://github.com/radius-project).
 - Engage with the [community](https://aka.ms/radius/discord)
 
-Please refer to  [Radius Workload Identity Setup Guide](https://docs.radapp.io/guides/operations/providers/overview/) for setting up Radius with Workload Identities.
+Please refer to [Radius Workload Identity Setup Guide](https://docs.radapp.io/guides/operations/providers/overview/) for setting up Radius with Workload Identities.
 
 ## References
 
