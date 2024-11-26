@@ -30,7 +30,7 @@ The above image shows how Radius UCP leverages AWS IRSA to deploy and manage AWS
 2a. STS uses the claim from this JWT to verify that it is indeed the `radius-system:ucp` service account that is making the request and verifies this by communicating with the cluster's configured OIDC provider.
    b. Once the identity of service is confirmed, STS checks the trust policy of the IAM role to make sure that the IAM role trusts the service account.
 3.  At this point, the service account associated with the UCP and Applications RP pod is both authenticated (2a) and authorized (2b). STS therefore issues a temporary credential.
-4.  UCP and Applications RP uses this temporary credential to make API requests to manage the AWS resources.
+4.  UCP and Applications RP uses this temporary credential to make API requests to manage and deploy the AWS resources.
    
 ### Pod spec when IRSA is enabled
 
