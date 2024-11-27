@@ -102,7 +102,7 @@ Radius implements configurations in a way that avoids these drawbacks, ensuring 
 Radius allows management of Azure resources as part of your application. In order to achieve this, Radius stores two essential pieces of information:
 
 1. Cloud Provider Scope: This is the subscription ID and resource group to which the Azure resources are deployed. Cloud Provider Scope is stored as part of Radius Environment. 
-2. Azure Credential: This is the client id and tenant id of the Azure AD application that Radius uses to deploy the Azure resources.
+2. Azure Credential: This is the client ID and tenant ID of the Azure AD application that Radius uses to deploy the Azure resources.
 
 There are three Radius services that communicates with Azure to achieve this: UCP, Applications RP and Deployment Engine.
 
