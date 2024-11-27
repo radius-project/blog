@@ -70,8 +70,7 @@ See the how-to guide [setup Radius with AWS IRSA](https://docs.radapp.io/guides/
 
 ### Challenges and Solutions
 
-AWS provides a webhook which can configure the necessary settings for IRSA on pods that use the relevant service accounts. This is the [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-identity-webhook#amazon-eks-pod-identity-webhook).
-We could have used this webhook to configure Radius for IRSA. The webhook adds two additional configurations to the relevant pods on creation:
+AWS provides the [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-identity-webhook#amazon-eks-pod-identity-webhook) which helps in configuring the necessary settings for IRSA on pods that use the relevant service accounts. We could have used this webhook to configure Radius for IRSA. The webhook adds two additional configurations to the relevant pods on creation:
 * Environment variables which the supporting AWS SDK read from automatically to detect IRSA role:
   ```
   Environment:
@@ -155,8 +154,7 @@ AWS and Azure provide very similar solutions for adopting workload or service id
   azure.workload.identity/client-id: "<your-client-id>"
   ```
 
-However, AWS's webhook utilizes just one annotation, coupling a specific IAM role ARN with the intent to enable
-IRSA. While this is simpler compared to Azure's multiple configuration settings, it is not suitable for Radius due to the need to support multi-tenancy.
+However, AWS's webhook utilizes just one annotation, coupling a specific IAM role ARN with the intent to enable IRSA. While this is simpler compared to Azure's multiple configuration settings, it is not suitable for Radius due to the need to support multi-tenancy.
   ```
   eks.amazonaws.com/role-arn: arn:aws:iam::<account-number>:role/<role-name> 
   ```
