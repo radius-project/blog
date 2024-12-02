@@ -1,5 +1,5 @@
 ---
-date: "2024-12-02T08:00:00-08:00"
+date: "2024-12-02T00:00:00"
 title: "How Workload Identity Federation for Cloud Providers Work in Radius"
 linkTitle: "Cloud Identity Federation in Radius"
 author: "[Nithya Subramanian](https://www.github.com/nithyatsu)"
