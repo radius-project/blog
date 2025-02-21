@@ -1,4 +1,4 @@
 ---
-title: "Radius Blog"
+title: "Posts"
 type: blog
 ---
