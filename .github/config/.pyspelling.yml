@@ -15,5 +15,5 @@ matrix:
       - code
       - pre
   sources:
-  - 'radblog/content/posts/**/*.md'
+  - 'radblog/content/**/*.md'
   default_encoding: utf-8
