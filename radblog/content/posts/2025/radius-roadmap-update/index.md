@@ -10,9 +10,9 @@ The Radius project maintainers would like to provide a progress update on our [f
 
 We invite the community to provide feedback on our priorities to jointly grow and enhance Radius. Please bookmark the [**Radius roadmap**](https://aka.ms/radius-roadmap) for updates on the full set of roadmap priorities.
 
-{{< image src="images/gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width=800 >}}
-
 > To see video demos of the latest Radius features, visit the [Radius YouTube channel](https://youtube.com/playlist?list=PLrZ6kld_pvgz8usAJCVqvUw5evfEzBCt-&si=0wPB_E43ktbMCc1i)
+
+{{< image src="images/gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width=800 >}}
 
 ## Recent progress
 With early adopters of Radius being primarily platform engineers, GitOps support and the ability to create custom resource types are the two major feature requests. These have been part of the top priorities for Radius, with the recent release of Flux integration and custom resource types coming soon. In addition, Radius contributors have been hard at work in delivering other new features, including support for the Dapr Configuration building block. Other recent accomplishments include a new `rad resource-type create` CLI command that introduces foundational primitives for resource extensibility, while preparations for migrating to PostgreSQL lay the groundwork for further improvements to the Radius data store. These updates reflect the collaborative efforts of the Radius community to drive innovation and usability.
