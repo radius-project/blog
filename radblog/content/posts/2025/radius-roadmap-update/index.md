@@ -2,7 +2,7 @@
 date: "2025-04-21T08:00:00-08:00"
 title: "Radius feature roadmap update"
 linkTitle: "Radius roadmap update"
-author: "Radius project maintainers"
+author: "[Will Tsai](https://www.github.com/willtsai)"
 type: blog
 ---
 
