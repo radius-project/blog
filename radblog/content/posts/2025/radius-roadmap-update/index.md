@@ -12,6 +12,8 @@ We invite the community to provide feedback on our priorities to jointly grow an
 
 {{< image src="images/gh-roadmap.png" alt="screenshot of the Radius roadmap board from GitHub" width=800 >}}
 
+> To see video demos of the latest Radius features, visit the [Radius YouTube channel](https://youtube.com/playlist?list=PLrZ6kld_pvgz8usAJCVqvUw5evfEzBCt-&si=0wPB_E43ktbMCc1i)
+
 ## Recent progress
 With early adopters of Radius being primarily platform engineers, GitOps support and the ability to create custom resource types are the two major feature requests. These have been part of the top priorities for Radius, with the recent release of Flux integration and custom resource types coming soon. In addition, Radius contributors have been hard at work in delivering other new features, including support for the Dapr Configuration building block. Other recent accomplishments include a new `rad resource-type create` CLI command that introduces foundational primitives for resource extensibility, while preparations for migrating to PostgreSQL lay the groundwork for further improvements to the Radius data store. These updates reflect the collaborative efforts of the Radius community to drive innovation and usability.
 
@@ -27,7 +29,6 @@ We have added a CLI command `rad resource-type create` to create new resource-ty
 ### Preparations for using PostgreSQL as the Radius database
 In the near future, the Radius data store will be migrated from etcd to a PostgreSQL database. In preparation for this, the Helm chart for installing Radius now includes deploying PostgreSQL to the Kubernetes cluster. You can follow the progress of moving the Radius data store in [this issue](https://github.com/radius-project/radius/issues/8398).
 
-> To see more video demos of Radius features, visit the [Radius channel on YouTube](https://youtube.com/playlist?list=PLrZ6kld_pvgz8usAJCVqvUw5evfEzBCt-&si=0wPB_E43ktbMCc1i)
 ## Upcoming priorities
 Looking ahead, our feature focus will be on enhancing the extensibility of Radius, starting with the ability to create custom resource types and enabling compute platform portability into serverless container platforms. Scalability and operational improvements are also on the horizon, including control plane upgrades, support for external data stores, and ability to specify additional application configurations.
 
