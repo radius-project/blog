@@ -48,7 +48,7 @@ Ideally, developers want:
 
 ## An Application-Centric IDP
 
-A common approach platform engineers take to meet these requirements is to define an application manifest file structure and build machinery to parse the manifest and deploy the application. Many organizations have tried using custom Terraform modules and providers or attempted to use the Open Application Model (OAM) and/or Kubevella. Others are looking to use Kubernetes as their control plane for everything and implement Crossplane, AWS Controllers for Kubernetes (ACK), Azure Service Operator (ASO), or Google Config Connector (they all follow the same pattern).
+A common approach platform engineers take to meet these requirements is to define an application manifest file structure and build machinery to parse the manifest and deploy the application. Many organizations have tried using custom Terraform modules and providers or attempted to use the Open Application Model (OAM) and/or Kubevela. Others are looking to use Kubernetes as their control plane for everything and implement Crossplane, AWS Controllers for Kubernetes (ACK), Azure Service Operator (ASO), or Google Config Connector (they all follow the same pattern).
 
 There is a ton of benefits to doing this:
 

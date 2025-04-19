@@ -527,3 +527,11 @@ LinkedIn
 VNets
 VPCs
 balancers
+IDPs
+CNOE
+ACK
+ASO
+Kubevela
+CloudFormation
+Ansible
+Pulumi
