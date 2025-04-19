@@ -1,3 +1,11 @@
+---
+date: "2025-04-28T08:00:00-08:00"
+title: "Radius enables application-centric internal developer platforms"
+linkTitle: "Application-centric IDPs"
+author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
+type: blog
+---
+
 # Radius enables application-centric internal developer platforms
 
 Very early in my career I worked on a long-forgotten system called the HP-3000. I wrote batch processing applications in Pascal to process financial transactions. Then I transitioned to being a web application developer. Moving from the world where each batch application had a single executable and maybe a few shared libraries to the world of web applications was a big change. I remember trying to wrap my head around how it all worked. There were so many different applications all communicating with other applications. Of course, I quickly learned that it was a simple model-view-controller pattern, and the application was just a collection of binaries and HTML templates.
