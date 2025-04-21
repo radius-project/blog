@@ -55,4 +55,4 @@ All feedback and contributions are welcome! The community is encouraged to engag
 - Submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E) to propose new functionality or other [issue reports](https://github.com/radius-project/radius/issues/new/choose)
 - Review in-progress [designs](https://github.com/radius-project/design-notes/pulls) and [code](https://github.com/radius-project/radius/pulls)
 - Contribute directly to fix [open issues](https://github.com/radius-project/radius/issues) and [documentation](https://github.com/radius-project/docs/issues)
-- Engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?community-meetings) and [Discord](https://aka.ms/radius/discord)
+- Engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?tab=readme-ov-file#community-meetings) and [Discord](https://aka.ms/radius/discord)
