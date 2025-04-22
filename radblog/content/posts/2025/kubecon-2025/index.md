@@ -1,7 +1,7 @@
 ---
-date: "2025-04-23T08:00:00-08:00"
-title: "Radius at KubeCon London 2025"
-linkTitle: "Radius at KubeCon London"
+date: "2025-04-24T08:00:00-08:00"
+title: "Radius for Platform Engineering at KubeCon London 2025"
+linkTitle: "KubeCon London 2025"
 author: "[Jonathan Smith](https://www.linkedin.com/in/jonathan-smith-99155916/)"
 type: blog
 ---
