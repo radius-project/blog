@@ -508,9 +508,6 @@ Subramanian
 RoleARN
 AssumeRole
 roleARN
-=======
-Casper
-Zach
 customizable
 CloudRun
 ECS
@@ -535,3 +532,4 @@ Kubevela
 CloudFormation
 Ansible
 Pulumi
+learnings
