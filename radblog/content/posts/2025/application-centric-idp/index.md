@@ -1,6 +1,6 @@
 ---
 date: "2025-04-28T08:00:00-08:00"
-title: "Radius enables application-centric internal developer platforms"
+title: "Platform engineering with Radius to build application-centric IDPs"
 linkTitle: "Application-centric IDPs"
 author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
 type: blog
@@ -22,9 +22,15 @@ Even on the Workloads tab, there is no application. I would show you the AWS con
 
 Compounding this trend, the platforms we use to run our applications have also gotten more complex, more distributed, and less easy to define. Modern cloud platforms including AWS, Azure, Google Cloud, and Kubernetes were built bottom-up and infrastructure centric. But developers build applications top-down and user centric.
 
-This bias towards infrastructure has made it hard on developers. Not only are developers today expected to be experts in their users' needs, their programming language, and their application architecture, but they also must master a mix of Kubernetes, AWS, Azure, and Google Cloud. 
+What if, instead of seeing infrastructure components in my cloud console, or Kubernetes Pods and Services, we had a console which was application-centric that showed developers and operators a list of environments and the applications deployed in those environments?
+
+![traders](images/traderx.png)
+
+This is what we are building with Radius. 
 
 ### Internal Developer Platforms Today
+
+The bias of clouds towards infrastructure has made it hard on developers. Not only are developers today expected to be experts in their users' needs, their programming language, and their application architecture, but they also must master a mix of Kubernetes, AWS, Azure, and Google Cloud. 
 
 Bringing the gap between developers and infrastructure is one of the many jobs of platform engineers and internal developer platforms (IDPs). The majority of IDPs are using a combination of many components:
 
