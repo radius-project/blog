@@ -17,13 +17,15 @@ Also please check out the [Radius YouTube channel](https://www.youtube.com/@rada
 
 A recurring theme from this presentation and many other conversations that I had at KubeCon is how Radius enables platform engineers to provide an application-centric experience through their IDPs. I have the good fortune to work with so many platform engineering teams from around the world. Those teams have taught me a ton about the problems they are solving via for enterprise application teams via custom IDPs, the challenges they face, and the increasingly rich ecosystem of open-source technologies they leverage in their day-to-day work. This diagram from CNOE (as snipped from the slide deck above) does a great job as a reference architecture including common open-source technologies used to build IDPs. Many platform teams use open-source technologies like Kubernetes for their compute platform, Terraform for infrastructure as code, Backstage as the UI framework for their developer portals, ArgoCD or Flux for GitOps workflows, etc.
 
-![cnoe](images/cnoe.png)
+<br>
+{{< image src="images/cnoe.png" alt="diagram of a reference internal developer platform architecture from the CNOE project" width="750" >}}
 
 Radius maintainers, along with our platform engineering early adopters found common cause around an important concept and technology that is *missing* in this landscape: the notion of what you can think of as an “application model,” or an “application platform.” That gap matters a lot, because developers live and breathe applications: It’s what they design, build, support. It’s what they reason about in their day-to-day work. But, in the world of distributed systems and cloud native technologies, it’s gotten increasingly difficult to reason about an application as an entity or even agree on what an application is and what its boundaries are. That ambiguity, in addition to the myriad challenges with cloud development, just further increases the cognitive load developers struggle with, which ironically is what IDPs are explicitly designed to reduce. Platform engineers require an open-source project to draw from, along with those illustrated above, that allows them to build an application-centric developer experience. That’s where Radius comes in: Radius is the application model platform engineers use to provide an application-centric developer experience integrated with other key open-source technologies used in their IDPs like Terraform, Flux, and Backstage.
 
 Radius is open-source (CNCF), it is cloud-agnostic and it allows you to create custom application resources tailored precisely to the needs of your developers. 
 
-![cnoe+radius](images/cnoe+radius.png)
+<br>
+{{< image src="images/cnoe+radius.png" alt="diagram of a reference internal developer platform architecture from the CNOE project with a Radius application model box overlayed on top" width="750" >}}
 
 Please watch the [KubeCon presentation from Millennium bcp](https://www.youtube.com/watch?v=ZmcZlDCYDgE) mentioned above. And watch this blog for future posts on how Radius is used by platform engineers in IDPs to: 
 
