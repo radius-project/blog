@@ -19,7 +19,7 @@ A recurring theme from this presentation and many other conversations that I had
 
 <br>
 {{< image src="images/cnoe.png" alt="diagram of a reference internal developer platform architecture from the CNOE project" width="750" >}}
-<br>
+<br><br>
 
 Radius maintainers, along with our platform engineering early adopters found common cause around an important concept and technology that is *missing* in this landscape: the notion of what you can think of as an “application model,” or an “application platform.” That gap matters a lot, because developers live and breathe applications: It’s what they design, build, support. It’s what they reason about in their day-to-day work. But, in the world of distributed systems and cloud native technologies, it’s gotten increasingly difficult to reason about an application as an entity or even agree on what an application is and what its boundaries are. That ambiguity, in addition to the myriad challenges with cloud development, just further increases the cognitive load developers struggle with, which ironically is what IDPs are explicitly designed to reduce. Platform engineers require an open-source project to draw from, along with those illustrated above, that allows them to build an application-centric developer experience. That’s where Radius comes in: Radius is the application model platform engineers use to provide an application-centric developer experience integrated with other key open-source technologies used in their IDPs like Terraform, Flux, and Backstage.
 
@@ -27,7 +27,7 @@ Radius is open-source (CNCF), it is cloud-agnostic and it allows you to create c
 
 <br>
 {{< image src="images/cnoe+radius.png" alt="diagram of a reference internal developer platform architecture from the CNOE project with a Radius application model box overlayed on top" width="750" >}}
-<br>
+<br><br>
 
 Please watch the [KubeCon presentation from Millennium bcp](https://www.youtube.com/watch?v=ZmcZlDCYDgE) mentioned above. And watch this blog for future posts on how Radius is used by platform engineers in IDPs to: 
 
