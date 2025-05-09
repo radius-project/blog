@@ -26,50 +26,93 @@ What if, instead of seeing infrastructure components in my cloud console, or Kub
 
 ![traders](images/traderx.png)
 
-This is what we are building with Radius. 
+This is why we are building with Radius. 
 
-### Internal Developer Platforms Today
+Radius provides platform engineers an open-source, cloud agnostic, application platform.  Radius can be integrated into internal developer platforms (IDPs) to give developers a more application centric experience.  For more context regarding how Radius related to other open-source projects used by platform engineers, please see [Platform Engineering with Radius at KubeCon London 2025](https://blog.radapp.io/posts/2025/04/24/platform-engineering-with-radius-at-kubecon-london-2025/.)
 
-The bias of clouds towards infrastructure has made it hard on developers. Not only are developers today expected to be experts in their users' needs, their programming language, and their application architecture, but they also must master a mix of Kubernetes, AWS, Azure, and Google Cloud. 
+### Applicatoin Centric Developer Experience with Radius
+Let’s take a look at the specifics of the application-centric developer experience when creating a Radius application.  Radius provides an application-centric experience in two basic ways: 
+1)Radius allows a developer to focus entirely on their application design without intermingling cloud infrastructure concepts within their application.  Specifically, Radius enables defining an application once and deploying it across clouds (private cloud, AWS, Azure), without the developer having to understand the nuances of each.  Radius also provides consistent syntax for defining application resources whether they run in the cloud (like AWS MemoryDB) or on Kubernetes (like a frontend container). 
+2)An output of every Radius application deployment is an application graph, just like the one for the TraderX app shown above.  So, the developer and other members of an enterprise application team all understand exactly what the application is, all of it’s software and infrastructure components sand how they are all connected.  The graph makes very clear what the application is and all of its component dependencies. 
+To better understand this application-centric experience, imagine you are an enterprise application developer very familiar with writing and containerizing runtime application code but not familiar with cloud infrastructure deployment and configuration.  You want to just describe your application and deploy it to whatever cloud your company prefers, whether private-cloud, AWS or Azure.  To provide this experience in a real-world scenario, your infrastructure operator would configure your Radius environment to enable the following developer experience.  More on this later.  For now, we’ll just walk through a simple example that you can try out yourself at Radius Getting Started guide.
+We’ll start with the description of a very simple ToDo list application that includes only two resources: a frontend container and a Redis cache.  These resource types are both natively supported in Radius. (In a future post, we’ll explain how to extend Radius by adding your own custom resource types).  Here's the Radius application code written in the Bicep language:
 
-Bringing the gap between developers and infrastructure is one of the many jobs of platform engineers and internal developer platforms (IDPs). The majority of IDPs are using a combination of many components:
+```
+//This is a Radius application file named app.bicep.
 
-* Backstage as a developer portal
-* Helm, Terraform, or other infrastructure as code language
-* Kubernetes
-* A CI/CD system such as ArgoCD
-* A Git repository and container registry
+// Import the set of Radius resources (Applications.*) into Bicep
+extension radius
 
-Of course there are so many other components and capabilities that could be added to an IDP. The [CNOE project](https://cnoe.io/docs/intro/technology) is a great example of a reference architecture and reference implementation. CNOE is a great starting point for building an IDP. But it is also emblematic of the challenges discussed earlier. It's very infrastructure centric and developers are expected to author Terraform configurations and/or Crossplane compositions.
+@description('The app ID of your Radius Application. Set automatically by the rad CLI.')
+param application string
 
-Ideally, developers want:
+//This is a frontend container named 'demo'
+resource demo 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'demo'
+  properties: {
+    application: application
+    container: {
+      image: 'ghcr.io/radius-project/samples/demo:latest'
+      ports: {
+        web: {
+          containerPort: 3000
+        }
+      }
+    }
+//The following connection makes it easy to connect this frontend container 
+// to the database defined further below
+    connections: {
+      redis: {
+        source: db.id
+      }
+    }
+  }
+}
 
-* To focus on their users and their application as much as possible and not their application's infrastructure
-* High quality developer documentation for using the IDP which include reference information, examples, and who to contact for help
-* Confidence that their application will run as expected whether the application is running locally or in the cloud environment
-* A dashboard for visualizing their application and application resources and how they are deployed
-* An integrated development environment with extensions for using the IDP
+param environment string
+//This is the definition of the database resource, named 'db'.
+//It is a Redis cache, which is a type of datastore.
+resource db 'Applications.Datastores/redisCaches@2023-10-01-preview' = {
+  name: 'db'
+  properties: {
+    application: application
+    environment: environment
+  }
+}
+```
+You can see the frontend container (‘demo’) in this application is created using the ‘resource’ key word, which just tells Radius to create an application resource, in this case one of type container.  This container has only a few parameters, including a container image file and a container port.  The container also includes a Radius “connection,” which is a powerful feature.  Connections enable Radius to do a lot of work behind the scenes for the developer, including showing explicit connections in an application graph, like the TraderX application graph pictured above. With Connections, Radius also automatically injects details like connection strings and credentials into the container as environment variables. This tells the container how to connect to Redis no matter where Redis is deployed (on-premise, on AWS or on Azure) so the developer doesn’t have to grapple with all these details.  
+It's also very easy for the developer to add a database to this application.  The developer creates a resource named ‘db’ of type redisCaches with only an application and an environment parameter.  Per the connection defined in the frontend container above, ‘db’ is explicitly connected to the frontned container, ‘demo.’   Notice that even though the container is a kubernetes specific resource and redis is a service that could run in any cloud environment, the syntax for creating both the container and the redis cache is consistent. 
+That’s it!  Your first Radius application is ready to deploy! But, before we look at the deployment experience, let’s pause to highlight some things you do not see in this Radius application definition: Beyond creating a redis resource named ‘db’, there are no infrastructure details.  As a developer, you are not concerned about how Redis is configured and deployed, how your application will authenticate to Redis, how Redis connects to your frontend container, or even where Redis will ultimately run (on-premise, AWS or Azure).  You just say you need Redis and you need it connected to your frontend container, and Radius uses a feature called “Recipes” to do the rest for the developer.  That’s one of the reasons Radius provides an application centric experience: Developers focus entirely on their applications, not on the details of underlying infrastructure deployment and configuration. 
+Now, here’s the developer’s deployment experience from the Radius CLI.  (In a real world scenario, Radius application deployments would more likely happen via a GitOps tool like ArgoCD.  We’ll discuss Radius integration with GitOps tools in a future post).  To deploy this application to, say, your default local environment, from the rad CLI, you would run 
 
-## An Application-Centric IDP
+```
+rad run app.bicep
+```
+The run command deploys the application and it sets up port forwarding so you can: 
+1) browse the applications graph at https://localhost:7007, which is a Backstage based Dashboard that allows you to browse all the details of your Radius application. The application graph is created every time you deploy and application. So, you can always easily see the application you deployed, the resources that make up that application, including all of its dependent infrastructure.
+2)Browse the actual working application at https://localhost:3000.
 
-A common approach platform engineers take to meet these requirements is to define an application manifest file structure and build machinery to parse the manifest and deploy the application. Many organizations have tried using custom Terraform modules and providers or attempted to use the Open Application Model (OAM) and/or Kubevela. Others are looking to use Kubernetes as their control plane for everything and implement Crossplane, AWS Controllers for Kubernetes (ACK), Azure Service Operator (ASO), or Google Config Connector (they all follow the same pattern).
+Let’s first take a look at the application graph at https://localhost:7007.  
 
-There is a ton of benefits to doing this:
+<insert dashboard image>
+This application graph shows only two nodes: the frontend container and the redis cache defined in the app.bicep file above.  The two resources are explicitly connected to each other per the  ‘connection’ code block discussed above.  Radius application graphs are as simple or as rich as the application they describe, as we saw in the TraderX application graph above.  Whether simple or complex, the graph makes it trivial to visualize any application you have deployed, which contributes to a more application-centric experience for developers and their operator and SRE counterparts. 
+Navigating to the actual running application at https://localhost:3000, we see 
+<insert todo list app image>
+The ToDo list application has a Container Info tab that shows all of the environment variables Radius automatically created inside of the container based on the connection code block in the Radius application description.  When writing this Radius application, the developer was focused on declaring the intent to have the frontend container and the redis connected but then Radius took case of these connection details behind the scenes.
 
-* Organizations can rationalize all their cloud resources by connecting it back to a canonical application resource (not just a label or annotation)
-* All developers within the organization are using the same set of resource types defined by the platform engineers
-* These resource types are specific to the organization and customized to meet the organization's structure, workflow, and culture; maybe the resource types are high level abstractions with minimal knobs and levers, or maybe they are foundational with tons of customization options
-* Since the resource types are agnostic of the implementation, developers never have to write Helm charts, CloudFormation templates, Bicep templates, or Terraform configurations
+Lastly, let’s take a look at the deployment experience for deploying the same todolist application to Amazon Web Services and Azure.
+This is completely consistent with the local deployment above, the developer just changes the target Radius environment for the application deployment.  Above the target was a default local environment.  Below assumes your Radius environment for Amazon Web Services is named aws, and your environment for Azure is named azure.
+To deploy the application unchanged to AWS you would run rad deploy app.bicep aws
+To deploy the application unchanged to Azure you would run rad deploy app.bicep azure 
+In both cases, the application is deployed to the target environment without the developer having to make environment specific changes to the application.
 
-The challenge is that there is no common solution in the cloud-native ecosystem for implementing this. There are so many different tools for deploying applications (CloudFormation, Terraform, Bicep, Google Deployment Manager, Crossplane, Pulumi, Ansible, etc.), and each one has different capabilities building a great developer experience. We've heard from many platform teams who have attempted this model and they have told us time and again how hard it is.
+## Recipes
 
-## Application and Resource Definitions
+The application-centric experience described above is largely enabled by a Radius feature called Recipes. In a future post, we’ll explain how Terraform and Bicep recipes work, how they enable the developer experience described above and how they are authored by infrastructure operators.
 
-That's where Radius comes in. We are building Radius to be a cloud provider- and container platform-agnostic application and resource definition solution for building application-centric IDPs.
+## Conclusion
 
-![idp-ref-architecture](images/idp-ref-architecture.png)
-
-Over the next several months, you will hear more about our vision for how Radius can help organizations build application-centric internal developer platforms. If you have joined any of our community meetings, you have already heard about our first steps by making Radius resource types extensible. We can't wait to share with our community more examples about using Radius resource types and recipes to create complex composite resource types and integrating those into VS Code to build powerful and customized developer experiences.
+Radius is an open source, cloud agnostic application platform that you can integrate into your internal developer platform (IDP) to provide an application centric experience for your developer customers.  Radius provides an application-centric experience in two basic ways: 1)it allows a developer to focus entirely on their application design without intermingling cloud infrastructure deployment or concepts within their application; 2)An output of every Radius application deployment is an application graph, that makes it easy for everyone in an enterprise application team to see the application as it is deployed.
 
 ## Learn More and Contribute
 
