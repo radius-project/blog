@@ -41,7 +41,7 @@ To better understand this application-centric experience, imagine you are an ent
 
 We’ll start with the description of a very simple ToDo list application that includes only two resources: a frontend container and a Redis cache.  These resource types are both natively supported in Radius. (In a future post, we’ll explain how to extend Radius by adding your own custom resource types).  Here's the Radius application description, which is written in the Bicep language:
 
-```
+```bicep
 //This is a Radius application file named app.bicep.
 
 // Import the set of Radius resources (Applications.*) into Bicep
@@ -93,7 +93,7 @@ But, before we look at the deployment experience, let’s pause to highlight som
 
 Now, here’s the deployment experience using the Radius CLI.  (In a real world scenario, Radius application deployments would more likely happen via a GitOps tool like ArgoCD.  We’ll discuss Radius integration with GitOps tools in a future post).  To deploy this application to, say, your default local environment, from the rad CLI, you would run 
 
-```
+```bash
 rad run app.bicep
 ```
 The run command deploys the application and it sets up port forwarding so you can: 
@@ -119,11 +119,11 @@ The ToDo list application has a Container Info tab that shows all of the environ
 Lastly, let’s take a look at the deployment experience for deploying the same todo list application to Amazon Web Services and Azure.  This experience is completely consistent with the local deployment above, the developer just changes the target Radius environment for the application deployment.  Above the target was a default local environment.  Below assumes your Radius environment for Amazon Web Services is named aws, and your environment for Azure is named azure.
 
 To deploy the application unchanged to AWS you would run 
-```
+```bash
 rad deploy app.bicep aws
 ```
 To deploy the application unchanged to Azure you would run 
-```
+```bash
 rad deploy app.bicep azure 
 ```
 In both cases, the application is deployed to the target cloud environment without the developer having to make environment specific changes to the application description.
