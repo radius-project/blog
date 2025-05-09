@@ -102,11 +102,13 @@ The run command deploys the application and it sets up port forwarding so you ca
 
 Let’s first take a look at the application graph at https://localhost:7007. 
 
+![Application Graph](images/RadiusAppGraph.png)
 {{< image src="images/RadiusAppGraph.png" alt="Radius Application Graph" width="600" >}}
 
 This application graph shows only two nodes: the frontend container and the redis cache defined in the app.bicep file above.  The two resources are explicitly connected to each other per the  ‘connection’ code block discussed above.  Radius application graphs are as simple or as rich as the application they describe, as we saw in the TraderX application graph above.  Regardless, the graph makes it trivial to visualize any application you have deployed, which contributes to a more application-centric experience for developers and their operator and SRE counterparts. 
 Navigating to the actual running application at https://localhost:3000, we see 
 
+![Application Graph](images/RadiusToDolistApp.png)
 {{< image src="images/RadiusToDolistApp.png" alt="Radius ToDO list Application" width="600" >}}
 
 The ToDo list application has a Container Info tab that shows all of the environment variables Radius automatically created inside of the container based on the connection code block in the Radius application description.  When writing this Radius application, the developer was focused on declaring the intent to have the frontend container and the redis connected but then Radius took care of these connection details behind the scenes.
