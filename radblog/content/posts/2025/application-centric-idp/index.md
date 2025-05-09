@@ -130,7 +130,7 @@ In both cases, the application is deployed to the target cloud environment witho
 
 ## Recipes
 
-The application-centric experience described above is largely enabled by a Radius feature called Recipes. In a future post, we’ll explain Recipes (which are written in either Terraform or Bicep), how they enable the developer experience described above and how they are authored by infrastructure operators.
+The application-centric experience described above is largely enabled by a Radius feature called [Recipes](https://docs.radapp.io/guides/recipes/overview/). In a future post, we’ll explain Recipes (which are written in either Terraform or Bicep), how they enable the developer experience described above and how they are authored by infrastructure operators.
 
 ## Conclusion
 
