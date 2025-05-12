@@ -58,7 +58,7 @@ The **DeploymentTemplate Controller** [[Code](https://github.com/radius-project/
 
 ## Extensibility
 
-The design of this feature in Radius is intentionally pluggable and component-ized to allow for future extensibility. We have built the first-class support for Flux first, but the design allows for other GitOps tools to be integrated in the future.
+The design of this feature in Radius is intentionally pluggable to allow for future extensibility. We have built the first-class support for Flux first, but the design allows for other GitOps tools to be integrated in the future.
 
 ### ArgoCD
 
