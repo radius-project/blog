@@ -30,7 +30,7 @@ That's why we built Radius: To make it easy for Platform Engineers to ensure the
 
 Radius provides platform engineers an open-source, cloud agnostic, application platform.  Radius can be integrated into internal developer platforms (IDPs) to give developers a more application centric experience.  For more context regarding how Radius relates to other open-source projects used by platform engineers, please see [Platform Engineering with Radius at KubeCon London 2025](https://blog.radapp.io/posts/2025/04/24/platform-engineering-with-radius-at-kubecon-london-2025/.)
 
-### Application Centric Developer Experience with Radius
+## Application Centric Developer Experience with Radius
 
 Let’s take a look at the specifics of the application-centric developer experience when creating a Radius application.  Radius provides an application-centric experience in two basic ways: 
 
