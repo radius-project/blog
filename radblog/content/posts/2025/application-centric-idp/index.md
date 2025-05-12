@@ -99,19 +99,19 @@ rad run app.bicep
 ```
 The run command deploys the application and it sets up port forwarding so you can: 
 
-1. Browse the applications graph at https://localhost:7007, which is a Backstage based Dashboard that allows you to browse all the details of your Radius application. The application graph is created every time you deploy a Radius application. So, you can always easily see the application you deployed, the resources that make up that application, including all of its dependent infrastructure.
+1. Browse the applications graph at [https://localhost:7007](https://localhost:7007), which is a Backstage based Dashboard that allows you to browse all the details of your Radius application. The application graph is created every time you deploy a Radius application. So, you can always easily see the application you deployed, the resources that make up that application, including all of its dependent infrastructure.
 
-2. Browse the actual running application at https://localhost:3000.
+2. Browse the actual running application at [https://localhost:3000](https://localhost:3000).
 
 
-Let’s first take a look at the application graph at https://localhost:7007. 
+Let’s first take a look at the application graph at [https://localhost:7007](https://localhost:7007). 
 
 ![Application Graph](images/RadiusAppGraph.png)
 
 
 This application graph shows only two nodes: the frontend container and the Redis cache defined in the `app.bicep` file above.  The two resources are explicitly connected to each other per the  `connection` property discussed above.  Radius application graphs are as simple or as rich as the application they describe, as we saw in the TraderX application graph above.  Regardless, the graph makes it trivial to visualize any application you have deployed, which contributes to a more application-centric experience for developers and their operator and SRE counterparts. 
 
-Navigating to the actual running application at https://localhost:3000, we see 
+Navigating to the actual running application at [https://localhost:3000](https://localhost:3000), we see 
 
 ![Application Graph](images/RadiusToDolistApp.png)
 
@@ -144,6 +144,7 @@ Radius is an open source, cloud agnostic application platform that you can integ
 To replicate the steps for deploying the simple Radius discussed above, please try the [Radius Getting Started Guide](https://docs.radapp.io/getting-started).
 
 ## Learn More and Contribute
+
 If you are a platform engineer, we invite you to try using Radius in your internal developer platform to provide a more application centric experience.
 We also invite everyone in the open source community to get involved with the Radius project. Your perspective and contributions are immensely valuable. 
 
