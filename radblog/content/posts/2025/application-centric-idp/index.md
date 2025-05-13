@@ -1,5 +1,5 @@
 ---
-date: "2025-05-12T08:00:00-08:00"
+date: "2025-05-13T08:00:00-08:00"
 title: "Platform Engineering with Radius to build application-centric IDPs"
 linkTitle: "Application-centric IDPs"
 author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
