@@ -1,5 +1,5 @@
 # Site Configuration
-baseURL = "https://blog.radapp.dev"
+baseURL = "https://blog.radapp.io"
 languageCode = "en-us"
 title = "Radius Blog"
 theme = "docsy"
@@ -10,7 +10,7 @@ posts = "/:section/:year/:month/:day/:slug/"
 
 # Google Analytics
 [services.googleAnalytics]
-id = "G-9JR8B6TPF9"
+id = "G-SZ71KL0YSK"
 
 enableGitInfo = true
 
@@ -24,12 +24,12 @@ enableGitInfo = true
 [[menu.main]]
     name = "Home"
     weight = 10
-    url = "https://radapp.dev"
+    url = "https://radapp.io/"
     pre = "<i class='fas fa-home'></i>"
 [[menu.main]]
     name = "Docs"
     weight = 30
-    url = "https://docs.radapp.dev/"
+    url = "https://docs.radapp.io/"
     pre = "<i class='fas fa-file'></i>"
 [[menu.main]]
     name = "GitHub"
@@ -37,14 +37,9 @@ enableGitInfo = true
     url = "https://github.com/radius-project"
     pre = "<i class='fab fa-github'></i>"
 [[menu.main]]
-    name = "Community"
-    weight = 70
-    url = "https://aka.ms/projectradius"
-    pre = "<i class='fas fa-comment'></i>"
-[[menu.main]]
     name = "Discord"
     weight = 90
-    url = "https://discord.com/channels/1113519723347456110/1113519723930468455"
+    url = "https://aka.ms/Radius/Discord"
     pre = "<i class='fab fa-discord'></i>"
 
 # UI Customization

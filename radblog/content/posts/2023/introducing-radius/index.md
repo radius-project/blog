@@ -1,6 +1,6 @@
 ---
-date: "2023-10-18T09:00:00-08:00"
-title: "Enabling developer collaboration with Radius"
+date: "2023-10-18T00:00:00"
+title: "Introducing Radius, a new open-source application platform for cloud-native apps"
 linkTitle: "Introducing Radius"
 author: Radius project maintainers
 type: blog
@@ -14,7 +14,7 @@ Applications are, of course, so much more than just Kubernetes and flat lists of
 
 ## A single tool to describe, deploy, and manage your entire application
 
-Radius is focused on solving platform engineering challenges involved in supporting application deployments across on-premises infrastructure and cloud providers like [Microsoft Azure](https://azure.microsoft.com/en-us) and Amazon Web Services. Meeting developers and operators where they are today, Radius offers built-in support for some of the most popular app development tools like Dapr, and infrastructure as code (IaC) languages like Terraform and Bicep. Designed to fit into, rather than disrupt, existing development tasks and CI/CD pipelines, Radius works to help developers better understand all the components that comprise their applications and takes care of platform configurations like permissions, connection strings, and more to simplify their tasks. As a result, operators can ensure that all applications are deployed in compliance with organizational policies, then use Radius to manage the application and its resources.
+Radius is focused on solving platform engineering challenges involved in supporting application deployments across on-premises infrastructure and cloud providers like Microsoft Azure and Amazon Web Services. Meeting developers and operators where they are today, Radius offers built-in support for some of the most popular app development tools like Dapr, and infrastructure as code (IaC) languages like Terraform and Bicep. Designed to fit into, rather than disrupt, existing development tasks and CI/CD pipelines, Radius works to help developers better understand all the components that comprise their applications and takes care of platform configurations like permissions, connection strings, and more to simplify their tasks. As a result, operators can ensure that all applications are deployed in compliance with organizational policies, then use Radius to manage the application and its resources.
 
 <img src="radius-diagram.png" alt="Radius introduces an application graph, provides infrastructure Recipes, and offers a simplified and consistent application development experience for teams building cloud-native apps across cloud and edge." width="600"/>
 
@@ -30,7 +30,7 @@ In this first release, the focus is on the features that are most foundational t
 
 To meet the growing business and technical needs for multi-cloud architectures, applications defined and managed with Radius can be deployed and run on any cloud using the same set of tools, meaning that the application code, definitions, and development workflows remain consistent. Agnostic to whether the application is deployed to Azure, AWS, or on-premises the authoring, deployment, and management experience remains the same. Furthermore, Radius makes it easy to connect and leverage many popular services such as Redis, Mongo, Dapr, and SQL, with more to be added as the needs and requirements of the community grows.
 
-For example, imagine an application that leverages a Mongo database. When running locally, the developer may want to use a Mongo container and when running in production, operators may want to enforce the use of high-throughput databases. With Radius, developers can model a Mongo resource in their app and use its connection string during their development and testing stages. When it comes time to deploy in production, developers can swap their application resources by changing just their app definition connections to services like [Azure CosmosDB](https://azure.microsoft.com/en-us/products/cosmos-db/) or AWS DocumentDB that have been pre-configured by operators. In other words, changing the backing infrastructure for an application in Radius no longer requires app code or configuration changes.
+For example, imagine an application that leverages a SQL database. When running locally, the developer may want to use a SQL container and when running in production, operators may want to enforce the use of high-throughput databases. With Radius, developers can model a SQL resource in their app and use its connection string during their development and testing stages. When it comes time to deploy in production, developers can swap their application resources by changing just their app definition connections to services like Azure SQL DB or AWS RDS that have been pre-configured by operators. In other words, changing the backing infrastructure for an application in Radius no longer requires app code or configuration changes.
 
 <img src="figure-1.png" alt="Figure 1. Connections enables a consistent API and allows for binding to different backing resources or infrastructures." width="600"/>
 
