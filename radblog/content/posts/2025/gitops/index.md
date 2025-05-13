@@ -6,7 +6,7 @@ author: "[Will Smith](https://www.github.com/willdavsmith)"
 type: blog
 ---
 
-GitOps is an approach to managing infrastructure and applications using Git as the single source of truth. This approach provides several benefits - including declarative management of infrastructure definitions and auditable change logs. Radius fits nicely into this workflow, allowing you to define your applications and infrastructure with Radius and then use GitOps to deploy and manage them across your deployment platforms.
+GitOps is an approach to managing infrastructure and applications using Git as the single source of truth and has become quite popular in the DevOps and Platform Engineering disciplines. This approach provides several benefits - including declarative management of infrastructure definitions and auditable change logs. Radius fits nicely into this workflow, allowing you to define your applications and infrastructure with Radius and then use GitOps to deploy and manage them across your deployment platforms.
 
 Radius has built first-class support for [Flux](https://fluxcd.io/), a GitOps tool designed to work with Kubernetes and provides a powerful set of features for managing applications and infrastructure through Git.
 
