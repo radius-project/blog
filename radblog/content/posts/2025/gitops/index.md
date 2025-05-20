@@ -1,6 +1,6 @@
 ---
-date: "2025-05-10T08:00:00-08:00"
-title: "Integrating Radius into your GitOps Flux workflow"
+date: "2025-05-20T08:00:00-08:00"
+title: "Platform Engineering : Integrating Radius into your GitOps Flux workflow"
 linkTitle: "Radius + GitOps with Flux"
 author: "[Will Smith](https://www.github.com/willdavsmith)"
 type: blog
@@ -62,7 +62,7 @@ The design of this feature in Radius is intentionally pluggable to allow for fut
 
 ### ArgoCD
 
-Similar to Flux, [ArgoCD]() is another popular GitOps tool for Kubernetes. The design of the Radius GitOps integration allows for ArgoCD to be integrated in the future. We have a [GitHub issue](https://github.com/radius-project/radius/issues/6942) open to track the progress of this integration, so if you are interested in this work or would like to contribute, please feel free to comment on the issue.
+Similar to Flux, [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) is another popular GitOps tool for Kubernetes. The design of the Radius GitOps integration allows for ArgoCD to be integrated in the future. We have a [GitHub issue](https://github.com/radius-project/radius/issues/6942) open to track the progress of this integration, so if you are interested in this work or would like to contribute, please feel free to comment on the issue.
 
 Using the existing design, ArgoCD could integrate with Radius in a similar way to Flux. ArgoCD would watch for changes to the remote Git repository, and some replacement for the `radius-flux-controller` would be responsible for creating and updating the `DeploymentTemplate` resources in the cluster. As long as this `DeploymentTemplate` resources is created and updated when the Git repository changes, Radius will handle the rest of the deployment process.
 
