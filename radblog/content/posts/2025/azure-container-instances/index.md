@@ -58,7 +58,7 @@ resource env 'Applications.Core/environments@2023-10-01-preview' = {
 
 Then, just like any other Radius environment, you deploy this ACI environment using the `rad deploy` command. When Radius creates and deploys the environment, it will provision the relevant Azure resources required to host your applications in ACI, including the virtual network, internal load balancer, and network security group.
 
-{{< image src="images/azure-portal-env.png" alt="screenshot of the Azure portal showing the ACI environment created by Radius" width=800 >}}
+{{< image src="images/azure-portal-env.png" alt="screenshot of the Azure portal showing the ACI environment created by Radius" width=600 >}}
 
 ### Define and deploy your application
 
@@ -80,7 +80,8 @@ rad deploy ./app.bicep --workspace aci-workspace
 
 Behind the scenes, Radius handles the translation of your application model into the appropriate Azure resources, including container groups and networking components, and provisions them accordingly on your behalf:
 
-{{< image src="images/azure-portal-env.png" alt="screenshot of the Azure portal showing the ACI environment created by Radius" width=800 >}}
+{{< image src="images/azure-portal-env.png" alt="screenshot of the Azure portal showing the ACI environment created by Radius" width=600 >}}
+<br>
 
 The entire process leverages Radius's application-centric approach, allowing you to focus on defining what your application needs rather than the underlying infrastructure details specific to ACI.
 
