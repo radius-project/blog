@@ -62,11 +62,25 @@ Then, just like any other Radius environment, you deploy this ACI environment us
 
 ### Define and deploy your application
 
-To deploy an application to ACI, you'll define your application using the Radius application model in a Bicep file. This includes your container specifications, environment variables, and any required connections to other resources. The beauty of Radius is that these application definitions remain consistent regardless of whether you're targeting Kubernetes or ACI.
+With your environment ready, you can proceed to deploy your application to ACI without changing how you define your applications in Radius. Your Radius application definition includes your container specifications, environment variables, and any required connections to other resources. The beauty of Radius is that the application definitions remain consistent regardless of whether you're targeting Kubernetes or ACI.
 
-Once your application is defined, you can deploy it using the `rad deploy` command, specifying ACI as your target platform. Radius handles the translation of your application model into the appropriate ACI resources, including container groups and networking components.
+Once your application is defined, you can deploy it using the `rad deploy` command, specifying ACI as your target platform.
 
-After deployment, you can use the `rad resource list` command to view your running application and its associated resources. For applications with exposed endpoints, Radius automatically configures the networking so your services are accessible.
+For example, if you have an application defined in a Bicep file named `app.bicep`, you can deploy it to your ACI environment like this:
+
+```bash
+rad deploy ./app.bicep --environment aci-demo
+```
+
+Alternatively, if you have a workspace set up for ACI, you can deploy your application using the workspace flag:
+
+```bash
+rad deploy ./app.bicep --workspace aci-workspace
+```
+
+Behind the scenes, Radius handles the translation of your application model into the appropriate Azure resources, including container groups and networking components, and provisions them accordingly on your behalf:
+
+{{< image src="images/azure-portal-env.png" alt="screenshot of the Azure portal showing the ACI environment created by Radius" width=800 >}}
 
 The entire process leverages Radius's application-centric approach, allowing you to focus on defining what your application needs rather than the underlying infrastructure details specific to ACI.
 
