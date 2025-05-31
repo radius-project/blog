@@ -80,7 +80,7 @@ rad deploy ./app.bicep --workspace aci-workspace
 
 Behind the scenes, Radius handles the translation of your application model into the appropriate Azure resources, including container groups and networking components, and provisions them accordingly on your behalf:
 
-{{< image src="images/azure-portal-env.png" alt="screenshot of the Azure portal showing the ACI environment created by Radius" width=600 >}}
+{{< image src="images/azure-portal-app.png" alt="screenshot of the Azure portal showing the ACI environment and application resources created by Radius" width=600 >}}
 <br>
 
 The entire process leverages Radius's application-centric approach, allowing you to focus on defining what your application needs rather than the underlying infrastructure details specific to ACI.
