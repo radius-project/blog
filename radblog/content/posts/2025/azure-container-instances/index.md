@@ -119,7 +119,7 @@ This new design will enable:
 
 ### Support for platform-specific capabilities
 
-As a part of the new extensibility model, we plan to enable support for Radius users to access platform-specific capabilities in their applications. This means that while Radius will continue to provide a consistent application model across different platforms, users will also be able to leverage unique features of each platform when targeting deployments to applicable environments. For example, Radius users should be able to deploy to confidential containers when targeting the deployment to an ACI environment.
+As a part of the new extensibility model, we plan to enable support for Radius users to access platform-specific capabilities in their applications. This means that while Radius will continue to provide a consistent application model across different platforms, users will also be able to leverage unique features of each platform when targeting deployments to applicable environments. For example, using a given application definition file, Radius users should be able to deploy to confidential containers when targeting the deployment to an ACI environment but not when targeting another environment that doesn't support confidential containers.
 
 ## Learn more and contribute
 
