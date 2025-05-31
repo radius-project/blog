@@ -85,33 +85,48 @@ Behind the scenes, Radius handles the translation of your application model into
 
 The entire process leverages Radius's application-centric approach, allowing you to focus on defining what your application needs rather than the underlying infrastructure details specific to ACI.
 
-## Implementation Details
+## How it works
 
-This integration leverages the Azure Container Instances API to provision and manage containers directly from Radius. The implementation maintains Radius's application-centric model while transparently handling the details of ACI resource creation and management.
+Currently, ACI support is hardcoded as imperative Go code in the Radius core codebase, including the resource provider (RP), Recipes, data model, and other components. The Environment and Container resource schemas were updated to include ACI-specific properties. If you're interested in diving deeper into the implementation details, you can refer to the code changes in [PR #9436](https://github.com/radius-project/radius/pull/9436).
 
-At Ignite 2024, the ACI Ngroups functionality was announced, which provides a single Ngroups API call to create and maintain N number of container instances using a common template. 
-This type of orchestration capability made it possible to build integration necessary to enable deployment of application containers and Ngroups resources to ACI using Radius.
-The ACI platform itself also offers advanced capabilities, such as confidential containers, spot instances, rolling upgrades, auto-scaling, and more.
-Deploying with Radius helps you create the required underlying infrastructure to deploy and host your application, for example the container instances themselves, container group profiles, Ngroups, and network infrastructure, e.g. application gateway, virtual network, load balancer.
-Coming soon is the functionality to punch-through the Radius abstraction to leverage platform-specific capabilities, for example, deploy applications to confidential containers when the deployment target is ACI.
-Stay tuned for the announcements of the availability of these Radius and ACI features!
+### ACI NGroups
+The Radius integration leverages the [ACI Ngroups functionality](https://learn.microsoft.com/en-us/azure/container-instances/container-instance-ngroups/container-instances-about-ngroups), which provides a single Ngroups API call to create and maintain N number of container instances using a common template. This type of orchestration capability made it possible to build the integration necessary to enable deployment of application containers and Ngroups resources to ACI using Radius.
+
+### Azure resources provisioned by Radius
+
+When you deploy an application to ACI using Radius, it provisions the necessary Azure resources automatically, including:
+- **Load balancer**: ACI requires an internal load balancer to manage traffic to the container instances. Radius provisions a load balancer that routes traffic to your application containers.
+- **Virtual Network**: ACI requires a virtual network for networking and security. Radius provisions a virtual network and subnet for your ACI deployments.
+- **Network Security Group**: ACI deployments require a network security group to control inbound and outbound traffic. Radius creates a security group with appropriate rules based on your application requirements.
+- **Container Group Profiles**: ACI supports container group profiles, which allow you to define common settings for multiple container groups. Radius sets up these profiles based on your application definitions, enabling consistent configurations across deployments.
+- **Container NGroups**: Radius creates container NGroups to manage multiple instances of your application containers.
+- **Container Instances**: The actual container instances are created based on your application definitions, including the container images, environment variables, and resource requirements.
 
 ## What's Next?
 
-This initial release provides the foundation for ACI support within Radius. We're continuing to enhance this integration with additional features like:
+This initial release of ACI support in Radius is just the beginning. The vision is to implement a compute platform extensibility model that allows Radius to support additional container runtimes in a more lightweight, flexible, and declarative way in lieu of the current imperative code.
 
-- Support for container groups with multiple containers
-- Additional volume types and networking options
-- Improved diagnostics and monitoring
+To learn more about or provide feedback on this new compute platform extensibility model, check out the [Compute Platform Extensibility](https://github.com/radius-project/design-notes/pull/91) design document currently in progress.
 
-We welcome your feedback on this new feature and encourage you to try deploying your Radius applications to Azure Container Instances today!
+### Redesigned compute platform extensibility model
+
+With the way ACI integration is currently implemented through imperative code, it is not readily extensible for other platforms. Expansion into each new platform requires intimate knowledge of the Radius codebase in order to make the necessary changes to support the new platform. To address this, we plan to refactor the ACI integration to make use of Radius extensibility features that leverage Radius [Recipes](https://docs.radapp.io/guides/recipes/overview/) to implement the ACI (and other platforms going forward) integration in a more declarative and extensible way.
+
+This new design will enable:
+- Architectural separation of Radius core logic from platform provisioning code
+- Community-provided extensions to support new compute platforms without Radius code changes
+- Consistent platform engineering experience across all resource types
+
+### Support for platform-specific capabilities
+
+As a part of the new extensibility model, we plan to enable support for Radius users to access platform-specific capabilities in their applications. This means that while Radius will continue to provide a consistent application model across different platforms, users will also be able to leverage unique features of each platform when targeting deployments to applicable environments. For example, Radius users should be able to deploy to confidential containers when targeting the deployment to an ACI environment.
 
 ## Learn more and contribute
 
-All feedback and contributions are welcome! The community is encouraged to engage with the Radius project in the following ways: 
+We would love for you to join us to help build Radius:
 
-- Provide feedback to influence roadmap decisions by commenting on and upvoting [existing items](https://aka.ms/radius-roadmap)
-- Submit new [feature requests](https://github.com/radius-project/radius/issues/new?assignees=&labels=feature&projects=&template=feature.md&title=%3CFEATURE+TITLE%3E) to propose new functionality or other [issue reports](https://github.com/radius-project/radius/issues/new/choose)
-- Review in-progress [designs](https://github.com/radius-project/design-notes/pulls) and [code](https://github.com/radius-project/radius/pulls)
-- Contribute directly to fix [open issues](https://github.com/radius-project/radius/issues) and [documentation](https://github.com/radius-project/docs/issues)
-- Engage with the Radius community via the [monthly community calls](https://github.com/radius-project/community?tab=readme-ov-file#community-meetings) and [Discord](https://aka.ms/radius/discord)
+* Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
+* Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
+* Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
+* Review and provide feedback on the [Compute Platform Extensibility](https://github.com/radius-project/design-notes/pull/91) design document
+* Let us know what compute platforms you would like to see supported in Radius by commenting on the [Compute Platform Extensibility](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=113169343&issue=radius-project%7Croadmap%7C73) roadmap item
