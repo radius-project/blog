@@ -106,7 +106,7 @@ When you deploy an application to ACI using Radius, it provisions the necessary 
 
 This initial release of ACI support in Radius is just the beginning. The vision is to implement a compute platform extensibility model that allows Radius to support additional container runtimes in a more lightweight, flexible, and declarative way in lieu of the current imperative code.
 
-To learn more about or provide feedback on this new compute platform extensibility model, check out the [Compute Platform Extensibility](https://github.com/radius-project/design-notes/pull/91) design document currently in progress.
+To learn more about or provide feedback on this new compute platform extensibility model, check out the [Compute Platform Extensibility design document](https://github.com/radius-project/design-notes/pull/91) currently in progress.
 
 ### Redesigned compute platform extensibility model
 
@@ -128,5 +128,5 @@ We would love for you to join us to help build Radius:
 * Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
 * Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
 * Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
-* Review and provide feedback on the [Compute Platform Extensibility](https://github.com/radius-project/design-notes/pull/91) design document
-* Let us know what compute platforms you would like to see supported in Radius by commenting on the [Compute Platform Extensibility](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=113169343&issue=radius-project%7Croadmap%7C73) roadmap item
+* Review and provide feedback on the [Compute Platform Extensibility design document](https://github.com/radius-project/design-notes/pull/91)
+* Let us know what compute platforms you would like to see supported in Radius by commenting on the [Compute Platform Extensibility roadmap item](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=113169343&issue=radius-project%7Croadmap%7C73)
