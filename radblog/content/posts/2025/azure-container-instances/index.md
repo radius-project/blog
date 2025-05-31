@@ -90,7 +90,7 @@ The entire process leverages Radius's application-centric approach, allowing you
 Currently, ACI support is hardcoded as imperative Go code in the Radius core codebase, including the resource provider (RP), Recipes, data model, and other components. The Environment and Container resource schemas were updated to include ACI-specific properties. If you're interested in diving deeper into the implementation details, you can refer to the code changes in [PR #9436](https://github.com/radius-project/radius/pull/9436).
 
 ### ACI NGroups
-The Radius integration leverages the [ACI Ngroups functionality](https://learn.microsoft.com/en-us/azure/container-instances/container-instance-ngroups/container-instances-about-ngroups), which provides a single Ngroups API call to create and maintain N number of container instances using a common template. This type of orchestration capability made it possible to build the integration necessary to enable deployment of application containers and Ngroups resources to ACI using Radius.
+The Radius integration leverages the [ACI NGroups functionality](https://learn.microsoft.com/en-us/azure/container-instances/container-instance-ngroups/container-instances-about-ngroups), which provides a single NGroups API call to create and maintain N number of container instances using a common template. This type of orchestration capability made it possible to build the integration necessary to enable deployment of application containers and NGroups resources to ACI using Radius.
 
 ### Azure resources provisioned by Radius
 
