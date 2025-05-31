@@ -119,14 +119,14 @@ This new design will enable:
 
 ### Support for platform-specific capabilities
 
-As a part of the new extensibility model, we plan to enable support for Radius users to access platform-specific capabilities in their applications. This means that while Radius will continue to provide a consistent application model across different platforms, users will also be able to leverage unique features of each platform when targeting deployments to applicable environments. For example, using a given application definition file, Radius users should be able to deploy to confidential containers when targeting the deployment to an ACI environment.
+As a part of the new extensibility model, we plan to enable support for Radius users to access platform-specific capabilities in their applications. This means that while Radius will continue to provide a consistent application model across different platforms, users will also be able to leverage unique features of each platform when targeting deployments to applicable environments. For example, Radius users should be able to deploy to confidential containers when targeting the deployment to an ACI environment.
 
 ## Learn more and contribute
 
 We would love for you to join us to help build Radius:
 
+* Review and provide feedback on the [Compute Platform Extensibility design document](https://github.com/radius-project/design-notes/pull/91)
+* Let us know what compute platforms you would like to see supported in Radius by commenting on the [Compute Platform Extensibility roadmap item](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=113169343&issue=radius-project%7Croadmap%7C73)
 * Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
 * Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
 * Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
-* Review and provide feedback on the [Compute Platform Extensibility design document](https://github.com/radius-project/design-notes/pull/91)
-* Let us know what compute platforms you would like to see supported in Radius by commenting on the [Compute Platform Extensibility roadmap item](https://github.com/orgs/radius-project/projects/8/views/1?pane=issue&itemId=113169343&issue=radius-project%7Croadmap%7C73)
