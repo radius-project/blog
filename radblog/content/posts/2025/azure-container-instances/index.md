@@ -6,7 +6,7 @@ author: "[Will Tsai](https://www.github.com/willtsai)"
 type: blog
 ---
 
-An important part of the Radius vision is to be platform agnostic, and that includes the underlying compute such that Radius can deploy the same application across different compute platforms. Thus, it's always been a goal to support additional container runtimes beyond just Kubernetes. That's why we're excited to share that Radius now supports deploying your applications to additional container platforms, beginning with [Azure Container Instances](https://docs.radapp.io/guides/author-apps/azure/azure-container-instances/). This integration provides Radius users with a serverless container runtime option that eliminates the need to maintain underlying compute infrastructure while still benefiting from the Radius application-centric approach and separation of concerns.
+An important part of the Radius vision is to be platform agnostic, and that includes the underlying compute such that Radius can deploy the same application across different compute platforms. Thus, it's always been a goal to support additional container runtimes beyond just Kubernetes. That's why we're excited to share that Radius now supports deploying your applications to additional container platforms, beginning with [Azure Container Instances](https://docs.radapp.io/guides/author-apps/azure/azure-container-instances/). This integration provides Radius users with a serverless container compute option that enables platform engineers to build developer platforms that are decoupled from specific container runtimes while still benefiting from the Radius application-centric approach and separation of concerns.
 
 > To see a demo of this feature, check out the recording of Mark Russinovich's [Inside Azure Innovations](https://youtu.be/lHBo_lDWFcI?si=U8KG05S2z-_MFkDh&t=2487) session from the Microsoft Build 2025 event
 
@@ -78,10 +78,36 @@ Alternatively, if you have a workspace set up for ACI, you can deploy your appli
 rad deploy ./app.bicep --workspace aci-workspace
 ```
 
-Behind the scenes, Radius handles the translation of your application model into the appropriate Azure resources, including container groups and networking components, and provisions them accordingly on your behalf:
+Once your deployment completes, you can run the `rad app graph` command in your terminal to view resources that were provisioned for your application:
 
-{{< image src="images/azure-portal-app.png" alt="screenshot of the Azure portal showing the ACI environment and application resources created by Radius" width=600 >}}
-<br>
+```
+Displaying application: demo-app
+
+Name: frontend (Applications.Core/containers)
+Connections:
+  gateway (Applications.Core/gateways) -> frontend
+  frontend -> database (Applications.Datastores/redisCaches)
+Resources:
+  frontend (Microsoft.ContainerInstance/containerGroupProfiles)
+  frontend (Microsoft.ContainerInstance/nGroups)
+  frontend (Microsoft.Network/loadBalancers/applications)
+  frontend (Microsoft.Network/virtualNetworks/subnets)
+
+Name: gateway (Applications.Core/gateways)
+Connections:
+  gateway -> frontend (Applications.Core/containers)
+Resources:
+  gateway (Microsoft.Network/applicationGateways)
+  gateway-nsg (Microsoft.Network/networkSecurityGroups)
+  gateway (Microsoft.Network/publicIPAddresses)
+  gateway (Microsoft.Network/virtualNetworks/subnets)
+
+Name: database (Applications.Datastores/redisCaches)
+Connections:
+  frontend (Applications.Core/containers) -> database
+Resources:
+  cache-vxkt2iou25nht (Microsoft.Cache/redis)
+```
 
 The entire process leverages Radius's application-centric approach, allowing you to focus on defining what your application needs rather than the underlying infrastructure details specific to ACI.
 
@@ -94,13 +120,16 @@ The Radius integration leverages the [ACI NGroups functionality](https://learn.m
 
 ### Azure resources provisioned by Radius
 
-When you deploy an application to ACI using Radius, it provisions the necessary Azure resources automatically, including:
+Behind the scenes, Radius handles the translation of your application model into the appropriate Azure resources, including container groups and networking components, and provisions them accordingly on your behalf:
 - **Load balancer**: ACI requires an internal load balancer to manage traffic to the container instances. Radius provisions a load balancer that routes traffic to your application containers.
 - **Virtual Network**: ACI requires a virtual network for networking and security. Radius provisions a virtual network and subnet for your ACI deployments.
 - **Network Security Group**: ACI deployments require a network security group to control inbound and outbound traffic. Radius creates a security group with appropriate rules based on your application requirements.
 - **Container Group Profiles**: ACI supports container group profiles, which allow you to define common settings for multiple container groups. Radius sets up these profiles based on your application definitions, enabling consistent configurations across deployments.
 - **Container NGroups**: Radius creates container NGroups to manage multiple instances of your application containers.
 - **Container Instances**: The actual container instances are created based on your application definitions, including the container images, environment variables, and resource requirements.
+
+{{< image src="images/azure-portal-app.png" alt="screenshot of the Azure portal showing the ACI environment and application resources created by Radius" width=600 >}}
+<br>
 
 ## What's Next?
 
@@ -115,7 +144,7 @@ With the way ACI integration is currently implemented through imperative code, i
 This new design will enable:
 - Architectural separation of Radius core logic from platform provisioning code
 - Community-provided extensions to support new compute platforms without Radius code changes
-- Consistent platform engineering experience across all resource types
+- Consistent platform engineering and developer experience across all resource types
 
 ### Support for platform-specific capabilities
 
