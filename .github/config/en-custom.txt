@@ -553,3 +553,16 @@ balancer
 Russinovich's
 hardcoded
 NGroups
+ContainerInstance
+containerGroupProfiles
+loadBalancers
+nGroups
+virtualNetworks
+applicationGateways
+networkSecurityGroups
+nsg
+publicIPAddresses
+virtualNetworks
+iou
+nht
+vxkt
