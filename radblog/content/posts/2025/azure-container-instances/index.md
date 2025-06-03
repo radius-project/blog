@@ -1,5 +1,5 @@
 ---
-date: "2026-06-02T08:00:00-08:00"
+date: "2025-06-03T08:00:00-08:00"
 title: "Deploy your Radius applications to Azure Container Instances"
 linkTitle: "Azure Container Instances"
 author: "[Will Tsai](https://www.github.com/willtsai)"
