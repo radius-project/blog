@@ -1,54 +1,221 @@
 ---
-date: "2026-06-10T08:00:00-08:00"
-title: "Radius Community Call Highlights: Introducing Custom Resource Types!"
-linkTitle: "Radius Resource Types"
-author: "[TBD](TODO)"
+date: "2025-06-16"
+title: "Introducing Radius Resource Types"
+linkTitle: "Introducing Radius Resource Types"
+author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
 type: blog
 ---
 
-The Radius Community Call on June 10, 2025, was a special one! We had the privilege of hosting Mark Russinovich, CTO of Microsoft Azure, who joined us to unveil a game-changing new capability in Radius: **Radius Resource Types**. This feature marks a significant step in our journey to simplify and empower cloud-native application development and platform engineering.
+The Radius project has been hard at work building tools that enable platform engineers to build internal developer platforms that are application-centric with great developer experience. This week Radius reached a major milestone with the launch of Radius Resource Types. Platform engineers now have complete flexibility in defining resources for developers to use in their applications and, separately, the implementation of those resources.
 
-If you missed the call, don't worry! We've got the highlights for you right here.
+When we worked large enterprises who are integrating Radius into their internal developer platform, many told us that they want to customize the API for common resource types such as a PostgreSQL database to simplify the developer experience (allowing developers to select T-shirt sizes for example). Others want to create abstract resource types such as web service that may have a reverse proxy, an application container, and an in-memory cache all in one type. Radius Resource Types enable platform engineers to accomplish these exact scenarios. In addition to the resource types built into Radius, platform engineers can now define resource types specific to their organization each with a custom API. 
 
-## A New Era of Customization: Radius Resource Types
+## Resource Types: The developer's interface
 
-Mark Russinovich kicked off the discussion by sharing the exciting news of what he termed a "relaunch" for Radius, centered around the introduction of **Radius Resource Types** (often referred to as custom resource types).
+Radius has always shipped with a catalog of common resource types. This includes core types such as Containers, Gateways, Secrets, and Volumes, but also open-source resource types including MongoDB, Redis, RabbitMQ, and others. Each resource type had a set of properties that developers could specify when defining their application.
 
-So, what are Radius Resource Types? In essence, they allow **you** to define your own resource types within Radius. This means platform engineering teams can create bespoke abstractions tailored to their organization's specific needs, standards, and operational practices.
+For example, the MongoDB resource type has properties for the database name, the host name, the port, and the username. These properties are the interface between the application and the internal developer platform. They constitute the contract developers and platform engineers.
 
-As Mark explained, this powerful feature was directly inspired by feedback from enterprise customers already leveraging Radius. These users expressed a desire to encapsulate their internal platform models and best practices—such as a custom "failover-enabled database" type—directly within Radius. With Radius Resource Types, this is now a reality.
+This interface insulated developers from the infrastructure implementation. They no longer need know how to deploy their containers to Kubernetes and their database to AWS or Azure. They no longer need to learn Helm and Bicep, CloudFormation, or Terraform.
 
-## How It Works: Building on Recipes and Environments
+However, until today, these resource types were predefined, immutable, and built into Radius. All of this changes with Radius Resource Types. Platform engineers create new resource types with custom APIs. This opens up a wide array of new capabilities. For example, platform engineers can now:
 
-Radius Resource Types seamlessly integrate with existing core Radius concepts:
+* Create resource types for application components that do not ship with Radius. For example, a resource type could be created for an OpenAI model.
+* Simplify the API for existing resource types. In the MongoDB example above, the API could be simplified so that the developer only needs to provide a T-shirt size (S, M, L, XL) for the database and all other properties are not needed.
+* Create more abstract resource types such as a web service, or a functions-based application that only required the developer to provide a container image while a full application gets deployed.
 
-*   **Recipes:** These custom types are backed by **recipes**, which define the provisioning logic. Platform teams can implement these recipes using familiar tools like **Terraform modules or Bicep**. This allows them to enforce security, compliance, and cost management policies directly within the resource definitions their developers use.
-*   **Environments:** Recipes are registered to Radius Environments. This means a developer can request a custom resource like `mycorp-postgres`, and Radius, based on the target environment (e.g., dev, test, prod), will use the appropriate recipe to provision it. For instance, a `dev` environment might spin up a containerized database, while a `prod` environment provisions a highly available, managed database service, all without the developer needing to change their application definition.
+Radius Resource Types are modeled using an OpenAPI schema in a YAML file. If you have created a Kubernetes Custom Resource Definition before, Radius Resource Types will look familiar. For example, here is resource type definition for an OpenAI model:
 
-This extends the power of recipes beyond the existing open-source portable types (like MongoDB, Redis, RabbitMQ) and Dapper component types that Radius already supports.
+**`types.yaml`**:
 
-## Why This Matters: Empowering Platform Teams and Developers
+```yaml
+namespace: Radius.Resources
+types:   
+  openAIModels:
+    apiVersions:
+      '2023-10-01-preview':
+        schema: 
+          type: 'object'
+          properties: 
+            environment:
+              type: string
+              description: The Radius environment, typically set by the rad CLI
+            application:
+              type: string
+              description: The application which the resource is associated with
+            capacity:
+              type: string
+              description: The capacity of the API, valid values are S, M, or L
+            apiKey: 
+              type: string
+              description: The key that can be used to connect to the API
+              readOnly: true
+            apiVersion:
+              type: string
+              description: The version of the OpenAI API
+              readOnly: true
+            deployment:
+              type: string
+              description: The deployment name, used by the OpenAI SDK to connect to the API
+              readOnly: true
+            endpoint:
+              type: string
+              description: The endpoint URL of the OpenAI API
+              readOnly: true
+          required:
+              - environment
+              - capacity  
+```
 
-The introduction of custom resource types brings several key benefits:
+Let's walkthrough this resource type definition. By convention, resource type definitions are stored in a file named `types.yaml`.
 
-*   **True Separation of Concerns:** It reinforces Radius's core mission to decouple application definitions from underlying infrastructure, making applications more portable and resilient to infrastructure changes.
-*   **Enhanced Platform Engineering:** Platform teams gain greater control and the ability to provide a curated, policy-compliant "internal developer platform" experience.
-*   **Developer Productivity:** Developers can work with higher-level, familiar abstractions defined by their organization, simplifying their workflow and reducing cognitive load.
-*   **Multi-Cloud and Hybrid Ready:** Combined with Radius's Universal Control Plane (UCP), these custom types can orchestrate resources across Azure, AWS, Kubernetes, and potentially other clouds, all from a single application definition.
+```yaml
+namespace: Radius.Resources
+```
 
-Mark highlighted the journey of the Incubations team within the Office of the CTO, which has a history of creating impactful open-source projects like KEDA (Kubernetes Event-driven Autoscaler) and Dapper (Distributed Application Runtime)—both now graduated CNCF projects. Radius follows this lineage, aiming to address critical gaps in the cloud-native application lifecycle.
+The namespace is just a namespace for the resource type. In practice, it is recommended to use `Radius.Resources` for all resource types. For advanced users, the namespace can be any string in the format `Parent.Child` (Radius uses `Applications.Core` for the built-in resource types).
 
-## The Road Ahead
+```yaml
+types:   
+  openAIModels:
+```
 
-The vision for Radius Resource Types doesn't stop here. Mark also shared a glimpse into future enhancements, including:
+Multiple resource types can be listed under `types`. `openAIModels` is the name of the resource type. By convention, Radius Resource Types are camel-case and plural. 
 
-*   **Recipe-ifying Existing Cloud Resources:** The ability to apply recipes to *existing* native cloud resource types (e.g., an AWS S3 bucket or an Azure Storage Account). This would allow platform teams to augment or constrain these standard resources with their own policies and configurations when deployed via Radius.
-*   **Internal Consistency:** Potentially, even Radius's own built-in types could be implemented using this same powerful recipe mechanism, further unifying the model.
+```yaml
+    apiVersions:
+      '2023-10-01-preview':
+        schema: 
+          type: 'object'
+          properties: 
+```
 
-## Get Involved!
+This defines our API version. API versions in Radius are in date form with an optional `-preview` suffix. Today, resource types can only have a single version, but in the future, adding additional versions with a different schema will be possible. Note than when developers add resource to the application definition, the API version must always be specified.
 
-We're incredibly excited about the potential of Radius Resource Types to transform how applications are built and managed in the cloud. This is a significant milestone for Radius, and we believe it will unlock new levels of productivity and control for our users.
+```yaml
+            environment:
+              type: string
+              description: The Radius environment, typically set by the rad CLI
+            application:
+              type: string
+              description: The application which the resource is associated with
+```
 
-As Zach Casper mentioned at the end of the call, we'll be sharing links to all the materials and documentation for you to dive deeper. We encourage you to explore this new capability and share your feedback with the community.
+These two properties are Radius-specific and should be on every resource type. The `environment` property is typically set by the Radius CLI when the application is deployed. The `application` property is set by the developer in the application definition.
 
-Stay tuned to the Radius blog and our community channels for more updates, tutorials, and examples of how to leverage Radius Resource Types.
+```yaml
+            capacity:
+              type: string
+              description: The capacity of the API. Valid values: 'S', 'M', 'L'
+```
+
+`capacity` is the only property that the developer needs to set. Later you will see that `capacity` is a required property. 
+
+![vscode](images/vscode.png)
+
+When the developer is adding an OpenAI model to their application using VS Code, the developer sees the description of the `capacity` property.
+
+```yaml
+            apiKey: 
+              type: string
+              description: The key that can be used to connect to the API
+              readOnly: true
+            apiVersion:
+              type: string
+              description: The version of the OpenAI API
+              readOnly: true
+            deployment:
+              type: string
+              description: The deployment name, used by the OpenAI SDK to connect to the API
+              readOnly: true
+            endpoint:
+              type: string
+              description: The endpoint URL of the OpenAI API
+              readOnly: true
+```
+
+The `apiKey`, `apiVersion`, `deployment`, and `endpoint`, are all read-only properties meaning the developer cannot set these properties in the resource definition (notice they are not in the screen shot above). 
+
+These read-only properties are set by the Recipe after the resource gets deployed. The developer can, however, reference these properties in the application definition. For example, this container has environment variables set using properties from an `openAIModels` resource.
+
+**`todolist.bicep`**:
+
+```json
+resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
+  name: 'frontend'
+  properties: {
+    ...
+    container: {
+      ...
+  		env: {
+        CONNECTION_AI_ENDPOINT: {
+          value: openai.properties.endpoint
+        }
+        CONNECTION_AI_DEPLOYMENT: {
+          value: openai.properties.deployment
+        }
+        CONNECTION_AI_APIKEY:{
+          value: openai.properties.apiKey
+        }
+        CONNECTION_AI_APIVERSION:{
+          value: openai.properties.apiVersion
+        }
+...
+```
+
+Finally, the remainder of the resource type definition YAML file is:
+
+```yaml
+          required:
+              - environment
+              - capacity  
+```
+
+This specified that only the `environment` and `capacity` properties are required to be set by the developer.
+
+## Recipes: The platform engineer's implementation
+
+The resource type definition discussed above is only the interface for a resource type. The implementation for deploying this resource is completely separate and not exposed to developers. If you are familiar with Radius, you know that Radius uses Recipes and Environments to determine how to deploy a resource. Radius Resource Types uses the same concepts.
+
+<img src="images/openai.png" alt="openai" style="zoom:50%;" />
+
+In this example, the `openAIModels` resource type is used by developers in their application definitions on the left. On the right, the platform engineer has create two Radius Environments. Notice that the same Terraform configuration for deploying the OpenAI model is used for both the test and production environments. While the same configuration file is used, it uses the parameters passed by Radius to determine the proper deployment configuration. The Terraform configuration has several variables set by Radius automatically but platform engineers can add additional parameters such as `production=TRUE` in this example.
+
+### Composite Recipes
+
+Radius Resource Types also introduces a powerful new concept of composite Recipes. In the previous OpenAI example, the recipe deployed a single resource. But recipes are much more powerful than that. With composite Recipes, platform engineers can model an abstract resource types then define a Recipe that is composed of multiple resources. 
+
+![composite](images/composite.png)
+
+The resources defined in the composite Recipe can be any type that Radius is aware of including:
+
+* Radius core types including Containers, Gateways, Secrets, and Volumes
+* Resource types built into Radius such as MongoDB, Redis, Dapr Configuration Store, and Dapr State Store
+* Radius Resource Types defined by the platform engineer
+* Azure resource types
+* AWS resource types
+
+For a hands-on example of using a composite Recipe, see the *[Create a composite Recipe](https://docs.radapp.io/tutorials/create-composite-recipe/)* tutorial in the Radius documentation.
+
+## Why This Matters
+
+Radius Resource Types is a major step forward for platform engineering. It reinforces Radius's core mission to decouple application definitions from underlying infrastructure, making applications portable across not only cloud platforms but also compute platforms (see the recent announcement of [Radius being able to deploy to Azure Container Instances)](https://blog.radapp.io/posts/2025/06/03/deploy-your-radius-applications-to-azure-container-instances/).
+
+Platform engineers teams gain greater control over the implementation and deployment of cloud resources. Ensuring security, compliance, and cost management best practices are follows is significantly easier.
+
+Developers can work with higher-level, familiar abstractions defined by their organization, simplifying their workflow and reducing cognitive load. They no longer need to learn multiple infrastructure as code languages.
+
+## Learn More
+
+There are several resources available to learn more about Radius Resource Types.
+
+* Mark Russinovich, the Azure CTO and sponsor of the Radius project introduced and demoed Radius Resource Types at the [June Radius Community Call](https://www.youtube.com/watch?v=MNuoMSIs4Jo).
+* There are two tutorials in the Radius documentation, one for [creating a PostgreSQL resource type](https://docs.radapp.io/tutorials/create-resource-type/) and a [second for creating a composite recipe for a web service resource type](https://docs.radapp.io/tutorials/create-composite-recipe/).
+
+## Get Involved
+
+We would love for you to join us to help build Radius:
+
+- Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
+- Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
+- Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
