@@ -18,7 +18,7 @@ For example, the MongoDB resource type has properties for the database name, the
 
 This interface insulated developers from the infrastructure implementation. They no longer need know how to deploy their containers to Kubernetes and their database to AWS or Azure. They no longer need to learn Helm and Bicep, CloudFormation, or Terraform.
 
-However, until today, these resource types were predefined, immutable, and built into Radius. All of this changes with Radius Resource Types. Platform engineers create new resource types with custom APIs. This opens up a wide array of new capabilities. For example, platform engineers can now:
+However, until today, these resource types were predefined, immutable, and built into Radius. All this changes with Radius Resource Types. Platform engineers create new resource types with custom APIs. This opens a wide array of new capabilities. For example, platform engineers can now:
 
 * Create resource types for application components that do not ship with Radius. For example, a resource type could be created for an OpenAI model.
 * Simplify the API for existing resource types. In the MongoDB example above, the API could be simplified so that the developer only needs to provide a T-shirt size (S, M, L, XL) for the database and all other properties are not needed.
@@ -140,7 +140,7 @@ These read-only properties are set by the Recipe after the resource gets deploye
 
 **`todolist.bicep`**:
 
-```json
+```bicep
 resource frontend 'Applications.Core/containers@2023-10-01-preview' = {
   name: 'frontend'
   properties: {
@@ -179,11 +179,11 @@ The resource type definition discussed above is only the interface for a resourc
 
 <img src="images/openai.png" alt="openai" style="zoom:50%;" />
 
-In this example, the `openAIModels` resource type is used by developers in their application definitions on the left. On the right, the platform engineer has create two Radius Environments. Notice that the same Terraform configuration for deploying the OpenAI model is used for both the test and production environments. While the same configuration file is used, it uses the parameters passed by Radius to determine the proper deployment configuration. The Terraform configuration has several variables set by Radius automatically but platform engineers can add additional parameters such as `production=TRUE` in this example.
+In this example, the `openAIModels` resource type is used by developers in their application definitions on the left. On the right, the platform engineer has created two Radius Environments. Notice that the same Terraform configuration for deploying the OpenAI model is used for both the test and production environments. While the same configuration file is used, it uses the parameters passed by Radius to determine the proper deployment configuration. The Terraform configuration has several variables set by Radius automatically, but platform engineers can add additional parameters such as `production=TRUE` in this example.
 
 ### Composite Recipes
 
-Radius Resource Types also introduces a powerful new concept of composite Recipes. In the previous OpenAI example, the recipe deployed a single resource. But recipes are much more powerful than that. With composite Recipes, platform engineers can model an abstract resource types then define a Recipe that is composed of multiple resources. 
+Radius Resource Types also introduces a powerful new concept of composite Recipes. In the previous OpenAI example, the recipe deployed a single resource. But recipes are much more powerful than that. With composite Recipes, platform engineers can model abstract resource types then define a Recipe that is composed of multiple resources. 
 
 ![composite](images/composite.png)
 
@@ -201,7 +201,7 @@ For a hands-on example of using a composite Recipe, see the *[Create a composite
 
 Radius Resource Types is a major step forward for platform engineering. It reinforces Radius's core mission to decouple application definitions from underlying infrastructure, making applications portable across not only cloud platforms but also compute platforms (see the recent announcement of [Radius being able to deploy to Azure Container Instances)](https://blog.radapp.io/posts/2025/06/03/deploy-your-radius-applications-to-azure-container-instances/).
 
-Platform engineers teams gain greater control over the implementation and deployment of cloud resources. Ensuring security, compliance, and cost management best practices are follows is significantly easier.
+Platform engineering teams gain greater control over the implementation and deployment of cloud resources. Ensuring security, compliance, and cost management best practices are follows is significantly easier.
 
 Developers can work with higher-level, familiar abstractions defined by their organization, simplifying their workflow and reducing cognitive load. They no longer need to learn multiple infrastructure as code languages.
 
