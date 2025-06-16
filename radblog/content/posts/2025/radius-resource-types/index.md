@@ -115,7 +115,7 @@ These two properties are Radius-specific and should be on every resource type. T
 
 `capacity` is the only property that the developer needs to set. Later you will see that `capacity` is a required property. 
 
-{{< image src="images/vscode.png" alt="Screenshot of VS Code showing Intellisense type ahead assistance with Radius Resource Types" >}}
+{{< image src="images/vscode.png" alt="Screenshot of VS Code showing Intellisense type ahead assistance with Radius Resource Types" width="100%">}}
 
 When the developer is adding an OpenAI model to their application using VS Code, the developer sees the description of the `capacity` property.
 
@@ -181,7 +181,7 @@ This specified that only the `environment` and `capacity` properties are require
 
 The resource type definition discussed above is only the interface for a resource type. The implementation for deploying this resource is completely separate and not exposed to developers. If you are familiar with Radius, you know that Radius uses Recipes and Environments to determine how to deploy a resource. Radius Resource Types uses the same concepts.
 
-<img src="images/openai.png" alt="openai" style="zoom:50%;" />
+{{< image src="images/openai.png" alt="Diagram showing the OpenAI resource type schema for developers separate from the Environment and Recipe" width="100%" >}}
 
 In this example, the `openAIModels` resource type is used by developers in their application definitions on the left. On the right, the platform engineer has created two Radius Environments. Notice that the same Terraform configuration for deploying the OpenAI model is used for both the test and production environments. While the same configuration file is used, it uses the parameters passed by Radius to determine the proper deployment configuration. The Terraform configuration has several variables set by Radius automatically, but platform engineers can add additional parameters such as `production=TRUE` in this example.
 
@@ -189,7 +189,7 @@ In this example, the `openAIModels` resource type is used by developers in their
 
 Radius Resource Types also introduces a powerful new concept of composite Recipes. In the previous OpenAI example, the recipe deployed a single resource. But recipes are much more powerful than that. With composite Recipes, platform engineers can model abstract resource types then define a Recipe that is composed of multiple resources. 
 
-![composite](images/composite.png)
+{{< image src="images/composite.png" alt="Diagram showing the web service resource type being created by a composite Recipe with two resources implemented by a Terraform and Bicep recipe" width="100%" >}}
 
 The resources defined in the composite Recipe can be any type that Radius is aware of including:
 
