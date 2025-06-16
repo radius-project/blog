@@ -6,7 +6,7 @@ author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
 type: blog
 ---
 
-The Radius maintainers and community have been hard at work enabling platform engineers to build internal developer platforms that are application-centric with a great developer experience. This week Radius launched [Radius Resource Types](https://docs.radapp.io/tutorials/create-resource-type/) reinforcing Radius' core mission to decouple application definitions from underlying infrastructure.
+The Radius maintainers and community have been hard at work enabling platform engineers to build internal developer platforms that are application-centric with a great developer experience. This week Radius launched [Radius Resource Types](https://docs.radapp.io/tutorials/create-resource-type/), reinforcing its core mission to decouple application definitions from underlying infrastructure.
 
 Enterprises integrating Radius into their internal developer platform tell us they need to customize the API for common resource types such as a PostgreSQL database to simplify the developer experience (allowing developers to select T-shirt sizes, for example). Others want to create abstract resource types such as a web service that may have a reverse proxy, an application container, and an in-memory cache all encapsulated in one single type. Radius Resource Types enable platform engineers to accomplish these exact scenarios. Platform engineers now have complete flexibility in defining the resources developers use in their applications and, separately, the implementation of those resources using Terraform configurations or Bicep templates (referred to generally as Recipes in Radius).
 
