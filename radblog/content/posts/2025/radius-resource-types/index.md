@@ -1,5 +1,5 @@
 ---
-date: "2025-06-16"
+date: "2025-06-17"
 title: "Introducing Radius Resource Types"
 linkTitle: "Introducing Radius Resource Types"
 author: "[Zach Casper](https://www.linkedin.com/in/zcasper/)"
@@ -18,12 +18,12 @@ Radius ships with a catalog of common resource types. This includes core types s
 
 For example, the MongoDB resource type has properties for the database name, the host name, the port, and the username. These properties are the interface between the application and the internal developer platform. They constitute the contract between developers and platform engineers.
 
-This interface insulates developers from the infrastructure implementation. They no longer need know how to deploy their containers to Kubernetes and their database to AWS or Azure. They no longer need to learn Helm and Bicep, CloudFormation, or Terraform.
+This interface insulates developers from the infrastructure implementation. They no longer need to know how to deploy their containers to Kubernetes and their database to AWS or Azure. They no longer need to learn Helm and Bicep, CloudFormation, or Terraform.
 
 However, until today, these resource types were predefined, immutable, and built into Radius. All this changes with Radius Resource Types. Platform engineers can now create new resource types with custom APIs, opening up a wide array of new capabilities. For example, platform engineers can now:
 
 * Create resource types for application components that do not ship with Radius. For example, a resource type could be created for an OpenAI model.
-* Simplify the API for existing resource types. In the MongoDB example above, the API could be simplified so the developer only needs to provide a T-shirt size (S, M, L) for the database with no other properties needed.
+* Modify the API for existing resource types. For example, a T-shirt size (S, M, L) could be added to one of the existing database resources such as MongoDB so the developer can specify the size of the database.
 * Create more abstract resource types such as a web service, or a functions-based application that only requires the developer to provide a container image for a full application to be deployed.
 
 Radius Resource Types are modeled using an OpenAPI schema in a YAML file. If you have created a Kubernetes Custom Resource Definition (CRD) before, Radius Resource Types will look familiar. For example, here is resource type definition for an OpenAI model:
