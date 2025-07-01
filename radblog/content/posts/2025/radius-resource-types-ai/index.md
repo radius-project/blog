@@ -63,7 +63,7 @@ types:
               - environment 
 ```         
 
-{{< image src="images/developer-interface.png" alt="Screenshot of developer interface in VSCode" width="70%">}}
+{{< image src="images/developer-interface.png" alt="Screenshot of developer interface in VSCode" width="50%">}}
 
 Behind this interface, we have implemented recipes for both Azure OpenAI and AWS Bedrock that handle the complexity of service provisioning, authentication, and configuration management.
 
@@ -73,7 +73,7 @@ The application structure demonstrates cloud portability in practice. The Bicep 
 
 When developers reference the `feedbackAI` resource, they do not know the underlying implementation details. They simply specify the model they want to use, such as `anthropic.claude-3-sonnet` or `GPT4` and the Radius platform handles the rest including injecting the environment variables via connections for their application to access the AI service.
 
-{{< image src="images/connections.png.png" alt="Screenshot of Connections to container" width="70%">}}
+{{< image src="images/connections.png" alt="Screenshot of Connections to container" width="70%">}}
 
 The [Azure Recipe](https://github.com/Reshrahim/todoapp-ai/tree/main/recipes/azure-openai) deploys an Azure Cognitive Services account with OpenAI capabilities and configures For e.g.: open AI GPT model of choice from developer.
 
