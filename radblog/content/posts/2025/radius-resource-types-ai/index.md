@@ -1,5 +1,5 @@
 ---
-date: "2025-07-05"
+date: "2025-07-07"
 title: "Introducing AI capabilities to developer teams with Radius Resource Types"
 linkTitle: "Radius Resource Types and AI"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
@@ -62,6 +62,7 @@ types:
           required:
               - environment 
 ```         
+Below is how developers can use this resource type in their application definition:
 
 {{< image src="images/developer-interface.png" alt="Screenshot of developer interface in VSCode" width="70%">}}
 
