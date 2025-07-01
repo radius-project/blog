@@ -16,7 +16,7 @@ Traditional approaches to AI integration require developers to learn provider-sp
 
 Radius provides a foundational platform for building internal developer platforms by introducing an application-centric model that abstracts infrastructure complexity. The platform enables organizations to define applications and their resource dependencies without coupling them to specific cloud providers. Through its Environment and Recipe concepts, Radius enables platform engineers to configure how resources are deployed across different environments while maintaining consistent developer interfaces. This separation of concerns enables developer teams to have self-serve paved paths without having to understand the underlying infrastructure details.
 
-The introduction of Radius Resource Types extends this foundation by allowing platform engineers to define custom resource types specific to their organization's needs. This capability transforms how teams approach AI integration by enabling the creation of AI resource types that abstract the complexity of deploying the AI model of their choice to the hosting provider of their choice. Platform engineers can define the developer interface through while implementing the actual infrastructure through Terraform or Bicep recipes. This approach ensures that switching between cloud providers requires no changes to application code—only updates to the underlying recipe configuration.
+The introduction of Radius Resource Types extends this foundation by allowing platform engineers to define custom resource types specific to their organization's needs. This capability transforms how teams approach AI integration by enabling the creation of AI resource types that abstract the complexity of deploying the AI model of their choice to the hosting provider of their choice. Platform engineers can define the developer interface through while implementing the actual infrastructure through Terraform or Bicep Recipes. This approach ensures that switching between cloud providers requires no changes to application code—only updates to the underlying Recipe configuration.
 
 ## TodoList Application sample
 
@@ -66,7 +66,7 @@ Below is how developers can use this resource type in their application definiti
 
 {{< image src="images/developer-interface.png" alt="Screenshot of developer interface in VSCode" width="70%">}}
 
-Behind this interface, we have implemented recipes for both Azure OpenAI and AWS Bedrock that handle the complexity of service provisioning, authentication, and configuration management.
+Behind this interface, we have implemented Recipes for both Azure OpenAI and AWS Bedrock that handle the complexity of service provisioning, authentication, and configuration management.
 
 <insert Recipes diagram that shows portability>
 
@@ -78,7 +78,7 @@ When developers reference the `feedbackAI` resource, they do not know the underl
 
 {{< image src="images/connections.png" alt="Screenshot of Connections to container" width="70%">}}
 
-The [Azure Recipe](https://github.com/Reshrahim/todoapp-ai/tree/main/recipes/azure-openai) deploys an Azure Cognitive Services account with OpenAI capabilities and configures For e.g.: open AI GPT model of choice from developer. You can use any existing Terraform configuration or Bicep template as a Radius Recipe. To convert an existing Terraform configuration into a Radius Recipe, you simply need to ensure that it adheres to the Radius Recipe format which includes defining the `context` and `outputs`. The `context` parameter has all the properties that developers provide when defining the resource type in the application definition, while the `outputs` section defines the values that will be returned to the application after provisioning the resource.
+The [Azure Recipe](https://github.com/Reshrahim/todoapp-ai/tree/main/recipes/azure-openai) deploys an Azure Cognitive Services account with OpenAI capabilities and configures For e.g.: Open AI GPT model of choice from developer. You can use any existing Terraform configuration or Bicep template as a Radius Recipe. To convert an existing Terraform configuration into a Radius Recipe, you simply need to ensure that it adheres to the Radius Recipe format which includes defining the `context` and `outputs`. The `context` parameter has all the properties that developers provide when defining the resource type in the application definition, while the `outputs` section defines the values that will be returned to the application after provisioning the resource.
 
 ```tf
 variable "context" {
