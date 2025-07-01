@@ -1,6 +1,6 @@
 ---
 date: "2025-07-07"
-title: "Introducing AI capabilities to developer teams with Radius Resource Types"
+title: "Introducing AI capabilities to Developer teams with Radius Resource Types"
 linkTitle: "Radius Resource Types and AI"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: "blog"
@@ -8,7 +8,7 @@ type: "blog"
 
 ## Platform Engineering in the AI Era
 
-Platform engineering teams today grapple with a complex challenge: how do you enable developers to build AI powered applications while maintaining security and compliance. The challenge extends beyond simply deploying AI services, teams must provide developers with standardized interfaces to AI resources while preserving the flexibility to switch between AI services from providers without rewriting application code. Radius Resource Types addresses this complexity by enabling platform engineers to create new resource abstractions that encapsulate cloud-specific AI implementations behind developer-friendly APIs.
+Platform engineering teams today grapple with a complex challenge: how do you enable developers to build AI powered applications while maintaining organizational security and compliance practices. The challenge extends beyond simply deploying AI services, teams must provide developers with standardized interfaces to AI resources while preserving the flexibility to switch between AI services from providers without rewriting application code. Radius Resource Types addresses this complexity by enabling platform engineers to create new resource abstractions that encapsulate cloud-specific AI implementations behind developer-friendly APIs.
 
 Traditional approaches to AI integration require developers to learn provider-specific APIs and manage complex infrastructure configurations. This creates vendor lock-in and increases cognitive load on development teams. When organizations decide to migrate between cloud providers, or adopt multi-cloud strategies, the effort required to refactor applications becomes significant. Platform engineering teams are in need of solutions that separate the application definition from the underlying infrastructure implementation, enabling developers to focus on building features rather than managing AI service configurations.
 
