@@ -22,7 +22,7 @@ The introduction of Radius Resource Types extends this foundation by allowing pl
 
 The [TodoList Application](https://github.com/Reshrahim/todoapp-ai) sample application demonstrates how Radius Resource Types can be used to integrate AI capabilities.
 
-The application defines a custom `feedbackAI` resource type that provides AI capabilities for task feedback. The resource type definition specifies a simple interface requiring only a model parameter from developers. 
+The application defines a custom `feedbackAI` resource type that provides AI capabilities for task feedback. The resource type definition specifies a simple interface requiring only a `model` parameter from developers. 
 
 ```
 name: Radius.Resources
@@ -63,19 +63,39 @@ types:
               - environment 
 ```         
 
-{{< image src="images/developer-interface.png" alt="Screenshot of developer interface in VSCode" width="50%">}}
+{{< image src="images/developer-interface.png" alt="Screenshot of developer interface in VSCode" width="70%">}}
 
 Behind this interface, we have implemented recipes for both Azure OpenAI and AWS Bedrock that handle the complexity of service provisioning, authentication, and configuration management.
 
 <insert Recipes diagram that shows portability>
 
-The application structure demonstrates cloud portability in practice. The Bicep application definition remains identical regardless of the target cloud provider. 
+The application structure demonstrates cloud portability in practice. The Bicep application definition remains identical regardless of the target cloud provider.
+
+{{< image src="images/application.png.png" alt="Screenshot of application definition in VSCode" width="70%">}}
 
 When developers reference the `feedbackAI` resource, they do not know the underlying implementation details. They simply specify the model they want to use, such as `anthropic.claude-3-sonnet` or `GPT4` and the Radius platform handles the rest including injecting the environment variables via connections for their application to access the AI service.
 
 {{< image src="images/connections.png" alt="Screenshot of Connections to container" width="70%">}}
 
-The [Azure Recipe](https://github.com/Reshrahim/todoapp-ai/tree/main/recipes/azure-openai) deploys an Azure Cognitive Services account with OpenAI capabilities and configures For e.g.: open AI GPT model of choice from developer.
+The [Azure Recipe](https://github.com/Reshrahim/todoapp-ai/tree/main/recipes/azure-openai) deploys an Azure Cognitive Services account with OpenAI capabilities and configures For e.g.: open AI GPT model of choice from developer. You can use any existing Terraform configuration or Bicep template as a Radius Recipe. To convert an existing Terraform configuration into a Radius Recipe, you simply need to ensure that it adheres to the Radius Recipe format which includes defining the `context` and `outputs`. The `context` parameter has all the properties that developers provide when defining the resource type in the application definition, while the `outputs` section defines the values that will be returned to the application after provisioning the resource.
+
+```tf
+variable "context" {
+  description = "This variable contains Radius Recipe context."
+  type = any
+}
+```
+
+```tf 
+output "result" {
+  value = {
+    values = {
+      model = "model_name"
+      endpoint ="https://example.openai.azure.com/" 
+    }
+  }
+}
+```
 
 The [AWS Recipe](https://github.com/Reshrahim/todoapp-ai/tree/main/recipes/aws-bedrock) provisions IAM users with Bedrock permissions and configures access to For e.g. : Anthropic's Claude 3 Sonnet model. Despite these significant implementation differences, the developer experience remains consistent.
 
