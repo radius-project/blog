@@ -1,6 +1,6 @@
 ---
 date: "2025-07-05"
-title: "Introducing AI capabilities with Radius Resource Types"
+title: "Introducing AI capabilities to developer teams with Radius Resource Types"
 linkTitle: "Radius Resource Types and AI"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: "blog"
@@ -73,7 +73,7 @@ The application structure demonstrates cloud portability in practice. The Bicep 
 
 When developers reference the `feedbackAI` resource, they do not know the underlying implementation details. They simply specify the model they want to use, such as `anthropic.claude-3-sonnet` or `GPT4` and the Radius platform handles the rest including injecting the environment variables via connections for their application to access the AI service.
 
-{{< image src="images/connections.png.png" alt="Screenshot of Connnections to container" width="70%">}}
+{{< image src="images/connections.png.png" alt="Screenshot of Connections to container" width="70%">}}
 
 The [Azure Recipe](https://github.com/Reshrahim/todoapp-ai/tree/main/recipes/azure-openai) deploys an Azure Cognitive Services account with OpenAI capabilities and configures For e.g.: open AI GPT model of choice from developer.
 

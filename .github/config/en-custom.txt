@@ -571,3 +571,6 @@ OpenAI
 openai
 CTO
 CRD
+TodoList
+GPT
+Anthropic's
