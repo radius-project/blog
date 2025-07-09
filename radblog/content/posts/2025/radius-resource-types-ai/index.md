@@ -6,7 +6,7 @@ author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: "blog"
 ---
 
-## Building Applications in AI Era
+## Building Applications in the AI Era
 
 Imagine you're a developer tasked with building an AI-powered application. You start with Azure OpenAI, write your application code, configure authentication, and deploy successfully. Three months later, your organization decides to migrate to use another model like Anthropic's Claude for better results or for cost optimization. Suddenly, you're facing weeks of refactoring, reconfiguring authentication, and testing across environments.
 
