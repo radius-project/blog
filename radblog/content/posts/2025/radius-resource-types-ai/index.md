@@ -21,6 +21,7 @@ The solution lies in establishing a clear contract that separates what developer
 Radius Resource Types enable this by allowing developers to declare their intent through simple, high-level abstractions without worrying about implementation details. Platform engineers define these resource types once, implementing the underlying infrastructure through Recipes-infrastructure templates in Bicep or Terraform, and developers can then just invoke them from their applications.
 
 {{< image src="images/dev-platformeng-graphic.png" alt="Screenshot of Developer and Platform engineer workflow" width="70%">}}
+![alt text](image.png)
 
 This separation enables developers to focus on building features while platform teams maintain infrastructure consistency and governance. When business requirements change—new compliance rules, cost optimization, or cloud migration, platform teams can update Recipes without disrupting application development.
 
