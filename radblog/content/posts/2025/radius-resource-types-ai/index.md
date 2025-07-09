@@ -26,7 +26,7 @@ This separation enables developers to focus on building features while platform 
 
 ### The Developer Experience: Simple and Consistent Interface
 
-A developer sits down Monday morning with a simple goal to add an AI service to their application. Instead of diving into cloud provider documentation, wrestling with authentication flows, or configuring service endpoints, they can just declare their intent by adding a AI resource to their application and setting a few parameters.
+A developer sits down Monday morning with a simple goal to add an AI service to their application. Instead of diving into cloud provider documentation, wrestling with authentication flows, or configuring service endpoints, they can just declare their intent by adding an AI resource to their application and setting a few parameters.
 
 {{< image src="images/ai-interface.png" alt="Screenshot of AI resource interface in VSCode" width="70%">}}
 
@@ -47,22 +47,22 @@ or
 rad deploy todolist.bicep --environment aws
 ```
 
-Whether your platform team provisions this using Azure's Cognitive Services, AWS Bedrock's Claude models, or tomorrow's next-generation AI provider, this application contract never changes. The developer experience remains constant while the infrastructure beneath evolves freely.
+Whether your platform team provisions this using Azure's Cognitive Services, AWS Bedrock's Claude models, or tomorrow's next-generation AI provider, this application contract never changes. The developer deploy experience remains constant while the infrastructure beneath evolves freely. The platform handles the complexity of authentication, rate limiting, and service configuration automatically.
 
-Developers can experiment with cutting-edge models like GPT-4, Claude 3.5, or emerging open-source alternatives by changing a single parameter. The platform handles the complexity of authentication, rate limiting, and service configuration automatically.
+While Radius addresses infrastructure and deployment complexity, some source code changes may still be necessary. For instance, switching from `gpt-35-turbo` to `claude-3-sonnet` might require modifying how your code interacts with the model. To simplify this, several solutions are emerging. One example is Dapr’s conversation building block, provides one consistent API entry point to talk to underlying LLM providers. It can be used alongside Radius Resource Types to ensure both infrastructure and the application is LLM agnostic.
 
 ### The Platform Engineering Experience: Orchestrating the Experience Behind the Scenes
 
-While developers embrace the simplicity of a single interface, platform engineers work behind the scenes. They craft the resource catalog and Recipes that transform abstract developer requests into concrete cloud/platform resources while maintaining the application contract.
-
-<insert resource type/ Recipe graphic>
+ Platform engineers work behind the scenes crafting the resource catalog and Recipes that transform abstract developer requests into concrete cloud/platform resources while maintaining the application contract.
 
 
-**The Kubernetes Recipe** - When a developer requests a Llama model, the Kubernetes Recipe springs into action. It deploys a containerized service that downloads the `tinyllama` model binary, configures authentication, and outputs the necessary values needed for the application to connect seamlessly
 
-**The Azure Recipe** - When a developer requests GPT-4, the Azure Recipe springs into action. It deploys Cognitive Services, configures authentication, and outputs the necessary values needed for the application to connect seamlessly
 
-**The AWS Recipe** - Now with AWS, The AWS Recipe handles the entirely different world of IAM roles and Bedrock permissions and injects the needed environment values needed for the application to connect seamlessly
+**The Kubernetes Recipe** - When a developer requests a `TinyLlama` model, the Kubernetes Recipe deploys a containerized service that downloads the `tinyllama` model binary, configures authentication, and outputs the necessary values needed for the application to connect
+
+**The Azure Recipe** - When a developer requests `GPT-3.5` model, the Azure Recipe deploys Cognitive Services, configures authentication, and outputs the necessary values needed for the application to connect
+
+**The AWS Recipe** - When a developer requests `claude-3-sonnet`, the AWS Recipe handles the entirely different world of IAM roles and Bedrock permissions and injects the needed environment values needed for the application to connect seamlessly
 
 When the next breakthrough AI service emerges or when new compliance requirements arise or when cost optimization opportunities appear from hosting providers, platform engineers can implement the requirements at the Recipe level without disrupting development workflows.
 
