@@ -10,9 +10,9 @@ type: "blog"
 
 Imagine you're a developer tasked with building an AI-powered application. You start with Azure OpenAI, write your application code, configure authentication, and deploy successfully. Three months later, your organization decides to migrate to use another model like Anthropic's Claude for better results or for cost optimization. Suddenly, you're facing weeks of refactoring, reconfiguring authentication, and testing across environments.
 
-This scenario plays out daily in organizations embracing AI. The rapid evolution of AI services means today's technical decisions may not align with tomorrow's business requirements. Developers need applications that can adapt to changing AI providers and models without requiring extensive rewrites. Platform teams need solutions that provide governance and standardization while maintaining flexibility.
+This scenario plays out daily in organizations embracing AI. The rapid evolution of AI services means today's technical decisions may not align with tomorrow's AI capabilities. Developers need applications that can adapt to changing AI providers and models without requiring extensive rewrites. Platform teams need solutions that provide governance and standardization while maintaining flexibility.
 
-The challenge isn't just technical—it's architectural. How do you build AI applications that remain portable across clouds while providing developers with a consistent, simple interface?
+The challenge isn't just technical—it's architectural. How do you build AI applications that remain loosely couple with the model and model provider while providing developers with a consistent, simple interface?
 
 ## The Application Contract: Separating What from How
 
@@ -26,13 +26,13 @@ This separation enables developers to focus on building features while platform 
 
 ### The Developer Experience: Simple and Consistent Interface
 
-A developer sits down Monday morning with a simple goal to add an AI service to their application. Instead of diving into cloud provider documentation, wrestling with authentication flows, or configuring service endpoints, they can just declare their intent like this. I want to use a LLM model for task feedback:
+A developer sits down Monday morning with a simple goal to add an AI service to their application. Instead of diving into cloud provider documentation, wrestling with authentication flows, or configuring service endpoints, they can just declare their intent by adding a AI resource to their application and setting a few parameters.
 
 {{< image src="images/ai-interface.png" alt="Screenshot of AI resource interface in VSCode" width="70%">}}
 
-Plus, They have access to a curated catalog of vetted AI models—from lightweight `tinyllama` for quick prototyping to production-ready `gpt-4` and `claude-3.5` for enterprise features. When I need to experiment with different models, I simply change one parameter in my code.
+The developer has access to a curated catalog of vetted AI models—from lightweight `tinyllama` for quick prototyping to production-ready `gpt-35-turbo` and `claude-3-sonnet` for enterprise features. When they need to experiment with different models, they simply change one parameter in my code.
 
-The best part? They can connect the AI service to my application using Radius connections that automatically handle all the complexity for me. No more wrestling with API keys, endpoints, or different authentication schemes—everything gets injected as environment variables.
+The best part is that Radius makes connecting to the AI service inside the application very easy. No more wrestling with API keys, endpoints, or different authentication schemes—everything gets injected as environment variables.
 
 {{< image src="images/connections.png" alt="Screenshot of connections" width="70%">}}
 
@@ -47,19 +47,16 @@ or
 rad deploy todolist.bicep --environment aws
 ```
 
-That's it. No Azure-specific configurations. No AWS IAM policies. No Google Cloud service accounts. Just a clean declaration of intent: "I need to add AI capabilities to my application"
-
 Whether your platform team provisions this using Azure's Cognitive Services, AWS Bedrock's Claude models, or tomorrow's next-generation AI provider, this application contract never changes. The developer experience remains constant while the infrastructure beneath evolves freely.
 
 Developers can experiment with cutting-edge models like GPT-4, Claude 3.5, or emerging open-source alternatives by changing a single parameter. The platform handles the complexity of authentication, rate limiting, and service configuration automatically.
 
-### The Platform Engineering Experience: Orchestrating the Magic Behind the Scenes
+### The Platform Engineering Experience: Orchestrating the Experience Behind the Scenes
 
-While developers enjoy the simplicity of a single interface, platform engineers work behind the curtain as the architects of this seamless experience. They craft the resource catalog and Recipes that transform abstract developer requests into concrete cloud/platform resources while maintaining the sacred contract.
+While developers embrace the simplicity of a single interface, platform engineers work behind the scenes. They craft the resource catalog and Recipes that transform abstract developer requests into concrete cloud/platform resources while maintaining the application contract.
 
 <insert resource type/ Recipe graphic>
 
-Think of it as culinary artistry: developers order "AI capabilities" from the menu, but platform engineers are the master chefs who know exactly how to prepare the Recipes to deliver that dish perfectly every time.
 
 **The Kubernetes Recipe** - When a developer requests a Llama model, the Kubernetes Recipe springs into action. It deploys a containerized service that downloads the `tinyllama` model binary, configures authentication, and outputs the necessary values needed for the application to connect seamlessly
 
