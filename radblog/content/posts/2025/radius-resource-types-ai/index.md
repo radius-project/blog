@@ -18,23 +18,26 @@ The challenge isn't just technical—it's architectural. How do you build AI app
 
 The solution lies in establishing a clear contract that separates what developers need from how infrastructure teams provide it. This application contract defines a stable interface that remains consistent regardless of the underlying AI provider or model. 
 
-Radius Resource Types enable this by allowing developers to declare their intent through simple, high-level abstractions without worrying about implementation details. Platform engineers define these resource types once, implementing the underlying infrastructure through Recipes, and developers can then just invoke them from their applications.
+Radius Resource Types enable this by allowing developers to declare their intent through simple, high-level abstractions without worrying about implementation details. Platform engineers define these resource types once, implementing the underlying infrastructure through Recipes-infrastructure templates in Bicep or Terraform, and developers can then just invoke them from their applications.
 
 {{< image src="images/dev-pe-graphic.png" alt="Screenshot of Developer and Platform engineer workflow" width="70%">}}
+![alt text](image.png)
 
-This separation enables developers to focus on building features while platform teams maintain infrastructure consistency and governance. When business requirements change—new compliance rules, cost optimization, or cloud migration, platform teams can update recipes without disrupting application development.
+This separation enables developers to focus on building features while platform teams maintain infrastructure consistency and governance. When business requirements change—new compliance rules, cost optimization, or cloud migration, platform teams can update Recipes without disrupting application development.
 
 ### The Developer Experience: Simple and Consistent Interface
 
-A developer sits down Monday morning with a simple goal to add an AI service to their application. Instead of diving into cloud provider documentation, wrestling with authentication flows, or configuring service endpoints, they can just declare their intent like this:
+A developer sits down Monday morning with a simple goal to add an AI service to their application. Instead of diving into cloud provider documentation, wrestling with authentication flows, or configuring service endpoints, they can just declare their intent like this. I want to use a LLM model for task feedback:
 
 {{< image src="images/ai-interface.png" alt="Screenshot of AI resource interface in VSCode" width="70%">}}
 
-They can connect the AI service to their application using Radius connections that seamlessly injects the necessary credentials and endpoints as environment variables, creating a universal interface that works regardless of the underlying provider. 
+Plus, I have access to a curated catalog of vetted AI models—from lightweight `tinyllama` for quick prototyping to production-ready `gpt-4` and `claude-3.5` for enterprise features. When I need to experiment with different models, I simply change one parameter in my code.
+
+The best part? I can connect the AI service to my application using Radius connections that automatically handle all the complexity for me. No more wrestling with API keys, endpoints, or different authentication schemes—everything gets injected as environment variables.
 
 {{< image src="images/connections.png" alt="Screenshot of connections" width="70%">}}
 
-And deploy them with a single command to the cloud of their choice:
+And deploy the application with a single command to the environment of choice
 
 ```sh
 rad deploy todolist.bicep --environment azure
@@ -67,11 +70,11 @@ Think of it as culinary artistry: developers order "AI capabilities" from the me
 
 When the next breakthrough AI service emerges or when new compliance requirements arise or when cost optimization opportunities appear from hosting providers, platform engineers can implement the requirements at the Recipe level without disrupting development workflows.
 
-The [AI-Enhanced Todo Application](https://github.com/Reshrahim/todoapp-ai) demonstrates this approach in practice. The application includes task feedback powered by AI, but the implementation showcases true cloud portability.
+The [Todo Application](https://github.com/Reshrahim/todoapp-ai) demonstrates this approach in practice. The application includes task feedback powered by AI.
 
 ## Learn More and Get Started
 
-- Try the [AI-Enhanced Todo Application tutorial](https://github.com/Reshrahim/todoapp-ai) for hands-on experience
+- Try the [Todo Application tutorial](https://github.com/Reshrahim/todoapp-ai) for hands-on experience
 - Join our monthly community meeting for demos and updates ([Radius Google Group](https://groups.google.com/g/radapp_io))
 - Get help and discuss on the [Radius Discord server](https://aka.ms/radius/discord)
 - Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
