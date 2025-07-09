@@ -574,3 +574,5 @@ CRD
 TodoList
 GPT
 Anthropic's
+LLM
+ai

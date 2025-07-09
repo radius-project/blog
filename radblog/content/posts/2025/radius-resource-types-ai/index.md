@@ -8,7 +8,7 @@ type: "blog"
 
 ## Building Applications in AI Era
 
-Imagine you're a developer tasked with building an AI-powered application. You start with Azure OpenAI, write your application code, configure authentication, and deploy successfully. Three months later, your organization decides to migrate to use another model like Anthropic Claude for better results or for cost optimization. Suddenly, you're facing weeks of refactoring, reconfiguring authentication, and testing across environments.
+Imagine you're a developer tasked with building an AI-powered application. You start with Azure OpenAI, write your application code, configure authentication, and deploy successfully. Three months later, your organization decides to migrate to use another model like Anthropic's Claude for better results or for cost optimization. Suddenly, you're facing weeks of refactoring, reconfiguring authentication, and testing across environments.
 
 This scenario plays out daily in organizations embracing AI. The rapid evolution of AI services means today's technical decisions may not align with tomorrow's business requirements. Developers need applications that can adapt to changing AI providers and models without requiring extensive rewrites. Platform teams need solutions that provide governance and standardization while maintaining flexibility.
 
@@ -20,8 +20,7 @@ The solution lies in establishing a clear contract that separates what developer
 
 Radius Resource Types enable this by allowing developers to declare their intent through simple, high-level abstractions without worrying about implementation details. Platform engineers define these resource types once, implementing the underlying infrastructure through Recipes-infrastructure templates in Bicep or Terraform, and developers can then just invoke them from their applications.
 
-{{< image src="images/dev-pe-graphic.png" alt="Screenshot of Developer and Platform engineer workflow" width="70%">}}
-![alt text](image.png)
+{{< image src="images/dev-platformeng-graphic.png" alt="Screenshot of Developer and Platform engineer workflow" width="70%">}}
 
 This separation enables developers to focus on building features while platform teams maintain infrastructure consistency and governance. When business requirements change—new compliance rules, cost optimization, or cloud migration, platform teams can update Recipes without disrupting application development.
 
@@ -31,9 +30,9 @@ A developer sits down Monday morning with a simple goal to add an AI service to 
 
 {{< image src="images/ai-interface.png" alt="Screenshot of AI resource interface in VSCode" width="70%">}}
 
-Plus, I have access to a curated catalog of vetted AI models—from lightweight `tinyllama` for quick prototyping to production-ready `gpt-4` and `claude-3.5` for enterprise features. When I need to experiment with different models, I simply change one parameter in my code.
+Plus, They have access to a curated catalog of vetted AI models—from lightweight `tinyllama` for quick prototyping to production-ready `gpt-4` and `claude-3.5` for enterprise features. When I need to experiment with different models, I simply change one parameter in my code.
 
-The best part? I can connect the AI service to my application using Radius connections that automatically handle all the complexity for me. No more wrestling with API keys, endpoints, or different authentication schemes—everything gets injected as environment variables.
+The best part? They can connect the AI service to my application using Radius connections that automatically handle all the complexity for me. No more wrestling with API keys, endpoints, or different authentication schemes—everything gets injected as environment variables.
 
 {{< image src="images/connections.png" alt="Screenshot of connections" width="70%">}}
 
