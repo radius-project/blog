@@ -57,7 +57,7 @@ While Radius addresses infrastructure and deployment complexity, some source cod
 
 {{< image src="images/platformeng-interface.png" alt="Screenshot of platform engineering experience" width="70%">}}
 
-Platform engineers define the schema definition for the `aiModels` resource type, specifying the parameters developers can use to request AI services. They then implement Recipes that translate these requests into infrastructure code using Bicep or Terraform. Recipes use the input context provided by the developer to provision the necessary resources and return output values in a standardized format that Radius can inject into the application.
+Platform engineers define the schema definition for the `aiModels` resource type, specifying the parameters developers can use to request AI services. They then implement Recipes using Bicep or Terraform that deploy the infrastructure. Recipes use the input context provided by the developer to provision the necessary resources and return output values in a standardized format that Radius can inject into the application.
 
 **The Kubernetes Recipe** - When a developer requests a `TinyLlama` model, the Kubernetes Recipe deploys a containerized service that downloads the `tinyllama` model binary, configures authentication, and outputs the necessary values needed for the application to connect
 
