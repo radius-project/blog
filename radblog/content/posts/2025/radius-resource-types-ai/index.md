@@ -55,8 +55,9 @@ While Radius addresses infrastructure and deployment complexity, some source cod
 
  Platform engineers work behind the scenes crafting the resource catalog and Recipes that transform abstract developer requests into concrete cloud/platform resources while maintaining the application contract.
 
+{{< image src="images/platformeng-interface.png" alt="Screenshot of platform engineering experience" width="70%">}}
 
-
+Platform engineers define the schema definition for the `aiModels` resource type, specifying the parameters developers can use to request AI services. They then implement Recipes that translate these requests into infrastructure code using Bicep or Terraform. Recipes use the input context provided by the developer to provision the necessary resources and return output values in a standardized format that Radius can inject into the application.
 
 **The Kubernetes Recipe** - When a developer requests a `TinyLlama` model, the Kubernetes Recipe deploys a containerized service that downloads the `tinyllama` model binary, configures authentication, and outputs the necessary values needed for the application to connect
 
@@ -68,9 +69,10 @@ When the next breakthrough AI service emerges or when new compliance requirement
 
 The [Todo Application](https://github.com/Reshrahim/todoapp-ai) demonstrates this approach in practice. The application includes task feedback powered by AI.
 
-## Learn More and Get Started
+## Get Involved
 
-- Try the [Todo Application tutorial](https://github.com/Reshrahim/todoapp-ai) for hands-on experience
-- Join our monthly community meeting for demos and updates ([Radius Google Group](https://groups.google.com/g/radapp_io))
-- Get help and discuss on the [Radius Discord server](https://aka.ms/radius/discord)
+We would love for you to join us to help build Radius:
+
+- Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
+- Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
 - Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
