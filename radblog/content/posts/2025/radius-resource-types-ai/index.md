@@ -59,11 +59,11 @@ To enable the developer experience described above, platform engineers work behi
 
 Platform engineers define the schema definition for the `aiModels` resource type, specifying the parameters developers can use to request AI services. They then implement Recipes using Bicep or Terraform that deploy the infrastructure. Recipes use the input context provided by the developer to provision the necessary resources and return output values in a standardized format that Radius can inject into the application.
 
-The Kubernetes Recipe - When a developer requests a `TinyLlama` model, the Kubernetes Recipe deploys a containerized service that downloads the TinyLlama model binary, configures authentication, and outputs the necessary values needed for the application to connect.
+**The Kubernetes Recipe** - When a developer requests a `TinyLlama` model, the Kubernetes Recipe deploys a containerized service that downloads the TinyLlama model binary, configures authentication, and outputs the necessary values needed for the application to connect.
 
-The Azure Recipe - When a developer requests `GPT 3.5 Turbo` model, the Azure Recipe deploys Cognitive Services, configures authentication, and outputs the necessary values needed for the application to connect.
+**The Azure Recipe** - When a developer requests `GPT 3.5 Turbo` model, the Azure Recipe deploys Cognitive Services, configures authentication, and outputs the necessary values needed for the application to connect.
 
-The AWS Recipe - When a developer requests `Claude 3 Sonnet` model, the AWS Recipe handles the entirely different world of IAM roles and Bedrock permissions and injects the needed environment values needed for the application to connect seamlessly.
+**The AWS Recipe** - When a developer requests `Claude 3 Sonnet` model, the AWS Recipe handles the entirely different world of IAM roles and Bedrock permissions and injects the needed environment values needed for the application to connect seamlessly.
 
 When the next breakthrough AI service emerges or when new compliance requirements arise or when cost optimization opportunities appear from hosting providers, platform engineers can implement the requirements at the Recipe level without disrupting development workflows. 
 
@@ -74,6 +74,7 @@ Check out the [Radius Todo List Application](https://github.com/Reshrahim/todo
 We would love for you to join us to help build Radius:
 
 - Try the [Radius Todo List Application](https://github.com/Reshrahim/todoapp-ai)
+- Check out the [Radius Resource types tutorial](https://docs.radapp.io/tutorials/create-resource-type/)
 - Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
 - Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
 - Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
