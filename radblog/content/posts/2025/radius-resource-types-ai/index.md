@@ -1,5 +1,5 @@
 ---
-date: "2025-14-07"
+date: "2025-07-14"
 title: "Future proofing AI applications via Radius Resource Types "
 linkTitle: "Radius Resource Types and AI"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
