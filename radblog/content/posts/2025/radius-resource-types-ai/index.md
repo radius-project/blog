@@ -1,5 +1,5 @@
 ---
-date: "2025-07-14"
+date: "2025-07-18"
 title: "Future Proofing AI Applications via Radius Resource Types "
 linkTitle: "Radius Resource Types and AI"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
@@ -47,9 +47,9 @@ rad deploy todolist.bicep --environment aws
 
 For production deployments, teams typically embrace GitOps workflows. Radius seamlessly integrates into these existing workflows, supporting [GitOps tools](https://docs.radapp.io/guides/deploy-apps/gitops/overview/) like Flux and with planned support for Argo CD in the future. This means your AI applications can be deployed and managed through the same CI/CD processes your team already uses, maintaining consistency with your broader deployment strategy.
 
-Whether your platform team provisions this using Azure’s Cognitive Services, AWS Bedrock’s Claude models, or tomorrow’s next-generation AI provider, this application contract never changes. The developer experience remains constant while the infrastructure beneath evolves freely. Radius recipes handle the complexity of authentication, rate limiting, and service configuration automatically.
+Whether your platform team provided Ra Azure’s Cognitive Services, AWS Bedrock’s Claude models, or tomorrow’s next-generation AI provider, this application contract never changes. The developer experience remains constant while the infrastructure beneath evolves freely. Radius Recipes handle the complexity of authentication, rate limiting, and service configuration automatically.
 
-While Radius mitigates developer exposure to the complexity of infrastructure configuration and deployment, some changes in application runtime may still be necessary. For instance, switching from GPT 3.5 Turbo to Claude 3 Sonnet will require modifying how your runtime code interacts with the model. To abstract your runtime code, use [Dapr’s conversation building block](https://docs.dapr.io/developing-applications/building-blocks/conversation/conversation-overview/), which provides a single API for calling underlying LLMs. It can be used alongside Radius Resource Types to ensure both infrastructure deployments and the application runtime code is LLM agnostic.
+While Radius mitigates developer exposure to the complexity of infrastructure configuration and deployment, some changes in application runtime may still be necessary. For instance, switching from `GPT 3.5 Turbo` to `Claude 3 Sonnet` will require modifying how your runtime code interacts with the model. To abstract your runtime code, use [Dapr’s Conversation building block](https://docs.dapr.io/developing-applications/building-blocks/conversation/conversation-overview/), which provides a single API for calling underlying LLMs. It can be used alongside Radius Resource Types to ensure both infrastructure deployments and the application runtime code is LLM agnostic.
 
 ### The Platform Engineering Experience: Orchestrating the Experience Behind the Scenes
 
@@ -63,7 +63,7 @@ Platform engineers define the schema definition for the `aiModels` resource type
 
 **The Azure Recipe** - When a developer requests `GPT 3.5 Turbo` model, the Azure Recipe deploys Cognitive Services, configures authentication, and outputs the necessary values needed for the application to connect.
 
-**The AWS Recipe** - When a developer requests `Claude 3 Sonnet` model, the AWS Recipe handles the entirely different world of IAM roles and Bedrock permissions and injects the needed environment values needed for the application to connect seamlessly.
+**The AWS Recipe** - When a developer requests `Claude 3 Sonnet` model, the AWS Recipe handles the entirely different world of IAM roles and Bedrock permissions and outputs the necessary values needed for the application to connect.
 
 When the next breakthrough AI service emerges or when new compliance requirements arise or when cost optimization opportunities appear from hosting providers, platform engineers can implement the requirements at the Recipe level without disrupting development workflows. 
 
