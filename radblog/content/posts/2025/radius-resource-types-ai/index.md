@@ -1,6 +1,6 @@
 ---
 date: "2025-07-14"
-title: "Future Proofing AI applications via Radius Resource Types "
+title: "Future Proofing AI Applications via Radius Resource Types "
 linkTitle: "Radius Resource Types and AI"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: "blog"
