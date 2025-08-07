@@ -1,6 +1,6 @@
 ---
-date: "2025-08-07"
-title: "Extend Radius: Contribute Your First Resource Type and Recipe"
+date: "2025-08-11"
+title: "Contribute Your First Resource Type and Recipe"
 linkTitle: "Radius Resource Types Contributions"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
@@ -16,14 +16,14 @@ This blog post will show you how you can contribute your own Resource Types and 
 
 ## A Great Example to Get You Started
 
-To showcase what a great contribution looks like, the Radius team has added a [Redis resource type with a Kubernetes recipe](https://github.com/radius-project/resource-types-contrib/pull/5). This alpha-stage contribution provides:
+To showcase what a good contribution looks like, the Radius team has added a [Redis resource type with a Kubernetes recipe](https://github.com/radius-project/resource-types-contrib/pull/5). This alpha-stage contribution provides:
 
-- A complete Redis resource type schema.
-- Both Bicep and Terraform recipes for Kubernetes.
+- A complete Redis Resource type schema.
+- Both Bicep and Terraform Recipes for Kubernetes.
 - Real-world testing with a sample application.
 - Clear documentation for others to follow.
 
-This serves as a template for community-driven development. We encourage you to use it as a reference for your own contributions.
+This serves as a template for community driven development. We encourage you to use it as a reference for your own contributions.
 
 ## Start with Alpha: No Contribution is Too Small
 
@@ -62,7 +62,7 @@ Fork the [resource-types-contrib repository](https://github.com/radius-project/r
 Create a `.yaml` schema file for your resource type. This is the developer-facing interface. Key guidelines are documented in our [contribution guide](https://github.com/radius-project/resource-types-contrib/blob/main/contributing-docs/contributing-resource-types-recipes.md#4-define-your-resource-type-schema)
 
 ### 3. Create Recipes
-Develop Bicep and/or Terraform Recipes to deploy your resource. This is the platform-facing implementation. Key guidelines are documented in our [contribution guide](https://github.com/radius-project/resource-types-contrib/blob/main/contributing-docs/contributing-resource-types-recipes.md#recipe-guidelines)
+Develop Terraform and/or Bicep Recipes to deploy your resource. This is the platform-facing implementation. Key guidelines are documented in our [contribution guide](https://github.com/radius-project/resource-types-contrib/blob/main/contributing-docs/contributing-resource-types-recipes.md#recipe-guidelines)
 
 ### 4. Document and Test
 Create a `README.md` with an overview, usage instructions, and examples. Most importantly, **test your resource type** with a real application and provide evidence that it works as expected.
