@@ -6,15 +6,15 @@ author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
 ---
 
-One of the core mission of Radius is to enable platform engineers to build powerful Internal Developer Platforms (IDPs) with curated resource catalog that empowers developers to build applications following all the enterprise best practices. The key to this is **Radius Resource Types**. 
+Radius helps platform engineers build powerful Internal Developer Platforms (IDPs) with curated resource catalogs that empower developers to build applications that adhere to all enterprise best practices. Key to delivering custom resource catalogs is the **Radius Resource Types** feature. 
 
-Radius Resource Types are the developer's interface to your platform. They define a contract—a set of properties developers use to provision infrastructure without needing to know the implementation details. Platform engineers then create [**Recipes**](https://docs.radapp.io/guides/recipes/overview/)—the implementation of that contract—using tools like Terraform or Bicep to deploy and manage the actual cloud resources, ensuring security, compliance, and cost best practices are followed.
+Think of Radius Resource Types as the developer's interface to your platform. They define a contract—a set of properties developers use to provision infrastructure without needing to know the implementation details. Platform engineers then create [**Recipes**](https://docs.radapp.io/guides/recipes/overview/)—the implementation of that contract—using tools like Terraform or Bicep to deploy and manage the actual cloud resources, ensuring that best practices related to security, compliance, and cost are followed by default.
 
-While Radius ships with a catalog of common resource types, the true power of Radius is unlocked when the community extends it and creates a **shared library** of the Resource Types. By creating and sharing your own Resource Types, you can model any service or technology, from a niche cloud service to a complex, multipart web application.
+While Radius ships with a catalog of common resource types, the true power of Radius is unlocked when the community extends it by creating a **shared library** of Resource Types. Shared Resource Types, enable you and the community to model any service or technology, from a niche cloud service to a complex, multipart web application.
 
-This blog post will show you how you can contribute your own Resource Types and Recipes to the Radius ecosystem and help build a rich, community-driven library that benefits everyone.
+This post explains how to contribute Resource Types and Recipes to the Radius ecosystem, with the goal of enabling a rich, community-driven library that benefits everyone.  See links at the end of this post for more information on how to create resource types and associated recipes.
 
-## A Great Example to Get You Started
+## An Example to Get You Started
 
 To showcase what a good contribution looks like, the Radius team has added a [Redis resource type with a Kubernetes recipe](https://github.com/radius-project/resource-types-contrib/pull/5). This alpha-stage contribution provides:
 
@@ -37,7 +37,7 @@ We welcome and encourage **alpha-stage contributions**. This is the perfect star
 
 ## What Can You Contribute?
 
-You can pick any resource type from the list of [open issues](https://github.com/radius-project/resource-types-contrib/issues). 
+You can define any resource specific to your own needs or pick a resource type from the list of [open issues](https://github.com/radius-project/resource-types-contrib/issues). 
 
 We'd love to see contributions for:
 
@@ -47,9 +47,9 @@ We'd love to see contributions for:
 - **Cloud Services:** Niche cloud provider services or multi-cloud abstractions.
 - **Observability:** Monitoring, logging, or tracing solutions.
 
-You can also pick a resource type that you use in your applications and create a Radius Resource Type for it. The more diverse the contributions, the richer the Radius ecosystem becomes.
+The more diverse the contributions, the richer the Radius ecosystem becomes.
 
-## How to Contribute Your Resource Type
+## Step by Step Guide
 
 We've structured the process in the [resource-types-contrib repository](https://github.com/radius-project/resource-types-contrib) to be as clear as possible, with three maturity levels for contributions: **Alpha**, **Beta**, and **Stable**.
 
@@ -67,11 +67,11 @@ Develop Terraform and/or Bicep Recipes to deploy your resource. This is the plat
 ### 4. Document and Test
 Create a `README.md` with an overview, usage instructions, and examples. Most importantly, **test your resource type** with a real application and provide evidence that it works as expected.
 
-### A Quick Contribution Checklist
+### Contribution Checklist
 Before you submit a pull request, make sure you have:
 
 - ✅ A schema following the naming conventions.
-- ✅ At least one working recipe (Bicep or Terraform).
+- ✅ At least one working recipe (Terraform or Bicep).
 - ✅ A comprehensive `README.md`.
 - ✅ Evidence of successful testing with a sample application.
 - ✅ Clear commit messages.
@@ -86,7 +86,7 @@ Not ready to contribute code? You can still participate!
 
 ## Get Started Today!
 
-The future of Radius resource types is community-driven. By sharing your experiments, testing each other's implementations, and collaboratively improving the ecosystem, we're building a platform that truly serves the needs of modern application development. As we build out the testing and CI/CD infrastructure for `beta` and `stable` contributions, we look forward to collaborating with you to mature your Resource types and Recipes. Your alpha contributions are the first step in a journey of collaborative development. Together, we can promote them through the maturity levels, ensuring they become robust and reliable components for the entire community.
+The future of Radius resource types is community-driven. By sharing your experiments, testing each other's implementations, and collaboratively improving the ecosystem, we're building a platform that truly serves the needs of cloud native application developers. As we build out the testing and CI/CD infrastructure for `beta` and `stable` contributions, we look forward to collaborating with you to mature your Resource types and Recipes. Your alpha contributions are the first step in a journey of collaborative development. Together, we can promote them through the maturity levels, ensuring they become robust and reliable components for the entire community.
 
 Ready to contribute? We can't wait to see what you build!
 
