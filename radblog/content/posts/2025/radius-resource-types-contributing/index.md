@@ -42,7 +42,7 @@ The more diverse the contributions, the richer the Radius ecosystem becomes.
 
 ## An Example to Get You Started
 
-To showcase what a good contribution looks like, the Radius team has added a [Redis resource type with a Kubernetes recipe](https://github.com/radius-project/resource-types-contrib/pull/5). This alpha-stage contribution provides:
+To showcase what a good contribution looks like, the Radius team has added a [Redis resource type with a Kubernetes recipe](https://github.com/radius-project/resource-types-contrib/pull/13). This alpha-stage contribution provides:
 
 - A complete Redis Resource type schema.
 - Both Bicep and Terraform Recipes for Kubernetes.
