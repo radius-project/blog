@@ -12,28 +12,19 @@ Think of Radius Resource Types as the developer's interface to your platform. Th
 
 While Radius ships with a catalog of common resource types, the true power of Radius is unlocked when the community extends it by creating a **shared library** of Resource Types. Shared Resource Types, enable you and the community to model any service or technology, from a niche cloud service to a complex, multipart web application.
 
-This post explains how to contribute Resource Types and Recipes to the Radius ecosystem, with the goal of enabling a rich, community-driven library that benefits everyone.  See links at the end of this post for more information on how to create resource types and associated recipes.
+This post explains how to contribute Resource Types and Recipes to the Radius ecosystem, with the goal of enabling a rich, community-driven library that benefits everyone.
 
-## An Example to Get You Started
+## Contribution Process Overview
 
-To showcase what a good contribution looks like, the Radius team has added a [Redis resource type with a Kubernetes recipe](https://github.com/radius-project/resource-types-contrib/pull/5). This alpha-stage contribution provides:
+Contributions to the `resource-types-contrib` repository are categorized into three maturity levels. This allows for a flexible contribution process, where you can start small and collaborate with the community to mature your Resource Type over time.
 
-- A complete Redis Resource type schema.
-- Both Bicep and Terraform Recipes for Kubernetes.
-- Real-world testing with a sample application.
-- Clear documentation for others to follow.
+- **Alpha**: This is the entry point for all new contributions. At this stage, the focus is on sharing your experimental work. You'll need a valid schema, at least one working Recipe for any platform, basic documentation, and evidence of manual testing.
 
-This serves as a template for community driven development. We encourage you to use it as a reference for your own contributions.
+- **Beta**: As a contribution matures, it can be promoted to Beta. This stage indicates that the Resource Type is well-tested and ready for broader use. Beta requirements include having Recipes for all major platforms (AWS, Azure, Kubernetes) in both Bicep and Terraform, along with automated functional tests.
 
-## Start with Alpha: No Contribution is Too Small
+- **Stable**: The final stage is for Resource Types that are considered production-ready and are officially supported by the Radius project. These contributions have 100% test coverage, are fully integrated into the Radius CI/CD pipeline, and have a designated owner for long-term maintenance.
 
-We welcome and encourage **alpha-stage contributions**. This is the perfect starting point for:
-
-- **Sharing early work** and experimental ideas.
-- **Getting community feedback** to refine your implementation.
-- **Collaborating** with others to improve and stabilize your resource.
-
-"Alpha" doesn't mean broken; it means you've built something that works and is ready for community collaboration.
+You can find the detailed requirements for each stage in our [contribution guide](https://github.com/radius-project/resource-types-contrib/blob/main/contributing-docs/contributing-resource-types-recipes.md#maturity-levels).
 
 ## What Can You Contribute?
 
@@ -49,9 +40,20 @@ We'd love to see contributions for:
 
 The more diverse the contributions, the richer the Radius ecosystem becomes.
 
-## Step by Step Guide
+## An Example to Get You Started
 
-We've structured the process in the [resource-types-contrib repository](https://github.com/radius-project/resource-types-contrib) to be as clear as possible, with three maturity levels for contributions: **Alpha**, **Beta**, and **Stable**.
+To showcase what a good contribution looks like, the Radius team has added a [Redis resource type with a Kubernetes recipe](https://github.com/radius-project/resource-types-contrib/pull/5). This alpha-stage contribution provides:
+
+- A complete Redis Resource type schema.
+- Both Bicep and Terraform Recipes for Kubernetes.
+- Manual testing with a sample application.
+- Clear documentation for others to follow.
+
+This serves as a template for community driven development. We encourage you to use it as a reference for your own contributions.
+
+## Step-by-Step Guide
+
+We've structured the process in the [resource-types-contrib repository](https://github.com/radius-project/resource-types-contrib/blob/main/contributing-docs/contributing-resource-types-recipes.md) to be as clear as possible, with three maturity levels for contributions: **Alpha**, **Beta**, and **Stable**.
 
 Here’s the high-level process:
 
@@ -88,10 +90,12 @@ Not ready to contribute code? You can still participate!
 
 The future of Radius resource types is community-driven. By sharing your experiments, testing each other's implementations, and collaboratively improving the ecosystem, we're building a platform that truly serves the needs of cloud native application developers. As we build out the testing and CI/CD infrastructure for `beta` and `stable` contributions, we look forward to collaborating with you to mature your Resource types and Recipes. Your alpha contributions are the first step in a journey of collaborative development. Together, we can promote them through the maturity levels, ensuring they become robust and reliable components for the entire community.
 
-Ready to contribute? We can't wait to see what you build!
+Ready to contribute? We can't wait to see what you build! 
 
 ## Get Involved with Radius
 
+- **Resource Types:** Check out our [tutorial](https://docs.radapp.io/tutorials/create-resource-type/) for step-by-step guides on creating Resource Types and Recipes.
+- **Recipes:** Learn more about [Recipes](https://docs.radapp.io/guides/recipes/overview/).
 - **Monthly Community Meetings:** Join the [Radius Google Group](https://groups.google.com/g/radapp_io) for announcements.
 - **Discord:** Connect with us and other contributors on the [Radius Discord](https://aka.ms/radius/discord).
 - **YouTube:** Watch demos and tutorials on the [Radius YouTube channel](https://www.youtube.com/@radapp_io).
