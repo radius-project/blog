@@ -42,7 +42,7 @@ The more diverse the contributions, the richer the Radius ecosystem becomes.
 
 ## An Example to Get You Started
 
-To showcase what a good contribution looks like, the Radius team has added a [Redis resource type with a Kubernetes recipe](https://github.com/radius-project/resource-types-contrib/pull/13). This alpha-stage contribution provides:
+To showcase what a good contribution looks like, the Radius team has added a [Redis Resource type with a Kubernetes Recipe](https://github.com/radius-project/resource-types-contrib/pull/13). This alpha-stage contribution provides:
 
 - A complete Redis Resource type schema.
 - Both Bicep and Terraform Recipes for Kubernetes.
@@ -73,7 +73,7 @@ Create a `README.md` with an overview, usage instructions, and examples. Most im
 Before you submit a pull request, make sure you have:
 
 - ✅ A schema following the naming conventions.
-- ✅ At least one working recipe (Terraform or Bicep).
+- ✅ At least one working Recipe (Terraform or Bicep).
 - ✅ A comprehensive `README.md`.
 - ✅ Evidence of successful testing with a sample application.
 - ✅ Clear commit messages.
