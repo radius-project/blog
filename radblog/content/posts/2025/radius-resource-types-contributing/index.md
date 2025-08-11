@@ -18,7 +18,7 @@ This post explains how to contribute Resource Types and Recipes to the Radius ec
 
 Contributions to the `resource-types-contrib` repository are categorized into three maturity levels. This allows for a flexible contribution process, where you can start small and collaborate with the community to mature your Resource Type over time.
 
-- **Alpha**: This is the entry point for all new contributions. At this stage, the focus is on sharing your experimental work. You'll need a valid schema, at least one working Recipe for any platform, basic documentation, and evidence of manual testing.
+- **Alpha**: This is the entry point for all new contributions. At this stage, the focus is on sharing your experimental work. You'll need a valid resource type schema, at least one working Recipe for any platform, basic documentation, and evidence of manual testing.
 
 - **Beta**: As a contribution matures, it can be promoted to Beta. This stage indicates that the Resource Type is well-tested and ready for broader use. Beta requirements include having Recipes for all major platforms (AWS, Azure, Kubernetes) in both Bicep and Terraform, along with automated functional tests.
 
