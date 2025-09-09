@@ -87,13 +87,6 @@ The `rad rollback` command will revert the Radius control plane back to the last
 
 A successful rollback means your Environments and Applications should continue working under the old version, just as before. No reconfiguration should be needed—the aim is to quickly get you back to a known good state. 
 
-We also **recommend backing up** your Radius Environment definitions before any upgrade, as an extra safety measure. For example, you can export your Environment configurations to a file:  
-```bash
-$ rad env show <env-name> -o yaml > <env-name>-backup.yaml
-```
-
-Do this for each Environment. In the unlikely event that something goes really wrong, having these definitions backed up means you could recreate the Environments if needed. (However, in most cases, the rollback command will handle restoration without any manual intervention.)
-
 
 ## Learn more
 For more details on in-place upgrades and rollbacks, check out the following resources in the documentation:
