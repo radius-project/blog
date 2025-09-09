@@ -30,7 +30,7 @@ Performing an in-place [upgrade](https://docs.radapp.io/guides/operations/kubern
    ```bash
    $ rad upgrade kubernetes --version 0.50.0 
    ```  
-   (If you omit `--version`, the CLI upgrades to the same version as the CLI itself.)
+   If you omit `--version`, the CLI upgrades to the same version as the CLI itself.
 
 3. **Verify the upgrade:** After the command finishes, you should verify that the control plane is running the new version and everything is healthy. You can check the Radius version again, which should now reflect the upgraded version:  
    ```bash
@@ -51,15 +51,15 @@ Performing an in-place [upgrade](https://docs.radapp.io/guides/operations/kubern
 One of the great things about `rad upgrade` is that it includes built-in preflight checks to catch any issues before making changes to your cluster. When you run the upgrade command, Radius will automatically validate a number of conditions, such as:
 - **Kubernetes connectivity and permissions**: Verifies connection to the cluster and required RBAC permissions
 - **Helm connectivity and installation status**: Confirms Radius is installed via Helm and can be upgraded
-- **Version compatibility validation**: Ensures the target version is compatible with your current version
-- **Cluster resource availability**: Checks for sufficient resources (optional warning)
+- **Version compatibility validation**: Ensures the current version can be upgraded to the target version
+- **Cluster resource availability**: Checks that there is sufficient CPU and memory available on the cluster for the rolling update (optional warning)
 - **Custom configuration validation**: Validates any custom Helm values
 
-If any of these checks fail or raise an issue, the CLI will stop the process and inform you what needs to be fixed. No changes will be made to your cluster unless all preflight checks pass. This gives you confidence that once the upgrade proceeds, it won't hit a surprise error halfway through.
+If any of these checks fail, the upgrade will stop and inform you of what needs to be fixed. No changes will be made to your cluster unless all preflight checks pass. This gives you confidence that once the upgrade proceeds, it won't hit a surprise error halfway through.
 
 ## Rolling Back if Something Goes Wrong
 
-What if you perform an upgrade and encounter an unexpected problem with the new version? In previous releases, you would have been stuck trying to reinstall the old version manually. Beginning with Radius v0.50, along with upgrades, we've introduced a [rollback mechanism](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-rollback/) for fast recovery.
+What if you perform an upgrade and encounter an unexpected problem with the new version? In previous releases, you would have been stuck trying to reinstall the old version manually. Radius v0.50 also introduces a [rollback mechanism](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-rollback/) for fast recovery.
 
 If an upgrade doesn't go as planned, you can simply run:  
 ```bash
@@ -68,7 +68,7 @@ $ rad rollback kubernetes
 
 This command will revert the Radius control plane back to the last deployed version. Under the hood, `rad rollback` uses Helm's built-in rollback capability to restore the previous release of Radius. Essentially, it redeploys the prior version's containers and settings, so your control plane goes back to the state it was in before the upgrade was attempted.
 
-A successful rollback means your environments and applications should continue working under the old version, just as before. No reconfiguration should be needed — the aim is to quickly get you back to a known good state. 
+A successful rollback means your environments and applications should continue working under the old version, just as before. No reconfiguration should be needed—the aim is to quickly get you back to a known good state. 
 
 It's worth noting that `rad rollback` will target the immediate previous release (the one you just upgraded from). If you had made several upgrades sequentially and needed to roll back further, you would potentially need to run the command multiple times or re-upgrade to the desired version. In practice, you'll typically detect any issues right after an upgrade and use rollback once.
 
@@ -79,13 +79,6 @@ $ rad env show <env-name> -o yaml > <env-name>-backup.yaml
 
 Do this for each environment. In the unlikely event that something goes really wrong, having these definitions backed up means you could recreate the environments if needed. (However, in most cases, the rollback command will handle restoration without any manual intervention.)
 
-## Upgrading or installing with custom container images
-
-If you want to use custom-built or predownloaded container images for Radius, you can specify them during installation or upgrade. This is useful for air-gapped environments or when using private registries to store container images that have been pre-approved or scanned. We have added `global.imageRegistry`, `global.imageTag`, and `global.imagePullSecrets` properties that may be used with commands like `rad install kubernetes`, `rad upgrade kubernetes`, and `rad init`. For example, to upgrade using a private image registry and tag, you can run:
-
-```bash
-$ rad upgrade kubernetes --set global.imageRegistry=myregistry.com/radius --set global.imageTag=v0.50.0 --set global.imagePullSecrets=my-pull-secret
-```
 
 ## Learn more
 For more details on in-place upgrades and rollbacks, check out the following resources in the documentation:
