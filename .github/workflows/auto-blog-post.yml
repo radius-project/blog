@@ -1,0 +1,199 @@
+name: Auto-generate Blog Post for New Radius Release
+
+on:
+  repository_dispatch:
+    types: [radius-release-published]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release tag to create blog post for (leave empty for latest)'
+        required: false
+
+jobs:
+  generate-blog-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get release information
+        id: release-info
+        run: |
+          # Determine which release to use
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            # Automatic trigger from release webhook
+            TAG_NAME="${{ github.event.client_payload.tag_name }}"
+            echo "Using release from webhook: $TAG_NAME"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.tag_name }}" ]; then
+            # Manual trigger with specific tag
+            TAG_NAME="${{ github.event.inputs.tag_name }}"
+            echo "Using manually specified tag: $TAG_NAME"
+          else
+            # Manual trigger without tag - get latest release
+            echo "Getting latest release..."
+            TAG_NAME=$(curl -s "https://api.github.com/repos/radius-project/radius/releases/latest" | jq -r '.tag_name')
+            echo "Using latest release: $TAG_NAME"
+          fi
+          
+          if [ -z "$TAG_NAME" ] || [ "$TAG_NAME" = "null" ]; then
+            echo "Could not determine tag name"
+            exit 1
+          fi
+          
+          RELEASE_DATA=$(curl -s "https://api.github.com/repos/radius-project/radius/releases/tags/$TAG_NAME")
+          
+          if [ "$(echo "$RELEASE_DATA" | jq -r '.message // empty')" = "Not Found" ]; then
+            echo "Release not found for tag: $TAG_NAME"
+            exit 1
+          fi
+          
+          RELEASE_NAME=$(echo "$RELEASE_DATA" | jq -r '.name')
+          RELEASE_BODY=$(echo "$RELEASE_DATA" | jq -r '.body')
+          PUBLISHED_AT=$(echo "$RELEASE_DATA" | jq -r '.published_at')
+          HTML_URL=$(echo "$RELEASE_DATA" | jq -r '.html_url')
+          
+          BLOG_DATE=$(date -d "$PUBLISHED_AT" "+%Y-%m-%dT%H:%M:%S%z" 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$PUBLISHED_AT" "+%Y-%m-%dT%H:%M:%S%z")
+          YEAR=$(date -d "$PUBLISHED_AT" "+%Y" 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$PUBLISHED_AT" "+%Y")
+          
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "release_name=$RELEASE_NAME" >> $GITHUB_OUTPUT
+          echo "blog_date=$BLOG_DATE" >> $GITHUB_OUTPUT
+          echo "year=$YEAR" >> $GITHUB_OUTPUT
+          echo "html_url=$HTML_URL" >> $GITHUB_OUTPUT
+          
+          echo "$RELEASE_BODY" > release_body.md
+
+      - name: Generate AI blog content
+        id: ai-content
+        run: |
+          # Get context from previous blog posts
+          CONTEXT=""
+          if ls radblog/content/posts/2025/*/index.md 1> /dev/null 2>&1; then
+            for file in $(ls radblog/content/posts/2025/*/index.md | head -2); do
+              if [ -f "$file" ]; then
+                # Extract content after frontmatter
+                CONTENT=$(sed -n '/^---$/,/^---$/!p' "$file" | head -20 | tr '\n' ' ')
+                CONTEXT="$CONTEXT $CONTENT"
+              fi
+            done
+          fi
+          
+          # Create AI prompt
+          PROMPT="Write an engaging blog post announcing Radius ${{ steps.release-info.outputs.release_name }}.
+
+          Release notes:
+          $(cat release_body.md)
+
+          Style context from previous posts:
+          $CONTEXT
+
+          Requirements:
+          - Professional but enthusiastic tone
+          - Transform technical notes into user-friendly content
+          - Highlight key features and developer benefits
+          - Include practical examples
+          - 800-1000 words
+          - Use markdown formatting
+
+          Generate only the blog content (no frontmatter)."
+
+          # Call GitHub Models API
+          RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{
+              "model": "gpt-4o-mini",
+              "messages": [
+                {"role": "system", "content": "You are a technical content writer for cloud-native application platforms."},
+                {"role": "user", "content": "'"$(echo "$PROMPT" | sed 's/"/\\"/g' | tr '\n' ' ')"'"}
+              ],
+              "max_tokens": 2000,
+              "temperature": 0.7
+            }')
+
+          # Check if API call was successful
+          if echo "$RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
+            echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content.md
+            echo "ai_success=true" >> $GITHUB_OUTPUT
+            echo "✅ AI content generated successfully"
+          else
+            echo "❌ AI generation failed, will use fallback template"
+            echo "Response: $RESPONSE"
+            echo "ai_success=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create blog post
+        run: |
+          BLOG_DIR="radblog/content/posts/${{ steps.release-info.outputs.year }}/radius-${{ steps.release-info.outputs.tag_name }}-release"
+          mkdir -p "$BLOG_DIR"
+          
+          # Create frontmatter
+          cat > "$BLOG_DIR/index.md" << EOF
+          ---
+          date: "${{ steps.release-info.outputs.blog_date }}"
+          title: "${{ steps.release-info.outputs.release_name }} Released"
+          linkTitle: "${{ steps.release-info.outputs.release_name }}"
+          author: "Radius Team"
+          type: blog
+          ---
+          
+          EOF
+          
+          # Add content
+          if [ "${{ steps.ai-content.outputs.ai_success }}" = "true" ] && [ -f "ai_content.md" ]; then
+            echo "Using AI-generated content"
+            cat ai_content.md >> "$BLOG_DIR/index.md"
+          else
+            echo "Using fallback template"
+            cat >> "$BLOG_DIR/index.md" << EOF
+          We're excited to announce the release of ${{ steps.release-info.outputs.release_name }}! 🎉
+          
+          ## Release Highlights
+          
+          EOF
+            sed 's/^## /### /g; s/^# /## /g' release_body.md >> "$BLOG_DIR/index.md"
+          fi
+          
+          # Add footer
+          cat >> "$BLOG_DIR/index.md" << EOF
+          
+          ## Get Started
+          
+          Install the latest version:
+          
+          \`\`\`bash
+          curl -fsSL https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh | /bin/bash
+          \`\`\`
+          
+          Or download from the [releases page](${{ steps.release-info.outputs.html_url }}).
+          
+          ## Resources
+          
+          - [Getting Started Guide](https://docs.radapp.io/getting-started/)
+          - [Documentation](https://docs.radapp.io/)
+          - [Discord Community](https://aka.ms/radius/discord)
+          - [GitHub Repository](https://github.com/radius-project/radius)
+          
+          Thank you for using Radius! 🚀
+          EOF
+          
+          echo "Blog post created at: $BLOG_DIR/index.md"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Add blog post for ${{ steps.release-info.outputs.release_name }}"
+          title: "Add blog post for ${{ steps.release-info.outputs.release_name }}"
+          body: |
+            Auto-generated blog post for **${{ steps.release-info.outputs.release_name }}**
+            
+            - **Tag:** ${{ steps.release-info.outputs.tag_name }}
+            - **Release:** ${{ steps.release-info.outputs.html_url }}
+            - **AI Generated:** ${{ steps.ai-content.outputs.ai_success == 'true' && '✅ Yes' || '❌ No (fallback used)' }}
+            
+            🤖 Generated automatically by GitHub Actions
+          branch: "blog-post-${{ steps.release-info.outputs.tag_name }}"
+          delete-branch: true
