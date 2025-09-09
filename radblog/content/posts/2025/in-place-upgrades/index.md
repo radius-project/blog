@@ -26,7 +26,7 @@ Performing an in-place [upgrade](https://docs.radapp.io/guides/operations/kubern
    ```  
    This will upgrade the Radius control plane in your Kubernetes cluster to the latest version matching your CLI. The CLI will first run a series of preflight checks (more on this below) to ensure your cluster and current Radius installation are ready to upgrade. If all checks pass, `rad upgrade` will proceed to perform the upgrade. Under the hood, this triggers a Helm-based upgrade of the Radius containers. The upgrade is applied as a rolling update to minimize downtime—the Radius Pods will be replaced one by one, preserving the system's state and all your environment configurations.
 
-   Alternatively, if you want to upgrade explicitly to a specific version, you can use the `--version` flag. For instance, to upgrade to v0.50.0:  
+   Alternatively, if you want to upgrade to a specific version, you can use the `--version` flag. For instance, to upgrade to v0.50.0:  
    ```bash
    $ rad upgrade kubernetes --version 0.50.0 
    ```  
