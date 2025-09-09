@@ -6,7 +6,7 @@ author: "[Will Tsai](https://www.github.com/willtsai)"
 type: blog
 ---
 
-Up until now, upgrading a Radius installation meant manually redeploying the control plane. This was cumbersome and risked downtime for your internal platform. **Beginning with Radius v0.50, we're excited to announce support for in-place upgrades of the Radius control plane.** Using the new `rad upgrade` command, platform engineers can now upgrade a running Radius control plane to a new version without rebuilding their environments or disrupting running applications. This enhancement makes it much easier to keep up with new Radius releases in production, thanks to built-in safety checks and a rollback capability.
+Up until now, upgrading a Radius installation meant manually redeploying the control plane. This was cumbersome and risked downtime for your internal platform. **Beginning with Radius v0.50, we're excited to announce support for in-place upgrades of the Radius control plane.** Using the new `rad upgrade` command, platform engineers can now upgrade a running Radius control plane to a new version without rebuilding their Environments or disrupting running applications. This enhancement makes it much easier to keep up with new Radius releases in production, thanks to built-in safety checks and a rollback capability.
 
 In this post, we'll walk through how the new in-place upgrade feature works and how to use the `rad upgrade` and `rad rollback` commands to upgrade safely. For a more detailed step-by-step guide, check out the official [How-To: Upgrade Radius on Kubernetes](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/) and [How-To: Rollback Radius on Kubernetes](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-rollback/) in the documentation.
 
@@ -24,7 +24,7 @@ Performing an in-place [upgrade](https://docs.radapp.io/guides/operations/kubern
    ```bash
    $ rad upgrade kubernetes
    ```  
-   This will upgrade the Radius control plane in your Kubernetes cluster to the latest version matching your CLI. The CLI will first run a series of preflight checks (more on this below) to ensure your cluster and current Radius installation are ready to upgrade. If all checks pass, `rad upgrade` will proceed to perform the upgrade. Under the hood, this triggers a Helm-based upgrade of the Radius containers. The upgrade is applied as a rolling update to minimize downtime—the Radius Pods will be replaced one by one, preserving the system's state and all your environment configurations.
+   This will upgrade the Radius control plane in your Kubernetes cluster to the latest version matching your CLI. The CLI will first run a series of preflight checks (more on this below) to ensure your cluster and current Radius installation are ready to upgrade. If all checks pass, `rad upgrade` will proceed to perform the upgrade. Under the hood, this triggers a Helm-based upgrade of the Radius containers. The upgrade is applied as a rolling update to minimize downtime—the Radius Pods will be replaced one by one, preserving the system's state and all your Environment configurations.
 
    Alternatively, if you want to upgrade to a specific version, you can use the `--version` flag. For instance, to upgrade to v0.50.0:  
    ```bash
@@ -68,16 +68,16 @@ $ rad rollback kubernetes
 
 This command will revert the Radius control plane back to the last deployed version. Under the hood, `rad rollback` uses Helm's built-in rollback capability to restore the previous release of Radius. Essentially, it redeploys the prior version's containers and settings, so your control plane goes back to the state it was in before the upgrade was attempted.
 
-A successful rollback means your environments and applications should continue working under the old version, just as before. No reconfiguration should be needed—the aim is to quickly get you back to a known good state. 
+A successful rollback means your Environments and Applications should continue working under the old version, just as before. No reconfiguration should be needed—the aim is to quickly get you back to a known good state. 
 
 It's worth noting that `rad rollback` will target the immediate previous release (the one you just upgraded from). If you had made several upgrades sequentially and needed to roll back further, you would potentially need to run the command multiple times or re-upgrade to the desired version. In practice, you'll typically detect any issues right after an upgrade and use rollback once.
 
-We also **recommend backing up** your Radius environment definitions before any upgrade, as an extra safety measure. For example, you can export your environment configurations to a file:  
+We also **recommend backing up** your Radius Environment definitions before any upgrade, as an extra safety measure. For example, you can export your Environment configurations to a file:  
 ```bash
 $ rad env show <env-name> -o yaml > <env-name>-backup.yaml
 ```
 
-Do this for each environment. In the unlikely event that something goes really wrong, having these definitions backed up means you could recreate the environments if needed. (However, in most cases, the rollback command will handle restoration without any manual intervention.)
+Do this for each Environment. In the unlikely event that something goes really wrong, having these definitions backed up means you could recreate the Environments if needed. (However, in most cases, the rollback command will handle restoration without any manual intervention.)
 
 
 ## Learn more
