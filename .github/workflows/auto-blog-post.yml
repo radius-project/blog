@@ -143,7 +143,7 @@ jobs:
           cat > "$BLOG_DIR/index.md" << EOF
           ---
           date: "${{ steps.release-info.outputs.blog_date }}"
-          title: "${{ steps.release-info.outputs.release_name }} Released"
+          title: " Announcing ${{ steps.release-info.outputs.release_name }}"
           linkTitle: "${{ steps.release-info.outputs.release_name }}"
           author: "Radius Team"
           type: blog

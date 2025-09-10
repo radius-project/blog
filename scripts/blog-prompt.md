@@ -25,8 +25,9 @@ Requirements:
 - Avoid repetitive summaries or conclusions that restate what was already covered
 
 Structure:
+- Start immediately with content - do NOT include a title or heading since the Hugo frontmatter already provides the title
 - Direct introduction stating what's new in this release
-- Technical summary of key features with implementation details and code examples demonstrating usage within the key features. Call out breaking changes within the features if applicable.
+- Technical summary of key features with implementation details and code examples demonstrating usage within the key features. Call out breaking changes within the features if applicable and not in a separate section.
 - Conclude with this standard "Learn more and Get Involved" section:
 
 ## Learn more and Get Involved
