@@ -8,7 +8,7 @@ Context for the blog post generation:
 - Radius documentation: https://docs.radapp.io/
 - Radius GitHub repository: https://github.com/radius-project/radius
 - Radius blog repository: https://github.com/radius-project/blog
-- Style and formatting guidelines: https://github.com/radius-project/blog/blob/b83709beb66133fe8afaa574774de5a2c9e18f8b/radblog/guide/contribution-guide.md
+- Style and formatting guidelines: https://github.com/radius-project/blog/blob/re/ab/radblog/guide/contribution-guide.md
 
 Requirements:
 - Target audience: experienced developers, platform engineers, DevOps practitioners
