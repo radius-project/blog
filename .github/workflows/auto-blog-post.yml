@@ -179,9 +179,9 @@ jobs:
           echo "=== END OF BLOG POST ==="
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
           commit-message: "Add blog post for ${{ steps.release-info.outputs.release_name }}"
           title: "Add blog post for ${{ steps.release-info.outputs.release_name }}"
           body: |
