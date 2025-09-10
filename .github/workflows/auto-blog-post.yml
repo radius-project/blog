@@ -166,30 +166,12 @@ jobs:
             sed 's/^## /### /g; s/^# /## /g' release_body.md >> "$BLOG_DIR/index.md"
           fi
           
-          # Add footer
-          cat >> "$BLOG_DIR/index.md" << EOF
-          
-          ## Get Started
-          
-          Install the latest version:
-          
-          \`\`\`bash
-          curl -fsSL https://raw.githubusercontent.com/radius-project/radius/main/deploy/install.sh | /bin/bash
-          \`\`\`
-          
-          Or download from the [releases page](${{ steps.release-info.outputs.html_url }}).
-          
-          ## Resources
-          
-          - [Getting Started Guide](https://docs.radapp.io/getting-started/)
-          - [Documentation](https://docs.radapp.io/)
-          - [Discord Community](https://aka.ms/radius/discord)
-          - [GitHub Repository](https://github.com/radius-project/radius)
-          
-          Thank you for using Radius! 🚀
-          EOF
+          # No additional footer needed - AI should include "Learn More" section
           
           echo "Blog post created at: $BLOG_DIR/index.md"
+          
+          # Clean up intermediate files
+          rm -f ai_content.md final_prompt.md prompt_template.md release_body.md
           
           # Show the generated content in logs
           echo "=== GENERATED BLOG POST CONTENT ==="
