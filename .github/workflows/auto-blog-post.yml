@@ -118,9 +118,12 @@ jobs:
             echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content.md
             echo "ai_success=true" >> $GITHUB_OUTPUT
             echo "✅ AI content generated successfully"
+            echo "=== AI GENERATED CONTENT ==="
+            cat ai_content.md
+            echo "=== END AI CONTENT ==="
           else
             echo "❌ AI generation failed, will use fallback template"
-            echo "Response: $RESPONSE"
+            echo "API Response: $RESPONSE"
             echo "ai_success=false" >> $GITHUB_OUTPUT
           fi
 
@@ -180,6 +183,11 @@ jobs:
           EOF
           
           echo "Blog post created at: $BLOG_DIR/index.md"
+          
+          # Show the generated content in logs
+          echo "=== GENERATED BLOG POST CONTENT ==="
+          cat "$BLOG_DIR/index.md"
+          echo "=== END OF BLOG POST ==="
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
