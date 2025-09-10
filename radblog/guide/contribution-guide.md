@@ -32,6 +32,7 @@ All blog contributions must be relevant to Radius and the broader cloud-native e
 
 ## Content Requirements
 
+- Length of the blog post should be between 800-1000 words.
 - Every statement must be verifiable through documentation, code examples, or reproducible demonstrations
 - Include complete, working code that readers can adapt and use successfully
 - Provide actionable insights that readers can apply immediately
