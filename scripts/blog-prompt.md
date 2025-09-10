@@ -16,14 +16,14 @@ Requirements:
 - Explain the technical reasoning behind changes with concrete details
 - 800-1000 words of substantive, technical content
 - Professional, matter-of-fact tone
-- Focus on Technical depth over marketing fluff
+- Technical depth over marketing fluff
 - Make sure it matches the style and tone of previous blog posts
 
 Structure:
-- Brief introduction identifying the most significant features in the release and their relevance to developers and platform engineers
+- Brief introduction identifying the most significant features in the release 
 - Detailed analysis of each major feature or change, including how the feature works under the hood. Specific API changes, new parameters, or configuration options introduced
-- Practical implementation examples with actual code/configuration
+- Examples with actual code/configuration
 - Breaking changes that developers need to be aware of, including Deprecated APIs or features and their replacements
 - Getting started with Radius and learn more section from previous blog posts for consistency
 
-Generate only the blog content (no frontmatter). Focus on analysis, not summary. Provide insights that experienced developers cannot get from just reading the release notes.
+Generate only the blog content (no frontmatter). 
