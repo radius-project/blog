@@ -1,4 +1,4 @@
-Analyze and explain the Radius {RELEASE_NAME} features for application developers and platform engineers. DO NOT simply rewrite or summarize the release notes.
+Analyze and explain the Radius {RELEASE_NAME} features and changes in a blog post targeted at application developers, platform engineers, and DevOps practitioners.
 
 Release notes (for reference only):
 {RELEASE_NOTES}
@@ -9,7 +9,6 @@ Style context from previous posts:
 CRITICAL: Do not copy or paraphrase the release notes. Instead, provide technical analysis and commentary on what these changes mean for developers.
 
 Requirements:
-- Target audience: Application developers, Platform engineers, DevOps practitioners
 - Focus on concrete functionality and implementation details
 - Avoid marketing and vague phrases like "enhanced user experience" or "improved performance"
 - Instead, be specific: what exact API changed, what new parameters were added, what specific problem this solves
@@ -25,6 +24,6 @@ Structure:
 - Detailed analysis of each major feature or change, including how the feature works under the hood. Specific API changes, new parameters, or configuration options introduced
 - Practical implementation examples with actual code/configuration
 - Breaking changes that developers need to be aware of, including Deprecated APIs or features and their replacements
-- Migration considerations and backward compatibility analysis  
+- Getting started with Radius and learn more section from previous blog posts for consistency
 
 Generate only the blog content (no frontmatter). Focus on analysis, not summary. Provide insights that experienced developers cannot get from just reading the release notes.
