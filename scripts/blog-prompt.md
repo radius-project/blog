@@ -7,7 +7,6 @@ Style context from previous posts:
 {BLOG_CONTEXT}
 
 Requirements:
-- Technical depth over marketing fluff
 - Target audience: Application developers, Platform engineers, DevOps practitioners
 - Focus on concrete functionality and implementation details
 - Avoid marketing and vague phrases like "enhanced user experience" or "improved performance"
@@ -17,6 +16,8 @@ Requirements:
 - Discuss specific real-world scenarios these features address
 - 800-1000 words of substantive, technical content
 - Professional, matter-of-fact tone
+- Focus on Technical depth over marketing fluff
+- Make sure it matches the style and tone of previous blog posts
 
 Structure:
 - Direct introduction stating what's new in this release
