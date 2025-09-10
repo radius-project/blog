@@ -76,11 +76,35 @@ jobs:
             done
           fi
           
-          # Create AI prompt from template
-          PROMPT=$(cat scripts/blog-prompt.md)
-          PROMPT=$(echo "$PROMPT" | sed "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g")
-          PROMPT=$(echo "$PROMPT" | sed "s|{RELEASE_NOTES}|$(cat release_body.md)|g")
-          PROMPT=$(echo "$PROMPT" | sed "s|{BLOG_CONTEXT}|$CONTEXT|g")
+          # Create AI prompt from template using safer approach
+          cp scripts/blog-prompt.md prompt_template.md
+          
+          # Replace placeholders safely
+          sed -i "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g" prompt_template.md
+          
+          # Replace RELEASE_NOTES placeholder with actual content
+          awk '
+          BEGIN { RS = "\n"; ORS = "\n" }
+          /{RELEASE_NOTES}/ {
+              while ((getline line < "release_body.md") > 0) {
+                  print line
+              }
+              close("release_body.md")
+              next
+          }
+          /{BLOG_CONTEXT}/ {
+              print "'"$CONTEXT"'"
+              next
+          }
+          { print }
+          ' prompt_template.md > final_prompt.md
+          
+          PROMPT=$(cat final_prompt.md)
+          
+          # Debug: Show the prompt being sent
+          echo "=== PROMPT BEING SENT TO AI ==="
+          cat final_prompt.md
+          echo "=== END OF PROMPT ==="
 
           # Call GitHub Models API
           RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
