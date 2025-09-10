@@ -127,3 +127,16 @@ Blog post content here.
 - **Internal links**: Connect to relevant Radius documentation and blog posts
 - **External links**: Point to authoritative, current sources
 - **GitHub references**: Include links to issues, PRs, and commits when relevant
+
+## Submission Process
+
+### Before Submitting
+1. **Self-review**: Check technical accuracy, style adherence, and target audience clarity
+2. **Technical review**: Have domain experts verify accuracy and completeness
+3. **Editorial review**: Ensure clarity, grammar, and style consistency
+
+### Pull Request Requirements
+- **Branch naming**: Use descriptive names (`blog/radius-app-graph`)
+- **Commit messages**: Follow conventional commit format
+- **Description**: Explain post topic, target audience, and key points
+- **Staging site**: A staging site will automatically get created and linked to PR to review and test

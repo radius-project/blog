@@ -32,15 +32,3 @@ The [radblog](./radblog) directory contains the hugo project, markdown files, an
 
 Follow the [Contribution Guide](./radblog/guide/contribution-guide.md) for more details on writing and formatting blog posts.
 
-## Submission Process
-
-### Before Submitting
-1. **Self-review**: Check technical accuracy, style adherence, and target audience clarity
-2. **Technical review**: Have domain experts verify accuracy and completeness
-3. **Editorial review**: Ensure clarity, grammar, and style consistency
-
-### Pull Request Requirements
-- **Branch naming**: Use descriptive names (`blog/radius-app-graph`)
-- **Commit messages**: Follow conventional commit format
-- **Description**: Explain post topic, target audience, and key points
-- **Staging site**: A staging site will automatically get created and linked to PR to review and test
