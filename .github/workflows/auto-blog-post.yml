@@ -1,13 +1,9 @@
 name: Auto-generate Blog Post for New Radius Release
 
 on:
-  repository_dispatch:
-    types: [radius-release-published]
-  workflow_dispatch:
-    inputs:
-      tag_name:
-        description: 'Release tag to create blog post for (leave empty for latest)'
-        required: false
+  push:
+    branches:
+      - 'recontributing'
 
 jobs:
   generate-blog-post:

@@ -94,7 +94,7 @@ Ready to contribute? We can't wait to see what you build!
 
 ## Get Involved with Radius
 
-- **Resource Types:** Check out our [tutorial](https://docs.radapp.io/tutorials/create-resource-type/) for step-by-step guides on creating Resource Types and Recipes.
+- **Resource Types:** Check out the [tutorial](https://docs.radapp.io/tutorials/create-resource-type/) for step-by-step guide on creating Resource Types and Recipes.
 - **Recipes:** Learn more about [Recipes](https://docs.radapp.io/guides/recipes/overview/).
 - **Monthly Community Meetings:** Join the [Radius Google Group](https://groups.google.com/g/radapp_io) for announcements.
 - **Discord:** Connect with us and other contributors on the [Radius Discord](https://aka.ms/radius/discord).
