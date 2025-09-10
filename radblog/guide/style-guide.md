@@ -1,70 +1,127 @@
-## Guide for Writing Blog Posts
+# Radius Blog Contribution Guidelines
 
-### Picking a Topic
+## Overview
 
-Any content that is relevant to the Radius project and the open-source community is welcome. Think about the topics in Radius that you are passionate about and would like to share with the community. When you pick a topic, also think about the target audience for the blog post. Audiences could any of the following 
-1. Enterprise Decision makers (CTO, Solution Architect) who are looking to understand how Radius can help with their cloud native strategy, 
-2. Platform engineers who are looking to extend Radius for their internal developer platform
-3. IT operators / Developers who are looking to get started with using a Radius feature 
-4. Open-source contributor who is looking to contribute to Radius.
+The Radius project blog serves as a vital communication channel between the Radius community and the broader cloud-native community. This guide establishes standards for creating content that is both technically accurate and accessible to developers worldwide. 
 
-Note that there might be overlap between these personas as individuals tend to wear multiple hats. Defining a primary target audience for your blog post will help you understand how you should frame the content in the blog post and the level of detail that you should go into to satisfy the target audience.
+All blog contributions must be relevant to Radius and the broader cloud-native ecosystem. Content should provide genuine value to readers through actionable insights, practical examples, or meaningful technical depth.
 
-Some examples include, but is not limited to:
+## Content Types
 
-- New features in the Radius project that helps solve a particular problem 
-    - Understanding and getting started with a particular feature, e.g., [Application graph blog post](https://blog.radapp.io/posts/2024/02/27/understand-your-entire-application-with-the-radius-application-graph/)
-    - Technical deep dives into the feature, e.g., [Bicep blog post](https://blog.radapp.io/posts/2024/08/28/how-radius-leveraged-bicep-extensibility/)
-- Customer case studies and success stories 
-    - How customers are using Radius to solve their problems, e.g., [MBCP case study](https://blog.radapp.io/posts/2023/12/06/case-study-how-millennium-bcp-leverages-radius/)
-    - Success stories of customers using Radius
-- Comparison with other similar projects and how Radius is different
-- Milestones and achievements of the Radius project, e.g., [Radius acceptance to CNCF as sandbox project](https://blog.radapp.io/posts/2024/04/16/radius-accepted-as-cloud-native-compute-foundation-cncf-sandbox-project/)
-- Any problem that you solved in Radius that might be useful for others
+1. **Feature announcements** introduce new capabilities with context about problems solved and practical applications in real-world workflows.
 
-### Blog Post Structure
+2. **Community stories** showcase how organizations use Radius to solve specific problems, focusing on implementation details and measurable outcomes. These highlight small, focused use cases.
 
-- **Title**: The title should be clear, concise and should give a brief idea about the content of the blog post.
+3. **Release announcements** balance comprehensive coverage with readability, highlighting significant changes and providing clear upgrade paths. Breaking changes require detailed migration steps.
 
-- **Introduction**: The introduction should give a brief overview of the topic that you are going to discuss in the blog post. It should be engaging and should make the reader want to read more. Assume you are talking to a reader who is completely new to the topic. Summarize the introduction in such a way that it is easy to understand the problem space for a beginner.
+4. **Integration guides** demonstrate real scenarios with Radius and other cloud-native technologies, including configuration examples and troubleshooting guidance.
 
-- **Subsections**: The blog post should be split into multiple sections to make it easier for the reader to navigate through the blog post. Each section should have a clear heading that gives an idea about the content of the section. The section headings themselves should tell a story and should be able to convey the message of the blog post.
+5. **Case studies** provide detailed analysis of production deployments, examining usage patterns, implementation challenges, and solutions developed.
 
-- **Closing note**: The closing note should summarize the key points discussed in the blog post. It should also give a brief idea about what is expected of the reader next. It can be a call to action to check out Radius, get started on contributing to Radius or a suggestion to try out something in Radius. Here is an example [Learn More and Contribute](https://blog.radapp.io/posts/2024/02/27/understand-your-entire-application-with-the-radius-application-graph/#learn-more-and-contribute).
+## Target Audience
 
-- **References**: If you are referring to any external sources, make sure to provide the references at the end of the blog post. This will help the reader to understand the context better and also to explore more about the topic.
+1. **Platform engineers** need architectural guidance, best practices, and integration patterns for internal developer platforms.
 
-### Writing Style 
+2. **Application developers** want practical solutions with working code examples and clear reasoning behind design decisions.
 
-- **Tone**: The tone of the blog post should be friendly and conversational. It should be easy to read and understand. Active voice is preferred over passive voice.
+3. **DevOps engineers** focus on automation, reliability, deployment strategies, and CI/CD integration patterns.
 
-- **Language**: Language should be simple and easy to understand. 
-    1. Always assume that the reader is new to Radius and the topic. Introduce Radius and the associated tools like Bicep and concepts in one or two sentences. Provide links to the documentation for the user to find more information about the topic.
-    1. Avoid using jargon and technical terms that might be difficult for a beginner to understand. If you are using any technical terms, make sure to explain them in simple terms. 
-    1. Avoid using phrases that are not open-source friendly. For example, instead of using "master" branch, use "main" branch and instead of using "team" refer to them as "community"
-    1. Avoid using superlatives and exaggerations. Be honest and transparent in your writing.
-    1. Use present tense. Avoid using `will` or `would` in the blog post.
+4. **Enterprise decision makers** require strategic insights, implementation considerations, and evidence of successful deployments at scale.
 
-- **Casing**: Capitalize the proper nouns, e.g. Radius, Bicep, Recipes. Use [sentence casing](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case) for title and section headings.
+5. **Open source contributors** seek detailed technical explanations, architecture discussions, and contribution guidance.
 
-- **Length**: The blog post should be concise and to the point. It should be readable within 3-5 minutes. For a technical blog, you can go deep into the details. Avoid long paragraphs and try to split the content into multiple sections.
+## Content Requirements
 
-- **Diagrams**: Add diagrams and visualizations wherever you can help the reader understand the content. This could be an architecture diagram, or a simple flow diagram that conveys the overall. If you are adding diagrams to the blog post, make sure to use the following `image` shortcode. 
+- Every statement must be verifiable through documentation, code examples, or reproducible demonstrations
+- Include complete, working code that readers can adapt and use successfully
+- Provide actionable insights that readers can apply immediately
+- Focus on demonstrable facts and measurable outcomes, avoiding promotional language
+- Ensure all external references point to authoritative, up-to-date sources
 
-    ```markdown
-    {{< image src="<imagepath>" alt="<alt text>" width="750" >}}
-    ```
-    1. Diagrams should follow the same theme and color within the blog post. 
-    1. Avoid blurry images and make sure the width of the image is set to 750px.
-    1. You can use [Excalidraw](https://excalidraw.com/) tool to create diagrams. 
+## Article Structure
 
-- **Code snippets**: If you are using code snippets in the blog post, make sure to use triple backticks ```<language> to wrap the code. This will help the reader to understand that it is a code snippet. If there are multiple commands, please split them into separate code blocks.
+- **Title**: Clear and descriptive, working well in search results and social media
+- **Author information**: Name with a link to a personal GitHub or LinkedIn profile
+- **Date**: Essential for technical content that can become outdated
+- **Introduction**: Establish context and explain the problem being addressed
+- **Main content**: Logical progression with descriptive headings and practical examples
+- **Conclusion**: Summarize key takeaways and provide clear next steps
+- **Learn More**: Link to official documentation and authoritative sources
 
+## Writing Guidelines
+
+### Style and Tone
+- **Conversational and friendly**: Make technical topics accessible without being frivolous
+- **User-focused**: Write in second person ("you") rather than first person ("we")
+- **Clear and concise**: Use simple, direct language accessible globally
+- **Active voice**: Make content more direct and engaging
+- **Present tense**: Use when describing current features and capabilities
+- **Objective**: Avoid promotional language, superlatives, and unsupported claims
+
+### Language Standards
+- **Global accessibility**: Avoid idioms, cultural references, and region-specific examples
+- **American English spelling**: Use standard conventions consistently
+- **Terminology consistency**: Use established Radius terminology throughout
+- **Inclusive language**: Follow cloud-native community standards
+- **Technical accuracy**: All statements must be verifiable and current
+- **Descriptive links**: Use meaningful text describing destination content
+- **Conditional clarity**: Put conditions before instructions
+
+### Content Quality Standards
+- **Evidence-based**: Support all claims with documentation, code, or examples
+- **Practical focus**: Include working code examples and step-by-step instructions
+- **No pre-announcements**: Avoid announcing unavailable future features
+- **Avoid speculation**: Don't make undocumented assumptions about user needs
+- **No redundancy**: Each section should provide unique value
+- **Technical depth**: Provide sufficient detail for understanding and implementation
+- **User-centric**: Focus on what users can accomplish
+
+## Formatting Standards
+
+### Typography
+- **Proper nouns**: Capitalize Radius entities including: Applications, Environments, Recipes, Resource Types, Containers, Secrets, Routes, Gateways, Resource Groups
+- **Headings**: Use sentence case (first word and proper nouns only)
+- **File names**: Use kebab-case (`radius-release-guide.md`)
+- **UI elements**: Use **bold** for buttons, menus, and dialog boxes
+- **Code elements**: Use `monospace` for function names, variables, and file paths
+- **Serial commas**: Use consistently in lists of three or more items
+
+### Code and Technical Content
+- **Code blocks**: Use fenced blocks with language specification for syntax highlighting
+    
     ```bash
-    rad deploy app.bicep
+    # Example bash code block
     ```
- 
-- **Links**: If you are referring to any external sources, make sure to provide the links in the blog post. This will help the reader to explore more about the topic. Use the following format to add links in the blog post.
+- **Commands**: Separate multiple commands into individual blocks
+- **File paths**: Use backticks for file names and paths
+- **Placeholders**: Use descriptive names (`YOUR_APPLICATION_NAME` not `app1`)
 
-    ```markdown
-    [Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep)
+### Visual Content
+- **Images**: Use high-resolution or vector images with Hugo shortcode `img`
+
+   ```
+   {{< image src="images/<your_image_name>" alt="Screenshot of image x" width="500" >}}
+   ```
+- **Alt text**: Provide descriptive text explaining what images show
+- **Consistency**: Maintain consistent visual styling within posts
+
+### Links and References
+- **Descriptive text**: Use specific descriptions instead of "click here"
+- **Internal links**: Connect to relevant Radius documentation and blog posts
+- **External links**: Point to authoritative, current sources
+- **GitHub references**: Include links to issues, PRs, and commits when relevant
+
+## Submission Process
+
+### Before Submitting
+1. **Self-review**: Check technical accuracy, style adherence, and target audience clarity
+2. **Technical review**: Have domain experts verify accuracy and completeness
+3. **Editorial review**: Ensure clarity, grammar, and style consistency
+
+### Pull Request Requirements
+- **Branch naming**: Use descriptive names (`blog/radius-v1.0-release`)
+- **Commit messages**: Follow conventional commit format
+- **Description**: Explain post topic, target audience, and key points
+
+
+This guide follows established practices from the cloud-native community and maintains the professional quality that developers expect.
