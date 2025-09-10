@@ -1,40 +1,55 @@
-Write a technical blog post announcing Radius {RELEASE_NAME} for developers and platform engineers.
+Write a technical blog post announcing Radius {RELEASE_NAME} for developers and platform engineers. Follow the Radius blog style guide exactly.
 
-Release notes:
+Release notes (YOUR ONLY SOURCE OF TRUTH):
 {RELEASE_NOTES}
+
+Style reference from previous posts:
 {BLOG_CONTEXT}
 
-Context for the blog post generation:
-- Radius documentation: https://docs.radapp.io/
-- Radius GitHub repository: https://github.com/radius-project/radius
-- Radius blog repository: https://github.com/radius-project/blog
-- Style and formatting guidelines: https://github.com/radius-project/blog/blob/re/ab/radblog/guide/contribution-guide.md
+CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
+- ONLY use information explicitly stated in the release notes above
+- Do NOT add any information not found in the release notes
+- Do NOT make up features, examples, or documentation links
+- Do NOT use marketing language like "we're excited", "introducing", "significant update"
+- Do NOT add introductory phrases like "Today we're announcing" or "We're pleased to"
+- Do NOT add horizontal rules (---) between sections
+- Do NOT speculate about future features or capabilities
+- ONLY include code examples that are explicitly shown in the release notes
+- ONLY include links that are explicitly mentioned in the release notes
 
-Requirements:
-- Target audience: Application developers, platform engineers, DevOps practitioners
-- Focus on concrete functionality and implementation details with technical reasoning
-- Technical depth over marketing fluff
-- Avoid marketing language like "we're excited", "with open arms", "happy building"
-- CRITICAL: Only include information that is explicitly stated in the release notes - do not expand, infer, or add details
-- Only include code examples, configuration snippets, or commands that are explicitly mentioned in the release notes 
-- Only include information and code samples that you can verify from the Radius code or documentation
-- Do NOT make up code examples following common industry patterns from similar projects if they are not specifically mentioned in the release notes or docs
-- Do NOT make up documentation links - only use links that are specifically mentioned in the release notes or that you can verify from the Radius documentation
-- When including code snippets, ensure they are spaced and formatted correctly for markdown
-- If you cannot verify information from the release notes, do not include it
-- 800-1000 words of substantive technical content
+WRITING STYLE (from Radius style guide):
+- Conversational and friendly without being frivolous
+- User-focused: Write in second person ("you") not first person ("we")
+- Clear and concise: Simple, direct language
+- Active voice and present tense
 - Professional, matter-of-fact tone
-- Avoid repetitive summaries or conclusions that restate what was already covered
-- Follow the style and formatting guidelines in the context links above
+- Technical depth over marketing content
+- Evidence-based: All claims supported by release notes only
 
-Structure:
-- Start immediately with introductory content - Do not include a title or heading since the Hugo front matter already provides the title
-- Direct introduction stating what's new in this release and a link to the release
-- Key Features as the main sections, with subheadings for each feature if applicable
-- Technical summary of key features with implementation details and code examples demonstrating usage within the key features. 
-- Add breaking changes within the feature summary if applicable 
-- DO NOT create a separate section for breaking changes.
-- Conclude with this standard "Learn more and Get Involved" section:
+CONTENT REQUIREMENTS:
+- Target audience: Application developers, platform engineers, DevOps practitioners  
+- 800-1000 words of substantive technical content
+- Focus on concrete functionality and implementation details
+- Include technical reasoning when provided in release notes
+- Proper markdown formatting for code snippets
+
+STRUCTURE REQUIREMENTS:
+- Start immediately with content - NO title, NO heading, NO introductory phrases
+- Begin directly with what's new in this release
+- Use ## headings for main features (not # headings)
+- Include breaking changes within relevant feature sections, not separately
+- Use clean markdown formatting without horizontal rules
+- End with the exact "Learn more and Get Involved" section below
+
+EXAMPLES OF WHAT NOT TO DO:
+- "Today, we're introducing Radius v0.50.0..."
+- "We're pleased to announce..."
+- "# Announcing Radius v0.50.0"
+- "---" (horizontal rules between sections)
+- Adding features not mentioned in release notes
+- Making up code examples or documentation links
+
+REQUIRED CLOSING SECTION (copy exactly):
 
 ## Learn more and Get Involved
 
