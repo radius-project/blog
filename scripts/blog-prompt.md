@@ -15,12 +15,13 @@ Requirements:
 - Discuss real-world problems these features solve
 - 800-1000 words of substantive content
 - Professional, matter-of-fact tone
+- Do not make up links or resources; only reference existing documentation or resources
 
 Structure:
 - Direct introduction stating what's new in this release
 - Technical analysis of key features with implementation details
    - Code examples or configuration samples demonstrating usage within the key features
 - Breaking changes or migration notes if applicable
-- Links to documentation for detailed implementation
+- Learn more and next steps section just like previous blog posts, with links to documentation and resources
 
 Generate only the blog content (no frontmatter). Be technical, be specific, avoid fluff.
