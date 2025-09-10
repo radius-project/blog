@@ -23,10 +23,12 @@ Requirements:
 - 800-1000 words of substantive technical content
 - Professional, matter-of-fact tone
 - Avoid repetitive summaries or conclusions that restate what was already covered
+- Follow the style and formatting guidelines in the context links above
 
 Structure:
-- Start immediately with content - do NOT include a title or heading since the Hugo frontmatter already provides the title
+- Start immediately with introductory content - Do not include a title or heading since the Hugo front matter already provides the title
 - Direct introduction stating what's new in this release
+- Key Features as the main sections, with subheadings for each feature if applicable
 - Technical summary of key features with implementation details and code examples demonstrating usage within the key features. Call out breaking changes within the features if applicable and not in a separate section.
 - Conclude with this standard "Learn more and Get Involved" section:
 
