@@ -1,4 +1,4 @@
-Write an engaging blog post announcing Radius {RELEASE_NAME}.
+Write a technical blog post announcing Radius {RELEASE_NAME} for experienced developers and platform engineers.
 
 Release notes:
 {RELEASE_NOTES}
@@ -7,23 +7,21 @@ Style context from previous posts:
 {BLOG_CONTEXT}
 
 Requirements:
-- Clear and concise language
-- Target audience: developers and technical users
-- Transform technical notes into user-friendly content
-- Highlight key features and developer benefits
-- Avoid excessive advertising language; maintain a balanced, informative tone
-- Include practical examples where appropriate
-- 800-1000 words
-- Use markdown formatting
-- Focus on developer experience improvements
-- Explain how new features solve real problems
+- Technical depth over marketing fluff
+- Target audience: experienced developers, platform engineers, DevOps practitioners
+- Focus on concrete functionality and implementation details
+- Avoid phrases like "we're excited", "with open arms", "happy building", or similar marketing speak
+- Include actual code examples, configuration snippets, or command examples where relevant
+- Explain the technical reasoning behind changes
+- Discuss real-world problems these features solve
+- 800-1000 words of substantive content
+- Professional, matter-of-fact tone
 
 Structure:
-- Engaging introduction announcing the release
-- Key highlights section (3-5 main features/improvements)
-- Technical details for developers
-- Practical examples demonstrating how to use the new features
-- Call to action for trying the new features
-- Learn more section with links to documentation and resources from the previous posts.
+- Direct introduction stating what's new in this release
+- Technical analysis of key features with implementation details
+   - Code examples or configuration samples demonstrating usage within the key features
+- Breaking changes or migration notes if applicable
+- Links to documentation for detailed implementation
 
-Generate only the blog content (no frontmatter).
+Generate only the blog content (no frontmatter). Be technical, be specific, avoid fluff.
