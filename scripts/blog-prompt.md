@@ -11,13 +11,13 @@ Context for the blog post generation:
 - Radius blog repository: https://github.com/radius-project/blog
 
 Requirements:
-- Technical depth over marketing fluff
 - Target audience: experienced developers, platform engineers, DevOps practitioners
 - Focus on concrete functionality and implementation details with technical reasoning
+- Technical depth over marketing fluff
 - Avoid marketing language like "we're excited", "with open arms", "happy building"
 - CRITICAL: Only include information that is explicitly stated in the release notes - do not expand, infer, or add details
 - Only include code examples, configuration snippets, or commands that are explicitly mentioned in the release notes
-- Do NOT make up documentation links - only use links that are specifically mentioned in the release notes
+- Do NOT make up documentation links - only use links that are specifically mentioned in the release notes or that you can verify from the Radius documentation
 - If you cannot verify information from the release notes, do not include it
 - Stick strictly to what is documented in the provided release notes
 - 800-1000 words of substantive technical content
