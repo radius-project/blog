@@ -76,24 +76,11 @@ jobs:
             done
           fi
           
-          # Create AI prompt
-          PROMPT="Write an engaging blog post announcing Radius ${{ steps.release-info.outputs.release_name }}.
-
-          Release notes:
-          $(cat release_body.md)
-
-          Style context from previous posts:
-          $CONTEXT
-
-          Requirements:
-          - Professional but enthusiastic tone
-          - Transform technical notes into user-friendly content
-          - Highlight key features and developer benefits
-          - Include practical examples
-          - 800-1000 words
-          - Use markdown formatting
-
-          Generate only the blog content (no frontmatter)."
+          # Create AI prompt from template
+          PROMPT=$(cat scripts/blog-prompt.md)
+          PROMPT=$(echo "$PROMPT" | sed "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g")
+          PROMPT=$(echo "$PROMPT" | sed "s|{RELEASE_NOTES}|$(cat release_body.md)|g")
+          PROMPT=$(echo "$PROMPT" | sed "s|{BLOG_CONTEXT}|$CONTEXT|g")
 
           # Call GitHub Models API
           RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
