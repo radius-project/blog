@@ -6,4 +6,5 @@
 # All of the people (and only those people) from the matching rule will be notified
 
 # Default rule: anything that doesn't match a more specific rule goes here
-* @radius-project/Radius-PM
+# These owners are the maintainers and approvers of this repo
+*       @radius-project/maintainers-docs @radius-project/approvers-docs
