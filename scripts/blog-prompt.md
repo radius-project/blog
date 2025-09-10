@@ -23,12 +23,9 @@ Requirements:
 
 Structure:
 - Brief introduction identifying the most significant features in the release and their relevance to developers and platform engineers
-- Detailed analysis of each major feature or change, including:
-    - Technical breakdown of how the feature works under the hood
-    - Specific API changes, new parameters, or configuration options introduced
+- Detailed analysis of each major feature or change, including how the feature works under the hood. Specific API changes, new parameters, or configuration options introduced
 - Practical implementation examples with actual code/configuration
-- Breaking changes that developers need to be aware of, including:
-    - Deprecated APIs or features and their replacements
+- Breaking changes that developers need to be aware of, including Deprecated APIs or features and their replacements
 - Migration considerations and backward compatibility analysis  
 
 Generate only the blog content (no frontmatter). Focus on analysis, not summary. Provide insights that experienced developers cannot get from just reading the release notes.
