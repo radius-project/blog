@@ -9,8 +9,8 @@ Style context from previous posts:
 CRITICAL: Do not copy or paraphrase the release notes. Instead, provide technical analysis and commentary on what these changes mean for developers.
 
 Requirements:
-- Focus on concrete functionality and implementation details
-- Avoid marketing and vague phrases like "enhanced user experience" or "improved performance"
+- Focus on concrete functionality and implementation details. Stick to technical facts.
+- Avoid marketing and vague phrases like "enhanced user experience" or "improved performance" 
 - Instead, be specific: what exact API changed, what new parameters were added, what specific problem this solves
 - Include actual code examples, configuration snippets, or command examples where relevant
 - Explain the technical reasoning behind changes with concrete details
