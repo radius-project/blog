@@ -183,6 +183,7 @@ jobs:
         with:
           token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
           commit-message: "Add blog post for ${{ steps.release-info.outputs.release_name }}"
+          signoff: true
           title: "Add blog post for ${{ steps.release-info.outputs.release_name }}"
           body: |
             Auto-generated blog post for **${{ steps.release-info.outputs.release_name }}**
@@ -193,4 +194,5 @@ jobs:
             
             🤖 Generated automatically by GitHub Actions
           branch: "blog-post-${{ steps.release-info.outputs.tag_name }}"
+          base: main
           delete-branch: true
