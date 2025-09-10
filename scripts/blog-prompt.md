@@ -17,7 +17,7 @@ Requirements:
 - Avoid marketing language like "we're excited", "with open arms", "happy building"
 - CRITICAL: Only include information that is explicitly stated in the release notes - do not expand, infer, or add details
 - Only include code examples, configuration snippets, or commands that are explicitly mentioned in the release notes 
--  Only include information and code samples that you can verify from the Radius code or documentation
+- Only include information and code samples that you can verify from the Radius code or documentation
 - Do NOT make up code examples following common industry patterns from similar projects if they are not specifically mentioned in the release notes or docs
 - Do NOT make up documentation links - only use links that are specifically mentioned in the release notes or that you can verify from the Radius documentation
 - When including code snippets, ensure they are spaced and formatted correctly for markdown
@@ -32,7 +32,8 @@ Structure:
 - Direct introduction stating what's new in this release and a link to the release
 - Key Features as the main sections, with subheadings for each feature if applicable
 - Technical summary of key features with implementation details and code examples demonstrating usage within the key features. 
-- Mention breaking changes within the feature summary if applicable and DO NOT create a separate section for breaking changes.
+- Add breaking changes within the feature summary if applicable 
+- DO NOT create a separate section for breaking changes.
 - Conclude with this standard "Learn more and Get Involved" section:
 
 ## Learn more and Get Involved
