@@ -26,8 +26,7 @@ Requirements:
 
 Structure:
 - Direct introduction stating what's new in this release
-- Technical summary of key features with implementation details and code examples demonstrating usage within the key features
-- Breaking changes or migration notes if applicable
+- Technical summary of key features with implementation details and code examples demonstrating usage within the key features. Call out breaking changes within the features if applicable.
 - Conclude with this standard "Learn more and Get Involved" section:
 
 ## Learn more and Get Involved
