@@ -34,7 +34,7 @@ CONTENT REQUIREMENTS:
 - Proper markdown formatting for code snippets
 
 STRUCTURE REQUIREMENTS:
-- Start immediately with content - NO title, NO heading, NO introductory phrases
+- Start immediately with content - NO title, NO heading.
 - Begin directly with what's new in this release
 - Use ## headings for main features (not # headings)
 - Include breaking changes within relevant feature sections, not separately
