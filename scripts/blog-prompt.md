@@ -10,7 +10,7 @@ Requirements:
 - Target audience: experienced developers, platform engineers, DevOps practitioners
 - Focus on concrete functionality and implementation details
 - Avoid marketing language like "we're excited", "with open arms", "happy building"
-- Include actual code examples, configuration snippets, or command examples where relevant. Do not make up code or commands that do not exist.
+- Include configuration snippets, or command examples where relevant. Do not make up code or commands that do not exist.
 - Explain the technical reasoning behind changes with concrete details
 - 800-1000 words of substantive technical content
 - Professional, matter-of-fact tone
@@ -19,9 +19,8 @@ Requirements:
 
 Structure:
 - Direct introduction stating what's new in this release
-- Technical analysis of key features with implementation details
-   - Code examples or configuration samples demonstrating usage within the key features
+- Technical summary of key features with implementation details and code examples demonstrating usage within the key features
 - Breaking changes or migration notes if applicable
-- Conclude with a Learn more and next steps section just like previous blog posts, with links to documentation and resources
+- Conclude with Learn more and next steps section just like previous blog posts, with links to documentation and resources
 
 Generate only the blog content (no frontmatter). Be technical, be specific, avoid fluff.
