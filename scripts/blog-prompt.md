@@ -10,11 +10,12 @@ Requirements:
 - Technical depth over marketing fluff
 - Target audience: experienced developers, platform engineers, DevOps practitioners
 - Focus on concrete functionality and implementation details
-- Avoid phrases like "we're excited", "with open arms", "happy building", or similar marketing speak
+- Avoid marketing and vague phrases like "enhanced user experience" or "improved performance"
+- Instead, be specific: what exact API changed, what new parameters were added, what specific problem this solves
 - Include actual code examples, configuration snippets, or command examples where relevant
-- Explain the technical reasoning behind changes
-- Discuss real-world problems these features solve
-- 800-1000 words of substantive content
+- Explain the technical reasoning behind changes with concrete details
+- Discuss specific real-world scenarios these features address
+- 800-1000 words of substantive, technical content
 - Professional, matter-of-fact tone
 
 Structure:
