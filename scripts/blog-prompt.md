@@ -9,13 +9,13 @@ Requirements:
 - Technical depth over marketing fluff
 - Target audience: experienced developers, platform engineers, DevOps practitioners
 - Focus on concrete functionality and implementation details
-- Avoid marketing language like "we're excited", "with open arms", "happy building", or similar marketing speak
+- Avoid marketing language like "we're excited", "with open arms", "happy building"
 - Include actual code examples, configuration snippets, or command examples where relevant
-- Explain the technical reasoning behind changes
-- Discuss real-world problems these features solve
-- 800-1000 words of substantive content
+- Explain the technical reasoning behind changes with concrete details
+- 800-1000 words of substantive technical content
 - Professional, matter-of-fact tone
 - Do not make up links or resources; only reference existing documentation or resources
+- Avoid repetitive summaries or conclusions that restate what was already covered
 
 Structure:
 - Direct introduction stating what's new in this release
