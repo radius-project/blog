@@ -28,27 +28,19 @@ The [radblog](./radblog) directory contains the hugo project, markdown files, an
 1. Run `hugo server --disableFastRender`
 1. Navigate to `http://localhost:1313/posts`
 
-## Update blog
+## Contributing Blog Posts
 
-1. Create new branch
-1. Commit and push changes to content
-1. Submit pull request to `main`
-1. Staging site will automatically get created and linked to PR to review and test
+Follow the [Contribution Guide](./radblog/guide/contribution-guide.md) for more details on writing and formatting blog posts.
 
-## Location and structure of post content
+## Submission Process
 
-Create a new markdown file for each blog post in the appropriate year directory under `radblog/content/posts`. The file name should be the title of the blog post, with hyphens in place of spaces. For example, the file name for a blog post titled "Hello world" would be `hello-world.md`.
+### Before Submitting
+1. **Self-review**: Check technical accuracy, style adherence, and target audience clarity
+2. **Technical review**: Have domain experts verify accuracy and completeness
+3. **Editorial review**: Ensure clarity, grammar, and style consistency
 
-The content of the blog post markdown file should be in the following format:
-
-```md
----
-date: "YYYY-MM-DDT07:00:00-07:00"
-title: "Blog post title"
-linkTitle: "Shorter blog post title in links pane"
-author: Radius project maintainers
-type: blog
----
-
-Blog post content here.
-```
+### Pull Request Requirements
+- **Branch naming**: Use descriptive names (`blog/radius-app-graph`)
+- **Commit messages**: Follow conventional commit format
+- **Description**: Explain post topic, target audience, and key points
+- **Staging site**: A staging site will automatically get created and linked to PR to review and test

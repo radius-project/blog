@@ -39,11 +39,27 @@ All blog contributions must be relevant to Radius and the broader cloud-native e
 - Focus on demonstrable facts and measurable outcomes, avoiding promotional language
 - Ensure all external references point to authoritative, up-to-date sources
 
+## Location and structure of post content
+
+Create a new markdown file for each blog post in the appropriate year directory under `radblog/content/posts`. The file name should be the title of the blog post, with hyphens in place of spaces. For example, the file name for a blog post titled "Hello world" would be `hello-world.md`.
+
+The content of the blog post markdown file should be in the following format:
+
+```md
+---
+date: "YYYY-MM-DDT07:00:00-07:00"
+title: "Blog post title"
+linkTitle: "Shorter blog post title in links pane"
+author: Radius project maintainers
+type: blog
+---
+
+Blog post content here.
+```
+
 ## Article Structure
 
 - **Title**: Clear and descriptive, working well in search results and social media
-- **Author information**: Name with a link to a personal GitHub or LinkedIn profile
-- **Date**: Essential for technical content that can become outdated
 - **Introduction**: Establish context and explain the problem being addressed
 - **Main content**: Logical progression with descriptive headings and practical examples
 - **Conclusion**: Summarize key takeaways and provide clear next steps
@@ -111,18 +127,3 @@ All blog contributions must be relevant to Radius and the broader cloud-native e
 - **Internal links**: Connect to relevant Radius documentation and blog posts
 - **External links**: Point to authoritative, current sources
 - **GitHub references**: Include links to issues, PRs, and commits when relevant
-
-## Submission Process
-
-### Before Submitting
-1. **Self-review**: Check technical accuracy, style adherence, and target audience clarity
-2. **Technical review**: Have domain experts verify accuracy and completeness
-3. **Editorial review**: Ensure clarity, grammar, and style consistency
-
-### Pull Request Requirements
-- **Branch naming**: Use descriptive names (`blog/radius-v1.0-release`)
-- **Commit messages**: Follow conventional commit format
-- **Description**: Explain post topic, target audience, and key points
-
-
-This guide follows established practices from the cloud-native community and maintains the professional quality that developers expect.
