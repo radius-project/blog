@@ -15,11 +15,13 @@ Requirements:
 - Target audience: experienced developers, platform engineers, DevOps practitioners
 - Focus on concrete functionality and implementation details with technical reasoning
 - Avoid marketing language like "we're excited", "with open arms", "happy building"
-- Only include code examples, configuration snippets, or commands that are explicitly mentioned in the release notes or are well-established Radius patterns
-- If you cannot provide a verified code example, describe the functionality without code
+- CRITICAL: Only include information that is explicitly stated in the release notes - do not expand, infer, or add details
+- Only include code examples, configuration snippets, or commands that are explicitly mentioned in the release notes
+- Do NOT make up documentation links - only use links that are specifically mentioned in the release notes
+- If you cannot verify information from the release notes, do not include it
+- Stick strictly to what is documented in the provided release notes
 - 800-1000 words of substantive technical content
 - Professional, matter-of-fact tone
-- Do not make up links or resources; only reference existing documentation or resources
 - Avoid repetitive summaries or conclusions that restate what was already covered
 
 Structure:
