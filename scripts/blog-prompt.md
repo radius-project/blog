@@ -16,8 +16,8 @@ Requirements:
 - Technical depth over marketing fluff
 - Avoid marketing language like "we're excited", "with open arms", "happy building"
 - CRITICAL: Only include information that is explicitly stated in the release notes - do not expand, infer, or add details
-- Only include code examples, configuration snippets, or commands that are explicitly mentioned in the release notes
-- Do NOT make up code examples following common patterns - only use code examples that are specifically mentioned in the release notes
+- Only include code examples, configuration snippets, or commands that are explicitly mentioned in the release notes or you can verify from the Radius code or documentation
+- Do NOT make up code examples following common industry patterns that you cannot verify from the release notes or Radius documentation
 - Do NOT make up documentation links - only use links that are specifically mentioned in the release notes or that you can verify from the Radius documentation
 - If you cannot verify information from the release notes, do not include it
 - 800-1000 words of substantive technical content
@@ -27,7 +27,7 @@ Requirements:
 
 Structure:
 - Start immediately with introductory content - Do not include a title or heading since the Hugo front matter already provides the title
-- Direct introduction stating what's new in this release and a link to changelog or release notes
+- Direct introduction stating what's new in this release and a link to the release
 - Key Features as the main sections, with subheadings for each feature if applicable
 - Technical summary of key features with implementation details and code examples demonstrating usage within the key features. Call out breaking changes within the features if applicable and not in a separate section.
 - Conclude with this standard "Learn more and Get Involved" section:
