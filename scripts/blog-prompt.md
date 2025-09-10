@@ -15,7 +15,6 @@ Requirements:
 - Instead, be specific: what exact API changed, what new parameters were added, what specific problem this solves
 - Include actual code examples, configuration snippets, or command examples where relevant
 - Explain the technical reasoning behind changes with concrete details
-- Discuss specific real-world scenarios these features address
 - 800-1000 words of substantive, technical content
 - Professional, matter-of-fact tone
 - Focus on Technical depth over marketing fluff
