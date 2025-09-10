@@ -8,7 +8,7 @@ Style context from previous posts:
 
 Requirements:
 - Technical depth over marketing fluff
-- Target audience: experienced developers, platform engineers, DevOps practitioners
+- Target audience: Application developers, Platform engineers, DevOps practitioners
 - Focus on concrete functionality and implementation details
 - Avoid marketing and vague phrases like "enhanced user experience" or "improved performance"
 - Instead, be specific: what exact API changed, what new parameters were added, what specific problem this solves
@@ -21,7 +21,7 @@ Requirements:
 Structure:
 - Direct introduction stating what's new in this release
 - Technical analysis of key features with implementation details
-   - Code examples or configuration samples demonstrating usage within the key features
+- Code examples or configuration samples demonstrating usage within the key features
 - Breaking changes or migration notes if applicable
 - Links to documentation for detailed implementation
 
