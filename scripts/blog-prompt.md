@@ -9,13 +9,13 @@ Style reference from previous posts:
 CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
 - ONLY use information explicitly stated in the release notes above
 - Do NOT add any information not found in the release notes
-- Do NOT make up features, examples, or documentation links
+- Do NOT make up features, examples, code snippets or documentation links
 - Do NOT use marketing language like "we're excited", "introducing", "significant update"
 - Do NOT add introductory phrases like "Today we're announcing" or "We're pleased to"
 - Do NOT add horizontal rules (---) between sections
 - Do NOT speculate about future features or capabilities
 - ONLY include code examples that are explicitly shown in the release notes
-- ONLY include links that are explicitly mentioned in the release notes
+- ONLY include links that are explicitly mentioned in the release notes or that you can verify exist in the Radius documentation
 
 WRITING STYLE (from Radius style guide):
 - Conversational and friendly without being frivolous
@@ -35,9 +35,9 @@ CONTENT REQUIREMENTS:
 
 STRUCTURE REQUIREMENTS:
 - Start immediately with content - NO title, NO heading.
-- Begin directly with what's new in this release
+- Begin directly with a introduction of what's new in this release and include a link to the release
 - Use ## headings for main features (not # headings)
-- Include breaking changes within relevant feature sections, not separately
+- Include breaking changes in a note or as a highlight within relevant feature sections, not separately
 - Use clean markdown formatting without horizontal rules
 - End with the exact "Learn more and Get Involved" section below
 
