@@ -73,11 +73,11 @@ jobs:
             done
           fi
           
-          # Load contribution guide
+          # Load contribution guide content
           if [ -f "radblog/guide/contribution-guide.md" ]; then
-            cp "radblog/guide/contribution-guide.md" "contribution-guide.md"
+            STYLE_GUIDE=$(cat "radblog/guide/contribution-guide.md")
           else
-            echo "WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes." > contribution-guide.md
+            STYLE_GUIDE="WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes."
           fi
           
           # Create AI prompt from template
@@ -86,7 +86,7 @@ jobs:
           # Replace placeholders with actual content
           sed -i "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g" prompt_template.md
           
-          awk '
+          awk -v style_guide="$STYLE_GUIDE" '
           /{RELEASE_NOTES}/ {
               while ((getline line < "release_body.md") > 0) {
                   print line
@@ -95,10 +95,7 @@ jobs:
               next
           }
           /{STYLE_GUIDE}/ {
-              while ((getline line < "contribution-guide.md") > 0) {
-                  print line
-              }
-              close("contribution-guide.md")
+              print style_guide
               next
           }
           /{BLOG_CONTEXT}/ {
@@ -164,7 +161,7 @@ jobs:
           fi
           
           # Clean up intermediate files
-          rm -f ai_content.md final_prompt.md prompt_template.md release_body.md contribution-guide.md
+          rm -f ai_content.md final_prompt.md prompt_template.md release_body.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
