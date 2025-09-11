@@ -1,53 +1,32 @@
-Write a technical blog post announcing Radius {RELEASE_NAME} for developers and platform engineers. Follow the Radius blog style guide exactly.
+Create a technical blog post about Radius {RELEASE_NAME}. Use ONLY information from the release notes below.
 
-Release notes (YOUR ONLY SOURCE OF TRUTH):
+RELEASE NOTES - YOUR ONLY INFORMATION SOURCE:
 {RELEASE_NOTES}
 
-Style reference from previous posts:
+PREVIOUS POST EXAMPLES FOR STYLE:
 {BLOG_CONTEXT}
 
-CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
-- ONLY use information explicitly stated in the release notes above
-- Do NOT add any information not found in the release notes
-- Do NOT make up features, examples, code snippets or documentation links
-- Do NOT use marketing language like "we're excited", "introducing", "significant update"
-- Do NOT add introductory phrases like "Today we're announcing" or "We're pleased to"
-- Do NOT add horizontal rules (---) between sections
-- Do NOT speculate about future features or capabilities
-- DO NOT include breaking changes as a separate section
-- ONLY include code examples that are explicitly shown in the release notes
-- ONLY include links that are explicitly mentioned in the release notes or that you can verify exist in the Radius documentation
-- Verify the content thoroughly and ensure all details are accurate
+ABSOLUTE REQUIREMENTS:
+1. Start immediately with content - NO title, NO "announcing" phrases
+2. Write: "Radius {RELEASE_NAME} brings [list key features from release notes]"  
+3. Use ## for feature headings (never #)
+4. NEVER create a "Breaking Changes" section - mention breaking changes within the relevant feature section only
+5. Only use information explicitly written in the release notes above
+6. Only include code examples that appear in the release notes above
+7. Only include links that appear in the release notes above
+8. Write in second person ("you can") not first person ("we introduce")
 
-WRITING STYLE (from Radius style guide):
-- Conversational and friendly without being frivolous
-- User-focused: Write in second person ("you") not first person ("we")
-- Clear and concise: Simple, direct language
-- Active voice and present tense
-- Professional, matter-of-fact tone
-- Technical depth over marketing content
-- Evidence-based: All claims supported by release notes only
+TEMPLATE TO FOLLOW:
+Radius {RELEASE_NAME} brings [feature 1], [feature 2], and [feature 3]. [Link to release notes].
 
-CONTENT REQUIREMENTS:
-- Target audience: Application developers, platform engineers, DevOps practitioners  
-- 800-1000 words of substantive technical content
-- Focus on concrete functionality and implementation details
-- Include technical reasoning when provided in release notes
-- Proper markdown formatting for code snippets
+## [Feature 1 Name]
+[Explain feature using only release notes content. Include any breaking changes for this feature here.]
 
-STRUCTURE REQUIREMENTS:
-- Start immediately with content - NO title, NO heading.
-- Begin directly with a introduction of what's new in this release and include a link to the release notes page
-- Use ## headings for main features (not # headings)
-- Include breaking changes in a note or as a highlight within relevant feature sections, not separately
-- Use clean markdown formatting without horizontal rules
-- End with the exact "Learn more and Get Involved" section below
+## [Feature 2 Name]  
+[Explain feature using only release notes content.]
 
-EXAMPLES OF WHAT NOT TO DO:
-- "---" (horizontal rules between sections)
-- Adding features not mentioned in release notes
-- Making up code examples or documentation links
-- Marketing language or speculative statements
+## [Feature 3 Name]
+[Explain feature using only release notes content.]
 
 REQUIRED CLOSING SECTION (copy exactly):
 
