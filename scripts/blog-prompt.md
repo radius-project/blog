@@ -34,7 +34,7 @@ REQUIRED CLOSING SECTION (copy exactly):
 
 We would love for you to join us to help build Radius:
 
-- Try the [Radius Todo List Application](https://github.com/Reshrahim/todoapp-ai)
+- Try the [Radius Tutorial](https://docs.radapp.io/tutorials/new-app/)
 - Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
 - Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
 - Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
