@@ -22,8 +22,8 @@ Style guide:
 {STYLE_GUIDE}
 
 STRUCTURE REQUIREMENTS:
-- Start immediately with introductory content, NO heading. Include a link to the latest Radius release notes.
-- Use ## headings for main features (not # headings)
+- Start immediately with introductory content, NO heading. Include a link to the latest Radius release notes and context about how someone new can get started with Radius.
+- Use ## headings for main features (not # headings) and summarize each feature in a concise paragraph
 - Feature summary should have breaking changes in a note or as a highlight, not a separate section
 - Use clean markdown formatting without horizontal rules
 - End with the exact "Learn more and Get Involved" section below
