@@ -30,7 +30,7 @@ CONTENT REQUIREMENTS:
 STRUCTURE REQUIREMENTS:
 - Start immediately with introductory content, NO heading. Include a link to the latest Radius release notes.
 - Use ## headings for main features (not # headings)
-- Include breaking changes in a note or as a highlight within relevant feature sections, not separately
+- Feature summary should have breaking changes in a note or as a highlight, not a separate section
 - Use clean markdown formatting without horizontal rules
 - End with the exact "Learn more and Get Involved" section below
 

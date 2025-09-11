@@ -76,23 +76,16 @@ jobs:
             done
           fi
           
-          # Get contribution guide content from re/ab branch
-          echo "Fetching contribution guide from re/ab branch..."
-          HTTP_STATUS=$(curl -s -w "%{http_code}" "https://raw.githubusercontent.com/radius-project/blog/re%2Fab/radblog/guide/contribution-guide.md" -o contribution-guide.md)
+          # Get contribution guide content from main branch
+          echo "Fetching contribution guide from GitHub main branch..."
+          HTTP_STATUS=$(curl -s -w "%{http_code}" "https://raw.githubusercontent.com/radius-project/blog/main/radblog/guide/contribution-guide.md" -o contribution-guide.md)
           
           if [ "$HTTP_STATUS" = "200" ] && [ -f "contribution-guide.md" ] && [ -s "contribution-guide.md" ]; then
             STYLE_GUIDE=$(cat contribution-guide.md)
-            echo "✅ Contribution guide fetched successfully (HTTP $HTTP_STATUS)"
+            echo "✅ Contribution guide fetched successfully from GitHub (HTTP $HTTP_STATUS)"
           else
-            echo "❌ Failed to fetch contribution guide (HTTP $HTTP_STATUS), trying alternative method..."
-            # Try using git show as fallback
-            if git show re/ab:radblog/guide/contribution-guide.md > contribution-guide.md 2>/dev/null; then
-              STYLE_GUIDE=$(cat contribution-guide.md)
-              echo "✅ Contribution guide fetched via git show"
-            else
-              echo "❌ All methods failed, using fallback style guide"
-              STYLE_GUIDE="Follow Radius blog style guide: conversational, user-focused, technical depth over marketing, evidence-based content only."
-            fi
+            echo "❌ Failed to fetch contribution guide (HTTP $HTTP_STATUS), using fallback"
+            STYLE_GUIDE="WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes."
           fi
           
           # Create AI prompt from template using safer approach
