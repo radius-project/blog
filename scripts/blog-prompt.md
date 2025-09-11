@@ -12,7 +12,7 @@ Style reference from previous posts:
 CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
 - ONLY use information explicitly stated in the release notes above
 - Do NOT add any information not found in the release notes
-- Do NOT make up features, examples, code snippets or documentation links
+- Do NOT make up features, examples, code snippets or documentation links not present in the release notes
 - DO NOT include breaking changes as a separate section
 - DO NOT add horizontal rules (---) between sections
 - DO NOT speculate about future features or capabilities
