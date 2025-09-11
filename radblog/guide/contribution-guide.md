@@ -22,17 +22,13 @@ All blog contributions must be relevant to Radius and the broader cloud-native e
 
 1. **Platform engineers** need architectural guidance, best practices, and integration patterns for internal developer platforms.
 
-2. **Application developers** want practical solutions with working code examples and clear reasoning behind design decisions.
+2. **Enterprise decision makers** require strategic insights, implementation considerations, and evidence of successful deployments at scale.
 
-3. **DevOps engineers** focus on automation, reliability, deployment strategies, and CI/CD integration patterns.
-
-4. **Enterprise decision makers** require strategic insights, implementation considerations, and evidence of successful deployments at scale.
-
-5. **Open source contributors** seek detailed technical explanations, architecture discussions, and contribution guidance.
+3. **Open source contributors** seek detailed technical explanations, architecture discussions, and contribution guidance.
 
 ## Content Requirements
 
-- Length of the blog post should be between 800-1000 words.
+- Length of the blog post should be between 800-1000 words
 - Every statement must be verifiable through documentation, code examples, or reproducible demonstrations
 - Include complete, working code that readers can adapt and use successfully
 - Provide actionable insights that readers can apply immediately
@@ -50,7 +46,7 @@ The content of the blog post markdown file should be in the following format:
 date: "YYYY-MM-DDT07:00:00-07:00"
 title: "Blog post title"
 linkTitle: "Shorter blog post title in links pane"
-author: Radius project maintainers
+author: "[Firstname Lastname](<link_to_linkedin_or_github>)"
 type: blog
 ---
 
