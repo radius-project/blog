@@ -20,7 +20,7 @@ All blog contributions must be relevant to Radius and the broader cloud-native e
 
 ## Target Audience
 
-1. **Platform engineers** need architectural guidance, best practices, and integration patterns for internal developer platforms.
+1. **Platform engineers and Developers** need architectural guidance, best practices, and integration patterns for internal developer platforms.
 
 2. **Enterprise decision makers** require strategic insights, implementation considerations, and evidence of successful deployments at scale.
 
