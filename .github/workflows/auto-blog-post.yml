@@ -76,13 +76,24 @@ jobs:
             done
           fi
           
+          # Get contribution guide content from re/ab branch
+          echo "Fetching contribution guide from re/ab branch..."
+          curl -s "https://raw.githubusercontent.com/radius-project/blog/re/ab/radblog/guide/contribution-guide.md" > contribution-guide.md
+          if [ -f "contribution-guide.md" ] && [ -s "contribution-guide.md" ]; then
+            STYLE_GUIDE=$(cat contribution-guide.md)
+            echo "✅ Contribution guide fetched successfully"
+          else
+            echo "❌ Failed to fetch contribution guide, using fallback"
+            STYLE_GUIDE="Follow Radius blog style guide: conversational, user-focused, technical depth over marketing."
+          fi
+          
           # Create AI prompt from template using safer approach
           cp scripts/blog-prompt.md prompt_template.md
           
           # Replace placeholders safely
           sed -i "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g" prompt_template.md
           
-          # Replace RELEASE_NOTES placeholder with actual content
+          # Replace placeholders with actual content
           awk '
           BEGIN { RS = "\n"; ORS = "\n" }
           /{RELEASE_NOTES}/ {
@@ -90,6 +101,10 @@ jobs:
                   print line
               }
               close("release_body.md")
+              next
+          }
+          /{STYLE_GUIDE}/ {
+              print "'"$STYLE_GUIDE"'"
               next
           }
           /{BLOG_CONTEXT}/ {

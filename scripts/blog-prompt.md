@@ -3,6 +3,9 @@ Write a technical blog post announcing Radius {RELEASE_NAME} for developers and 
 Release notes (YOUR ONLY SOURCE OF TRUTH):
 {RELEASE_NOTES}
 
+Style guide:
+{STYLE_GUIDE}
+
 Style reference from previous posts:
 {BLOG_CONTEXT}
 
