@@ -16,6 +16,7 @@ CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
 - Do NOT speculate about future features or capabilities
 - ONLY include code examples that are explicitly shown in the release notes
 - ONLY include links that are explicitly mentioned in the release notes or that you can verify exist in the Radius documentation
+- Verify the content thoroughly and ensure all details are accurate
 
 WRITING STYLE (from Radius style guide):
 - Conversational and friendly without being frivolous
@@ -35,19 +36,17 @@ CONTENT REQUIREMENTS:
 
 STRUCTURE REQUIREMENTS:
 - Start immediately with content - NO title, NO heading.
-- Begin directly with a introduction of what's new in this release and include a link to the release
+- Begin directly with a introduction of what's new in this release and include a link to the release notes page
 - Use ## headings for main features (not # headings)
 - Include breaking changes in a note or as a highlight within relevant feature sections, not separately
 - Use clean markdown formatting without horizontal rules
 - End with the exact "Learn more and Get Involved" section below
 
 EXAMPLES OF WHAT NOT TO DO:
-- "Today, we're introducing Radius v0.50.0..."
-- "We're pleased to announce..."
-- "# Announcing Radius v0.50.0"
 - "---" (horizontal rules between sections)
 - Adding features not mentioned in release notes
 - Making up code examples or documentation links
+- Marketing language or speculative statements
 
 REQUIRED CLOSING SECTION (copy exactly):
 
