@@ -79,20 +79,20 @@ jobs:
           # Get contribution guide content from blog repository
           echo "Loading contribution guide from blog repository..."
           if [ -f "radblog/guide/contribution-guide.md" ]; then
-            STYLE_GUIDE=$(cat "radblog/guide/contribution-guide.md")
+            cp "radblog/guide/contribution-guide.md" "contribution-guide.md"
             echo "✅ Contribution guide loaded successfully from radblog/guide/contribution-guide.md"
           else
             echo "❌ Contribution guide not found at radblog/guide/contribution-guide.md, using fallback"
-            STYLE_GUIDE="WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes."
+            echo "WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes." > contribution-guide.md
           fi
           
           # Create AI prompt from template using safer approach
           cp scripts/blog-prompt.md prompt_template.md
           
-          # Replace placeholders safely
+          # Replace placeholders with actual content
           sed -i "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g" prompt_template.md
           
-          # Replace placeholders with actual content
+          # Replace RELEASE_NOTES placeholder
           awk '
           BEGIN { RS = "\n"; ORS = "\n" }
           /{RELEASE_NOTES}/ {
@@ -103,7 +103,10 @@ jobs:
               next
           }
           /{STYLE_GUIDE}/ {
-              print "'"$STYLE_GUIDE"'"
+              while ((getline line < "contribution-guide.md") > 0) {
+                  print line
+              }
+              close("contribution-guide.md")
               next
           }
           /{BLOG_CONTEXT}/ {
