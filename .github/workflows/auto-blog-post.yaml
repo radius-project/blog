@@ -86,7 +86,7 @@ jobs:
             echo "WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes." > contribution-guide.md
           fi
           
-          # Create AI prompt from template using safer approach
+          # Create AI prompt from template
           cp scripts/blog-prompt.md prompt_template.md
           
           # Replace placeholders with actual content
