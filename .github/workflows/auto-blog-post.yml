@@ -76,15 +76,13 @@ jobs:
             done
           fi
           
-          # Get contribution guide content from main branch
-          echo "Fetching contribution guide from GitHub main branch..."
-          HTTP_STATUS=$(curl -s -w "%{http_code}" "https://raw.githubusercontent.com/radius-project/blog/main/radblog/guide/contribution-guide.md" -o contribution-guide.md)
-          
-          if [ "$HTTP_STATUS" = "200" ] && [ -f "contribution-guide.md" ] && [ -s "contribution-guide.md" ]; then
-            STYLE_GUIDE=$(cat contribution-guide.md)
-            echo "✅ Contribution guide fetched successfully from GitHub (HTTP $HTTP_STATUS)"
+          # Get contribution guide content from blog repository
+          echo "Loading contribution guide from blog repository..."
+          if [ -f "radblog/guide/contribution-guide.md" ]; then
+            STYLE_GUIDE=$(cat "radblog/guide/contribution-guide.md")
+            echo "✅ Contribution guide loaded successfully from radblog/guide/contribution-guide.md"
           else
-            echo "❌ Failed to fetch contribution guide (HTTP $HTTP_STATUS), using fallback"
+            echo "❌ Contribution guide not found at radblog/guide/contribution-guide.md, using fallback"
             STYLE_GUIDE="WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes."
           fi
           
