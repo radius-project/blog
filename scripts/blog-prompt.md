@@ -14,6 +14,7 @@ CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
 - Do NOT add introductory phrases like "Today we're announcing" or "We're pleased to"
 - Do NOT add horizontal rules (---) between sections
 - Do NOT speculate about future features or capabilities
+- DO NOT include breaking changes as a separate section
 - ONLY include code examples that are explicitly shown in the release notes
 - ONLY include links that are explicitly mentioned in the release notes or that you can verify exist in the Radius documentation
 - Verify the content thoroughly and ensure all details are accurate
