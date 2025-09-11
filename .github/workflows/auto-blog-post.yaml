@@ -1,9 +1,14 @@
 name: Auto-generate Blog Post for New Radius Release
 
 on:
-  push:
-    branches:
-      - 'autogen'
+  repository_dispatch:
+    types: [radius-release-published]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release tag name (optional - will use latest if not provided)'
+        required: false
+        type: string
 
 jobs:
   generate-blog-post:
@@ -19,18 +24,11 @@ jobs:
         run: |
           # Determine which release to use
           if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            # Automatic trigger from release webhook
             TAG_NAME="${{ github.event.client_payload.tag_name }}"
-            echo "Using release from webhook: $TAG_NAME"
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.tag_name }}" ]; then
-            # Manual trigger with specific tag
+          elif [ -n "${{ github.event.inputs.tag_name }}" ]; then
             TAG_NAME="${{ github.event.inputs.tag_name }}"
-            echo "Using manually specified tag: $TAG_NAME"
           else
-            # Manual trigger without tag - get latest release
-            echo "Getting latest release..."
             TAG_NAME=$(curl -s "https://api.github.com/repos/radius-project/radius/releases/latest" | jq -r '.tag_name')
-            echo "Using latest release: $TAG_NAME"
           fi
           
           if [ -z "$TAG_NAME" ] || [ "$TAG_NAME" = "null" ]; then
@@ -69,20 +67,16 @@ jobs:
           if ls radblog/content/posts/2025/*/index.md 1> /dev/null 2>&1; then
             for file in $(ls radblog/content/posts/2025/*/index.md | head -2); do
               if [ -f "$file" ]; then
-                # Extract content after frontmatter
                 CONTENT=$(sed -n '/^---$/,/^---$/!p' "$file" | head -20 | tr '\n' ' ')
                 CONTEXT="$CONTEXT $CONTENT"
               fi
             done
           fi
           
-          # Get contribution guide content from blog repository
-          echo "Loading contribution guide from blog repository..."
+          # Load contribution guide
           if [ -f "radblog/guide/contribution-guide.md" ]; then
             cp "radblog/guide/contribution-guide.md" "contribution-guide.md"
-            echo "✅ Contribution guide loaded successfully from radblog/guide/contribution-guide.md"
           else
-            echo "❌ Contribution guide not found at radblog/guide/contribution-guide.md, using fallback"
             echo "WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes." > contribution-guide.md
           fi
           
@@ -92,9 +86,7 @@ jobs:
           # Replace placeholders with actual content
           sed -i "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g" prompt_template.md
           
-          # Replace RELEASE_NOTES placeholder
           awk '
-          BEGIN { RS = "\n"; ORS = "\n" }
           /{RELEASE_NOTES}/ {
               while ((getline line < "release_body.md") > 0) {
                   print line
@@ -118,11 +110,6 @@ jobs:
           
           PROMPT=$(cat final_prompt.md)
           
-          # Debug: Show the prompt being sent
-          echo "=== PROMPT BEING SENT TO AI ==="
-          cat final_prompt.md
-          echo "=== END OF PROMPT ==="
-
           # Call GitHub Models API
           RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
             -H "Content-Type: application/json" \
@@ -141,13 +128,8 @@ jobs:
           if echo "$RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
             echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content.md
             echo "ai_success=true" >> $GITHUB_OUTPUT
-            echo "✅ AI content generated successfully"
-            echo "=== AI GENERATED CONTENT ==="
-            cat ai_content.md
-            echo "=== END AI CONTENT ==="
           else
             echo "❌ AI generation failed, will use fallback template"
-            echo "API Response: $RESPONSE"
             echo "ai_success=false" >> $GITHUB_OUTPUT
           fi
 
@@ -160,7 +142,7 @@ jobs:
           cat > "$BLOG_DIR/index.md" << EOF
           ---
           date: "${{ steps.release-info.outputs.blog_date }}"
-          title: " Announcing ${{ steps.release-info.outputs.release_name }}"
+          title: "Announcing ${{ steps.release-info.outputs.release_name }}"
           linkTitle: "${{ steps.release-info.outputs.release_name }}"
           author: "Radius Team"
           type: blog
@@ -170,10 +152,8 @@ jobs:
           
           # Add content
           if [ "${{ steps.ai-content.outputs.ai_success }}" = "true" ] && [ -f "ai_content.md" ]; then
-            echo "Using AI-generated content"
             cat ai_content.md >> "$BLOG_DIR/index.md"
           else
-            echo "Using fallback template"
             cat >> "$BLOG_DIR/index.md" << EOF
           We're excited to announce the release of ${{ steps.release-info.outputs.release_name }}! 🎉
           
@@ -183,17 +163,8 @@ jobs:
             sed 's/^## /### /g; s/^# /## /g' release_body.md >> "$BLOG_DIR/index.md"
           fi
           
-          # No additional footer needed - AI should include "Learn More" section
-          
-          echo "Blog post created at: $BLOG_DIR/index.md"
-          
           # Clean up intermediate files
-          rm -f ai_content.md final_prompt.md prompt_template.md release_body.md
-          
-          # Show the generated content in logs
-          echo "=== GENERATED BLOG POST CONTENT ==="
-          cat "$BLOG_DIR/index.md"
-          echo "=== END OF BLOG POST ==="
+          rm -f ai_content.md final_prompt.md prompt_template.md release_body.md contribution-guide.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
