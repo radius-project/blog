@@ -19,15 +19,6 @@ CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
 - ONLY include links that are explicitly mentioned in the release notes or that you can verify exist in the Radius documentation
 - Verify the content thoroughly and ensure all details are accurate
 
-WRITING STYLE (from Radius style guide):
-- Conversational and friendly without being frivolous
-- User-focused: Write in second person ("you") not first person ("we")
-- Clear and concise: Simple, direct language
-- Active voice and present tense
-- Professional, matter-of-fact tone
-- Technical depth over marketing content
-- Evidence-based: All claims supported by release notes only
-
 CONTENT REQUIREMENTS:
 - Target audience: Application developers, platform engineers, DevOps practitioners  
 - 800-1000 words of substantive technical content
@@ -36,8 +27,7 @@ CONTENT REQUIREMENTS:
 - Proper markdown formatting for code snippets
 
 STRUCTURE REQUIREMENTS:
-- Start immediately with content - NO heading.
-- Begin directly with an introduction of what's new in this release and include a link to the release notes page
+- Start immediately with introductory content, NO heading. Include a link to the latest Radius release notes.
 - Use ## headings for main features (not # headings)
 - Include breaking changes in a note or as a highlight within relevant feature sections, not separately
 - Use clean markdown formatting without horizontal rules
