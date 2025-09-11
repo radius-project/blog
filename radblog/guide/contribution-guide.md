@@ -106,8 +106,9 @@ Blog post content here.
     # Example bash code block
     ```
 - **Commands**: Separate multiple commands into individual blocks
+- **Output**: Show expected output in separate blocks
 - **File paths**: Use backticks for file names and paths
-- **Placeholders**: Use descriptive names (`YOUR_APPLICATION_NAME` not `app1`)
+- **Placeholders**: Use descriptive names and enclose them in angle brackets (`<YOUR-APPLICATION-NAME>` not `app1`)
 
 ### Visual Content
 - **Images**: Use high-resolution or vector images with Hugo shortcode `img`
