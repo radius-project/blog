@@ -88,6 +88,7 @@ jobs:
           
           # Replace placeholders with actual content
           sed -i "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g" prompt_template.md
+          sed -i "s|{RELEASE_URL}|${{ steps.release-info.outputs.html_url }}|g" prompt_template.md
           
           awk -v style_guide="$STYLE_GUIDE" '
           /{RELEASE_NOTES}/ {
