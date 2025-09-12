@@ -67,18 +67,27 @@ jobs:
         run: |
           # Get context from previous blog posts
           CONTEXT=""
-          if ls radblog/content/posts/2025/*/index.md 1> /dev/null 2>&1; then
-            for file in $(ls radblog/content/posts/2025/*/index.md | head -2); do
-              if [ -f "$file" ]; then
-                CONTENT=$(sed -n '/^---$/,/^---$/!p' "$file" | head -20 | tr '\n' ' ')
-                CONTEXT="$CONTEXT $CONTENT"
-              fi
+          if ls radblog/content/posts/*/*/index.md 1> /dev/null 2>&1; then
+            for file in $(ls radblog/content/posts/*/*/index.md | head -2); do
+              CONTENT=$(sed -n '/^---$/,/^---$/!p' "$file" | head -10 | tr '\n' ' ')
+              CONTEXT="$CONTEXT $CONTENT"
             done
           fi
           
-          # Load contribution guide content
+          # Load contribution guide content and extract key formatting rules
           if [ -f "radblog/guide/contribution-guide.md" ]; then
-            STYLE_GUIDE=$(cat "radblog/guide/contribution-guide.md")
+            # Extract key formatting rules dynamically
+            FORMATTING_RULES=$(awk '
+            /## Writing Guidelines/,/## Formatting Standards/ { 
+              if ($0 ~ /^- \*\*/) print $0 
+            }
+            /## Formatting Standards/,/## Submission Process/ { 
+              if ($0 ~ /^- \*\*/) print $0 
+            }
+            ' "radblog/guide/contribution-guide.md" | head -10)
+            
+            # Combine formatting rules with full style guide
+            STYLE_GUIDE=$(printf "KEY FORMATTING RULES - FOLLOW EXACTLY:\n%s\n\nFULL STYLE GUIDE:\n%s" "$FORMATTING_RULES" "$(cat "radblog/guide/contribution-guide.md")")
           else
             STYLE_GUIDE="WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes."
           fi
@@ -109,28 +118,25 @@ jobs:
           { print }
           ' prompt_template.md > final_prompt.md
           
-          PROMPT=$(cat final_prompt.md)
-          
           # Call GitHub Models API
           RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -d '{
-              "model": "gpt-4o",
-              "messages": [
-                {"role": "system", "content": "You are a technical content writer for cloud-native application platforms."},
-                {"role": "user", "content": "'"$(echo "$PROMPT" | sed 's/"/\\"/g' | tr '\n' ' ')"'"}
+            -d "{
+              \"model\": \"gpt-4o\",
+              \"messages\": [
+                {\"role\": \"system\", \"content\": \"You are a technical content writer for cloud-native application platforms.\"},
+                {\"role\": \"user\", \"content\": \"$(cat final_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
               ],
-              "max_tokens": 3500,
-              "temperature": 0.3
-            }')
+              \"max_tokens\": 3500,
+              \"temperature\": 0.3
+            }")
 
           # Check if API call was successful
           if echo "$RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
             echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content.md
             echo "ai_success=true" >> $GITHUB_OUTPUT
           else
-            echo "❌ AI generation failed, will use fallback template"
             echo "ai_success=false" >> $GITHUB_OUTPUT
           fi
 
