@@ -3,9 +3,6 @@ Write a technical blog post announcing Radius {RELEASE_NAME} for developers and 
 Release notes (YOUR ONLY SOURCE OF TRUTH):
 {RELEASE_NOTES}
 
-Style reference from previous posts:
-{BLOG_CONTEXT}
-
 CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
 - ONLY use information explicitly stated in the release notes above
 - Do NOT add any information not found in the release notes
