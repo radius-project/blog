@@ -26,7 +26,7 @@ STRUCTURE REQUIREMENTS:
 
 REQUIRED CLOSING SECTION (copy exactly):
 
-## Learn more and Get Involved
+## Learn More and Get Involved
 
 We would love for you to join us to help build Radius:
 

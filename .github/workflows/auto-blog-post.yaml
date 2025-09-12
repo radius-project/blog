@@ -165,7 +165,7 @@ jobs:
               -H "Content-Type: application/json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               -d "{
-                \"model\": \"gpt-4o\",
+                \"model\": \"claude-3-5-sonnet-20241022\",
                 \"messages\": [
                   {\"role\": \"system\", \"content\": \"You are a technical editor. Fix formatting violations and return ONLY the corrected blog post content. Do NOT wrap in code blocks, add summaries, or include explanations. Just return the clean corrected content.\"},
                   {\"role\": \"user\", \"content\": \"$(cat post_process_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
@@ -212,7 +212,17 @@ jobs:
           EOF
           
           # Add content
-          cat ai_content.md >> "$BLOG_DIR/index.md"
+          if [ "${{ steps.ai-content.outputs.ai_success }}" = "true" ] && [ -f "ai_content.md" ]; then
+            cat ai_content.md >> "$BLOG_DIR/index.md"
+          else
+            cat >> "$BLOG_DIR/index.md" << EOF
+          We're excited to announce the release of ${{ steps.release-info.outputs.release_name }}! 🎉
+          
+          ## Release Highlights
+          
+          EOF
+            sed 's/^## /### /g; s/^# /## /g' release_body.md >> "$BLOG_DIR/index.md"
+          fi
           
 
       - name: Create Pull Request
