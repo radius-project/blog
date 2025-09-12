@@ -70,11 +70,19 @@ jobs:
           
           # Load contribution guide content and extract key formatting rules
           if [ -f "radblog/guide/contribution-guide.md" ]; then
-            # Extract key formatting sections dynamically
+            # Extract key formatting sections dynamically and debug what we're getting
             FORMATTING_RULES=$(awk '
-            /## Writing Guidelines/,/## Formatting Standards/ { print }
-            /## Formatting Standards/,/## Submission Process/ { print }
+            /## Writing Guidelines/,/## Formatting Standards/ { 
+              if (!/## Formatting Standards/) print 
+            }
+            /## Formatting Standards/,/## Submission Process/ { 
+              if (!/## Submission Process/) print 
+            }
             ' "radblog/guide/contribution-guide.md")
+            
+            echo "=== EXTRACTED FORMATTING RULES ==="
+            echo "$FORMATTING_RULES"
+            echo "=== END FORMATTING RULES ==="
             
             # Combine formatting rules with full style guide
             STYLE_GUIDE=$(printf "CRITICAL FORMATTING REQUIREMENTS - THESE RULES ARE MANDATORY:\n%s\n\nCOMPLETE STYLE GUIDE:\n%s" "$FORMATTING_RULES" "$(cat "radblog/guide/contribution-guide.md")")
