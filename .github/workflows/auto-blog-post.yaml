@@ -70,18 +70,14 @@ jobs:
           
           # Load contribution guide content and extract key formatting rules
           if [ -f "radblog/guide/contribution-guide.md" ]; then
-            # Extract key formatting rules dynamically
+            # Extract key formatting sections dynamically
             FORMATTING_RULES=$(awk '
-            /## Writing Guidelines/,/## Formatting Standards/ { 
-              if ($0 ~ /^- \*\*/) print $0 
-            }
-            /## Formatting Standards/,/## Submission Process/ { 
-              if ($0 ~ /^- \*\*/) print $0 
-            }
-            ' "radblog/guide/contribution-guide.md" | head -10)
+            /## Writing Guidelines/,/## Formatting Standards/ { print }
+            /## Formatting Standards/,/## Submission Process/ { print }
+            ' "radblog/guide/contribution-guide.md")
             
             # Combine formatting rules with full style guide
-            STYLE_GUIDE=$(printf "KEY FORMATTING RULES - FOLLOW EXACTLY:\n%s\n\nFULL STYLE GUIDE:\n%s" "$FORMATTING_RULES" "$(cat "radblog/guide/contribution-guide.md")")
+            STYLE_GUIDE=$(printf "CRITICAL FORMATTING REQUIREMENTS - THESE RULES ARE MANDATORY:\n%s\n\nCOMPLETE STYLE GUIDE:\n%s" "$FORMATTING_RULES" "$(cat "radblog/guide/contribution-guide.md")")
           else
             STYLE_GUIDE="WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes."
           fi
@@ -119,11 +115,11 @@ jobs:
             -d "{
               \"model\": \"gpt-4o\",
               \"messages\": [
-                {\"role\": \"system\", \"content\": \"You are a technical content writer for cloud-native application platforms.\"},
+                {\"role\": \"system\", \"content\": \"You are a technical content writer for cloud-native application platforms. You MUST follow all formatting rules and style guidelines exactly as specified. Failure to follow formatting rules is not acceptable.\"},
                 {\"role\": \"user\", \"content\": \"$(cat final_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
               ],
               \"max_tokens\": 3500,
-              \"temperature\": 0.3
+              \"temperature\": 0.2
             }")
 
           # Check if API call was successful
