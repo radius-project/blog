@@ -165,7 +165,7 @@ jobs:
               -H "Content-Type: application/json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               -d "{
-                \"model\": \"anthropic/claude-sonnet-4\",
+                \"model\": \"xai/grok-3\",
                 \"messages\": [
                   {\"role\": \"system\", \"content\": \"You are a technical editor. Fix formatting violations and return ONLY the corrected blog post content. Do NOT wrap in code blocks, add summaries, or include explanations. Just return the clean corrected content.\"},
                   {\"role\": \"user\", \"content\": \"$(cat post_process_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
