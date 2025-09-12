@@ -133,6 +133,9 @@ jobs:
           # Check if API call was successful
           if echo "$RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
             echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content_raw.md
+            echo "=== INITIAL AI GENERATED CONTENT ==="
+            cat ai_content_raw.md
+            echo "=== END INITIAL CONTENT ==="
             
             # Create focused post-processing prompt
             echo "You are a technical editor. Your job is to fix formatting violations in this blog post." > post_process_prompt.md
@@ -146,13 +149,17 @@ jobs:
             echo "---END BLOG POST---" >> post_process_prompt.md
             echo "" >> post_process_prompt.md
             echo "STEP 3: Fix ONLY formatting issues. Do NOT change technical content, meaning, or structure." >> post_process_prompt.md
-            echo "STEP 4: Return the corrected blog post with ALL style guide violations fixed." >> post_process_prompt.md
+            echo "STEP 4: Return ONLY the corrected blog post content. Do NOT include:" >> post_process_prompt.md
+            echo "- Markdown code blocks wrapping the content" >> post_process_prompt.md
+            echo "- Summaries of what you fixed" >> post_process_prompt.md
+            echo "- Explanations or commentary" >> post_process_prompt.md
+            echo "- Frontmatter (the blog post should start with the content directly)" >> post_process_prompt.md
             echo "" >> post_process_prompt.md
-            echo "Focus especially on:" >> post_process_prompt.md
-            echo "- Proper capitalization as specified in the style guide" >> post_process_prompt.md
-            echo "- Link formatting and validation" >> post_process_prompt.md
-            echo "- Heading structure and casing" >> post_process_prompt.md
-            echo "- Any other formatting rules from the style guide" >> post_process_prompt.md
+            echo "Just return the clean, corrected blog post content that can be directly used." >> post_process_prompt.md
+
+            echo "=== POST-PROCESSING PROMPT ==="
+            cat post_process_prompt.md
+            echo "=== END POST-PROCESSING PROMPT ==="
 
             POST_RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
               -H "Content-Type: application/json" \
@@ -160,19 +167,27 @@ jobs:
               -d "{
                 \"model\": \"gpt-4o\",
                 \"messages\": [
-                  {\"role\": \"system\", \"content\": \"You are a meticulous technical editor. Your ONLY job is to fix formatting violations against the provided style guide. You must follow the style guide rules exactly. Do not change any technical content, facts, or meaning - only fix formatting.\"},
+                  {\"role\": \"system\", \"content\": \"You are a technical editor. Fix formatting violations and return ONLY the corrected blog post content. Do NOT wrap in code blocks, add summaries, or include explanations. Just return the clean corrected content.\"},
                   {\"role\": \"user\", \"content\": \"$(cat post_process_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
                 ],
                 \"max_tokens\": 4000,
                 \"temperature\": 0.1
               }")
 
-            # Use post-processed version if successful, otherwise use original
+            # Use post-processed version if successful
             if echo "$POST_RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
               echo "$POST_RESPONSE" | jq -r '.choices[0].message.content' > ai_content.md
+              echo "✅ Post-processing successful"
+              echo "=== FINAL PROCESSED CONTENT ==="
+              cat ai_content.md
+              echo "=== END FINAL CONTENT ==="
             else
-              cp ai_content_raw.md ai_content.md
+              echo "❌ Post-processing failed"
+              exit 1
             fi
+            
+            # Clean up intermediate files immediately after processing
+            rm -f ai_content_raw.md final_prompt.md prompt_template.md release_body.md post_process_prompt.md
             
             echo "ai_success=true" >> $GITHUB_OUTPUT
           else
@@ -197,20 +212,8 @@ jobs:
           EOF
           
           # Add content
-          if [ "${{ steps.ai-content.outputs.ai_success }}" = "true" ] && [ -f "ai_content.md" ]; then
-            cat ai_content.md >> "$BLOG_DIR/index.md"
-          else
-            cat >> "$BLOG_DIR/index.md" << EOF
-          We're excited to announce the release of ${{ steps.release-info.outputs.release_name }}! 🎉
+          cat ai_content.md >> "$BLOG_DIR/index.md"
           
-          ## Release Highlights
-          
-          EOF
-            sed 's/^## /### /g; s/^# /## /g' release_body.md >> "$BLOG_DIR/index.md"
-          fi
-          
-          # Clean up intermediate files
-          rm -f ai_content_raw.md final_prompt.md prompt_template.md release_body.md post_process_prompt.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
