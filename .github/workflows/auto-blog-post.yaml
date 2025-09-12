@@ -134,20 +134,25 @@ jobs:
           if echo "$RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
             echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content_raw.md
             
-            # Create post-processing prompt with style guide
-            echo "Compare the following blog post against the style guide and fix any formatting violations." > post_process_prompt.md
+            # Create focused post-processing prompt
+            echo "You are a technical editor. Your job is to fix formatting violations in this blog post." > post_process_prompt.md
             echo "" >> post_process_prompt.md
-            echo "STYLE GUIDE (source of truth):" >> post_process_prompt.md
+            echo "STEP 1: Read the complete style guide below and understand ALL formatting requirements:" >> post_process_prompt.md
             echo "$STYLE_GUIDE" >> post_process_prompt.md
             echo "" >> post_process_prompt.md
-            echo "BLOG POST TO REVIEW AND FIX:" >> post_process_prompt.md
+            echo "STEP 2: Review this blog post for violations of the style guide above:" >> post_process_prompt.md
+            echo "---BEGIN BLOG POST---" >> post_process_prompt.md
             cat ai_content_raw.md >> post_process_prompt.md
+            echo "---END BLOG POST---" >> post_process_prompt.md
             echo "" >> post_process_prompt.md
-            echo "Instructions:" >> post_process_prompt.md
-            echo "- Review the blog post against the style guide above" >> post_process_prompt.md
-            echo "- Fix any formatting violations found" >> post_process_prompt.md
-            echo "- Maintain the technical content but correct formatting issues" >> post_process_prompt.md
-            echo "- Return only the corrected blog post content" >> post_process_prompt.md
+            echo "STEP 3: Fix ONLY formatting issues. Do NOT change technical content, meaning, or structure." >> post_process_prompt.md
+            echo "STEP 4: Return the corrected blog post with ALL style guide violations fixed." >> post_process_prompt.md
+            echo "" >> post_process_prompt.md
+            echo "Focus especially on:" >> post_process_prompt.md
+            echo "- Proper capitalization as specified in the style guide" >> post_process_prompt.md
+            echo "- Link formatting and validation" >> post_process_prompt.md
+            echo "- Heading structure and casing" >> post_process_prompt.md
+            echo "- Any other formatting rules from the style guide" >> post_process_prompt.md
 
             POST_RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
               -H "Content-Type: application/json" \
@@ -155,7 +160,7 @@ jobs:
               -d "{
                 \"model\": \"gpt-4o\",
                 \"messages\": [
-                  {\"role\": \"system\", \"content\": \"You are a technical editor. Fix formatting issues in blog posts to match the provided style guide exactly. Do not change technical content or meaning.\"},
+                  {\"role\": \"system\", \"content\": \"You are a meticulous technical editor. Your ONLY job is to fix formatting violations against the provided style guide. You must follow the style guide rules exactly. Do not change any technical content, facts, or meaning - only fix formatting.\"},
                   {\"role\": \"user\", \"content\": \"$(cat post_process_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
                 ],
                 \"max_tokens\": 4000,
