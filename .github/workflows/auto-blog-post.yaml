@@ -140,15 +140,15 @@ jobs:
             # Create focused post-processing prompt
             echo "You are a technical editor. Your job is to fix formatting violations in this blog post." > post_process_prompt.md
             echo "" >> post_process_prompt.md
-            echo "STEP 1: Read the complete style guide below and understand ALL formatting requirements:" >> post_process_prompt.md
+            echo "STEP 1: Read this style guide and identify ALL formatting requirements:" >> post_process_prompt.md
             echo "$STYLE_GUIDE" >> post_process_prompt.md
             echo "" >> post_process_prompt.md
-            echo "STEP 2: Review this blog post for violations of the style guide above:" >> post_process_prompt.md
+            echo "STEP 2: Review this blog post and identify every formatting violation of the style guide:" >> post_process_prompt.md
             echo "---BEGIN BLOG POST---" >> post_process_prompt.md
             cat ai_content_raw.md >> post_process_prompt.md
             echo "---END BLOG POST---" >> post_process_prompt.md
             echo "" >> post_process_prompt.md
-            echo "STEP 3: Fix ONLY formatting issues. Do NOT change technical content, meaning, or structure." >> post_process_prompt.md
+            echo "STEP 3: Fix every formatting violation you identified. Apply the style guide rules exactly." >> post_process_prompt.md
             echo "STEP 4: Return ONLY the corrected blog post content. Do NOT include:" >> post_process_prompt.md
             echo "- Markdown code blocks wrapping the content" >> post_process_prompt.md
             echo "- Summaries of what you fixed" >> post_process_prompt.md
@@ -165,7 +165,7 @@ jobs:
               -H "Content-Type: application/json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               -d "{
-                \"model\": \"xai/grok-3\",
+                \"model\": \"gpt-4o\",
                 \"messages\": [
                   {\"role\": \"system\", \"content\": \"You are a technical editor. Fix formatting violations and return ONLY the corrected blog post content. Do NOT wrap in code blocks, add summaries, or include explanations. Just return the clean corrected content.\"},
                   {\"role\": \"user\", \"content\": \"$(cat post_process_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
