@@ -9,6 +9,9 @@ on:
         description: 'Release tag name (optional - will use latest if not provided)'
         required: false
         type: string
+  push:
+    branches:
+      - 'autogen'
 
 jobs:
   generate-blog-post:
