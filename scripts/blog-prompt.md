@@ -25,7 +25,7 @@ STRUCTURE REQUIREMENTS:
 - Start immediately with introductory content, NO heading. 
 - Summarize the release, include a link to the latest Radius release notes and for new users, provide guidance on how to get started with Radius.
 - Use ## headings for main features (not # headings) and summarize each feature in a concise paragraph
-- Feature summary should have breaking changes in a note or as a highlight, not a separate section
+- Feature summary should have breaking changes as a highlight within, not a separate section
 - End with the exact "Learn more and Get Involved" section below
 
 REQUIRED CLOSING SECTION (copy exactly):
