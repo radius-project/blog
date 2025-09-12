@@ -1,24 +1,20 @@
 Write a technical blog post announcing Radius {RELEASE_NAME} for developers and platform engineers.
 
-MANDATORY FORMATTING REQUIREMENTS (extracted from style guide):
-{FORMATTING_RULES}
-
 Release notes (YOUR ONLY SOURCE OF TRUTH):
 {RELEASE_NOTES}
 
-CRITICAL CONSTRAINTS - FOLLOW EXACTLY:
+CRITICAL CONTENT CONSTRAINTS - FOLLOW EXACTLY:
 - ONLY use information explicitly stated in the release notes above
 - Do NOT add any information not found in the release notes
-- Do NOT make up features, examples, documentation links not present in the release notes
+- Do NOT make up features, examples, or documentation links not present in the release notes
 - DO NOT make up code snippets not explicitly shown in the release notes
 - DO NOT include breaking changes as a separate section
-- DO NOT add horizontal rules (---) between sections
 - DO NOT speculate about future features or capabilities
 - ONLY include code examples that are explicitly shown in the release notes
-- ONLY include links that are explicitly mentioned in the release notes or that you can verify exist in the Radius documentation
+- ONLY include links that are explicitly mentioned in the release notes
 - Verify the content thoroughly and ensure all details are accurate
 
-CRITICAL CONSTRAINTS - FOLLOW EXACTLY the Style guide below on tone, voice, and formatting:
+Style context for reference:
 {STYLE_GUIDE}
 
 STRUCTURE REQUIREMENTS:

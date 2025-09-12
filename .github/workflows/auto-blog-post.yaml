@@ -97,7 +97,7 @@ jobs:
           sed -i "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g" prompt_template.md
           sed -i "s|{RELEASE_URL}|${{ steps.release-info.outputs.html_url }}|g" prompt_template.md
           
-          awk -v style_guide="$STYLE_GUIDE" -v context="$CONTEXT" -v formatting_rules="$FORMATTING_RULES" '
+          awk -v style_guide="$STYLE_GUIDE" -v context="$CONTEXT" '
           /{RELEASE_NOTES}/ {
               while ((getline line < "release_body.md") > 0) {
                   print line
@@ -107,10 +107,6 @@ jobs:
           }
           /{STYLE_GUIDE}/ {
               print style_guide
-              next
-          }
-          /{FORMATTING_RULES}/ {
-              print formatting_rules
               next
           }
           /{BLOG_CONTEXT}/ {
@@ -136,7 +132,43 @@ jobs:
 
           # Check if API call was successful
           if echo "$RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
-            echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content.md
+            echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content_raw.md
+            
+            # Create post-processing prompt with style guide
+            echo "Compare the following blog post against the style guide and fix any formatting violations." > post_process_prompt.md
+            echo "" >> post_process_prompt.md
+            echo "STYLE GUIDE (source of truth):" >> post_process_prompt.md
+            echo "$STYLE_GUIDE" >> post_process_prompt.md
+            echo "" >> post_process_prompt.md
+            echo "BLOG POST TO REVIEW AND FIX:" >> post_process_prompt.md
+            cat ai_content_raw.md >> post_process_prompt.md
+            echo "" >> post_process_prompt.md
+            echo "Instructions:" >> post_process_prompt.md
+            echo "- Review the blog post against the style guide above" >> post_process_prompt.md
+            echo "- Fix any formatting violations found" >> post_process_prompt.md
+            echo "- Maintain the technical content but correct formatting issues" >> post_process_prompt.md
+            echo "- Return only the corrected blog post content" >> post_process_prompt.md
+
+            POST_RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -d "{
+                \"model\": \"gpt-4o\",
+                \"messages\": [
+                  {\"role\": \"system\", \"content\": \"You are a technical editor. Fix formatting issues in blog posts to match the provided style guide exactly. Do not change technical content or meaning.\"},
+                  {\"role\": \"user\", \"content\": \"$(cat post_process_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
+                ],
+                \"max_tokens\": 4000,
+                \"temperature\": 0.1
+              }")
+
+            # Use post-processed version if successful, otherwise use original
+            if echo "$POST_RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
+              echo "$POST_RESPONSE" | jq -r '.choices[0].message.content' > ai_content.md
+            else
+              cp ai_content_raw.md ai_content.md
+            fi
+            
             echo "ai_success=true" >> $GITHUB_OUTPUT
           else
             echo "ai_success=false" >> $GITHUB_OUTPUT
@@ -173,7 +205,7 @@ jobs:
           fi
           
           # Clean up intermediate files
-          rm -f ai_content.md final_prompt.md prompt_template.md release_body.md
+          rm -f ai_content_raw.md final_prompt.md prompt_template.md release_body.md post_process_prompt.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
