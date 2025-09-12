@@ -1,5 +1,8 @@
 Write a technical blog post announcing Radius {RELEASE_NAME} for developers and platform engineers.
 
+MANDATORY FORMATTING REQUIREMENTS (extracted from style guide):
+{FORMATTING_RULES}
+
 Release notes (YOUR ONLY SOURCE OF TRUTH):
 {RELEASE_NOTES}
 
