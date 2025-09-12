@@ -183,6 +183,9 @@ jobs:
               echo "=== END FINAL CONTENT ==="
             else
               echo "❌ Post-processing failed"
+              echo "=== API ERROR RESPONSE ==="
+              echo "$POST_RESPONSE" | jq '.' || echo "$POST_RESPONSE"
+              echo "=== END ERROR RESPONSE ==="
               exit 1
             fi
             
