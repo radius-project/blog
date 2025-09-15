@@ -142,17 +142,19 @@ jobs:
             
             echo "=== APPLYING STYLE GUIDE COMPLIANCE ==="
             
-            # Extract Radius entities dynamically from style guide
+            # Extract and apply Radius entity capitalization dynamically from style guide
             if grep -q "Capitalize Radius entities" "radblog/guide/contribution-guide.md"; then
-              ENTITIES_LINE=$(grep -A 1 "Capitalize Radius entities" "radblog/guide/contribution-guide.md" | tail -1)
-              echo "Found entities rule: $ENTITIES_LINE"
+              echo "Extracting entities from style guide..."
+              ENTITIES=$(grep -A 1 "Capitalize Radius entities" "radblog/guide/contribution-guide.md" | grep -o '[A-Z][a-z]* [A-Z][a-z]*\|[A-Z][a-z]*' | grep -v "Radius")
               
-              # Extract and apply each entity capitalization
-              echo "$ENTITIES_LINE" | grep -o '\b[A-Z][a-zA-Z ]*[a-zA-Z]\b' | while read -r entity; do
-                if [ -n "$entity" ] && [ "$entity" != "Radius" ]; then
+              echo "Found entities: $ENTITIES"
+              
+              # Apply each entity fix
+              echo "$ENTITIES" | while IFS= read -r entity; do
+                if [ -n "$entity" ]; then
                   lowercase_entity=$(echo "$entity" | tr '[:upper:]' '[:lower:]')
                   echo "Fixing: '$lowercase_entity' -> '$entity'"
-                  sed -i "s/\b$lowercase_entity\b/$entity/g" ai_content.md
+                  sed -i "s/\\b$lowercase_entity\\b/$entity/g" ai_content.md
                 fi
               done
             fi
@@ -164,13 +166,15 @@ jobs:
               sed -i 's/^## \([A-Z]\)\([a-z]*\) \([A-Z]\)\([a-z]*\) \([A-Z]\)/## \1\2 \L\3\4 \L\5/g' ai_content.md
             fi
             
-            # Remove generic documentation links not in release notes
-            if grep -q "Descriptive links" "radblog/guide/contribution-guide.md"; then
-              echo "Removing generic documentation links..."
-              sed -i '/\[getting started guide\]/d' ai_content.md
-              sed -i '/\[upgrade documentation\]/d' ai_content.md
-              sed -i 's/\[.*\](https:\/\/docs\.radapp\.io\/[^)]*)//g' ai_content.md
-            fi
+            # Fix broken links and remove content that shouldn't be there
+            echo "Fixing broken links and content..."
+            
+            # Remove lines with broken links that have no link text
+            sed -i '/^Try the$/d' ai_content.md
+            sed -i '/^- Try the$/d' ai_content.md
+            
+            # Fix incomplete bullet points in Learn more section
+            sed -i 's/^Try the$/- Try the [Radius Tutorial](https:\/\/docs.radapp.io\/tutorials\/new-app\/)/' ai_content.md
             
             # Clean up extra whitespace
             sed -i 's/  */ /g' ai_content.md
