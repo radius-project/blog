@@ -1,0 +1,102 @@
+---
+date: "2025-09-16"
+title: "In-place upgrades now available"
+linkTitle: "In-place upgrades"
+author: "[Will Tsai](https://www.github.com/willtsai)"
+type: blog
+---
+
+Up until now, upgrading a Radius installation meant manually redeploying the control plane. This was cumbersome and risked downtime for your internal platform. **Beginning with Radius v0.50, we're excited to announce support for in-place upgrades of the Radius control plane.** Using the new `rad upgrade` command, platform engineers can now upgrade a running Radius control plane to a new version without rebuilding their Environments or disrupting running applications. This enhancement makes it much easier to keep up with new Radius releases in production, thanks to built-in safety checks and a rollback capability.
+
+In this post, we'll walk through how the new in-place upgrade feature works and how to use the `rad upgrade` and `rad rollback` commands to upgrade safely. For a more detailed step-by-step guide, check out the official [How-To: Upgrade Radius on Kubernetes](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/) and [How-To: Rollback Radius on Kubernetes](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-rollback/) in the documentation.
+
+## Upgrading Radius control plane in-place with `rad upgrade`
+
+Performing an in-place [upgrade](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/) of Radius is straightforward. Here's a high-level overview of the process:
+
+1. **Upgrade your Radius CLI:** First, ensure you have the latest `rad` CLI (v0.50 or later) installed on your machine. The new CLI version includes the `rad upgrade` and `rad rollback` commands. You can verify your CLI version by running:  
+   ```bash
+   $ rad version 
+   ```  
+   Make sure it shows **0.50.0 or later** as the version. If not, update the CLI before proceeding.
+
+2. **Run the upgrade command:** Once your CLI is up to date, initiate the control plane upgrade with:  
+   ```bash
+   $ rad upgrade kubernetes
+   ```  
+   This will upgrade the Radius control plane in your Kubernetes cluster to the latest version matching your CLI. The CLI will first run a series of preflight checks (more on this below) to ensure your cluster and current Radius installation are ready to upgrade. If all checks pass, `rad upgrade` will proceed to perform the upgrade. Under the hood, this triggers a Helm-based upgrade of the Radius containers. The upgrade is applied as a rolling update to minimize downtime—the Radius Pods will be replaced one by one, preserving the system's state and all your Environment configurations.
+
+   Alternatively, if you want to upgrade to a specific version, you can use the `--version` flag. For instance, to upgrade to v0.50.0:  
+   ```bash
+   $ rad upgrade kubernetes --version 0.50.0 
+   ```  
+   If you omit `--version`, the CLI upgrades to the same version as the CLI itself.
+
+3. **Verify the upgrade:** After the command finishes, you should verify that the control plane is running the new version and everything is healthy. You can check the Radius version again, which should now reflect the upgraded version:  
+   ```bash
+   $ rad version
+   CLI Version Information:
+   RELEASE   VERSION   BICEP     COMMIT
+   0.50.0    v0.50.0   0.37.4    42e20ccab9001f54cc9c3074fd20016260a37792
+
+   Control Plane Information:
+   STATUS     VERSION
+   Installed  0.50.0
+   ```
+
+> **Important:** Radius currently supports *incremental upgrades* only. That means you should upgrade one version at a time (e.g. from v0.49 to v0.50). Skipping directly over a version is not supported by `rad upgrade` and will be blocked by the version check. Always upgrade sequentially and consult the release notes if you are coming from older versions.
+
+### Preflight Checks for Safe Upgrades
+
+One of the great things about `rad upgrade` is that it includes built-in preflight checks to catch any issues before making changes to your cluster. When you run the upgrade command, Radius will automatically validate a number of conditions, such as:
+- **Kubernetes connectivity and permissions**: Verifies connection to the cluster and required RBAC permissions
+- **Helm connectivity and installation status**: Confirms Radius is installed via Helm and can be upgraded
+- **Version compatibility validation**: Ensures the current version can be upgraded to the target version
+- **Cluster resource availability**: Checks that there is sufficient CPU and memory available on the cluster for the rolling update (optional warning)
+- **Custom configuration validation**: Validates any custom Helm values
+
+If any of these checks fail, the upgrade will stop and inform you of what needs to be fixed. No changes will be made to your cluster unless all preflight checks pass. This gives you confidence that once the upgrade proceeds, it won't hit a surprise error halfway through.
+
+## Rolling Back if Something Goes Wrong
+
+What if you perform an upgrade and encounter an unexpected problem with the new version? In previous releases, you would have been stuck trying to reinstall the old version manually. Radius v0.50 also introduces a [rollback mechanism](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-rollback/) for fast recovery.
+
+If an upgrade doesn't go as planned, you can simply run this command to roll back to the previous version:  
+```bash
+$ rad rollback kubernetes
+```
+
+Or, to roll back to a specific revision, you can the `--list-revisions` flag to see available revisions:  
+```bash
+$ rad rollback kubernetes --list-revisions
+Current Radius version: 0.50.0
+REVISION  CHART VERSION  STATUS      UPDATED              DESCRIPTION
+6         0.50.0         deployed    2025-03-25 21:22:09  Upgrade complete
+5         0.49.0         superseded  2025-03-25 21:22:09  Upgrade complete
+4         0.42.42-dev    superseded  2025-03-25 21:22:09  Upgrade complete
+3         0.42.42-dev    superseded  2025-03-25 21:22:09  Upgrade complete
+2         0.42.42-dev    superseded  2025-03-25 21:22:09  Upgrade complete
+1         0.42.42-dev    superseded  2025-03-25 21:22:09  Install complete
+```
+Then specify the desired revision number with `--revision`:  
+```bash
+$ rad rollback kubernetes --revision 5
+```
+
+The `rad rollback` command will revert the Radius control plane back to the last deployed or specified version. Under the hood, it uses Helm's built-in rollback capability to restore the previously installed release of Radius. Essentially, it redeploys the prior version's containers and settings, so your control plane goes back to the state it was in before the upgrade was attempted.
+
+A successful rollback means your Environments and Applications should continue working under the old version, just as before. No reconfiguration should be needed—the aim is to quickly get you back to a known good state. 
+
+
+## Learn more
+For more details on in-place upgrades and rollbacks, check out the following resources in the documentation:
+- [How-To: Upgrade Radius on Kubernetes](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/)
+- [How-To: Rollback Radius on Kubernetes](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-rollback/)
+
+## Get involved
+
+We would love for you to join us to help build Radius:
+
+- Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
+- Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
+- Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
