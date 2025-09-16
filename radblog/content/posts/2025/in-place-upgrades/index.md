@@ -1,5 +1,5 @@
 ---
-date: "2025-09-016T08:00:00-08:00"
+date: "2025-09-016"
 title: "In-place upgrades now available"
 linkTitle: "In-place upgrades"
 author: "[Will Tsai](https://www.github.com/willtsai)"
