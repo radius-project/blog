@@ -7,11 +7,12 @@ CRITICAL CONTENT CONSTRAINTS - FOLLOW EXACTLY:
 - ONLY use information explicitly stated in the release notes above
 - Do NOT add any information not found in the release notes
 - Do NOT make up features, examples, or documentation links not present in the release notes
-- DO NOT make up code snippets not explicitly shown in the release notes
+- ABSOLUTELY NO CODE SNIPPETS unless they are copy-pasted directly from the release notes
+- DO NOT create example code, sample configurations, or illustrative commands
 - DO NOT include breaking changes as a separate section
 - DO NOT speculate about future features or capabilities
-- ONLY include code examples that are explicitly shown in the release notes
 - ONLY include links that are explicitly mentioned in the release notes
+- If no code examples exist in release notes, describe features in text only
 - Verify the content thoroughly and ensure all details are accurate
 
 CRITICAL STYLE CONSTRAINTS - FOLLOW EXACTLY:
