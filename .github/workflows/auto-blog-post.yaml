@@ -173,9 +173,6 @@ jobs:
             sed -i '/^Try the$/d' ai_content.md
             sed -i '/^- Try the$/d' ai_content.md
             
-            # Fix incomplete bullet points in Learn more section
-            sed -i 's/^Try the$/- Try the [Radius Tutorial](https:\/\/docs.radapp.io\/tutorials\/new-app\/)/' ai_content.md
-            
             # Clean up extra whitespace
             sed -i 's/  */ /g' ai_content.md
             sed -i '/^$/N;/^\n$/d' ai_content.md

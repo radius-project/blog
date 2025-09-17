@@ -14,7 +14,7 @@ CRITICAL CONTENT CONSTRAINTS - FOLLOW EXACTLY:
 - ONLY include links that are explicitly mentioned in the release notes
 - Verify the content thoroughly and ensure all details are accurate
 
-Style context for reference:
+CRITICAL STYLE CONSTRAINTS - FOLLOW EXACTLY:
 {STYLE_GUIDE}
 
 STRUCTURE REQUIREMENTS:
