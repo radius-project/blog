@@ -213,6 +213,8 @@ jobs:
           # Add content
           if [ "${{ steps.ai-content.outputs.ai_success }}" = "true" ] && [ -f "ai_content.md" ]; then
             cat ai_content.md >> "$BLOG_DIR/index.md"
+            # Clean up ai_content.md immediately after use
+            rm -f ai_content.md
           else
             cat >> "$BLOG_DIR/index.md" << EOF
           We're excited to announce the release of ${{ steps.release-info.outputs.release_name }}! 🎉
