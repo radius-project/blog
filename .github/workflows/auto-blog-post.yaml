@@ -22,22 +22,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Generate blog post and create PR
+      - name: Generate blog post
         env:
           RELEASE_TAG: ${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}
         run: |
-          echo "Using release tag: ${RELEASE_TAG:-'latest'}"
-          echo "RELEASE_TAG=$RELEASE_TAG" >> $GITHUB_ENV
-
-          # Generate AI content (will use latest if tag is empty)
-          if ./scripts/generate-ai-content.sh "$RELEASE_TAG" "${{ secrets.GITHUB_TOKEN }}"; then
-            echo "AI_SUCCESS=true" >> $GITHUB_ENV
-          else
-            echo "AI_SUCCESS=false" >> $GITHUB_ENV
-          fi
-
-          # Create blog post (will use latest if tag is empty)
-          ./scripts/create-blog-post.sh "$RELEASE_TAG" "ai_content.md"
+          # Generate complete blog post in directory
+          ./scripts/generate-blog-post.sh "$RELEASE_TAG" "${{ secrets.GITHUB_TOKEN }}"
+          
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
@@ -50,7 +41,6 @@ jobs:
 
             - **Tag:** ${{ env.RELEASE_TAG }}
             - **Release:** https://github.com/radius-project/radius/releases/tag/${{ env.RELEASE_TAG }}
-            - **AI Generated:** ${{ env.AI_SUCCESS == 'true' && '✅ Yes' || '❌ No (fallback used)' }}
 
             🤖 Generated automatically by GitHub Actions
           branch: "blog-post-${{ env.RELEASE_TAG }}"
