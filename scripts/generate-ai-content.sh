@@ -52,9 +52,9 @@ fi
 echo "Building AI prompt from template..."
 cp scripts/blog-prompt.md prompt_template.md
 
-# Replace placeholders with actual content
-sed -i '' "s/{RELEASE_NAME}/Radius $RELEASE_TAG/g" prompt_template.md
-sed -i '' "s|{RELEASE_URL}|https://github.com/radius-project/radius/releases/tag/$RELEASE_TAG|g" prompt_template.md
+# Replace placeholders with actual content (cross-platform sed)
+sed -i.bak "s/{RELEASE_NAME}/Radius $RELEASE_TAG/g" prompt_template.md && rm -f prompt_template.md.bak
+sed -i.bak "s|{RELEASE_URL}|https://github.com/radius-project/radius/releases/tag/$RELEASE_TAG|g" prompt_template.md && rm -f prompt_template.md.bak
 
 # Write style guide and release notes to temp files for awk processing
 echo "$STYLE_GUIDE" > temp_style_guide.txt
@@ -114,19 +114,19 @@ if echo "$RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
   # Apply style guide rules that AI typically ignores
   echo "Fixing capitalization and formatting..."
 
-  # Capitalize Radius entities
-  sed -i '' 's/\bapplications\b/Applications/g' ai_content.md
-  sed -i '' 's/\benvironments\b/Environments/g' ai_content.md
-  sed -i '' 's/\brecipes\b/Recipes/g' ai_content.md
-  sed -i '' 's/\bresource types\b/Resource Types/g' ai_content.md
-  sed -i '' 's/\bcontainers\b/Containers/g' ai_content.md
-  sed -i '' 's/\bsecrets\b/Secrets/g' ai_content.md
-  sed -i '' 's/\broutes\b/Routes/g' ai_content.md
-  sed -i '' 's/\bgateways\b/Gateways/g' ai_content.md
+  # Capitalize Radius entities (cross-platform sed)
+  sed -i.bak 's/\bapplications\b/Applications/g' ai_content.md && rm -f ai_content.md.bak
+  sed -i.bak 's/\benvironments\b/Environments/g' ai_content.md && rm -f ai_content.md.bak
+  sed -i.bak 's/\brecipes\b/Recipes/g' ai_content.md && rm -f ai_content.md.bak
+  sed -i.bak 's/\bresource types\b/Resource Types/g' ai_content.md && rm -f ai_content.md.bak
+  sed -i.bak 's/\bcontainers\b/Containers/g' ai_content.md && rm -f ai_content.md.bak
+  sed -i.bak 's/\bsecrets\b/Secrets/g' ai_content.md && rm -f ai_content.md.bak
+  sed -i.bak 's/\broutes\b/Routes/g' ai_content.md && rm -f ai_content.md.bak
+  sed -i.bak 's/\bgateways\b/Gateways/g' ai_content.md && rm -f ai_content.md.bak
 
   # Clean up formatting
-  sed -i '' 's/  */ /g' ai_content.md
-  sed -i '' '/^$/N;/^\n$/d' ai_content.md
+  sed -i.bak 's/  */ /g' ai_content.md && rm -f ai_content.md.bak
+  sed -i.bak '/^$/N;/^\n$/d' ai_content.md && rm -f ai_content.md.bak
 
   echo "AI content generation successful"
 else

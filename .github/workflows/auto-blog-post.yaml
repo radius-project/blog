@@ -23,25 +23,36 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate blog post and create PR
+        env:
+          RELEASE_TAG: ${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}
         run: |
-          # Get release information using existing script
-          INPUT_TAG="${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}"
-          RELEASE_INFO=$(./scripts/get-release-info.sh "$INPUT_TAG")
+          echo "Using release tag: ${RELEASE_TAG:-'latest'}"
+          echo "RELEASE_TAG=$RELEASE_TAG" >> $GITHUB_ENV
 
-          # Extract tag from release info
-          RELEASE_TAG=$(echo "$RELEASE_INFO" | grep "TAG_NAME=" | cut -d'=' -f2)
-
-          echo "Using release tag: $RELEASE_TAG"
-
-          # Generate AI content
+          # Generate AI content (will use latest if tag is empty)
           if ./scripts/generate-ai-content.sh "$RELEASE_TAG" "${{ secrets.GITHUB_TOKEN }}"; then
-            AI_SUCCESS="true"
+            echo "AI_SUCCESS=true" >> $GITHUB_ENV
           else
-            AI_SUCCESS="false"
+            echo "AI_SUCCESS=false" >> $GITHUB_ENV
           fi
 
-          # Create blog post
+          # Create blog post (will use latest if tag is empty)
           ./scripts/create-blog-post.sh "$RELEASE_TAG" "ai_content.md"
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
+          commit-message: "Add blog post for Radius ${{ env.RELEASE_TAG }}"
+          signoff: true
+          title: "Add blog post for Radius ${{ env.RELEASE_TAG }}"
+          body: |
+            Auto-generated blog post for **Radius ${{ env.RELEASE_TAG }}**
 
-          # Create pull request
-          ./scripts/create-pr.sh "$RELEASE_TAG" "${{ secrets.GH_RAD_CI_BOT_PAT }}" "$AI_SUCCESS"
+            - **Tag:** ${{ env.RELEASE_TAG }}
+            - **Release:** https://github.com/radius-project/radius/releases/tag/${{ env.RELEASE_TAG }}
+            - **AI Generated:** ${{ env.AI_SUCCESS == 'true' && '✅ Yes' || '❌ No (fallback used)' }}
+
+            🤖 Generated automatically by GitHub Actions
+          branch: "blog-post-${{ env.RELEASE_TAG }}"
+          base: main
+          delete-branch: true
