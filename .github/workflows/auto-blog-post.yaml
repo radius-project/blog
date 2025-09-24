@@ -26,8 +26,12 @@ jobs:
         env:
           RELEASE_TAG: ${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}
         run: |
+          # Debug: Show what we have
+          echo "RELEASE_TAG: '${RELEASE_TAG}'"
+          echo "Event name: ${{ github.event_name }}"
+
           # Generate complete blog post in directory
-          ./scripts/generate-blog-post.sh "$RELEASE_TAG" "${{ secrets.GITHUB_TOKEN }}"
+          ./scripts/generate-blog-post.sh "${RELEASE_TAG}" "${{ secrets.GITHUB_TOKEN }}"
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
