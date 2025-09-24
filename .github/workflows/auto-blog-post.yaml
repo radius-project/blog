@@ -24,13 +24,14 @@ jobs:
 
       - name: Generate blog post and create PR
         run: |
-          # Determine release tag from event
-          RELEASE_TAG=""
-          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            RELEASE_TAG="${{ github.event.client_payload.tag_name }}"
-          elif [ -n "${{ github.event.inputs.tag_name }}" ]; then
-            RELEASE_TAG="${{ github.event.inputs.tag_name }}"
-          fi
+          # Get release information using existing script
+          INPUT_TAG="${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}"
+          RELEASE_INFO=$(./scripts/get-release-info.sh "$INPUT_TAG")
+
+          # Extract tag from release info
+          RELEASE_TAG=$(echo "$RELEASE_INFO" | grep "TAG_NAME=" | cut -d'=' -f2)
+
+          echo "Using release tag: $RELEASE_TAG"
 
           # Generate AI content
           if ./scripts/generate-ai-content.sh "$RELEASE_TAG" "${{ secrets.GITHUB_TOKEN }}"; then
