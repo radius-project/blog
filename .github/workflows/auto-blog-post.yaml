@@ -22,16 +22,25 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Generate blog post
-        env:
-          RELEASE_TAG: ${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}
+      - name: Determine release tag
         run: |
-          # Debug: Show what we have
-          echo "RELEASE_TAG: '${RELEASE_TAG}'"
-          echo "Event name: ${{ github.event_name }}"
+          # Get release tag from event or use latest
+          INPUT_TAG="${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}"
 
-          # Generate complete blog post in directory
-          ./scripts/generate-blog-post.sh "${RELEASE_TAG}" "${{ secrets.GITHUB_TOKEN }}"
+          if [ -z "$INPUT_TAG" ]; then
+            echo "No tag provided, getting latest release..."
+            RELEASE_TAG=$(curl -s "https://api.github.com/repos/radius-project/radius/releases/latest" | jq -r '.tag_name')
+          else
+            RELEASE_TAG="$INPUT_TAG"
+          fi
+
+          echo "Using release tag: $RELEASE_TAG"
+          echo "RELEASE_TAG=$RELEASE_TAG" >> $GITHUB_ENV
+
+      - name: Generate blog post
+        run: |
+          # Generate complete blog post using determined tag
+          ./scripts/generate-blog-post.sh "${{ env.RELEASE_TAG }}" "${{ secrets.GITHUB_TOKEN }}"
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7

@@ -8,19 +8,9 @@ set -e
 RELEASE_TAG="$1"
 GITHUB_TOKEN="$2"
 
-if [ -z "$GITHUB_TOKEN" ]; then
+if [ -z "$RELEASE_TAG" ] || [ -z "$GITHUB_TOKEN" ]; then
   echo "Usage: $0 <release_tag> <github_token>" >&2
   exit 1
-fi
-
-# Use latest release if tag is empty
-if [ -z "$RELEASE_TAG" ]; then
-  echo "No release tag provided, getting latest release..."
-  RELEASE_TAG=$(curl -s "https://api.github.com/repos/radius-project/radius/releases/latest" | jq -r '.tag_name')
-  if [ -z "$RELEASE_TAG" ] || [ "$RELEASE_TAG" = "null" ]; then
-    echo "Error: Could not determine latest release tag" >&2
-    exit 1
-  fi
 fi
 
 echo "Generating blog post for Radius $RELEASE_TAG..."
@@ -104,7 +94,7 @@ EOF
   rm ai_content.md
 
   echo "Blog post created successfully at: $BLOG_DIR/index.md"
-  echo "AI_SUCCESS=true"
+  echo "RELEASE_TAG=$RELEASE_TAG"
 else
   echo "AI generation failed, using fallback content"
 
@@ -138,5 +128,5 @@ We would love for you to join us to help build Radius:
 EOF
 
   echo "Blog post created with fallback content at: $BLOG_DIR/index.md"
-  echo "AI_SUCCESS=false"
 fi
+
