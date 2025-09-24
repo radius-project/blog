@@ -25,166 +25,21 @@ jobs:
       - name: Get release information
         id: release-info
         run: |
-          # Determine which release to use
-          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            TAG_NAME="${{ github.event.client_payload.tag_name }}"
-          elif [ -n "${{ github.event.inputs.tag_name }}" ]; then
-            TAG_NAME="${{ github.event.inputs.tag_name }}"
-          else
-            TAG_NAME=$(curl -s "https://api.github.com/repos/radius-project/radius/releases/latest" | jq -r '.tag_name')
-          fi
-          
-          if [ -z "$TAG_NAME" ] || [ "$TAG_NAME" = "null" ]; then
-            echo "Could not determine tag name"
-            exit 1
-          fi
-          
-          RELEASE_DATA=$(curl -s "https://api.github.com/repos/radius-project/radius/releases/tags/$TAG_NAME")
-          
-          if [ "$(echo "$RELEASE_DATA" | jq -r '.message // empty')" = "Not Found" ]; then
-            echo "Release not found for tag: $TAG_NAME"
-            exit 1
-          fi
-          
-          RELEASE_NAME=$(echo "$RELEASE_DATA" | jq -r '.name')
-          RELEASE_BODY=$(echo "$RELEASE_DATA" | jq -r '.body')
-          PUBLISHED_AT=$(echo "$RELEASE_DATA" | jq -r '.published_at')
-          HTML_URL=$(echo "$RELEASE_DATA" | jq -r '.html_url')
-          
-          BLOG_DATE=$(date -d "$PUBLISHED_AT" "+%Y-%m-%dT%H:%M:%S%z" 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$PUBLISHED_AT" "+%Y-%m-%dT%H:%M:%S%z")
-          YEAR=$(date -d "$PUBLISHED_AT" "+%Y" 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$PUBLISHED_AT" "+%Y")
-          
-          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
-          echo "release_name=$RELEASE_NAME" >> $GITHUB_OUTPUT
-          echo "blog_date=$BLOG_DATE" >> $GITHUB_OUTPUT
-          echo "year=$YEAR" >> $GITHUB_OUTPUT
-          echo "html_url=$HTML_URL" >> $GITHUB_OUTPUT
-          
-          echo "$RELEASE_BODY" > release_body.md
+          # Call the release info script
+          RELEASE_INFO=$(./scripts/get-release-info.sh "${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}")
+
+          # Parse output and set GitHub outputs
+          echo "$RELEASE_INFO" | while IFS= read -r line; do
+            echo "$line" >> $GITHUB_OUTPUT
+          done
 
       - name: Generate AI blog content
         id: ai-content
         run: |
-          # Get context from previous blog posts (simplified)
-          CONTEXT="Previous Radius blog posts focus on technical features and developer workflows."
-          
-          # Load contribution guide content and extract key formatting rules
-          if [ -f "radblog/guide/contribution-guide.md" ]; then
-            # Extract key formatting sections dynamically and debug what we're getting
-            FORMATTING_RULES=$(awk '
-            /## Writing Guidelines/,/## Formatting Standards/ { 
-              if (!/## Formatting Standards/) print 
-            }
-            /## Formatting Standards/,/## Submission Process/ { 
-              if (!/## Submission Process/) print 
-            }
-            ' "radblog/guide/contribution-guide.md")
-            
-            echo "=== EXTRACTED FORMATTING RULES ==="
-            echo "$FORMATTING_RULES"
-            echo "=== END FORMATTING RULES ==="
-            
-            # Combine formatting rules with full style guide
-            STYLE_GUIDE=$(printf "CRITICAL FORMATTING REQUIREMENTS - THESE RULES ARE MANDATORY:\n%s\n\nCOMPLETE STYLE GUIDE:\n%s" "$FORMATTING_RULES" "$(cat "radblog/guide/contribution-guide.md")")
-          else
-            STYLE_GUIDE="WRITING GUIDELINES: Conversational, user-focused, technical depth, no marketing language, evidence-based content only from release notes."
-          fi
-          
-          # Create AI prompt from template
-          cp scripts/blog-prompt.md prompt_template.md
-          
-          # Replace placeholders with actual content
-          sed -i "s/{RELEASE_NAME}/${{ steps.release-info.outputs.release_name }}/g" prompt_template.md
-          sed -i "s|{RELEASE_URL}|${{ steps.release-info.outputs.html_url }}|g" prompt_template.md
-          
-          awk -v style_guide="$STYLE_GUIDE" -v context="$CONTEXT" '
-          /{RELEASE_NOTES}/ {
-              while ((getline line < "release_body.md") > 0) {
-                  print line
-              }
-              close("release_body.md")
-              next
-          }
-          /{STYLE_GUIDE}/ {
-              print style_guide
-              next
-          }
-          /{BLOG_CONTEXT}/ {
-              print context
-              next
-          }
-          { print }
-          ' prompt_template.md > final_prompt.md
-          
-          # Call GitHub Models API
-          RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -d "{
-              \"model\": \"gpt-4o\",
-              \"messages\": [
-                {\"role\": \"system\", \"content\": \"You are a technical content writer for cloud-native application platforms. You MUST follow all formatting rules and style guidelines exactly as specified. Failure to follow formatting rules is not acceptable.\"},
-                {\"role\": \"user\", \"content\": \"$(cat final_prompt.md | sed 's/"/\\"/g' | tr '\n' ' ')\"}
-              ],
-              \"max_tokens\": 3500,
-              \"temperature\": 0.2
-            }")
-
-          # Check if API call was successful
-          if echo "$RESPONSE" | jq -e '.choices[0].message.content' > /dev/null 2>&1; then
-            echo "$RESPONSE" | jq -r '.choices[0].message.content' > ai_content_raw.md
-            echo "=== INITIAL AI GENERATED CONTENT ==="
-            cat ai_content_raw.md
-            echo "=== END INITIAL CONTENT ==="
-            
-            # Apply style guide compliance using shell commands
-            cp ai_content_raw.md ai_content.md
-            
-            echo "=== APPLYING STYLE GUIDE COMPLIANCE ==="
-            
-            # Extract and apply Radius entity capitalization dynamically from style guide
-            if grep -q "Capitalize Radius entities" "radblog/guide/contribution-guide.md"; then
-              echo "Extracting entities from style guide..."
-              ENTITIES=$(grep -A 1 "Capitalize Radius entities" "radblog/guide/contribution-guide.md" | grep -o '[A-Z][a-z]* [A-Z][a-z]*\|[A-Z][a-z]*' | grep -v "Radius")
-              
-              echo "Found entities: $ENTITIES"
-              
-              # Apply each entity fix
-              echo "$ENTITIES" | while IFS= read -r entity; do
-                if [ -n "$entity" ]; then
-                  lowercase_entity=$(echo "$entity" | tr '[:upper:]' '[:lower:]')
-                  echo "Fixing: '$lowercase_entity' -> '$entity'"
-                  sed -i "s/\\b$lowercase_entity\\b/$entity/g" ai_content.md
-                fi
-              done
-            fi
-            
-            # Apply sentence case to headings dynamically
-            if grep -q "sentence case" "radblog/guide/contribution-guide.md"; then
-              echo "Applying sentence case to headings..."
-              sed -i 's/^## \([A-Z]\)\([a-z]*\) \([A-Z]\)/## \1\2 \L\3/g' ai_content.md
-              sed -i 's/^## \([A-Z]\)\([a-z]*\) \([A-Z]\)\([a-z]*\) \([A-Z]\)/## \1\2 \L\3\4 \L\5/g' ai_content.md
-            fi
-            
-            # Fix broken links and remove content that shouldn't be there
-            echo "Fixing broken links and content..."
-            
-            # Remove lines with broken links that have no link text
-            sed -i '/^Try the$/d' ai_content.md
-            sed -i '/^- Try the$/d' ai_content.md
-            
-            # Clean up extra whitespace
-            sed -i 's/  */ /g' ai_content.md
-            sed -i '/^$/N;/^\n$/d' ai_content.md
-            
-            echo "=== STYLE GUIDE COMPLIANCE APPLIED ==="
-            echo "=== FINAL PROCESSED CONTENT ==="
-            cat ai_content.md
-            echo "=== END FINAL CONTENT ==="
-            
-            # Clean up intermediate files immediately after processing
-            rm -f ai_content_raw.md final_prompt.md prompt_template.md release_body.md post_process_prompt.md
-            
+          # Call the AI content generation script
+          if ./scripts/generate-ai-content.sh \
+              "${{ steps.release-info.outputs.TAG_NAME }}" \
+              "${{ secrets.GITHUB_TOKEN }}"; then
             echo "ai_success=true" >> $GITHUB_OUTPUT
           else
             echo "ai_success=false" >> $GITHUB_OUTPUT
@@ -192,52 +47,24 @@ jobs:
 
       - name: Create blog post
         run: |
-          BLOG_DIR="radblog/content/posts/${{ steps.release-info.outputs.year }}/radius-${{ steps.release-info.outputs.tag_name }}-release"
-          mkdir -p "$BLOG_DIR"
-          
-          # Create frontmatter
-          cat > "$BLOG_DIR/index.md" << EOF
-          ---
-          date: "${{ steps.release-info.outputs.blog_date }}"
-          title: "Announcing ${{ steps.release-info.outputs.release_name }}"
-          linkTitle: "${{ steps.release-info.outputs.release_name }}"
-          author: "Radius Team"
-          type: blog
-          ---
-          
-          EOF
-          
-          # Add content
-          if [ "${{ steps.ai-content.outputs.ai_success }}" = "true" ] && [ -f "ai_content.md" ]; then
-            cat ai_content.md >> "$BLOG_DIR/index.md"
-            # Clean up ai_content.md immediately after use
-            rm -f ai_content.md
-          else
-            cat >> "$BLOG_DIR/index.md" << EOF
-          We're excited to announce the release of ${{ steps.release-info.outputs.release_name }}! 🎉
-          
-          ## Release Highlights
-          
-          EOF
-            sed 's/^## /### /g; s/^# /## /g' release_body.md >> "$BLOG_DIR/index.md"
-          fi
-          
+          # Call the blog post creation script
+          ./scripts/create-blog-post.sh "${{ steps.release-info.outputs.TAG_NAME }}" "ai_content.md"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
-          commit-message: "Add blog post for ${{ steps.release-info.outputs.release_name }}"
+          commit-message: "Add blog post for ${{ steps.release-info.outputs.RELEASE_NAME }}"
           signoff: true
-          title: "Add blog post for ${{ steps.release-info.outputs.release_name }}"
+          title: "Add blog post for ${{ steps.release-info.outputs.RELEASE_NAME }}"
           body: |
-            Auto-generated blog post for **${{ steps.release-info.outputs.release_name }}**
+            Auto-generated blog post for **${{ steps.release-info.outputs.RELEASE_NAME }}**
             
-            - **Tag:** ${{ steps.release-info.outputs.tag_name }}
-            - **Release:** ${{ steps.release-info.outputs.html_url }}
+            - **Tag:** ${{ steps.release-info.outputs.TAG_NAME }}
+            - **Release:** ${{ steps.release-info.outputs.HTML_URL }}
             - **AI Generated:** ${{ steps.ai-content.outputs.ai_success == 'true' && '✅ Yes' || '❌ No (fallback used)' }}
             
             🤖 Generated automatically by GitHub Actions
-          branch: "blog-post-${{ steps.release-info.outputs.tag_name }}"
+          branch: "blog-post-${{ steps.release-info.outputs.TAG_NAME }}"
           base: main
           delete-branch: true
