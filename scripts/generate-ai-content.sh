@@ -13,6 +13,9 @@ if [ -z "$RELEASE_TAG" ]; then
   exit 1
 fi
 
+# Cleanup temporary files on exit (success or failure)
+trap 'rm -f prompt_template.md final_prompt.md temp_style_guide.txt temp_release_notes.txt' EXIT
+
 # =============================================================================
 # PREPROCESSING: Gather all data needed for AI generation
 # =============================================================================
@@ -131,5 +134,4 @@ else
   exit 1
 fi
 
-# Cleanup temporary files
-rm -f prompt_template.md final_prompt.md temp_style_guide.txt temp_release_notes.txt
+# Temporary files will be cleaned up automatically by the EXIT trap

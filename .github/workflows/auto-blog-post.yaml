@@ -22,49 +22,25 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get release information
-        id: release-info
+      - name: Generate blog post and create PR
         run: |
-          # Call the release info script
-          RELEASE_INFO=$(./scripts/get-release-info.sh "${{ github.event.client_payload.tag_name || github.event.inputs.tag_name || '' }}")
-
-          # Parse output and set GitHub outputs
-          echo "$RELEASE_INFO" | while IFS= read -r line; do
-            echo "$line" >> $GITHUB_OUTPUT
-          done
-
-      - name: Generate AI blog content
-        id: ai-content
-        run: |
-          # Call the AI content generation script
-          if ./scripts/generate-ai-content.sh \
-              "${{ steps.release-info.outputs.TAG_NAME }}" \
-              "${{ secrets.GITHUB_TOKEN }}"; then
-            echo "ai_success=true" >> $GITHUB_OUTPUT
-          else
-            echo "ai_success=false" >> $GITHUB_OUTPUT
+          # Determine release tag from event
+          RELEASE_TAG=""
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            RELEASE_TAG="${{ github.event.client_payload.tag_name }}"
+          elif [ -n "${{ github.event.inputs.tag_name }}" ]; then
+            RELEASE_TAG="${{ github.event.inputs.tag_name }}"
           fi
 
-      - name: Create blog post
-        run: |
-          # Call the blog post creation script
-          ./scripts/create-blog-post.sh "${{ steps.release-info.outputs.TAG_NAME }}" "ai_content.md"
+          # Generate AI content
+          if ./scripts/generate-ai-content.sh "$RELEASE_TAG" "${{ secrets.GITHUB_TOKEN }}"; then
+            AI_SUCCESS="true"
+          else
+            AI_SUCCESS="false"
+          fi
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GH_RAD_CI_BOT_PAT }}
-          commit-message: "Add blog post for ${{ steps.release-info.outputs.RELEASE_NAME }}"
-          signoff: true
-          title: "Add blog post for ${{ steps.release-info.outputs.RELEASE_NAME }}"
-          body: |
-            Auto-generated blog post for **${{ steps.release-info.outputs.RELEASE_NAME }}**
-            
-            - **Tag:** ${{ steps.release-info.outputs.TAG_NAME }}
-            - **Release:** ${{ steps.release-info.outputs.HTML_URL }}
-            - **AI Generated:** ${{ steps.ai-content.outputs.ai_success == 'true' && '✅ Yes' || '❌ No (fallback used)' }}
-            
-            🤖 Generated automatically by GitHub Actions
-          branch: "blog-post-${{ steps.release-info.outputs.TAG_NAME }}"
-          base: main
-          delete-branch: true
+          # Create blog post
+          ./scripts/create-blog-post.sh "$RELEASE_TAG" "ai_content.md"
+
+          # Create pull request
+          ./scripts/create-pr.sh "$RELEASE_TAG" "${{ secrets.GH_RAD_CI_BOT_PAT }}" "$AI_SUCCESS"
