@@ -8,15 +8,19 @@ set -e
 RELEASE_TAG="$1"
 GITHUB_TOKEN="$2"
 
-if [ -z "$RELEASE_TAG" ] || [ -z "$GITHUB_TOKEN" ]; then
+if [ -z "$GITHUB_TOKEN" ]; then
   echo "Usage: $0 <release_tag> <github_token>" >&2
   exit 1
 fi
 
 # Use latest release if tag is empty
-if [ "$RELEASE_TAG" = "" ]; then
-  echo "Getting latest release..."
+if [ -z "$RELEASE_TAG" ]; then
+  echo "No release tag provided, getting latest release..."
   RELEASE_TAG=$(curl -s "https://api.github.com/repos/radius-project/radius/releases/latest" | jq -r '.tag_name')
+  if [ -z "$RELEASE_TAG" ] || [ "$RELEASE_TAG" = "null" ]; then
+    echo "Error: Could not determine latest release tag" >&2
+    exit 1
+  fi
 fi
 
 echo "Generating blog post for Radius $RELEASE_TAG..."
