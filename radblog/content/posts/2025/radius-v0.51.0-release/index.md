@@ -20,7 +20,7 @@ The `rad app delete` command has been improved to provide real-time progress sta
 
 ## ACI deployments now use dynamic resource group location 
 
-Radius has updated its Azure Container Instances (ACI) deployment process to dynamically retrieve and use the resource group’s location. Previously, deployments defaulted to the hardcoded WestUS3 region due to early support for ACI NGroups. This improvement ensures that Radius adapts to your resource group’s location, simplifying ACI Environment creation and resource deployment. For more information, see the [how-to guide](https://docs.radapp.io/guides/author-apps/azure/azure-container-instances/). 
+Radius has updated its Azure Container Instances (ACI) deployment process to dynamically retrieve and use the resource group’s location. Previously, deployments defaulted to the hardcoded West US 3 region due to early support for ACI NGroups. This improvement ensures that Radius adapts to your resource group’s location, simplifying ACI Environment creation and resource deployment. For more information, see the [how-to guide](https://docs.radapp.io/guides/author-apps/azure/azure-container-instances/). 
 
 ## Contour ingress controller installation disabled 
 
