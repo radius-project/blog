@@ -1,5 +1,5 @@
 ---
-date: "2025-10-10T16:29:59+0000"
+date: "2025-10-14T16:29:59+0000"
 title: "Announcing Radius v0.52.0"
 linkTitle: "Radius v0.52.0"
 author: "Radius Team"
