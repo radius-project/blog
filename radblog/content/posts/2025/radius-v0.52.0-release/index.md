@@ -22,7 +22,7 @@ The `rad group delete` command now includes a confirmation prompt that lists all
 
 ## Upgrading to Radius v0.52.0
 
-Upgrading to Radius v0.52.0 is straightforward. First, update your Radius CLI to the latest version. Then, run the `rad upgrade kubernetes` command to upgrade your Kubernetes environment. Note that only incremental version upgrades are supported, so ensure you are upgrading from v0.51.0. For detailed instructions, consult the [upgrade documentation](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/).
+Upgrading to Radius v0.52.0 is straightforward. First, refer to the [installation guide](https://docs.radapp.io/guides/tooling/rad-cli/howto-rad-cli/) to update your Radius CLI to the latest version. Then, run the `rad upgrade kubernetes` command to upgrade your Kubernetes environment. Note that only incremental version upgrades are supported, so ensure you are upgrading from v0.51.0. For detailed instructions, consult the [upgrade documentation](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/).
 
 ## Learn More and Get Involved
 
