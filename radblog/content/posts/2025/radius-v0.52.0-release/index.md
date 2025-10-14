@@ -8,7 +8,7 @@ type: blog
 
 Today marks the release of Radius v0.52.0, bringing usability improvements and refinements to enhance your experience with the Radius platform. This release focuses on making key commands more intuitive and user-friendly, while also addressing several important updates under the hood. You can find the full release notes on the [Radius GitHub repository](https://github.com/radius-project/radius/releases/tag/v0.52.0).
 
-If you’re new to Radius, it’s a powerful platform for building and managing cloud-native Applications. To get started, visit the [Radius website](https://radapp.io) for an overview, or check out the [getting started guide](https://docs.radapp.io/getting-started/) to install Radius and create your first app.
+If you’re new to Radius, it’s an open-source platform for building, deploying, and managing cloud-native applications. To get started, visit the [Radius website](https://radapp.io) for an overview, or check out the [getting started guide](https://docs.radapp.io/getting-started/) to install Radius and create your first app.
 
 ## Usability improvements to `rad uninstall kubernetes`
 
