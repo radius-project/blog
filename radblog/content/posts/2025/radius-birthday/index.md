@@ -30,9 +30,9 @@ We have had fruitful engagements with the community through various events and c
 
 - [**MYSQL Resource Type and Recipe**](https://github.com/radius-project/resource-types-contrib/tree/main/Data/mySqlDatabases) contributed by community member Andrew, enabling developers to easily add MySQL databases to their applications using a simple Resource Type definition, with the underlying infrastructure provisioned via a Bicep Recipe.
 
-- **KubeCon EU 2025** session with Millennium BCP showcased Radius as the IDP application layer, including live multi-cloud demos and custom resource catalogs (https://youtu.be/ZmcZlDCYDgE?si=M4FlrKtBcz23Edw2).
+- **KubeCon EU 2025** session with Millennium BCP showcased Radius as the IDP application layer, including live multi-cloud demos and custom resource catalogs [KubeCon EU 2025](https://youtu.be/ZmcZlDCYDgE?si=M4FlrKtBcz23Edw2).
 
-- **Mark Russinovich's Ignite session**, highlighted how the platform maps real-world collaboration between developers and operators ([Inside Azure Innovations](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270)).
+- **Mark Russinovich's Ignite session**, highlighted how the platform maps real-world collaboration between developers and operators [Inside Azure Innovations](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270).
 
 ## What's Next
 
