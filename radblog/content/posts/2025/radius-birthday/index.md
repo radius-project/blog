@@ -22,6 +22,11 @@ The Radius community has grown with new contributors, thoughtful feedback, and c
 
 - **Usability improvements** across multiple releases have improved the developer and platform engineering experience. Key improvements include:
     - Radius Dashboard: Platform engineers can publish organization-specific resource types with rich Markdown docs that includes details on how and when to use them, and developers browse them in one place instead of trawling CLI output. The environment page shows additional details about the Kubernetes cluster and the cloud provider configuration.
+
+    {{< image src="images/resource-types.png" alt="Screenshot of Radius Resource Types" width="70%">}}
+
+    {{< image src="images/environment.png" alt="Screenshot of Radius Environment" width="70%">}}
+    
     - Radius CLI: Interactive confirmation prompts for destructive operations like `rad uninstall kubernetes`, `rad group delete`, and `rad app delete` that clearly explain what resources will be affected, preventing accidental data loss.
 
 ## Community and Ecosystem
