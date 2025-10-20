@@ -21,13 +21,13 @@ The Radius community has grown with new contributors, thoughtful feedback, and c
 - **In-place control plane upgrades** introduced in v0.50.0 with the `rad upgrade` and `rad rollback` commands, makes it easy to keep Radius installations up-to-date without disrupting environments or applications. This feature includes preflight safety checks that validate cluster health, permissions, and version compatibility before any changes are made.  It also includes built-in rollback capabilities for fast recovery as needed.
 
 - **Usability improvements** across multiple releases have improved the developer and platform engineering experience. Key improvements include:
-    - Radius Dashboard: Platform engineers can publish organization-specific resource types with rich Markdown docs that includes details on how and when to use them, and developers browse them in one place instead of trawling CLI output. The environment page shows additional details about the Kubernetes cluster and the cloud provider configuration.
+    - **Radius Dashboard**: Platform engineers can publish organization-specific resource types with rich Markdown docs that includes details on how and when to use them, and developers browse them in one place instead of trawling CLI output. The environment page shows additional details about the Kubernetes cluster and the cloud provider configuration.
 
-    {{< image src="images/resource-types.png" alt="Screenshot of Radius Resource Types" width="70%">}}
-
-    {{< image src="images/environment.png" alt="Screenshot of Radius Environment" width="70%">}}
+        {{< image src="images/resource-types.png" alt="Screenshot of Radius Resource Types" width="70%">}}
+        <br>
+        {{< image src="images/environment.png" alt="Screenshot of Radius Environment" width="70%">}}
     
-    - Radius CLI: Interactive confirmation prompts for destructive operations like `rad uninstall kubernetes`, `rad group delete`, and `rad app delete` that clearly explain what resources will be affected, preventing accidental data loss.
+    - **Radius CLI**: Interactive confirmation prompts for destructive operations like `rad uninstall kubernetes`, `rad group delete`, and `rad app delete` that clearly explain what resources will be affected, preventing accidental data loss.
 
 ## Community and Ecosystem
 
