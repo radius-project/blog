@@ -37,11 +37,12 @@ We have had fruitful engagements with the community through various events and c
   - [MySQL Resource Type and Kubernetes Recipe](https://github.com/radius-project/resource-types-contrib/tree/main/Data/mySqlDatabases) added by [Andrew Matveychuk](https://github.com/andrewmatveychuk), giving developers a turnkey way to add MySQL databases to their applications with the infrastructure packaged as a Bicep Recipe.
   - [Neo4j Resource Type and Kubernetes Recipe (PR #58)](https://github.com/radius-project/resource-types-contrib/pull/58) from community member [Nick Beenham](https://github.com/superbeeny), expanding the catalog with graph database support.
 
-- **Community events and talks**
-  - [**KubeCon EU 2025**](https://youtu.be/ZmcZlDCYDgE?si=M4FlrKtBcz23Edw2) session with Millennium BCP showcased Radius as the IDP application layer, including live multi-cloud demos and curated resource catalogs.
-  - [**KubeCon US 2024 BackstageCon**](https://youtu.be/U2-Lo-yuvdc?si=Tm_GlKQg5SVMQLyz) session how Radius integrates with Backstage to visualize environments and deployed applications.
-  - [**Mark Russinovich’s community presentation on Radius Resource Types**](https://youtu.be/MNuoMSIs4Jo?si=XI1Uh1Ej7a1uhLEo) outlining the extensibility feature and how platform teams can share reusable abstractions across organizations.
-  - [**Microsoft Build 2025**](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270) session with Mark Russinovich spotlighting how Radius aligns developers and platform engineers on real-world deployments.
+**Community events and talks:**
+
+- [KubeCon EU 2025](https://youtu.be/ZmcZlDCYDgE?si=M4FlrKtBcz23Edw2) session with Millennium BCP showcased Radius as the IDP application layer, including live multi-cloud demos and curated resource catalogs.
+- [KubeCon US 2024 BackstageCon](https://youtu.be/U2-Lo-yuvdc?si=Tm_GlKQg5SVMQLyz) session showing how Radius integrates with Backstage to visualize environments and deployed applications.
+- [Mark Russinovich’s community presentation on Radius Resource Types](https://youtu.be/MNuoMSIs4Jo?si=XI1Uh1Ej7a1uhLEo) outlining the extensibility feature and how platform teams can share reusable abstractions across organizations.
+- [Microsoft Build 2025](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270) session with Mark Russinovich spotlighting how Radius aligns developers and platform engineers on real-world deployments.
 
 ## What's Next
 
