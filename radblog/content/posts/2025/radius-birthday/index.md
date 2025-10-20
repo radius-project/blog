@@ -41,7 +41,7 @@ We have had fruitful engagements with the community through various events and c
   - [**KubeCon EU 2025**](https://youtu.be/ZmcZlDCYDgE?si=M4FlrKtBcz23Edw2) session with Millennium BCP showcased Radius as the IDP application layer, including live multi-cloud demos and curated resource catalogs.
   - [**KubeCon US 2024 BackstageCon**](https://youtu.be/U2-Lo-yuvdc?si=Tm_GlKQg5SVMQLyz) session how Radius integrates with Backstage to visualize environments and deployed applications.
   - [**Mark Russinovich’s community presentation on Radius Resource Types**](https://youtu.be/MNuoMSIs4Jo?si=XI1Uh1Ej7a1uhLEo) outlining the extensibility feature and how platform teams can share reusable abstractions across organizations.
-  - [**Ignite 2024**](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270) session with Mark Russinovich spotlighting how Radius aligns developers and platform engineers on real-world deployments.
+  - [**Microsoft Build 2025**](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270) session with Mark Russinovich spotlighting how Radius aligns developers and platform engineers on real-world deployments.
 
 ## What's Next
 
