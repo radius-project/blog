@@ -6,7 +6,7 @@ author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
 ---
 
-On October 18, 2025 we celebrated two years since Radius was released as an open-source project! This milestone gives us a chance to reflect on our collective journey and the significant progress made with the community. This past year has been transformative for Radius, with a focus on providing an extensibility model for enterprises adopting Radius into their internal developer platforms, to adding capabilities that improved operational maturity of the platform.
+On October 18, 2025 we celebrated two years since Radius was released as an open-source project! This milestone gives us a chance to reflect on our collective journey and the significant progress made with the community. This past year has been transformative for Radius, with a focus on providing an extensibility model for enterprises adopting Radius into their internal developer platforms and adding capabilities that improved operational maturity of the platform.
 
 The Radius community has grown with new contributors, thoughtful feedback, and collaborative feature development. We've delivered consistent monthly releases with features that catered to both application developers and platform engineers, and improved product documentation and community resources. We extend our sincere gratitude to everyone who has participated, contributing code, writing documentation, testing features, and providing feedback. Your contributions have been essential to Radius' progress, and we're excited to continue this collaboration as we further evolve the platform.
 
