@@ -52,7 +52,9 @@ We have had fruitful engagements with the community through various events and c
 
 - **Radius for AI workloads** As AI reshapes both applications and software delivery workflows to include developers pairing with agents and services that spans beyond Kubernetes, hosted models, databases, queues, and storage, platform engineers must keep both developers and agents aligned with security, cost, and operational guardrails. Check out this blog post on [how you can future proof your AI applications with Radius Resource Types](https://blog.radapp.io/posts/2025/07/18/future-proofing-ai-applications-via-radius-resource-types/). More updates coming soon.
 
-Thank you to every maintainer, contributor, speaker, and demo author who invested time in the Radius repositories, documentation, and community sessions—your efforts power the shared progress we celebrate today.
+## Thank You
+
+Thank you to every maintainer, contributor, speaker, and demo author who invested time in Radius. The result of your efforts are what we celebrate today.
 
 ## Learn More and Get Involved
 
