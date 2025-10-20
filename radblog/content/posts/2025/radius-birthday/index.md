@@ -46,11 +46,11 @@ We have had fruitful engagements with the community through various events and c
 
 ## What's Next
 
-- **Extending Radius to even more serverless container runtimes** Per above, we've added support for ACI, and have other runtimes, like AWS Elastic Container Service in the Radius backlog. 
+- **Extending Radius to even more serverless container runtimes** with support for AWS Elastic Container Service (ECS) and Azure Container Apps on the roadmap.
 
-- **Radius for air-gapped environments**: Support offline installation, configuration, and upgrades so organizations with strict security requirements can vet and cache packages and control dependency versions without internet access.
+- **Air-gapped environment support** with offline installation, configuration, and upgrades so organizations with strict security requirements can vet and cache packages and control dependency versions without internet access.
 
-- **Radius for AI workloads** As AI reshapes both applications and software delivery workflows to include developers pairing with agents and services that spans beyond Kubernetes, hosted models, databases, queues, and storage, platform engineers must keep both developers and agents aligned with security, cost, and operational guardrails. Check out this blog post on [how you can future proof your AI applications with Radius Resource Types](https://blog.radapp.io/posts/2025/07/18/future-proofing-ai-applications-via-radius-resource-types/). More updates coming soon.
+- **Radius Resource Types for AI workloads.** As AI reshapes both applications and software delivery workflows to include developers pairing with agents and services that spans beyond Kubernetes, hosted models, databases, queues, and storage, platform engineers must keep both developers and agents aligned with security, cost, and operational guardrails. Check out this blog post on [how you can future proof your AI applications with Radius Resource Types](https://blog.radapp.io/posts/2025/07/18/future-proofing-ai-applications-via-radius-resource-types/). More updates coming soon.
 
 ## Thank You
 
