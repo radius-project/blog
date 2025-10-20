@@ -18,7 +18,7 @@ The Radius community has grown with new contributors, thoughtful feedback, and c
 
 - **Multi-platform support beyond Kubernetes** through first-class integration with Azure Container Instances (ACI), enabling serverless container deployments without changing application definitions. This advancement demonstrates Radius's platform-agnostic vision, allowing the same application to deploy across different compute platforms while maintaining a consistent developer experience. 
 
-- **In-place control plane upgrades** introduced in v0.50.0 with the `rad upgrade` and `rad rollback` commands, making it significantly easier to keep Radius installations up-to-date without disrupting environments or applications. This feature includes preflight safety checks that validate cluster health, permissions, and version compatibility before any changes are made, with built-in rollback capabilities for fast recovery if needed.
+- **In-place control plane upgrades** introduced in v0.50.0 with the `rad upgrade` and `rad rollback` commands, makes it  easy to keep Radius installations up-to-date without disrupting environments or applications. This feature includes preflight safety checks that validate cluster health, permissions, and version compatibility before any changes are made.  It also includes built-in rollback capabilities for fast recovery as needed.
 
 - **Enhanced usability improvements** across multiple releases for destructive operations like `rad uninstall kubernetes`, `rad group delete` and `rad app delete`
 
