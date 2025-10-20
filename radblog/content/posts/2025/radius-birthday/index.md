@@ -14,31 +14,37 @@ The Radius community has grown with new contributors, thoughtful feedback, and c
 
 - **Radius Resource Types** are one of the most transformative enhancements to the platform this year because they make Radius fundamentally extensible. Instead of being limited to a fixed catalog of built-in resources, platform engineers can now define custom resource types tailored to their organization’s workflows, policies, and infrastructure. Resource types act as a contract between application developers and their internal developer platform, abstracting away the complexity of underlying cloud resources while enabling seamless integration with existing Infrastructure-as-Code tools like Terraform and Bicep. This decoupling of resource definition from implementation empowers platform teams to enforce best practices and evolve infrastructure without disrupting developer workflows, while developers gain a simplified, application-centric experience. In short, resource types unlock innovation, flexibility, and scalability—positioning Radius as a cornerstone for building modern internal developer platforms. We are building a community driven library of Resource Types and Recipes in [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository to accelerate adoption and provide best practices for defining application centric abstractions in Radius.
 
-- **Native GitOps Integration** with built-in Flux integration now enables teams to promote application and infrastructure updates from Git while Radius keeps the desired state synchronized. The integration includes a new Radius Flux Controller that watches for changes in Git repositories containing `radius-gitops-config.yaml` files and a DeploymentTemplate Controller that creates, updates, or deletes applications based on these configurations. This brings the operational benefits of GitOps workflows while preserving Radius's application-centric approach.
+- **Native GitOps Integration** built-in Flux integration enables teams to promote application and infrastructure updates from Git while Radius keeps the desired state synchronized. The integration includes a new Radius Flux Controller that watches for changes in Git repositories containing `radius-gitops-config.yaml` files and a DeploymentTemplate Controller that creates, updates, or deletes applications based on these configurations. This brings the operational benefits of GitOps workflows while preserving Radius's application-centric approach.
 
-- **Multi-platform support beyond Kubernetes** through first-class integration with Azure Container Instances (ACI), enabling serverless container deployments without changing application definitions. This advancement demonstrates Radius's platform-agnostic vision, allowing the same application to deploy across different compute platforms while maintaining a consistent developer experience. 
+- **Support for serverless platforms** Radius now has first-class integration with Azure Container Instances (ACI), which enables deploying the same application, unchanged, to either a Kubernetes cluster or to ACI. This demonstrates Radius's runtime-agnostic vision, allowing the same application to deploy across different compute platforms while maintaining a consistent developer experience. 
 
-- **In-place control plane upgrades** introduced in v0.50.0 with the `rad upgrade` and `rad rollback` commands, makes it  easy to keep Radius installations up-to-date without disrupting environments or applications. This feature includes preflight safety checks that validate cluster health, permissions, and version compatibility before any changes are made.  It also includes built-in rollback capabilities for fast recovery as needed.
+- **In-place control plane upgrades** introduced in v0.50.0 with the `rad upgrade` and `rad rollback` commands, makes it easy to keep Radius installations up-to-date without disrupting environments or applications. This feature includes preflight safety checks that validate cluster health, permissions, and version compatibility before any changes are made.  It also includes built-in rollback capabilities for fast recovery as needed.
 
-- **Enhanced usability improvements** across multiple releases for destructive operations like `rad uninstall kubernetes`, `rad group delete` and `rad app delete`
+- **Usability improvements** across multiple releases have improved the developer and platform engineering experience. Key improvements include:
+    - Radius Dashboard: Platform engineers can publish organization-specific resource types with rich Markdown docs that includes details on how and when to use them, and developers browse them in one place instead of trawling CLI output. The environment page shows additional details about the Kubernetes cluster and the cloud provider configuration.
+    - Radius CLI: Interactive confirmation prompts for destructive operations like `rad uninstall kubernetes`, `rad group delete`, and `rad app delete` that clearly explain what resources will be affected, preventing accidental data loss.
 
 ## Community and Ecosystem
 
-We have had fruitful engagements with the community through various events and contributions. Our community has grown to ~883 members engaging on Discord and ~864 contributions to a wide range of areas, including some significant features that unblocked specific user scenarios. Highlights include:
+We have had fruitful engagements with the community through various events and contributions. Our community has grown to ~883 members engaging on Discord and ~864 contributions to a wide range of areas, including some significant features that unblocked specific user scenarios.
 
-- [**MYSQL Resource Type and Recipe**](https://github.com/radius-project/resource-types-contrib/tree/main/Data/mySqlDatabases) contributed by community member Andrew, enabling developers to easily add MySQL databases to their applications using a simple Resource Type definition, with the underlying infrastructure provisioned via a Bicep Recipe.
+- **Key community contributions**
+  - [MySQL Resource Type and Kubernetes Recipe](https://github.com/radius-project/resource-types-contrib/tree/main/Data/mySqlDatabases) added by [Andrew Matveychuk](https://github.com/andrewmatveychuk), giving developers a turnkey way to add MySQL databases to their applications with the infrastructure packaged as a Bicep Recipe.
+  - [Neo4j Resource Type and Kubernetes Recipe (PR #58)](https://github.com/radius-project/resource-types-contrib/pull/58) from community member [Nick Beenham](https://github.com/superbeeny), expanding the catalog with graph database support.
 
-- **KubeCon EU 2025** session with Millennium BCP showcased Radius as the IDP application layer, including live multi-cloud demos and custom resource catalogs [KubeCon EU 2025](https://youtu.be/ZmcZlDCYDgE?si=M4FlrKtBcz23Edw2).
-
-- **Mark Russinovich's Ignite session**, highlighted how the platform maps real-world collaboration between developers and operators [Inside Azure Innovations](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270).
+- **Community events and talks**
+  - [**KubeCon EU 2025**](https://youtu.be/ZmcZlDCYDgE?si=M4FlrKtBcz23Edw2) session with Millennium BCP showcased Radius as the IDP application layer, including live multi-cloud demos and curated resource catalogs.
+  - [**KubeCon US 2024 BackstageCon**](https://youtu.be/U2-Lo-yuvdc?si=Tm_GlKQg5SVMQLyz) session how Radius integrates with Backstage to visualize environments and deployed applications.
+  - [**Mark Russinovich’s community presentation on Radius Resource Types**](https://youtu.be/MNuoMSIs4Jo?si=XI1Uh1Ej7a1uhLEo) outlining the extensibility feature and how platform teams can share reusable abstractions across organizations.
+  - [**Ignite 2024**](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270) session with Mark Russinovich spotlighting how Radius aligns developers and platform engineers on real-world deployments.
 
 ## What's Next
 
 - **Extending Radius to even more serverless container runtimes** Per above, we've added support for ACI, and have other runtimes, like AWS Elastic Container Service in the Radius backlog. 
 
-- **Radius for Air-Gapped Environments** to meet strict enterprise security and compliance needs by enabling installations and ongoing operations in fully isolated or heavily restricted networks.
+- **Radius for air-gapped environments**: Support offline installation, configuration, and upgrades so organizations with strict security requirements can vet and cache packages and control dependency versions without internet access.
 
-- **Introducing fine-grained authorization**, so platform operators can manage access to Radius Resource Groups, Environments and Recipes.
+- **Radius for AI workloads** As AI reshapes both applications and software delivery workflows to include developers pairing with agents and services that spans beyond Kubernetes, hosted models, databases, queues, and storage, platform engineers must keep both developers and agents aligned with security, cost, and operational guardrails. Check out this blog post on [how you can future proof your AI applications with Radius Resource Types](https://blog.radapp.io/posts/2025/07/18/future-proofing-ai-applications-via-radius-resource-types/). More updates coming soon.
 
 Thank you to every maintainer, contributor, speaker, and demo author who invested time in the Radius repositories, documentation, and community sessions—your efforts power the shared progress we celebrate today.
 
