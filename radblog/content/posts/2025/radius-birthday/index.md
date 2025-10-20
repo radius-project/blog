@@ -34,7 +34,7 @@ We have had fruitful engagements with the community through various events and c
 
 ## What's Next
 
-- **Extending Radius beyond Kubernetes** by adding first-class deployment targets for other serverless container platforms, beginning with Azure Container Instances and AWS Elastic Container Service. 
+- **Extending Radius to even more serverless container runtimes** Per above, we've added support for ACI, and have other runtimes, like AWS Elastic Container Service in the Radius backlog. 
 
 - **Radius for Air-Gapped Environments** to meet strict enterprise security and compliance needs by enabling installations and ongoing operations in fully isolated or heavily restricted networks.
 
