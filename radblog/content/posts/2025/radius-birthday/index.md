@@ -33,9 +33,10 @@ The Radius community has grown with new contributors, thoughtful feedback, and c
 
 We have had fruitful engagements with the community through various events and contributions. Our community has grown to ~883 members engaging on Discord and ~864 contributions to a wide range of areas, including some significant features that unblocked specific user scenarios.
 
-- **Key community contributions**
-  - [MySQL Resource Type and Kubernetes Recipe](https://github.com/radius-project/resource-types-contrib/tree/main/Data/mySqlDatabases) added by [Andrew Matveychuk](https://github.com/andrewmatveychuk), giving developers a turnkey way to add MySQL databases to their applications with the infrastructure packaged as a Bicep Recipe.
-  - [Neo4j Resource Type and Kubernetes Recipe (PR #58)](https://github.com/radius-project/resource-types-contrib/pull/58) from community member [Nick Beenham](https://github.com/superbeeny), expanding the catalog with graph database support.
+**Key community contributions:**
+
+- [MySQL Resource Type and Kubernetes Recipe](https://github.com/radius-project/resource-types-contrib/tree/main/Data/mySqlDatabases) contributed by [Andrew Matveychuk](https://github.com/andrewmatveychuk).
+- [Neo4j Resource Type and Kubernetes Recipe](https://github.com/radius-project/resource-types-contrib/pull/58) contributed by [Nick Beenham](https://github.com/superbeeny).
 
 **Community events and talks:**
 
