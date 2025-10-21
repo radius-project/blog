@@ -1,7 +1,7 @@
 ---
 date: "2025-10-20"
-title: "Happy 2nd Birthday, Radius!"
-linkTitle: "Happy 2nd Birthday, Radius!"
+title: "Happy 2nd birthday, Radius!"
+linkTitle: "Happy 2nd birthday, Radius!"
 author: "[Reshma Abdul Rahim](https://github.com/Reshrahim)"
 type: blog
 ---
@@ -29,7 +29,7 @@ The Radius community has grown with new and existing contributors providing thou
     
     - **Radius CLI**: Interactive confirmation prompts for destructive operations like `rad uninstall kubernetes`, `rad group delete`, and `rad app delete` that clearly explain what resources will be affected, preventing accidental data loss.
 
-## Community and Ecosystem
+## Community and ecosystem
 
 We have had fruitful engagements with the community through various events and contributions. Our community has grown to ~883 members engaging on Discord and ~864 contributions to a wide range of areas, including some significant features that unblocked specific user scenarios.
 
@@ -45,7 +45,7 @@ We have had fruitful engagements with the community through various events and c
 - [Mark Russinovich’s community presentation on Radius Resource Types](https://youtu.be/MNuoMSIs4Jo?si=XI1Uh1Ej7a1uhLEo) outlining the extensibility feature and how platform teams can share reusable abstractions across organizations.
 - [Microsoft Build 2025](https://youtu.be/lHBo_lDWFcI?si=kD3fTzkps8cogIK5&t=2270) session with Mark Russinovich spotlighting how Radius aligns developers and platform engineers on real-world deployments.
 
-## What's Next
+## What's next
 
 - **Extending Radius to even more serverless container runtimes** with support for AWS Elastic Container Service (ECS) and Azure Container Apps on the roadmap.
 
@@ -53,11 +53,11 @@ We have had fruitful engagements with the community through various events and c
 
 - **Radius Resource Types for AI workloads.** As AI reshapes both applications and software delivery workflows to include developers pairing with agents and services that spans beyond Kubernetes, hosted models, databases, queues, and storage, platform engineers must keep both developers and agents aligned with security, cost, and operational guardrails. Check out this blog post on [how you can future proof your AI applications with Radius Resource Types](https://blog.radapp.io/posts/2025/07/18/future-proofing-ai-applications-via-radius-resource-types/). More updates coming soon.
 
-## Thank You
+## Thank you
 
 Thank you to every maintainer, contributor, speaker, and demo author who invested time in Radius. The result of your efforts are what we celebrate today.
 
-## Learn More and Get Involved
+## Learn more and get involved
 
 We would love for you to join us to help build Radius:
 
