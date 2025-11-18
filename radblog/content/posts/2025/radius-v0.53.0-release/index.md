@@ -16,6 +16,9 @@ Radius v0.53.0 reintroduces support for installing the Contour ingress controlle
 
 The `rad env delete` command has been enhanced to make Environment cleanup safer and more transparent. This update introduces differentiated prompts for deleting empty versus populated Environments, helping you understand the scope of deletion before proceeding. Additionally, progress messages have been added to provide clearer feedback during deletion operations. For more details, refer to the [CLI documentation](https://docs.radapp.io/reference/cli/rad_environment_delete/).
 
+## Better Onboarding & Learning Experience
+
+This release brings a major documentation update, including a refreshed [Quick Start](https://docs.radapp.io/quick-start/), brand-new [Concept](https://docs.radapp.io/concepts/) pages that elevate Radius core concepts, and a redesigned 5-part [Tutorial](https://docs.radapp.io/tutorials/). Together, these improvements create a clearer, more intuitive learning journey that helps new users quickly understand Radius and start building with confidence. [Learn more](https://docs.radapp.io/)
 ## New contributors
 
 Radius v0.53.0 welcomes new contributors to the project. Special thanks to:
