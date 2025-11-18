@@ -19,6 +19,7 @@ The `rad env delete` command has been enhanced to make Environment cleanup safer
 ## Better Onboarding & Learning Experience
 
 This release brings a major documentation update, including a refreshed [Quick Start](https://docs.radapp.io/quick-start/), brand-new [Concept](https://docs.radapp.io/concepts/) pages that elevate Radius core concepts, and a redesigned 5-part [Tutorial](https://docs.radapp.io/tutorials/). Together, these improvements create a clearer, more intuitive learning journey that helps new users quickly understand Radius and start building with confidence. [Learn more](https://docs.radapp.io/)
+
 ## New contributors
 
 Radius v0.53.0 welcomes new contributors to the project. Special thanks to:
