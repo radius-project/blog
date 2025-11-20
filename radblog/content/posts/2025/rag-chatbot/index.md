@@ -30,7 +30,7 @@ We used Radius to model the entire application, defining the relationships betwe
 
 We defined custom **Radius Resource Types (RRTs)** for the SQL Database and OpenAI models. This abstraction allows developers to request these resources without needing to know the underlying infrastructure details.
 
-{{ < image src="images/resource-types.png" alt="Screenshot of Radius Resource Types for SQL Database and AI Models"> }}
+{{ <image src="images/resource-types.png" alt="Screenshot of Radius Resource Types for SQL Database and AI Models"> }}
 
 ### Radius Recipes for Infrastructure
 
