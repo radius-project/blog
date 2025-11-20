@@ -10,6 +10,8 @@ Agentic AI applications are rapidly becoming a cornerstone of modern software, e
 
 We wanted to illustrate how Radius can streamline the building and deploying of these modern AI workloads, ensuring they are portable, secure, and easy to manage. This brings us to the demo that we've built: leveraging Radius to model and deploy the [azure-sql-db-chat-sk](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo) sample chatbot from the open source [Azure Samples repo](https://github.com/Azure-Samples/azure-sql-db-chat-sk). This demo illustrates how Radius simplifies the deployment and governance enforcement of intelligent applications across multiple environments.
 
+https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo?tab=readme-ov-file#deployment-with-radius
+
 ## Overview of the sample chatbot application
 
 The application is a chatbot designed for insurance claims agents. It uses SQL Server Database to store and retrieve data, leveraging both Retrieval-Augmented Generation (RAG) and Natural-Language-to-SQL (NL2QL) mechanisms. This allows the bot to chat effectively using both structured (SQL tables) and unstructured (vector embeddings) data.
@@ -27,6 +29,8 @@ We used Radius to model the entire application, defining the relationships betwe
 ### Radius Resource Types for Dependencies
 
 We defined custom **Radius Resource Types (RRTs)** for the SQL Database and OpenAI models. This abstraction allows developers to request these resources without needing to know the underlying infrastructure details.
+
+{{ < image src="images/resource-types.png" alt="Screenshot of Radius Resource Types for SQL Database and AI Models"> }}
 
 ### Radius Recipes for Infrastructure
 
