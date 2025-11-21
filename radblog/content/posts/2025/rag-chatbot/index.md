@@ -26,25 +26,21 @@ We used Radius to model the entire application, defining the relationships betwe
 
 {{< image src="images/sql-db-chat-sk-radius.png" alt="Architecture diagram of the SQL DB Chatbot application with Radius">}}
 
-### Radius Resource Types for Dependencies
+### Radius Resource Types and Recipes for dependencies
 
-We defined custom **Radius Resource Types (RRTs)** for the SQL Database and OpenAI models. This abstraction allows developers to request these resources without needing to know the underlying infrastructure details.
-
-{{ <image src="images/resource-types.png" alt="Screenshot of Radius Resource Types for SQL Database and AI Models"> }}
-
-### Radius Recipes for Infrastructure
-
-Instead of hardcoding infrastructure details, we utilized **Radius Recipes** for the SQL database and OpenAI resources. This allows the application definition to remain environment-agnostic. The developer simply requests a "SQL Database" or an "OpenAI Model," and Radius handles the provisioning based on the environment's configuration.
+We defined custom Radius Resource Types (RRTs) to model the SQL Database and OpenAI models, which are deployed using infrastructure Recipes. These Recipes encapsulate the provisioning logic for these resources to abstract them away from developers, allowing for dynamic infrastructure decisions at deploy time. For example, the SQL Database Recipe provisions different SKUs based on the target Azure environment (Dev vs Prod) or even different cloud providers if needed. This abstraction allows developers to request these resources without needing to know the underlying infrastructure details. The developer simply requests a "SQL Database" or an "OpenAI Model," and Radius handles the provisioning based on the target Environment's configuration.
 
 ### Multi-Environment Deployment
 
-The power of Radius shines when deploying to different environments. In this demo, we targeted three distinct Radius Environments:
+The power of Radius shines when deploying to different environments. In our demo, we targeted three distinct Radius Environments:
 
-1.  **ACI (Azure Container Instances)**: A lightweight environment for quick testing.
-2.  **AKS Dev (Azure Kubernetes Service)**: A development environment on Kubernetes.
-3.  **AKS Prod (Azure Kubernetes Service)**: A production environment with stricter governance.
+1.  ACI (Azure Container Instances): A lightweight environment for quick testing.
+2.  AKS Dev (Azure Kubernetes Service): A development environment on Kubernetes.
+3.  AKS Prod (Azure Kubernetes Service): A production environment with stricter governance.
 
-Radius deploys the exact same application definition to all three environments without requiring any changes to the code or the application model.
+Radius deploys the exact same application definition to all three environments without requiring any changes to the code or the `app.bicep` file.
+
+{{< image src="images/sql-db-chat-sk-radius-environments.png" alt="Screenshot of Radius Resource Types for SQL Database and AI Models" >}}
 
 ## Governance and Guardrails: The Jailbreak Scenario
 
