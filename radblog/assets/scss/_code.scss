@@ -75,14 +75,6 @@
   padding: 1rem;
 }
 
-/* Override Chroma inline string/link color (yellow) for better readability */
-.td-content .highlight span[style*="#e6db74"],
-.td-content .highlight span[style*="#f1fa8c"],
-.td-content pre span[style*="#e6db74"],
-.td-content pre span[style*="#f1fa8c"] {
-  color: #1d4ed8 !important;
-}
-
 /* Generic <pre> blocks outside .highlight */
 .td-content pre {
   margin: 0;
@@ -95,16 +87,4 @@
 .td-content li > code,
 .td-content table code {
   background-color: rgba(0, 0, 0, 0.05);
-}
-
-/* Override string color (yellow) in code blocks */
-.td-content .highlight .chroma .s,
-.td-content .highlight .chroma .s1,
-.td-content .highlight .chroma .s2 {
-  color: #0a66c2 !important;  /* example: Azure blue */
-}
-
-/* Or neutralize syntax coloring for a more uniform look */
-.td-content .highlight .chroma * {
-  color: #1a1a1a !important;
 }
