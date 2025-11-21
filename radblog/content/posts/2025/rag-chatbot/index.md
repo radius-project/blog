@@ -44,16 +44,18 @@ Radius deploys the exact same application definition to all three environments w
 
 {{< image src="images/sql-db-chat-sk-radius-environments.png" alt="Screenshot of Radius Resource Types for SQL Database and AI Models" >}}
 
-## Governance and Guardrails: The Jailbreak Scenario
+## Governance and guardrails using Radius
 
-A key highlight of the demo is **governance enforcement**. We demonstrated how Radius Environments can enforce different policies and configurations transparently to the application.
+A key highlight of the demo is leveraging Radius for seamless governance enforcement. We demonstrated how Radius Environments can enforce different policies and configurations for each deployed resource transparently to the application and developer.
 
-Specifically, we implemented **AI content filtering** to prevent "jailbreak" attempts—where users try to manipulate the LLM into ignoring its instructions.
+Specifically, we implemented separate database configurations (SKUs, disaster recovery, multizone redundancy) for Dev and Prod environments and added AI content filtering to prevent "jailbreak" attempts in Prod.
 
-*   **Dev Environment**: The jailbreak content filtering is relaxed or disabled for testing purposes.
-*   **Prod Environment**: The jailbreak content filtering is strictly enforced.
+*   **Dev Environment**: The SQL Database uses a lower SKU and does not have disaster recovery or multizone redundancy enabled for cost savings. The jailbreak content filtering is relaxed or disabled for testing purposes.
+*   **Prod Environment**: The SQL Database uses a higher SKU with disaster recovery and multizone redundancy enabled for resilience. The jailbreak content filtering is strictly enforced.
 
-This configuration is managed entirely through **Radius Environment parameters**. The AI Model Recipes accept parameters configured at the Environment level. When deploying to Prod, the Environment automatically passes the strict content filtering configuration to the Recipe.
+This configuration is managed entirely through Radius Environment parameters. The SQL Database and AI Model Recipes accept parameters configured at the Environment level. When deploying to Prod, the Environment automatically passes the database resiliency and strict content filtering configurations to the Recipes.
+
+{{< image src="images/sql-db-chat-sk-radius-parameters.png" alt="Screenshot of Radius Environment parameters for AI Model Recipe" >}}
 
 ## Seeing it in Action
 
