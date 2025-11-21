@@ -60,14 +60,3 @@ github_repo = "https://github.com/radius-project/blog"
 github_subdir = "blog"
 github_branch = "main"
 github_project_repo = "https://github.com/radius-project/radius"
-
-[markup.highlight]
-codeFences = true
-guessSyntax = true
-hl_Lines = ""
-lineNoStart = 1
-lineNos = false
-lineNumbersInTable = false
-tabWidth = 4
-noClasses = false
-style = "monokai" 
