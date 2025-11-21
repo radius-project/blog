@@ -8,7 +8,7 @@ type: blog
 
 Agentic AI applications are rapidly becoming a cornerstone of modern software, enabling systems to reason, act, and interact with data in unprecedented ways. As these intelligent applications grow in complexity, managing their infrastructure and governance becomes increasingly challenging. For instance, a Retrieval-Augmented Generation (RAG) chatbot application might require a combination of vector databases, large language models (LLMs), and traditional compute, on top of which considerations like dependency management, security, and compliance are layered. Indeed, when looking at some of the most popular AI sample applications, we see that they often involve multiple components and services that need to be orchestrated outside the bounds of the core application itself before the application can even run. 
 
-We wanted to illustrate how Radius can streamline the building and deploying of these modern AI workloads, ensuring they are portable, secure, and easy to manage. This brings us to the demo that we've built: leveraging Radius to model and deploy the [azure-sql-db-chat-sk](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo) sample chatbot from the open source [Azure Samples repo](https://github.com/Azure-Samples/azure-sql-db-chat-sk). This demo illustrates how Radius simplifies the deployment and governance enforcement of intelligent applications across multiple environments. You may view a video of this demo in action from this session at Microsoft Ignite 2025: [Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
+We wanted to illustrate how Radius can streamline the building and deploying of these modern AI workloads, ensuring they are portable, secure, and easy to manage. This brings us to the demo that we've built: leveraging Radius to model and deploy the [azure-sql-db-chat-sk](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo) sample chatbot from the open source [Azure Samples repo](https://github.com/Azure-Samples/azure-sql-db-chat-sk). This demo illustrates how Radius simplifies the deployment and governance enforcement of intelligent applications across multiple environments. You may view a video of this demo in action from this session at [Microsoft Ignite 2025: Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
 
 > To try the demo for yourself, follow the Radius deployment [instructions](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo?tab=readme-ov-file#deployment-with-radius) in the repo.
 
@@ -96,8 +96,9 @@ When running the demo, the difference in behavior is observed based on the targe
 This demonstrates how platform engineers can enforce security and compliance standards (like database SKUs, redundancy, and AI safety) across environments without burdening developers with the details.
 
 {{< image src="images/chatbot-jailbreak.png" alt="Screenshot of chatbot refusing to answer jailbreak prompt in Prod environment" width="800" >}}
+<br><br>
 
-> Check out a video of this demo in action from Microsoft Ignite 2025: [Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
+> Check out a video of this demo in action from [Microsoft Ignite 2025: Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
 
 ## In summary
 
