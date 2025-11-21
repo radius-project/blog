@@ -18,21 +18,23 @@ The application is a chatbot designed for insurance claims agents. It uses SQL S
 
 The bot is built using the [Semantic Kernel](https://github.com/microsoft/semantic-kernel) agent orchestration framework and takes advantage of the native vector support in SQL Server Database.
 
-{{< image src="images/sql-db-chat-sk.png" alt="Architecture diagram of the SQL DB Chatbot application">}}
+{{< image src="images/sql-db-chat-sk.png" alt="Architecture diagram of the SQL DB Chatbot application" width="500" >}}
 
 ## Modeling the chatbot app using Radius
 
 First, we containerized the chatbot application code using Docker and pushed the container image to a container registry. Then, we used Radius to model the entire application, defining the relationships between the chatbot container and its dependent resources: the SQL database and OpenAI services.
 
-{{< image src="images/sql-db-chat-sk-radius.png" alt="Architecture diagram of the SQL DB Chatbot application with Radius">}}
+{{< image src="images/sql-db-chat-sk-radius.png" alt="Architecture diagram of the SQL DB Chatbot application with Radius" width="800" >}}
 
 ### Radius Resource Types and Recipes for dependencies
 
-We defined custom Radius Resource Types (RRTs) to model the SQL Database and OpenAI models, which are deployed using infrastructure Recipes. These Recipes encapsulate the provisioning logic for these resources to abstract them away from developers, allowing for dynamic infrastructure decisions at deploy time. For example, the SQL Database Recipe provisions different SKUs based on the target Azure environment (Dev vs Prod) or even different cloud providers if needed. This abstraction allows developers to request these resources without needing to know the underlying infrastructure details. The developer simply requests a "SQL Database" or an "OpenAI Model," and Radius handles the provisioning based on the target Environment's configuration.
+We defined [custom Radius Resource Types](https://github.com/willtsai/azure-sql-db-chat-sk/blob/radius-insurance-chatbot-demo/types/types.yaml) (RRTs) to model the SQL Database and OpenAI models, which are deployed using infrastructure Recipes. These [Recipes](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo/recipes) encapsulate the provisioning logic for these resources to abstract them away from developers, allowing for dynamic infrastructure decisions at deploy time. For example, the SQL Database Recipe provisions different SKUs based on the target [Azure Environment](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo/environments) (Dev vs Prod) that we have configured or even different cloud providers if needed. This abstraction allows developers to request these resources without needing to know the underlying infrastructure details. The developer simply requests a "SQL Database" or an "OpenAI Model," and Radius handles the provisioning based on the target Environment's configuration.
 
 ### Radius Application definition
 
-As mentioned above, the developer is able to build a declarative application definition that focuses on the application logic and dependencies without worrying about the underlying infrastructure. For our demo chatbot app, the application definition includes a container for the chatbot service, a SQL Database for the vector store, and AI models for chat and embeddings, all encapsulated in a single `app.bicep` [file](https://github.com/willtsai/azure-sql-db-chat-sk/blob/radius-insurance-chatbot-demo/app.bicep).
+As mentioned above, the developer is able to build a declarative application definition that focuses on the application logic and dependencies without worrying about the underlying infrastructure. For our demo chatbot app, the application definition includes a container for the chatbot service, a SQL Database for the vector store, and AI models for chat and embeddings, all encapsulated in a single `app.bicep` [file](https://github.com/willtsai/azure-sql-db-chat-sk/blob/radius-insurance-chatbot-demo/app.bicep). Radius builds the application graph dynamically based on the resources that get deployed and [connections](https://docs.radapp.io/concepts/applications/#connections) between resources are automatically established.
+
+{{< image src="images/chatbot-app-graph.png" alt="Screenshot of Radius Application Graph for Chatbot app" width="500" >}}
 
 ### Multi-Environment deployment
 
@@ -44,7 +46,7 @@ In our demo, we targeted three distinct Radius Environments:
 
 Radius deploys the exact same application definition to all three environments without requiring any changes to the code or the `app.bicep` file.
 
-{{< image src="images/sql-db-chat-sk-radius-environments.png" alt="Screenshot of Radius Resource Types for SQL Database and AI Models" >}}
+{{< image src="images/sql-db-chat-sk-radius-environments.png" alt="Diagram of Radius Resource Types for SQL Database and AI Models" width="800" >}}
 
 ## Governance and guardrails using Radius
 
@@ -57,7 +59,7 @@ Specifically, we implemented separate database configurations (SKUs, disaster re
 
 This configuration is managed entirely through Radius [Environment parameters](https://docs.radapp.io/reference/resource-schema/core-schema/environment-schema/#recipe-properties). The SQL Database and AI Model Recipes accept parameters configured at the Environment level. When deploying to Prod, the Environment automatically passes the database resiliency and strict content filtering configurations to the Recipes.
 
-{{< image src="images/sql-db-chat-sk-radius-parameters.png" alt="Screenshot of Radius Environment parameters for AI Model Recipe" >}}
+{{< image src="images/sql-db-chat-sk-radius-parameters.png" alt="Diagram of Radius Environment parameters for Recipes" width="800" >}}
 
 ## Seeing it in action
 
@@ -93,7 +95,7 @@ When running the demo, the difference in behavior is observed based on the targe
 
 This demonstrates how platform engineers can enforce security and compliance standards (like database SKUs, redundancy, and AI safety) across environments without burdening developers with the details.
 
-{{< image src="images/chatbot-jailbreak.png" alt="Screenshot of chatbot refusing to answer jailbreak prompt in Prod environment" >}}
+{{< image src="images/chatbot-jailbreak.png" alt="Screenshot of chatbot refusing to answer jailbreak prompt in Prod environment" width="800" >}}
 
 > Check out a video of this demo in action from Microsoft Ignite 2025: [Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
 
