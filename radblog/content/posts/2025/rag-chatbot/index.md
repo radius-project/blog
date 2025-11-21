@@ -22,7 +22,7 @@ The bot is built using the [Semantic Kernel](https://github.com/microsoft/semant
 
 ## Modeling the chatbot app using Radius
 
-We used Radius to model the entire application, defining the relationships between the chatbot container and its dependent resources: the SQL database and OpenAI services.
+First, we containerized the chatbot application code using Docker and pushed the container image to a container registry. Then, we used Radius to model the entire application, defining the relationships between the chatbot container and its dependent resources: the SQL database and OpenAI services.
 
 {{< image src="images/sql-db-chat-sk-radius.png" alt="Architecture diagram of the SQL DB Chatbot application with Radius">}}
 
