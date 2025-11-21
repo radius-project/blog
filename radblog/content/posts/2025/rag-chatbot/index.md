@@ -32,11 +32,11 @@ We defined custom Radius Resource Types (RRTs) to model the SQL Database and Ope
 
 ### Radius Application definition
 
-As mentioned above, the developer is able to build a declarative application definition that focuses on the application logic and dependencies without worrying about the underlying infrastructure. For our demo chatbot app, the application definition includes a container for the chatbot service, a SQL Database for the vector store, and AI models for chat and embeddings, all encapsulated in a single [`app.bicep` file](https://github.com/willtsai/azure-sql-db-chat-sk/blob/radius-insurance-chatbot-demo/app.bicep).
+As mentioned above, the developer is able to build a declarative application definition that focuses on the application logic and dependencies without worrying about the underlying infrastructure. For our demo chatbot app, the application definition includes a container for the chatbot service, a SQL Database for the vector store, and AI models for chat and embeddings, all encapsulated in a single `app.bicep` [file](https://github.com/willtsai/azure-sql-db-chat-sk/blob/radius-insurance-chatbot-demo/app.bicep).
 
 ### Multi-Environment deployment
 
-The power of Radius shines when deploying to different environments. In our demo, we targeted three distinct Radius Environments:
+In our demo, we targeted three distinct Radius Environments:
 
 1.  ACI (Azure Container Instances): A lightweight environment for quick testing.
 2.  AKS Dev (Azure Kubernetes Service): A development environment on Kubernetes.
