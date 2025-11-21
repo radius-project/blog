@@ -30,7 +30,11 @@ We used Radius to model the entire application, defining the relationships betwe
 
 We defined custom Radius Resource Types (RRTs) to model the SQL Database and OpenAI models, which are deployed using infrastructure Recipes. These Recipes encapsulate the provisioning logic for these resources to abstract them away from developers, allowing for dynamic infrastructure decisions at deploy time. For example, the SQL Database Recipe provisions different SKUs based on the target Azure environment (Dev vs Prod) or even different cloud providers if needed. This abstraction allows developers to request these resources without needing to know the underlying infrastructure details. The developer simply requests a "SQL Database" or an "OpenAI Model," and Radius handles the provisioning based on the target Environment's configuration.
 
-### Multi-Environment Deployment
+### Radius Application definition
+
+As mentioned above, the developer is able to build a declarative application definition that focuses on the application logic and dependencies without worrying about the underlying infrastructure. For our demo chatbot app, the application definition includes a container for the chatbot service, a SQL Database for the vector store, and AI models for chat and embeddings, all encapsulated in a single [`app.bicep` file](https://github.com/willtsai/azure-sql-db-chat-sk/blob/radius-insurance-chatbot-demo/app.bicep).
+
+### Multi-Environment deployment
 
 The power of Radius shines when deploying to different environments. In our demo, we targeted three distinct Radius Environments:
 
@@ -51,16 +55,41 @@ Specifically, we implemented separate database configurations (SKUs, disaster re
 *   **Dev Environment**: The SQL Database uses a lower SKU and does not have disaster recovery or multizone redundancy enabled for cost savings. The jailbreak content filtering is relaxed or disabled for testing purposes.
 *   **Prod Environment**: The SQL Database uses a higher SKU with disaster recovery and multizone redundancy enabled for resilience. The jailbreak content filtering is strictly enforced.
 
-This configuration is managed entirely through Radius Environment parameters. The SQL Database and AI Model Recipes accept parameters configured at the Environment level. When deploying to Prod, the Environment automatically passes the database resiliency and strict content filtering configurations to the Recipes.
+This configuration is managed entirely through Radius [Environment parameters](https://docs.radapp.io/reference/resource-schema/core-schema/environment-schema/#recipe-properties). The SQL Database and AI Model Recipes accept parameters configured at the Environment level. When deploying to Prod, the Environment automatically passes the database resiliency and strict content filtering configurations to the Recipes.
 
 {{< image src="images/sql-db-chat-sk-radius-parameters.png" alt="Screenshot of Radius Environment parameters for AI Model Recipe" >}}
 
 ## Seeing it in action
 
-When running the demo, we can see the difference in behavior:
+The platform engineering team sets up the Radius Resource Types, Recipes, and Environments by running the below commands:
 
+```bash
+# Create the Resource Types from the types.yaml file
+rad resource-type create  --from-file ./types/types.yaml
+```
+
+```bash
+# Deploy each Environment using its respective defintion file 
+#   (i.e. aci-dev.bicep, aks-dev.bicep, aks-prod.bicep)
+rad deploy ./environments/<env-definition>.bicep --parameters subscriptionId=<subscriptionId> --parameters resourceGroupName=<resourceGroupName>
+```
+
+Developers can then deploy the chatbot app to any of the available Environments using the same application definition file and providing the desired chat and embedding model names as parameters:
+
+```bash
+# Target the aci-dev environment using gpt-3.5-turbo and text-embedding-ada-002 models
+rad deploy app.bicep --environment aci-dev --parameters chatModelName=gpt-35-turbo --parameters embeddingModelName=text-embedding-ada-002
+
+# Target the aks-dev environment using gpt-4 and text-embedding-3-small models
+rad deploy app.bicep --environment aks-dev --parameters chatModelName=gpt-4 --parameters embeddingModelName=text-embedding-3-small
+
+# Target the aks-prod environment using gpt-4 and text-embedding-3-small models
+rad deploy app.bicep --environment aks-prod --parameters chatModelName=gpt-4 --parameters embeddingModelName=text-embedding-3-small
+```
+
+When running the demo, the difference in behavior is observed based on the target environment:
 1.  **Deploy to Dev**: We deploy the app to the AKS Dev environment and see the database configured with a lower SKU and no disaster recovery or multizone redundancy. We attempt a jailbreak prompt, and the bot might respond (or the filter is loose).
-2.  **Deploy to Prod**: We deploy the same app to the AKS Prod environment and see the database configured with a higher SKU and disaster recovery and multizone redundancy enabled. We attempt the same jailbreak prompt. This time, the Azure OpenAI content filters kick in, and the chatbot refuses to answer, flagging the attempt.
+1.  **Deploy to Prod**: We deploy the same app to the AKS Prod environment and see the database configured with a higher SKU and disaster recovery and multizone redundancy enabled. We attempt the same jailbreak prompt. This time, the Azure OpenAI content filters kick in, and the chatbot refuses to answer, flagging the attempt.
 
 This demonstrates how platform engineers can enforce security and compliance standards (like database SKUs, redundancy, and AI safety) across environments without burdening developers with the details.
 
