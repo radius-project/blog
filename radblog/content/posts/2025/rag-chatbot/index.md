@@ -8,9 +8,7 @@ type: blog
 
 Agentic AI applications are rapidly becoming a cornerstone of modern software, enabling systems to reason, act, and interact with data in unprecedented ways. As these intelligent applications grow in complexity, managing their infrastructure and governance becomes increasingly challenging. For instance, a Retrieval-Augmented Generation (RAG) chatbot application might require a combination of vector databases, large language models (LLMs), and traditional compute, on top of which considerations like dependency management, security, and compliance are layered. Indeed, when looking at some of the most popular AI sample applications, we see that they often involve multiple components and services that need to be orchestrated outside the bounds of the core application itself before the application can even run. 
 
-We wanted to illustrate how Radius can streamline the building and deploying of these modern AI workloads, ensuring they are portable, secure, and easy to manage. This brings us to the demo that we've built: leveraging Radius to model and deploy the [azure-sql-db-chat-sk](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo) sample chatbot from the open source [Azure Samples repo](https://github.com/Azure-Samples/azure-sql-db-chat-sk). This demo illustrates how Radius simplifies the deployment and governance enforcement of intelligent applications across multiple environments.
-
-> Check out a video of this demo in action from Microsoft Ignite 2025: [Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
+We wanted to illustrate how Radius can streamline the building and deploying of these modern AI workloads, ensuring they are portable, secure, and easy to manage. This brings us to the demo that we've built: leveraging Radius to model and deploy the [azure-sql-db-chat-sk](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo) sample chatbot from the open source [Azure Samples repo](https://github.com/Azure-Samples/azure-sql-db-chat-sk). This demo illustrates how Radius simplifies the deployment and governance enforcement of intelligent applications across multiple environments. You may view a video of this demo in action from this session at Microsoft Ignite 2025: [Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
 
 > To try the demo for yourself, follow the Radius deployment [instructions](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo?tab=readme-ov-file#deployment-with-radius) in the repo.
 
@@ -57,17 +55,31 @@ This configuration is managed entirely through Radius Environment parameters. Th
 
 {{< image src="images/sql-db-chat-sk-radius-parameters.png" alt="Screenshot of Radius Environment parameters for AI Model Recipe" >}}
 
-## Seeing it in Action
+## Seeing it in action
 
 When running the demo, we can see the difference in behavior:
 
-1.  **Deploy to Dev**: We deploy the app to the AKS Dev environment. We attempt a jailbreak prompt, and the bot might respond (or the filter is loose).
-2.  **Deploy to Prod**: We deploy the same app to the AKS Prod environment. We attempt the same jailbreak prompt. This time, the Azure OpenAI content filters kick in, and the chatbot refuses to answer, flagging the attempt.
+1.  **Deploy to Dev**: We deploy the app to the AKS Dev environment and see the database configured with a lower SKU and no disaster recovery or multizone redundancy. We attempt a jailbreak prompt, and the bot might respond (or the filter is loose).
+2.  **Deploy to Prod**: We deploy the same app to the AKS Prod environment and see the database configured with a higher SKU and disaster recovery and multizone redundancy enabled. We attempt the same jailbreak prompt. This time, the Azure OpenAI content filters kick in, and the chatbot refuses to answer, flagging the attempt.
 
-This demonstrates how platform engineers can enforce security and compliance standards (like database SKUs, encryption, and AI safety) across environments without burdening developers with the details.
+This demonstrates how platform engineers can enforce security and compliance standards (like database SKUs, redundancy, and AI safety) across environments without burdening developers with the details.
 
-## Conclusion
+{{< image src="images/chatbot-jailbreak.png" alt="Screenshot of chatbot refusing to answer jailbreak prompt in Prod environment" >}}
+
+> Check out a video of this demo in action from Microsoft Ignite 2025: [Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
+
+## In summary
 
 This demo showcases the "Write Once, Run Anywhere" promise of Radius, not just for compute, but for the entire application topology including dependencies and configuration. By decoupling the application needs from the infrastructure capabilities, Radius enables developers to move fast while ensuring platform engineers can maintain control and governance.
 
-Check out the [source code](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo) to try it yourself!
+Check out the [source code](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo?tab=readme-ov-file#deployment-with-radius) to try it yourself!
+
+## Get Involved with Radius
+
+- **Radius Concepts:** Learn about [Radius Concepts](https://docs.radapp.io/concepts/) to understand the core ideas behind Radius.
+- **Quickstart:** Follow the [Quickstart Guide](https://docs.radapp.io/quick-start/) to get started with Radius.
+- **Tutorial:** Check out the [tutorial](https://docs.radapp.io/tutorials/) for step-by-step guide on creating Resource Types and Recipes.
+- **Monthly Community Meetings:** Join the [Radius Google Group](https://groups.google.com/g/radapp_io) for announcements.
+- **Discord:** Connect with us and other contributors on the [Radius Discord](https://aka.ms/radius/discord).
+- **YouTube:** Watch demos and tutorials on the [Radius YouTube channel](https://www.youtube.com/@radapp_io).
+- **Docs:** Learn more at [docs.radapp.io](https://docs.radapp.io/tutorials/create-resource-type/).
