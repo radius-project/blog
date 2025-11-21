@@ -98,7 +98,6 @@ This demonstrates how platform engineers can enforce security and compliance sta
 {{< image src="images/chatbot-jailbreak.png" alt="Screenshot of chatbot refusing to answer jailbreak prompt in Prod environment" width="800" >}}
 <br><br>
 
-> Check out a video of this demo in action from [Microsoft Ignite 2025: Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
 
 ## In summary
 
