@@ -108,10 +108,6 @@ Check out the [source code](https://github.com/willtsai/azure-sql-db-chat-sk/tre
 
 ## Get Involved with Radius
 
-- **Radius Concepts:** Learn about [Radius Concepts](https://docs.radapp.io/concepts/) to understand the core ideas behind Radius.
-- **Quickstart:** Follow the [Quickstart Guide](https://docs.radapp.io/quick-start/) to get started with Radius.
-- **Tutorial:** Check out the [tutorial](https://docs.radapp.io/tutorials/) for step-by-step guide on creating Resource Types and Recipes.
 - **Monthly Community Meetings:** Join the [Radius Google Group](https://groups.google.com/g/radapp_io) for announcements.
 - **Discord:** Connect with us and other contributors on the [Radius Discord](https://aka.ms/radius/discord).
 - **YouTube:** Watch demos and tutorials on the [Radius YouTube channel](https://www.youtube.com/@radapp_io).
-- **Docs:** Learn more at [docs.radapp.io](https://docs.radapp.io/tutorials/create-resource-type/).
