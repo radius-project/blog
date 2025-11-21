@@ -10,13 +10,13 @@ Agentic AI applications are rapidly becoming a cornerstone of modern software, e
 
 We wanted to illustrate how Radius can streamline the building and deploying of these modern AI workloads, ensuring they are portable, secure, and easy to manage. This brings us to the demo that we've built: leveraging Radius to model and deploy the [azure-sql-db-chat-sk](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo) sample chatbot from the open source [Azure Samples repo](https://github.com/Azure-Samples/azure-sql-db-chat-sk). This demo illustrates how Radius simplifies the deployment and governance enforcement of intelligent applications across multiple environments. You may view a video of this demo in action from this session at [Microsoft Ignite 2025: Cloud Native Innovations with Mark Russinovich](https://ignite.microsoft.com/en-US/sessions/BRK431)
 
-> To try the demo for yourself, follow the Radius deployment [instructions](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo?tab=readme-ov-file#deployment-with-radius) in the repo.
+To try the demo for yourself, follow the Radius deployment [instructions](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo?tab=readme-ov-file#deployment-with-radius) in the repo.
 
 ## Overview of the sample chatbot application
 
-The application is a chatbot designed for insurance claims agents. It uses SQL Server Database to store and retrieve data, leveraging both Retrieval-Augmented Generation (RAG) and Natural-Language-to-SQL (NL2QL) mechanisms. This allows the bot to chat effectively using both structured (SQL tables) and unstructured (vector embeddings) data.
+The application is a chatbot designed for insurance claims agents. It uses a SQL Server database to store and retrieve data, leveraging both Retrieval-Augmented Generation (RAG) and Natural-Language-to-SQL (NL2QL) mechanisms. This allows the bot to chat effectively using both structured (tables) and unstructured (vector embeddings) data.
 
-The bot is built using the [Semantic Kernel](https://github.com/microsoft/semantic-kernel) agent orchestration framework and takes advantage of the native vector support in SQL Server Database.
+The bot is built using the [Semantic Kernel](https://github.com/microsoft/semantic-kernel) agent orchestration framework and takes advantage of the native vector support in SQL Server.
 
 {{< image src="images/sql-db-chat-sk.png" alt="Architecture diagram of the SQL DB Chatbot application" width="500" >}}
 
@@ -36,13 +36,13 @@ As mentioned above, the developer is able to build a declarative application def
 
 {{< image src="images/chatbot-app-graph.png" alt="Screenshot of Radius Application Graph for Chatbot app" width="500" >}}
 
-### Multi-Environment deployment
+### Multi-environment deployment
 
 In our demo, we targeted three distinct Radius Environments:
 
-1.  ACI (Azure Container Instances): A lightweight environment for quick testing.
-2.  AKS Dev (Azure Kubernetes Service): A development environment on Kubernetes.
-3.  AKS Prod (Azure Kubernetes Service): A production environment with stricter governance.
+1.  `ACI`: A lightweight environment for quick testing running on Azure Container Instances
+2.  `AKS Dev`: A development environment running on Azure Kubernetes Service
+3.  `AKS Prod` A production environment with stricter governance running on Azure Kubernetes Service
 
 Radius deploys the exact same application definition to all three environments without requiring any changes to the code or the `app.bicep` file.
 
@@ -67,7 +67,7 @@ The platform engineering team sets up the Radius Resource Types, Recipes, and En
 
 ```bash
 # Create the Resource Types from the types.yaml file
-rad resource-type create  --from-file ./types/types.yaml
+rad resource-type create --from-file ./types/types.yaml
 ```
 
 ```bash
