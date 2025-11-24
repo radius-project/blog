@@ -10,7 +10,7 @@ Agentic AI applications are rapidly becoming a cornerstone of modern software, e
 
 We wanted to illustrate how Radius can streamline the building and deploying of these modern AI workloads, ensuring they are portable, secure, and easy to manage. This brings us to the demo that we've built: leveraging Radius to model and deploy the [azure-sql-db-chat-sk](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo) sample chatbot from the open source [Azure Samples repo](https://github.com/Azure-Samples/azure-sql-db-chat-sk). This demo illustrates how Radius simplifies the deployment and governance enforcement of intelligent applications across multiple environments. Mark Russinovich presented this [demo](https://youtu.be/-xcNd5ZU0Z8?si=pi9L4jtI2hZBjq-M&t=1731) recently at the Microsoft Ignite conference:
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 80%;">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 100%; max-width: 720px; margin: 0 auto;">
   <iframe src="https://www.youtube-nocookie.com/embed/-xcNd5ZU0Z8?si=1KIPvS0vQXj2HglY&amp;start=1731" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
