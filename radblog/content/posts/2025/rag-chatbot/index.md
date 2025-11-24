@@ -12,8 +12,7 @@ We wanted to illustrate how Radius can streamline the building and deploying of 
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/-xcNd5ZU0Z8?si=1KIPvS0vQXj2HglY&amp;start=1987" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<br>
-
+<br><br>
 To try the demo for yourself, follow the Radius deployment [instructions](https://github.com/willtsai/azure-sql-db-chat-sk/tree/radius-insurance-chatbot-demo?tab=readme-ov-file#deployment-with-radius) in the repo.
 
 ## Overview of the sample chatbot application
