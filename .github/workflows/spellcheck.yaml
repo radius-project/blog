@@ -8,25 +8,32 @@ on:
     branches:
       - main
     paths:
-      - "radblog/**"
-      - ".github/workflows/spellcheck.yaml"
-      - ".github/config/**"
+      - radblog/**
+      - .github/workflows/spellcheck.yaml
+      - .github/config/**
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
       - main
     paths:
-      - "radblog/**"
-      - ".github/workflows/spellcheck.yaml"
-      - ".github/config/**"
+      - radblog/**
+      - .github/workflows/spellcheck.yaml
+      - .github/config/**
+
+permissions: {}
 
 jobs:
   build:
     name: Spellcheck
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
 
       - name: Spellcheck
         uses: rojopolis/spellcheck-github-actions@6f2326b663e2dbab920da0fc4144b9f3202434ba # 0.54.0
