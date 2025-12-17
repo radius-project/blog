@@ -37,4 +37,4 @@ We would love for you to join us to help build Radius:
 - Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
 - Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
 
-Generate only the blog content (no frontmatter). Be technical, be specific, avoid fluff.
+Generate only the blog content (no frontmatter). Be technical, be specific, avoid fluff, check for grammatical and spelling mistakes
