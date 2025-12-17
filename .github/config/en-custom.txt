@@ -163,6 +163,7 @@ daprstatestores
 databaseAccounts
 datastore
 de
+dereference
 declaratively
 deployable
 dev
@@ -182,6 +183,7 @@ exe
 extensibility
 failureThreshold
 fileshare
+filipevrevez
 frontend
 fullyQualifiedHostname
 geos
