@@ -20,7 +20,7 @@ A critical fix has been made to the `rad credential show azure` command. Previou
 Upgrading to the latest version is straightforward. First, update your Radius CLI, then run the `rad upgrade kubernetes` command. Note that only incremental version upgrades are supported, so ensure you’re upgrading from the previous version. For detailed instructions, consult the [upgrade documentation](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/). 
 
 ## New contributors 
-We’re thrilled to welcome new contributors to the Radius community! A special thanks to @filipevrevez for their first contribution in [PR #10749](https://github.com/radius-project/radius/pull/10749). Your contributions help make Radius better for everyone. 
+We’re thrilled to welcome new contributors to the Radius community! A special thanks to **@filipevrevez** for their first contribution in [PR #10749](https://github.com/radius-project/radius/pull/10749). Your contributions help make Radius better for everyone. 
 
 ## Learn More and Get Involved 
 We would love for you to join us to help build Radius: 
