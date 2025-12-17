@@ -31,7 +31,7 @@ REQUIRED CLOSING SECTION (copy exactly):
 
 We would love for you to join us to help build Radius:
 
-- Try the [Radius Tutorial](https://docs.radapp.io/tutorials/new-app/)
+- Try the [Radius Tutorial](https://docs.radapp.io/tutorials/)
 - Checkout the Radius roadmap and influence future features at [https://aka.ms/radius-roadmap](https://aka.ms/radius-roadmap)
 - Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
 - Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
