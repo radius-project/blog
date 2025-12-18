@@ -14,7 +14,7 @@ If you’re new to Radius, it’s a cloud-native application platform designed t
 The `rad workspace show` command has been updated to improve usability. Previously, if no workspace was set, the command would return an error, which could be confusing. With this release, the command now logs an informational message to guide you when no current workspace exists. This change ensures a more user-friendly experience when managing workspaces. For more details, refer to the [CLI documentation](https://docs.radapp.io/reference/cli/rad_workspace_show/). 
 
 ## Fixed `rad credential show azure` command 
-A critical fix has been made to the `rad credential show azure` command. Previously, this command would fail with a nil pointer dereference error when attempting to display Azure Service Principal credentials. This issue has been resolved, and the command now correctly displays the Azure credentials you’ve configured for Radius. 
+A fix has been made to the `rad credential show azure` command. Previously, this command would fail with a runtime error: invalid memory address when attempting to display Azure Service Principal credentials. This issue has been resolved, and the command now correctly displays the Azure credentials you’ve configured for Radius. 
 
 ## Upgrading to Radius v0.54
 Upgrading to the latest version is straightforward. First, update your Radius CLI, then run the `rad upgrade kubernetes` command. Note that only incremental version upgrades are supported, so ensure you’re upgrading from the previous version. For detailed instructions, consult the [upgrade documentation](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/). 
