@@ -1,12 +1,12 @@
 ---
-date: "2025-12-17"
-title: "Announcing Radius v0.54.0"
-linkTitle: "Radius v0.54.0"
+date: "2025-12-18"
+title: "Announcing Radius v0.54"
+linkTitle: "Radius v0.54"
 author: "Radius Team"
 type: blog
 ---
 
-Today, we’re excited to announce the release of Radius v0.54.0! This update brings several improvements and fixes to enhance your experience with Radius. Whether you’re a developer or platform engineer, this release focuses on making your workflows smoother and more reliable. You can find the full release notes on our [GitHub releases page](https://github.com/radius-project/radius/releases/tag/v0.54.0). 
+Today, we’re excited to announce the release of Radius v0.54. This update brings several improvements and fixes detailed below. You can find the full release notes on our [GitHub releases page](https://github.com/radius-project/radius/releases/tag/v0.54.0). 
 
 If you’re new to Radius, it’s a cloud-native application platform designed to simplify the deployment and management of Applications. To get started, visit our [getting started guide](https://docs.radapp.io/getting-started/) and learn how to install Radius and create your first app.
 
@@ -16,7 +16,7 @@ The `rad workspace show` command has been updated to improve usability. Previous
 ## Fixed `rad credential show azure` command 
 A critical fix has been made to the `rad credential show azure` command. Previously, this command would fail with a nil pointer dereference error when attempting to display Azure Service Principal credentials. This issue has been resolved, and the command now correctly displays the Azure credentials you’ve configured for Radius. 
 
-## Upgrading to Radius v0.54.0 
+## Upgrading to Radius v0.54
 Upgrading to the latest version is straightforward. First, update your Radius CLI, then run the `rad upgrade kubernetes` command. Note that only incremental version upgrades are supported, so ensure you’re upgrading from the previous version. For detailed instructions, consult the [upgrade documentation](https://docs.radapp.io/guides/operations/kubernetes/kubernetes-upgrade/). 
 
 ## New contributors 
