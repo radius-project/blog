@@ -26,8 +26,6 @@ env:
   MAX_WAIT_SECONDS: "600"
   POLL_INTERVAL_SECONDS: "15"
   SWA_CLI_APP_NAME: radius-blog
-  SWA_CLI_APP_LOCATION: "."
-  SWA_CLI_OUTPUT_LOCATION: "."
   PREVIEW_COMMENT_HEADER: swa-preview
   BUILD_OUTPUT_DIR: radblog/public
   BUILD_ARTIFACT_NAME: radblog-public
@@ -160,9 +158,7 @@ jobs:
               "source_repository": "${{ github.repository }}",
               "source_run_id": "${{ github.run_id }}",
               "artifact_name": "${{ env.BUILD_ARTIFACT_NAME }}",
-              "swa_cli_app_name": "${{ env.SWA_CLI_APP_NAME }}",
-              "swa_cli_app_location": "${{ env.SWA_CLI_APP_LOCATION }}",
-              "swa_cli_output_location": "${{ env.SWA_CLI_OUTPUT_LOCATION }}"
+              "swa_cli_app_name": "${{ env.SWA_CLI_APP_NAME }}"
             }
 
       - name: Monitor remote workflow
@@ -243,9 +239,7 @@ jobs:
               "source_repository": "${{ github.repository }}",
               "source_run_id": "${{ github.run_id }}",
               "artifact_name": "${{ env.BUILD_ARTIFACT_NAME }}",
-              "swa_cli_app_name": "${{ env.SWA_CLI_APP_NAME }}",
-              "swa_cli_app_location": "${{ env.SWA_CLI_APP_LOCATION }}",
-              "swa_cli_output_location": "${{ env.SWA_CLI_OUTPUT_LOCATION }}"
+              "swa_cli_app_name": "${{ env.SWA_CLI_APP_NAME }}"
             }
 
       - name: Monitor remote workflow
