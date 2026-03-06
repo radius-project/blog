@@ -34,6 +34,15 @@ env:
   BUILD_ARTIFACT_NAME: radblog-public
 
 jobs:
+  approval:
+    name: Approval
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: ${{ github.event_name != 'merge_group' && github.event.pull_request.user.login != 'dependabot[bot]' && 'pr' || '' }} # this is used to enforce approval requirements in the GitHub UI
+    steps:
+      - name: 👍 Approve
+        run: echo "PR Workflow Approved"
+
   build:
     name: Build
     if: >-
@@ -107,12 +116,20 @@ jobs:
     if: >-
       (github.event_name == 'push' && github.ref == 'refs/heads/main')
         || github.event_name == 'schedule'
-    needs: build
+    needs:
+      - build
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: read
     steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/scripts/monitor-remote-workflow.mjs
+
       - name: Get App Token
         uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: github-app-token
@@ -179,13 +196,22 @@ jobs:
       github.event_name == 'pull_request'
         && github.event.action != 'closed'
         && github.event.pull_request.head.repo.full_name == github.repository
-    needs: build
+    needs:
+      - approval
+      - build
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: read
       pull-requests: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/scripts/monitor-remote-workflow.mjs
+
       - name: Get App Token
         uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: github-app-token
@@ -276,6 +302,13 @@ jobs:
       contents: read
       pull-requests: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/scripts/monitor-remote-workflow.mjs
+
       - name: Get App Token
         uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: github-app-token
