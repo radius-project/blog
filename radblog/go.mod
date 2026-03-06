@@ -1,5 +1,4 @@
-module github.com/me/my-new-site
+module github.com/radius-project/blog
 
-go 1.19
-
+go 1.26
 require github.com/google/docsy v0.6.0 // indirect

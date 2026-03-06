@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - healthy-llama-olive
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -15,46 +16,45 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: blog-swa-${{ github.event.pull_request.number || github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  TARGET_OWNER: azure-octo
+  TARGET_REPO: radius-publisher
+  TARGET_WORKFLOW_FILE: swa.yml
+  MAX_WAIT_SECONDS: "600"
+  POLL_INTERVAL_SECONDS: "15"
+  SWA_CLI_APP_NAME: radius-blog
+  SWA_CLI_APP_LOCATION: "."
+  SWA_CLI_OUTPUT_LOCATION: "."
+  PREVIEW_COMMENT_HEADER: swa-preview
+  BUILD_OUTPUT_DIR: radblog/public
+  BUILD_ARTIFACT_NAME: radblog-public
+
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  build:
+    name: Build
+    if: >-
+      !(github.event_name == 'pull_request'
+        && github.event.action == 'closed')
     runs-on: ubuntu-24.04
-    name: Build and Deploy Job for Static Web App
-    timeout-minutes: 5
+    timeout-minutes: 15
     permissions:
       contents: read
-    env:
-      GOVER: "1.25"
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           submodules: true
           persist-credentials: false
 
-      - name: Setup Go ${{ env.GOVER }}
+      - name: Setup Go
         id: setup-go
         uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.2.0
         with:
-          go-version: ${{ env.GOVER }}
-
-      - name: Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-        with:
-          node-version: 22
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
-        with:
-          hugo-version: 0.102.3
-          extended: true
-
-      - name: Setup Docsy
-        run: |
-          cd radblog
-          sudo npm install -D --save autoprefixer
-          sudo npm install -D --save postcss-cli
-          cd themes/docsy
-          npm install
+          go-version-file: radblog/go.mod
 
       - name: Restore Go Modules Cache
         uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
@@ -63,61 +63,277 @@ jobs:
           path: |
             ~/.cache/go-build
             ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('radius/go.sum') }}
+          key: ${{ runner.os }}-go-${{ hashFiles('radblog/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Build And Deploy Staging Site
-        if: github.event_name == 'pull_request' && github.event.action != 'closed'
-        id: builddeploystaging
-        uses: Azure/static-web-apps-deploy@1a947af9992250f3bc2e68ad0754c0b0c11566c9 # v1
+      - name: Setup Node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version-file: radblog/.node-version
+          cache: npm
+          cache-dependency-path: radblog/package-lock.json
+
+      - name: Install root dependencies
+        working-directory: radblog
+        run: npm ci --ignore-scripts
+
+      - name: Install Docsy dependencies
+        working-directory: radblog/themes/docsy
+        run: npm install --no-fund --no-audit
+
+      - name: Build site
+        working-directory: radblog
+        run: |
+          if [ "${EVENT_NAME}" = 'pull_request' ]; then
+            hugo --buildFuture
+          else
+            hugo
+          fi
         env:
           HUGO_ENV: production
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.SWA_TOKEN }}
-          skip_deploy_on_missing_secrets: true
-          repo_token: ${{ github.token }} # Used for Github integrations (i.e. PR comments)
-          action: upload
-          ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: radblog # App source code path
-          api_location: api # Api source code path - optional
-          app_artifact_location: public # Built app content directory - optional
-          app_build_command: hugo --buildFuture
-          ###### End of Repository/Build Configurations ######
+          EVENT_NAME: ${{ github.event_name }}
 
-      - name: Build And Deploy Live Site
-        if: github.event_name == 'push'
-        id: builddeploylive
-        uses: Azure/static-web-apps-deploy@1a947af9992250f3bc2e68ad0754c0b0c11566c9 # v1
-        env:
-          HUGO_ENV: production
+      - name: Upload build artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
-          azure_static_web_apps_api_token: ${{ secrets.SWA_TOKEN }}
-          skip_deploy_on_missing_secrets: true
-          repo_token: ${{ github.token }} # Used for Github integrations (i.e. PR comments)
-          action: upload
-          ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: radblog # App source code path
-          api_location: api # Api source code path - optional
-          app_artifact_location: public # Built app content directory - optional
-          app_build_command: hugo
-          ###### End of Repository/Build Configurations ######
+          name: ${{ env.BUILD_ARTIFACT_NAME }}
+          path: ${{ env.BUILD_OUTPUT_DIR }}
+          if-no-files-found: error
+          retention-days: 1
 
-  close_pull_request_job:
-    name: Close Pull Request Job
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+  dispatch-production:
+    name: Dispatch Production Deploy
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        || github.event_name == 'schedule'
+    needs: build
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 15
     permissions:
       contents: read
     steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@1a947af9992250f3bc2e68ad0754c0b0c11566c9 # v1
+      - name: Get App Token
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        id: github-app-token
         with:
-          azure_static_web_apps_api_token: ${{ secrets.SWA_TOKEN }}
-          skip_deploy_on_missing_secrets: true
-          action: close
-          app_location: radblog
+          app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
+          private-key: ${{ secrets.RADIUS_PUBLISHER_BOT_PRIVATE_KEY }}
+          permission-metadata: read
+          permission-actions: read
+          permission-contents: write
+          owner: ${{ env.TARGET_OWNER }}
+          repositories: |
+            ${{ env.TARGET_REPO }}
+
+      - name: Capture dispatch start time
+        id: dispatch-start
+        run: |
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "${GITHUB_OUTPUT}"
+
+      - name: Dispatch production deploy
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ steps.github-app-token.outputs.token }}
+          repository: ${{ env.TARGET_OWNER }}/${{ env.TARGET_REPO }}
+          event-type: swa
+          client-payload: |-
+            {
+              "action": "deploy",
+              "environment": "production",
+              "source_repository": "${{ github.repository }}",
+              "source_run_id": "${{ github.run_id }}",
+              "artifact_name": "${{ env.BUILD_ARTIFACT_NAME }}",
+              "swa_cli_app_name": "${{ env.SWA_CLI_APP_NAME }}",
+              "swa_cli_app_location": "${{ env.SWA_CLI_APP_LOCATION }}",
+              "swa_cli_output_location": "${{ env.SWA_CLI_OUTPUT_LOCATION }}"
+            }
+
+      - name: Monitor remote workflow
+        id: monitor
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          github-token: ${{ steps.github-app-token.outputs.token }}
+          script: |
+            const { default: script } = await import(`${process.env.GITHUB_WORKSPACE}/.github/scripts/monitor-remote-workflow.mjs`)
+            await script({github, core})
+        env:
+          INPUT_OWNER: ${{ env.TARGET_OWNER }}
+          INPUT_REPO: ${{ env.TARGET_REPO }}
+          INPUT_WORKFLOW_FILE: ${{ env.TARGET_WORKFLOW_FILE }}
+          INPUT_DISPATCH_STARTED_AT: ${{ steps.dispatch-start.outputs.started_at }}
+          INPUT_MAX_WAIT_SECONDS: ${{ env.MAX_WAIT_SECONDS }}
+          INPUT_POLL_INTERVAL_SECONDS: ${{ env.POLL_INTERVAL_SECONDS }}
+
+      - name: Show failed logs
+        if: failure()
+        run: |
+          gh run view "${RUN_ID}" --repo "${TARGET_OWNER}/${TARGET_REPO}" --log-failed || true
+        env:
+          GH_TOKEN: ${{ steps.github-app-token.outputs.token }}
+          RUN_ID: ${{ steps.monitor.outputs.run_id }}
+
+  dispatch-preview:
+    name: Dispatch Preview Deploy
+    if: >-
+      github.event_name == 'pull_request'
+        && github.event.action != 'closed'
+        && github.event.pull_request.head.repo.full_name == github.repository
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Get App Token
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        id: github-app-token
+        with:
+          app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
+          private-key: ${{ secrets.RADIUS_PUBLISHER_BOT_PRIVATE_KEY }}
+          permission-metadata: read
+          permission-actions: read
+          permission-contents: write
+          owner: ${{ env.TARGET_OWNER }}
+          repositories: |
+            ${{ env.TARGET_REPO }}
+
+      - name: Capture dispatch start time
+        id: dispatch-start
+        run: |
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "${GITHUB_OUTPUT}"
+
+      - name: Dispatch preview deploy
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ steps.github-app-token.outputs.token }}
+          repository: ${{ env.TARGET_OWNER }}/${{ env.TARGET_REPO }}
+          event-type: swa
+          client-payload: |-
+            {
+              "action": "deploy",
+              "environment": "preview",
+              "pr_number": ${{ github.event.pull_request.number }},
+              "source_repository": "${{ github.repository }}",
+              "source_run_id": "${{ github.run_id }}",
+              "artifact_name": "${{ env.BUILD_ARTIFACT_NAME }}",
+              "swa_cli_app_name": "${{ env.SWA_CLI_APP_NAME }}",
+              "swa_cli_app_location": "${{ env.SWA_CLI_APP_LOCATION }}",
+              "swa_cli_output_location": "${{ env.SWA_CLI_OUTPUT_LOCATION }}"
+            }
+
+      - name: Monitor remote workflow
+        id: monitor
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          github-token: ${{ steps.github-app-token.outputs.token }}
+          script: |
+            const { default: script } = await import(`${process.env.GITHUB_WORKSPACE}/.github/scripts/monitor-remote-workflow.mjs`)
+            await script({github, core})
+        env:
+          INPUT_OWNER: ${{ env.TARGET_OWNER }}
+          INPUT_REPO: ${{ env.TARGET_REPO }}
+          INPUT_WORKFLOW_FILE: ${{ env.TARGET_WORKFLOW_FILE }}
+          INPUT_DISPATCH_STARTED_AT: ${{ steps.dispatch-start.outputs.started_at }}
+          INPUT_MAX_WAIT_SECONDS: ${{ env.MAX_WAIT_SECONDS }}
+          INPUT_POLL_INTERVAL_SECONDS: ${{ env.POLL_INTERVAL_SECONDS }}
+
+      - name: Upsert preview PR comment
+        if: success()
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
+        with:
+          header: ${{ env.PREVIEW_COMMENT_HEADER }}
+          skip_unchanged: true
+          message: |
+            ### Static Web App Preview
+
+            | Environment | Deployment |
+            |---|---|
+            | pr-${{ github.event.pull_request.number }} | [View workflow run](${{ steps.monitor.outputs.run_url }}) |
+
+            _Deployed from commit `${{ github.event.pull_request.head.sha }}` via the publisher workflow._
+
+            > Publisher deployments: https://github.com/${{ env.TARGET_OWNER }}/${{ env.TARGET_REPO }}/deployments/preview-pr-${{ github.event.pull_request.number }}
+
+      - name: Show failed logs
+        if: failure()
+        run: |
+          gh run view "${RUN_ID}" --repo "${TARGET_OWNER}/${TARGET_REPO}" --log-failed || true
+        env:
+          GH_TOKEN: ${{ steps.github-app-token.outputs.token }}
+          RUN_ID: ${{ steps.monitor.outputs.run_id }}
+
+  dispatch-cleanup:
+    name: Dispatch Preview Cleanup
+    if: >-
+      github.event_name == 'pull_request'
+        && github.event.action == 'closed'
+        && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Get App Token
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        id: github-app-token
+        with:
+          app-id: ${{ secrets.RADIUS_PUBLISHER_BOT_APP_ID }}
+          private-key: ${{ secrets.RADIUS_PUBLISHER_BOT_PRIVATE_KEY }}
+          permission-metadata: read
+          permission-actions: read
+          permission-contents: write
+          owner: ${{ env.TARGET_OWNER }}
+          repositories: |
+            ${{ env.TARGET_REPO }}
+
+      - name: Delete preview PR comment
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
+        with:
+          header: ${{ env.PREVIEW_COMMENT_HEADER }}
+          delete: true
+
+      - name: Capture dispatch start time
+        id: dispatch-start
+        run: |
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "${GITHUB_OUTPUT}"
+
+      - name: Dispatch preview cleanup
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ steps.github-app-token.outputs.token }}
+          repository: ${{ env.TARGET_OWNER }}/${{ env.TARGET_REPO }}
+          event-type: swa
+          client-payload: |-
+            {
+              "action": "close",
+              "source_repository": "${{ github.repository }}",
+              "pr_number": ${{ github.event.pull_request.number }},
+              "swa_cli_app_name": "${{ env.SWA_CLI_APP_NAME }}"
+            }
+
+      - name: Monitor remote workflow
+        id: monitor
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          github-token: ${{ steps.github-app-token.outputs.token }}
+          script: |
+            const { default: script } = await import(`${process.env.GITHUB_WORKSPACE}/.github/scripts/monitor-remote-workflow.mjs`)
+            await script({github, core})
+        env:
+          INPUT_OWNER: ${{ env.TARGET_OWNER }}
+          INPUT_REPO: ${{ env.TARGET_REPO }}
+          INPUT_WORKFLOW_FILE: ${{ env.TARGET_WORKFLOW_FILE }}
+          INPUT_DISPATCH_STARTED_AT: ${{ steps.dispatch-start.outputs.started_at }}
+          INPUT_MAX_WAIT_SECONDS: ${{ env.MAX_WAIT_SECONDS }}
+          INPUT_POLL_INTERVAL_SECONDS: ${{ env.POLL_INTERVAL_SECONDS }}
+
+      - name: Show failed logs
+        if: failure()
+        run: |
+          gh run view "${RUN_ID}" --repo "${TARGET_OWNER}/${TARGET_REPO}" --log-failed || true
+        env:
+          GH_TOKEN: ${{ steps.github-app-token.outputs.token }}
+          RUN_ID: ${{ steps.monitor.outputs.run_id }}

@@ -1,5 +1,5 @@
 {
-  "name": "radius-blog-hugo",
+  "name": "radius-blog",
   "version": "0.0.1",
   "description": "Blog site for Radius",
   "main": "",
@@ -11,9 +11,16 @@
   "bugs": {
     "url": "https://github.com/radius-project/radius/issues"
   },
-  "homepage": "https://radius.azurewebapp.net",
+  "homepage": "https://blog.radapp.io",
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
-    "postcss-cli": "^10.1.0"
+    "autoprefixer": "^10.4.27",
+    "hugo-extended": "^0.102.3",
+    "postcss": "^8.5.8",
+    "postcss-cli": "^11.0.1"
+  },
+  "scripts": {
+    "dev": "hugo server --buildDrafts",
+    "build": "hugo --minify",
+    "build:preview": "hugo --buildDrafts --buildFuture"
   }
 }
