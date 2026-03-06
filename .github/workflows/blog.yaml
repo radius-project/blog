@@ -273,8 +273,6 @@ jobs:
 
             _Deployed from commit `${{ github.event.pull_request.head.sha }}` via the publisher workflow._
 
-            > Publisher deployments: https://github.com/${{ env.TARGET_OWNER }}/${{ env.TARGET_REPO }}/deployments/preview-pr-${{ github.event.pull_request.number }}
-
       - name: Show failed logs
         if: failure()
         run: |
