@@ -86,9 +86,9 @@ jobs:
         working-directory: radblog
         run: |
           if [ "${EVENT_NAME}" = 'pull_request' ]; then
-            hugo --buildFuture
+            npm run build:preview
           else
-            hugo
+            npm run build
           fi
         env:
           HUGO_ENV: production
