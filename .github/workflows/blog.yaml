@@ -269,7 +269,7 @@ jobs:
 
             | Environment | Deployment |
             |---|---|
-            | pr-${{ github.event.pull_request.number }} | [View workflow run](${{ steps.monitor.outputs.run_url }}) |
+            | pr${{ github.event.pull_request.number }} | [View workflow run](${{ steps.monitor.outputs.run_url }}) |
 
             _Deployed from commit `${{ github.event.pull_request.head.sha }}` via the publisher workflow._
 
