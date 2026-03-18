@@ -1,5 +1,5 @@
 ---
-date: "2026-03-15T08:00:00-08:00"
+date: "2026-03-18T08:00:00-08:00"
 title: "How I Built a Radius Plugin for Headlamp"
 linkTitle: "Radius + Headlamp"
 author: "[Filipe Revez](https://www.github.com/filipevrevez)"
