@@ -12,7 +12,7 @@ As our Radius adoption has grown, so has the need for better visibility into wha
 
 ## Why Headlamp?
 
-[Headlamp](https://headlamp.dev/) is an open-source Kubernetes web UI maintained under [Kubernetes SIGs](https://github.com/kubernetes-sigs/headlamp). It runs [in-cluster](https://headlamp.dev/docs/latest/installation/in-cluster) or as a [desktop app](https://headlamp.dev/docs/latest/installation/desktop), and — most importantly for this project — it has a [plugin system](https://headlamp.dev/docs/latest/development/plugins/) that lets you add custom pages, sidebar entries, and resource views without forking the project. For us at Millennium bcp, Headlamp is our de facto Kubernetes UI, so extending it with Radius views was a natural fit for the platform we're building.
+[Headlamp](https://headlamp.dev/) is an open-source Kubernetes web UI maintained under [Kubernetes SIGs](https://github.com/kubernetes-sigs/headlamp). It runs [in-cluster](https://headlamp.dev/docs/latest/installation/in-cluster) or as a [desktop app](https://headlamp.dev/docs/latest/installation/desktop), and, most importantly for this project, it has a [plugin system](https://headlamp.dev/docs/latest/development/plugins/) that lets you add custom pages, sidebar entries, and resource views without forking the project. For us at Millennium bcp, Headlamp is our de facto Kubernetes UI, so extending it with Radius views was a natural fit for the platform we're building.
 
 ## What the Plugin Does
 
@@ -20,23 +20,23 @@ The plugin adds a "Radius" section to the Headlamp sidebar with several views th
 
 - **Overview Dashboard** — A summary of all Radius resources in the cluster with status breakdowns (succeeded, failed, processing, suspended).
 
-  {{< image src="images/radius_overview.png" alt="screenshot of the Headlamp Radius overview dashboard" width=600 >}}
+  {{< image src="images/radius_overview.png" alt="screenshot of the Headlamp Radius overview dashboard" width="70%" >}}
 
 - **Applications** — Lists all Radius applications, with detail views showing environment configuration, associated resources, and system metadata.
 
-  {{< image src="images/app_detail.png" alt="screenshot of the Headlamp application detail view" width=600 >}}
+  {{< image src="images/app_detail.png" alt="screenshot of the Headlamp application detail view" width="70%" >}}
   
 - **Environments** — Browse Radius environments and their compute configuration.
 
-  {{< image src="images/environments.png" alt="screenshot of the Headlamp environments view" width=600 >}}
+  {{< image src="images/environments.png" alt="screenshot of the Headlamp environments view" width="70%" >}}
 
 - **Resources** — View resources across all Radius providers (`Applications.Core`, `Applications.Datastores`, `Applications.Messaging`, `Applications.Dapr`) with provisioning state indicators.
 
-  {{< image src="images/resources.png" alt="screenshot of the Headlamp resources view" width=600 >}}
+  {{< image src="images/resources.png" alt="screenshot of the Headlamp resources view" width="70%" >}}
   
 - **Resource Types** — Explore the Radius resource types registered in your cluster, including API versions, schemas, and properties.
 
-  {{< image src="images/rt_details.png" alt="screenshot of the Headlamp resource types view" width=600 >}}
+  {{< image src="images/rt_details.png" alt="screenshot of the Headlamp resource types view" width="70%" >}}
 
 Each resource gets a status label that maps Radius provisioning states to Headlamp's built-in visual indicators, making it easy to spot issues at a glance. For a team like ours that manages a large and diverse application portfolio spanning multiple environments, having this unified view has significantly reduced the time we spend tracking down application states and debugging deployment issues.
 
@@ -61,7 +61,7 @@ To use the plugin, you'll need:
 2. [Headlamp](https://headlamp.dev/docs/latest/installation/) installed (in-cluster or desktop).
 3. The Radius plugin installed in Headlamp (available on [Artifact Hub](https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_radius)).
 
-{{< image src="images/headlamp_plugin.png" alt="screenshot of the Headlamp Radius plugin" width=600 >}}
+{{< image src="images/headlamp_plugin.png" alt="screenshot of the Headlamp Radius plugin" width="70%" >}}
 
 You can install the plugin directly from Headlamp's plugin catalog or manually from Artifact Hub. Once installed, you'll see the "Radius" section in the sidebar. From there you can browse apps, environments, resources, and resource types — all from the same UI you use for the rest of your cluster.
 
