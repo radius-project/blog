@@ -1,5 +1,5 @@
 ---
-date: "2026-03-18T08:00:00-08:00"
+date: "2026-03-19T08:00:00-08:00"
 title: "How I Built a Radius Plugin for Headlamp"
 linkTitle: "Radius + Headlamp"
 author: "[Filipe Revez](https://www.github.com/filipevrevez)"
@@ -8,7 +8,7 @@ type: blog
 
 Hi, I'm Filipe Revez, and I work at [Millennium bcp](https://millenniumbcp.pt/), Portugal's largest privately owned bank. As some of you may know, Millennium bcp has been an early adopter of Radius — we wrote about our journey in a [case study](https://blog.radapp.io/posts/2023/12/06/case-study-how-millennium-bcp-leverages-radius/) back in 2023, where we shared how we use Radius to go from 8 days to 8 minutes when deploying applications across environments. We also have a few engineers that actively contribute to the Radius ecosystem. Radius has become a key part of the platform we've built for our development teams, enabling them to focus on their applications while our infrastructure teams manage the underlying resources through [Recipes](https://docs.radapp.io/concepts/recipes/) and [Environments](https://docs.radapp.io/concepts/environments/).
 
-As our Radius adoption has grown, so has the need for better visibility into what's deployed and how it's running. The [rad CLI](https://docs.radapp.io/guides/tooling/rad-cli/overview/) and the [Radius Dashboard](https://docs.radapp.io/guides/tooling/dashboard/overview/) are great for individual developers and Radius-specific workflows, but we wanted a unified web-based experience where our teams could browse Radius applications, environments, and resources alongside their Kubernetes workloads — all in one place. That's why I built a [Radius plugin for Headlamp](https://github.com/headlamp-k8s/plugins/pull/461).
+As our Radius adoption has grown, so has the need for better visibility into what's deployed and how it's running. The [rad CLI](https://docs.radapp.io/guides/tooling/rad-cli/overview/) and the [Radius Dashboard](https://docs.radapp.io/guides/tooling/dashboard/overview/) are great for individual developers and Radius-specific workflows, but we wanted a unified web-based experience where our teams could browse Radius applications, environments, and resources alongside their Kubernetes workloads — all in one place. That's why I built a [Radius plugin for Headlamp](https://github.com/headlamp-k8s/plugins/tree/main/radius). 
 
 ## Why Headlamp?
 
