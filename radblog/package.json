@@ -14,8 +14,8 @@
   "homepage": "https://blog.radapp.io",
   "devDependencies": {
     "autoprefixer": "^10.4.27",
-    "hugo-extended": "^0.102.3",
-    "postcss": "^8.5.8",
+    "hugo-extended": "^0.160.1",
+    "postcss": "^8.5.9",
     "postcss-cli": "^11.0.1"
   },
   "scripts": {
