@@ -612,3 +612,7 @@ RRTs
 SKUs
 sk
 subscriptionId
+Filipe
+Revez
+SIGs
+facto
