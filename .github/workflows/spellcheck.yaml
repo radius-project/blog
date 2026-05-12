@@ -15,10 +15,6 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - main
-    paths:
-      - radblog/**
-      - .github/workflows/spellcheck.yaml
-      - .github/config/**
 
 permissions: {}
 
