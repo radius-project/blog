@@ -79,21 +79,43 @@ jobs:
           cache: npm
           cache-dependency-path: radblog/package-lock.json
 
-      - name: Install root dependencies
+      - name: Install Node.js dependencies
         working-directory: radblog
-        run: npm ci --ignore-scripts
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || npm install"
+
+      - name: Verify installations
+        working-directory: radblog
+        run: |
+          echo "Go: $(go version)"
+          echo "Node.js: $(node --version)"
+          npm run hugo:version
+
+      - name: Restore Hugo cache
+        id: cache-restore
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: ${{ runner.temp }}/hugo_cache
+          key: hugo-${{ github.run_id }}
+          restore-keys: hugo-
 
       - name: Build site
         working-directory: radblog
         run: |
           if [ "${EVENT_NAME}" = 'pull_request' ]; then
-            npm run build:preview
+            npm run build:preview -- --cacheDir "${RUNNER_TEMP}/hugo_cache"
           else
-            npm run build
+            npm run build -- --cacheDir "${RUNNER_TEMP}/hugo_cache"
           fi
         env:
           HUGO_ENV: production
           EVENT_NAME: ${{ github.event_name }}
+          RUNNER_TEMP: ${{ runner.temp }}
+
+      - name: Save Hugo cache
+        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: ${{ runner.temp }}/hugo_cache
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

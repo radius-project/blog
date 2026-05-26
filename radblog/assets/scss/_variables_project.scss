@@ -1,6 +1,10 @@
 $info: #b89112;
 $primary: #c43821;
 
+// Docsy v0.15 changed the navbar default background to the body color.
+// Restore the previous primary-colored navbar.
+$td-navbar-bg-color: $primary;
+
 input[type="text"] {
     width: 75%;
     padding: 12px 20px;

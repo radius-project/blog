@@ -18,14 +18,14 @@ The [radblog](./radblog) directory contains the hugo project, markdown files, an
 1. Ensure pre-requisites are installed
 1. Clone repository
 1. Change to radblog directory: `cd radblog`
-1. Add Docsy submodule: `git submodule add https://github.com/google/docsy.git themes/docsy`
-1. Update submodules: `git submodule update --init --recursive`
 1. Install npm packages: `npm install`
+
+The Docsy theme is pulled in automatically via [Hugo Modules](https://gohugo.io/hugo-modules/) on first build — no git submodule setup required.
 
 ## Run local server
 
 1. Make sure you're still in the radblog directory
-1. Run `hugo server --disableFastRender`
+1. Run `npm run start:drafts` (or `npm run start` to exclude drafts)
 1. Navigate to `http://localhost:1313/posts`
 
 ## Contributing Blog Posts

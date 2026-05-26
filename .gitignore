@@ -22,3 +22,6 @@ bin/
 
 # Pyspelling
 dictionary.dic
+
+# Hugo Modules vendor directory
+radblog/_vendor/

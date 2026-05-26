@@ -2,6 +2,12 @@
     display: none;
 }
 
+// Docsy v0.15 zeroed the navbar horizontal padding (--bs-navbar-padding-x: 0),
+// which makes the logo sit flush against the left edge. Restore previous spacing.
+.td-navbar {
+    padding: 0.5rem 1rem;
+}
+
 .btn-success {
     background: #3176d9;
     background-color: #3176d9;
