@@ -1,6 +1,6 @@
-# Radius blog 
+# Radius blog
 
-The Radius blog is a place to share the latest news, updates, features, customer stories, and more about the Radius project. This repository contains the markdown files which generate the Radius blog site at https://blog.radapp.io/. Head over there to read the blog and learn more about the latest Radius news! Read on to get up and running with a local environment to contribute to the blog.
+The Radius blog is a place to share the latest news, updates, features, customer stories, and more about the Radius project. This repository contains the markdown files which generate the Radius blog site at <https://blog.radapp.io/>. Head over there to read the blog and learn more about the latest Radius news! Read on to get up and running with a local environment to contribute to the blog.
 
 ## Overview
 
@@ -31,4 +31,3 @@ The Docsy theme is pulled in automatically via [Hugo Modules](https://gohugo.io/
 ## Contributing Blog Posts
 
 Follow the [Contribution Guide](./radblog/guide/contribution-guide.md) for more details on writing and formatting blog posts.
-
