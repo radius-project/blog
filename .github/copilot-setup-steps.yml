@@ -1,0 +1,12 @@
+# Copilot Coding Agent Setup Steps
+# This configures the environment for the Copilot coding agent when assigned to issues.
+
+steps:
+  - name: Install GitHub CLI extensions
+    run: |
+      gh extension install github/gh-models || true
+
+  - name: Verify tools
+    run: |
+      gh --version
+      jq --version
