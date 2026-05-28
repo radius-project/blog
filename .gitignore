@@ -19,6 +19,3 @@ bin/
 
 *.DS_Store
 .vscode/
-
-# Pyspelling
-dictionary.dic
