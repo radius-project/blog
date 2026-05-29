@@ -42,10 +42,6 @@ Previously, CLI commands like `rad app list` and `rad app graph` only worked wit
 - **`rad app show/list/delete --preview`** — List, inspect, and delete applications created with the `Radius.Core/applications` type. ([#11935](https://github.com/radius-project/radius/pull/11935))
 - **`rad workspace create --preview`** — Create workspaces that use `Radius.Core/environments`, so you can pair them with the new resource types. ([#11905](https://github.com/radius-project/radius/pull/11905))
 
-#### MySQL recipe support
-
-- **MySQL added to the default recipe pack** — [Recipes](https://docs.radapp.io/guides/recipes/overview/) are operator-defined templates that automate infrastructure provisioning. With this release, developers can add a MySQL database to their application with a single line in their app definition, and Radius handles provisioning the database according to your organization's standards. Previously, only Redis, MongoDB, and other data stores were available out of the box. ([#11913](https://github.com/radius-project/radius/pull/11913))
-
 #### Automated resource type registration
 
 - **Resource types are now automatically registered on install** — Radius uses [resource types](https://docs.radapp.io/guides/operations/resource-types/) to understand what kinds of infrastructure your app can use (e.g., containers, databases, message queues). Previously, operators had to manually register each type. Now, all default resource types from the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository are registered automatically when you install Radius, so you can start deploying immediately. ([#11911](https://github.com/radius-project/radius/pull/11911))
