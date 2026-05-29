@@ -77,7 +77,7 @@ Thank you for your contributions! 🎉
 
 ## Community spotlight
 
-We'd like to highlight [rios.engineer's write-up on Project Radius](https://rios.engineer/project-radius/), which walks through setting up Radius from scratch and deploying a sample application. If you're evaluating Radius for your team, this is a great real-world perspective on what the onboarding experience looks like. Thank you for sharing your journey with the community!
+We'd like to highlight [Dan Rios's write-up on Project Radius](https://rios.engineer/project-radius/). Dan is a Microsoft MVP who walks through setting up Radius from scratch and deploying a sample application. If you're evaluating Radius for your team, this is a great real-world perspective on what the onboarding experience looks like. Thank you, Dan, for sharing your journey with the community!
 
 ## Get involved
 
