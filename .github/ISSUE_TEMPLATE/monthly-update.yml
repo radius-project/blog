@@ -1,0 +1,36 @@
+name: Monthly Community Update
+description: Generate a monthly community update blog post summarizing activity across all radius-project repos
+title: "Generate monthly community update for [MONTH YEAR]"
+labels: ["blog", "copilot"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue triggers the Copilot coding agent to generate a monthly community update blog post.
+        Simply fill in the month and submit — Copilot will gather data and open a PR.
+  - type: input
+    id: month
+    attributes:
+      label: Report month
+      description: "The month to report on (e.g., May 2026)"
+      placeholder: "May 2026"
+    validations:
+      required: true
+  - type: input
+    id: date-range
+    attributes:
+      label: Date range
+      description: "Start and end dates for data collection (YYYY-MM-DD to YYYY-MM-DD)"
+      placeholder: "2026-05-01 to 2026-05-31"
+    validations:
+      required: true
+  - type: textarea
+    id: highlights
+    attributes:
+      label: Additional highlights (optional)
+      description: "Any specific items you'd like called out in the update (e.g., community events, milestones)"
+      placeholder: "e.g., Radius turned 2 years old this month"
+    validations:
+      required: false
