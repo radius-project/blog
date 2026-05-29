@@ -1,8 +1,8 @@
 ---
-date: "2026-05-29T08:00:00-08:00"
+date: "2026-06-01T08:00:00-08:00"
 title: "Radius Community Update: May 2026"
 linkTitle: "Community Update May 2026"
-author: "Radius Community"
+author: "Radius Maintainers"
 type: blog
 ---
 
@@ -32,9 +32,11 @@ This is the latest major release of Radius. Here are the highlights and what the
 
 - **Breaking change to `rad init`:** The `rad init` command no longer creates a `.rad/rad.yaml` file to track your current application. This simplifies project setup and avoids confusion in multi-app repositories. If you previously relied on implicit app detection, you'll now pass `--application <name>` to commands like `rad deploy`. This makes it explicit which application you're targeting, reducing accidental deployments to the wrong app.
 
-#### CLI support for the new Radius.Core resource types
+#### Radius Resource Types for Compute platform extensibility
 
-Radius is introducing a new set of resource types under the `Radius.Core` namespace (e.g., `Radius.Core/applications`, `Radius.Core/environments`) that will eventually replace the existing `Applications.Core` types. These new types are available via the `v20250801preview` API surface and represent the next generation of Radius's resource model.
+>Note: the new Radius.Core resource types are actively under development and only available now as an early preview.
+
+**CLI support for the new Radius.Core Resource Types** - Radius is introducing a new set of Resource Types under the `Radius.Core` namespace (e.g., `Radius.Core/applications`, `Radius.Core/environments`) that will eventually replace the existing `Applications.Core` types. These new types are available via the `v20250801preview` API surface and represent the next generation of Radius's resource model.
 
 Previously, CLI commands like `rad app list` and `rad app graph` only worked with the older `Applications.Core/applications` type — meaning applications deployed using the new `Radius.Core/applications` type were invisible to the CLI. The new `--preview` flag fixes this by directing commands to operate against `Radius.Core` resources:
 
@@ -42,9 +44,7 @@ Previously, CLI commands like `rad app list` and `rad app graph` only worked wit
 - **`rad app show/list/delete --preview`** — List, inspect, and delete applications created with the `Radius.Core/applications` type. ([#11935](https://github.com/radius-project/radius/pull/11935))
 - **`rad workspace create --preview`** — Create workspaces that use `Radius.Core/environments`, so you can pair them with the new resource types. ([#11905](https://github.com/radius-project/radius/pull/11905))
 
-#### Automated resource type registration
-
-- **Resource Types are now automatically registered on install** — Radius [Resource Types](https://docs.radapp.io/concepts/resource-types/) defines the resources your applications can use (e.g., containers, databases, message queues). Previously, operators had to manually register each type. Now, all default resource types from the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository are registered automatically when you install Radius, so you can start deploying immediately. ([#11911](https://github.com/radius-project/radius/pull/11911))
+**Automated resource type registration** - Radius [Resource Types](https://docs.radapp.io/concepts/resource-types/) defines the resources your applications can use (e.g., containers, databases, message queues). Previously, operators had to manually register each type. Now, all default resource types from the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository are registered automatically when you install Radius, so you can start deploying immediately with Recipes linked to the types. ([#11911](https://github.com/radius-project/radius/pull/11911))
 
 #### Additional improvements
 
@@ -75,3 +75,4 @@ Whether you're a developer looking to simplify cloud deployments or a platform e
 - **Shape the future:** Check out the [Radius roadmap](https://aka.ms/radius-roadmap) and vote on features that matter to you
 - **Join the conversation:** Ask questions and share ideas on the [Radius Discord server](https://aka.ms/radius/discord)
 - **Stay updated:** Join our monthly community meeting (sign up via the [Radius Google Group](https://groups.google.com/g/radapp_io)) or subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io)
+- **Stuck on something:** Raise an issue in the [Radius respository](https://github.com/radius-project/radius/issues/new/choose)
