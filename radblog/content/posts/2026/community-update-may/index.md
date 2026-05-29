@@ -32,13 +32,15 @@ This is the latest major release of Radius. Here are the highlights and what the
 
 - **Breaking change to `rad init`:** The `rad init` command no longer creates a `.rad/rad.yaml` file to track your current application. This simplifies project setup and avoids confusion in multi-app repositories. If you previously relied on implicit app detection, you'll now pass `--application <name>` to commands like `rad deploy`. This makes it explicit which application you're targeting, reducing accidental deployments to the wrong app.
 
-#### Preview deployments — validate before you deploy
+#### CLI support for the new Radius.Core resource types
 
-Radius now supports *preview mode*, which lets you see what your deployment would look like without actually creating any resources. This is useful for catching configuration mistakes, reviewing the application graph with your team, or integrating into CI/CD pipelines as a validation step.
+Radius is introducing a new set of resource types under the `Radius.Core` namespace (e.g., `Radius.Core/applications`, `Radius.Core/environments`) that will eventually replace the existing `Applications.Core` types. These new types are available via the `v20250801preview` API surface and represent the next generation of Radius's resource model.
 
-- **`rad app graph --preview` and `rad app status --preview`** — Visualize how your application's components connect to each other and check their status, all before committing to a real deployment. ([#11983](https://github.com/radius-project/radius/pull/11983))
-- **`rad app show/list/delete --preview`** — Manage preview applications: inspect, list, or clean up preview deployments. ([#11935](https://github.com/radius-project/radius/pull/11935))
-- **`rad workspace create --preview`** — Create workspaces dedicated to previewing deployments, keeping them separate from your production environments. ([#11905](https://github.com/radius-project/radius/pull/11905))
+Previously, CLI commands like `rad app list` and `rad app graph` only worked with the older `Applications.Core/applications` type — meaning applications deployed using the new `Radius.Core/applications` type were invisible to the CLI. The new `--preview` flag fixes this by directing commands to operate against `Radius.Core` resources:
+
+- **`rad app graph --preview` and `rad app status --preview`** — View the application graph and check status for apps deployed as `Radius.Core/applications`. ([#11983](https://github.com/radius-project/radius/pull/11983))
+- **`rad app show/list/delete --preview`** — List, inspect, and delete applications created with the `Radius.Core/applications` type. ([#11935](https://github.com/radius-project/radius/pull/11935))
+- **`rad workspace create --preview`** — Create workspaces that use `Radius.Core/environments`, so you can pair them with the new resource types. ([#11905](https://github.com/radius-project/radius/pull/11905))
 
 #### MySQL recipe support
 
