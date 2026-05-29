@@ -48,22 +48,10 @@ Previously, CLI commands like `rad app list` and `rad app graph` only worked wit
 
 #### Additional improvements
 
-- **Multi-file merge for manifest-to-bicep generation** — When converting resource type manifests into Bicep type definitions, Radius now merges multiple manifest files into a single coherent output, making it easier for resource type authors to organize their definitions across files. ([#11914](https://github.com/radius-project/radius/pull/11914))
-- **Radius.Core schemas hydrated from OpenAPI** — Internal type definitions now derive from the OpenAPI specification, improving consistency between the API and the type system. ([#11881](https://github.com/radius-project/radius/pull/11881))
 - **Fixed Helm chart Terraform binary path** — Users mounting a custom Terraform binary via Helm values can now rely on the correct path being used at runtime. ([#11880](https://github.com/radius-project/radius/pull/11880))
 - **Fixed `rad resource-type list` showing incomplete results** — All registered resource types now appear correctly when listing available types. ([#11933](https://github.com/radius-project/radius/pull/11933))
-- **Controller-runtime v0.24 upgrade** — Keeps Radius current with the latest Kubernetes controller framework, improving performance and maintainability. ([#11861](https://github.com/radius-project/radius/pull/11861))
 
 For full details, see the [v0.58.0 release notes](https://github.com/radius-project/radius/releases/tag/v0.58.0).
-
-## Across the project
-
-Activity spanned multiple repositories this month:
-
-- **[resource-types-contrib](https://github.com/radius-project/resource-types-contrib)**: Fixed environment ID formatting in the deploy-recipe-pack and added Azure validation checks to catch issues earlier in pull requests.
-- **[docs](https://github.com/radius-project/docs)**: Migrated to cspell for more accurate spell checking and updated CLI reference docs to reflect all new commands and flags.
-- **[dashboard](https://github.com/radius-project/dashboard)**: Fixed Docker configuration to improve the local development experience for contributors.
-- **[blog](https://github.com/radius-project/blog)**: Migrated to cspell for consistent spell checking across the blog content.
 
 ## New contributors
 
