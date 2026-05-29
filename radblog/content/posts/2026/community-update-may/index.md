@@ -6,36 +6,55 @@ author: "Radius Community"
 type: blog
 ---
 
-Welcome to the May 2026 Radius community update! This month was packed with two releases, new features, important fixes, and exciting community contributions. Here's a summary of what happened across the Radius project.
+Welcome to the May 2026 Radius community update! [Radius](https://radapp.io/) is an open-source cloud-native application platform that helps developers define, deploy, and manage applications across any cloud or on-premises environment. It acts as an abstraction layer between your application and your infrastructure, letting you focus on building your app while platform teams maintain control over how resources are provisioned.
+
+This month brought two releases, a significantly improved getting-started experience, and a new preview feature that lets you validate deployments before they go live.
 
 ## Releases
 
-### Radius v0.57.1 (patch release)
+### Radius v0.57.1 (patch release — May 12)
 
-Released on May 12, this patch release addressed several critical issues:
+This patch release ensures stability for users on v0.57.0 by pinning key dependencies to known-good versions:
 
-- Pinned the Deployment Engine image to `0.56` to work around a bug in Deployment Engine `0.57.0`
-- Pinned the Bicep CLI to `v0.42.1` to work around a breaking change in Bicep `v0.43+` that rejects local registry targets
-- Pinned the Terraform version to avoid surprise breaking changes
+- **Deployment Engine pinned to v0.56** — A bug in the v0.57.0 engine could cause deployment failures; this pin ensures your deployments continue to succeed reliably.
+- **Bicep CLI pinned to v0.42.1** — A breaking change in Bicep v0.43+ rejected local registry targets, which prevented users from using local Bicep registries for storing and sharing infrastructure templates.
+- **Terraform version pinned** — Prevents unexpected behavior from upstream Terraform changes affecting your infrastructure provisioning.
 
 For full details, see the [v0.57.1 release notes](https://github.com/radius-project/radius/releases/tag/v0.57.1).
 
-### Radius v0.58.0
+### Radius v0.58.0 (May 26)
 
-Released on May 26, this is the latest major release of Radius. Key highlights include:
+This is the latest major release of Radius. Here are the highlights and what they mean for you:
 
-- **Breaking change:** `rad init` no longer creates `.rad/rad.yaml`, and the rad CLI no longer uses `.rad/rad.yaml` to implicitly determine the current application. Commands that previously relied on this file may now require the `--application <name>` flag or a positional argument.
-- **New `--preview` flag for `rad app graph` and `rad app status`** — Preview your application graph and status before deployment ([#11983](https://github.com/radius-project/radius/pull/11983))
-- **`rad app show/list/delete --preview`** — Manage preview applications with the rad CLI ([#11935](https://github.com/radius-project/radius/pull/11935))
-- **`rad workspace create --preview`** — Create preview workspaces ([#11905](https://github.com/radius-project/radius/pull/11905))
-- **`rad install` now creates default resource group and environment** — Streamlined setup experience ([#11870](https://github.com/radius-project/radius/pull/11870))
-- **Hydrate Radius.Core schemas from OpenAPI** — Improved type system alignment ([#11881](https://github.com/radius-project/radius/pull/11881))
-- **Fix Helm chart pre-mounted Terraform binary path mismatch** ([#11880](https://github.com/radius-project/radius/pull/11880))
-- **Fix resource types missing from `rad resource-type list`** with per-type manifest files ([#11933](https://github.com/radius-project/radius/pull/11933))
-- **MySQL type added to default recipe pack** ([#11913](https://github.com/radius-project/radius/pull/11913))
-- **Automated default resource type registration** from resource-types-contrib ([#11911](https://github.com/radius-project/radius/pull/11911))
-- **Multi-file merge support for manifest-to-bicep generate command** ([#11914](https://github.com/radius-project/radius/pull/11914))
-- **Controller-runtime v0.24 upgrade** and scheme.Builder deprecation migration ([#11861](https://github.com/radius-project/radius/pull/11861))
+#### Faster getting started
+
+- **`rad install` now automatically creates a default resource group and environment** — Previously, after installing Radius you had to manually run additional commands to set up a resource group (a logical container for your app resources) and an environment (the target where your app runs). Now installation takes you straight to a ready-to-deploy state. ([#11870](https://github.com/radius-project/radius/pull/11870))
+
+- **Breaking change to `rad init`:** The `rad init` command no longer creates a `.rad/rad.yaml` file to track your current application. This simplifies project setup and avoids confusion in multi-app repositories. If you previously relied on implicit app detection, you'll now pass `--application <name>` to commands like `rad deploy`. This makes it explicit which application you're targeting, reducing accidental deployments to the wrong app.
+
+#### Preview deployments — validate before you deploy
+
+Radius now supports *preview mode*, which lets you see what your deployment would look like without actually creating any resources. This is useful for catching configuration mistakes, reviewing the application graph with your team, or integrating into CI/CD pipelines as a validation step.
+
+- **`rad app graph --preview` and `rad app status --preview`** — Visualize how your application's components connect to each other and check their status, all before committing to a real deployment. ([#11983](https://github.com/radius-project/radius/pull/11983))
+- **`rad app show/list/delete --preview`** — Manage preview applications: inspect, list, or clean up preview deployments. ([#11935](https://github.com/radius-project/radius/pull/11935))
+- **`rad workspace create --preview`** — Create workspaces dedicated to previewing deployments, keeping them separate from your production environments. ([#11905](https://github.com/radius-project/radius/pull/11905))
+
+#### MySQL recipe support
+
+- **MySQL added to the default recipe pack** — [Recipes](https://docs.radapp.io/guides/recipes/overview/) are operator-defined templates that automate infrastructure provisioning. With this release, developers can add a MySQL database to their application with a single line in their app definition, and Radius handles provisioning the database according to your organization's standards. Previously, only Redis, MongoDB, and other data stores were available out of the box. ([#11913](https://github.com/radius-project/radius/pull/11913))
+
+#### Automated resource type registration
+
+- **Resource types are now automatically registered on install** — Radius uses [resource types](https://docs.radapp.io/guides/operations/resource-types/) to understand what kinds of infrastructure your app can use (e.g., containers, databases, message queues). Previously, operators had to manually register each type. Now, all default resource types from the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository are registered automatically when you install Radius, so you can start deploying immediately. ([#11911](https://github.com/radius-project/radius/pull/11911))
+
+#### Additional improvements
+
+- **Multi-file merge for manifest-to-bicep generation** — When converting resource type manifests into Bicep type definitions, Radius now merges multiple manifest files into a single coherent output, making it easier for resource type authors to organize their definitions across files. ([#11914](https://github.com/radius-project/radius/pull/11914))
+- **Radius.Core schemas hydrated from OpenAPI** — Internal type definitions now derive from the OpenAPI specification, improving consistency between the API and the type system. ([#11881](https://github.com/radius-project/radius/pull/11881))
+- **Fixed Helm chart Terraform binary path** — Users mounting a custom Terraform binary via Helm values can now rely on the correct path being used at runtime. ([#11880](https://github.com/radius-project/radius/pull/11880))
+- **Fixed `rad resource-type list` showing incomplete results** — All registered resource types now appear correctly when listing available types. ([#11933](https://github.com/radius-project/radius/pull/11933))
+- **Controller-runtime v0.24 upgrade** — Keeps Radius current with the latest Kubernetes controller framework, improving performance and maintainability. ([#11861](https://github.com/radius-project/radius/pull/11861))
 
 For full details, see the [v0.58.0 release notes](https://github.com/radius-project/radius/releases/tag/v0.58.0).
 
@@ -43,10 +62,10 @@ For full details, see the [v0.58.0 release notes](https://github.com/radius-proj
 
 Activity spanned multiple repositories this month:
 
-- **radius-project/resource-types-contrib**: Fixed fully qualified environment IDs in deploy-recipe-pack and improved Azure validation checks for PRs
-- **radius-project/docs**: Migrated to cspell for spell checking and updated auto-generated CLI documentation to reflect new commands
-- **radius-project/dashboard**: Fixed Docker configuration for development environments
-- **radius-project/blog**: Published the [Headlamp plugin blog post](https://blog.radapp.io/posts/2026/03/19/how-i-built-a-radius-plugin-for-headlamp/) and migrated to cspell
+- **[resource-types-contrib](https://github.com/radius-project/resource-types-contrib)**: Fixed environment ID formatting in the deploy-recipe-pack and added Azure validation checks to catch issues earlier in pull requests.
+- **[docs](https://github.com/radius-project/docs)**: Migrated to cspell for more accurate spell checking and updated CLI reference docs to reflect all new commands and flags.
+- **[dashboard](https://github.com/radius-project/dashboard)**: Fixed Docker configuration to improve the local development experience for contributors.
+- **[blog](https://github.com/radius-project/blog)**: Published the [Headlamp plugin blog post](https://blog.radapp.io/posts/2026/03/19/how-i-built-a-radius-plugin-for-headlamp/) (a guide to building a Kubernetes UI plugin for Radius) and migrated to cspell.
 
 ## New contributors
 
@@ -60,14 +79,13 @@ Thank you for your contributions! 🎉
 
 ## Community spotlight
 
-We'd like to highlight a community member contribution by [rios.engineer](https://rios.engineer/project-radius/) who wrote about their experience with Project Radius. Community-authored content like this helps spread awareness and provides real-world perspectives on using Radius. Thank you for sharing your journey with the community!
+We'd like to highlight [rios.engineer's write-up on Project Radius](https://rios.engineer/project-radius/), which walks through setting up Radius from scratch and deploying a sample application. If you're evaluating Radius for your team, this is a great real-world perspective on what the onboarding experience looks like. Thank you for sharing your journey with the community!
 
 ## Get involved
 
-We would love for you to join us to help build Radius:
+Whether you're a developer looking to simplify cloud deployments or a platform engineer building golden paths for your team, we'd love to have you join the Radius community:
 
-- Try the [Radius Tutorial](https://docs.radapp.io/tutorials/)
-- Check out the Radius roadmap and influence future features at [https://aka.ms/radius-roadmap](https://aka.ms/radius-roadmap)
-- Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
-- Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
-- Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
+- **Get started:** Follow the [Radius Tutorial](https://docs.radapp.io/tutorials/) to deploy your first app in minutes
+- **Shape the future:** Check out the [Radius roadmap](https://aka.ms/radius-roadmap) and vote on features that matter to you
+- **Join the conversation:** Ask questions and share ideas on the [Radius Discord server](https://aka.ms/radius/discord)
+- **Stay updated:** Join our monthly community meeting (sign up via the [Radius Google Group](https://groups.google.com/g/radapp_io)) or subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io)
