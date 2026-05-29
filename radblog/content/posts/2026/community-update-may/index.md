@@ -44,7 +44,7 @@ Previously, CLI commands like `rad app list` and `rad app graph` only worked wit
 
 #### Automated resource type registration
 
-- **Resource types are now automatically registered on install** — Radius uses [resource types](https://docs.radapp.io/guides/operations/resource-types/) to understand what kinds of infrastructure your app can use (e.g., containers, databases, message queues). Previously, operators had to manually register each type. Now, all default resource types from the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository are registered automatically when you install Radius, so you can start deploying immediately. ([#11911](https://github.com/radius-project/radius/pull/11911))
+- **Resource Types are now automatically registered on install** — Radius [Resource Types](https://docs.radapp.io/concepts/resource-types/) defines the resources your applications can use (e.g., containers, databases, message queues). Previously, operators had to manually register each type. Now, all default resource types from the [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository are registered automatically when you install Radius, so you can start deploying immediately. ([#11911](https://github.com/radius-project/radius/pull/11911))
 
 #### Additional improvements
 
