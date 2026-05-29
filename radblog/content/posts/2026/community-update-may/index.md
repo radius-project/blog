@@ -65,7 +65,7 @@ Activity spanned multiple repositories this month:
 - **[resource-types-contrib](https://github.com/radius-project/resource-types-contrib)**: Fixed environment ID formatting in the deploy-recipe-pack and added Azure validation checks to catch issues earlier in pull requests.
 - **[docs](https://github.com/radius-project/docs)**: Migrated to cspell for more accurate spell checking and updated CLI reference docs to reflect all new commands and flags.
 - **[dashboard](https://github.com/radius-project/dashboard)**: Fixed Docker configuration to improve the local development experience for contributors.
-- **[blog](https://github.com/radius-project/blog)**: Published the [Headlamp plugin blog post](https://blog.radapp.io/posts/2026/03/19/how-i-built-a-radius-plugin-for-headlamp/) (a guide to building a Kubernetes UI plugin for Radius) and migrated to cspell.
+- **[blog](https://github.com/radius-project/blog)**: Migrated to cspell for consistent spell checking across the blog content.
 
 ## New contributors
 
