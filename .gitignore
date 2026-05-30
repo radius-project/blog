@@ -19,3 +19,6 @@ bin/
 
 *.DS_Store
 .vscode/
+
+# Hugo Modules vendor directory
+radblog/_vendor/
