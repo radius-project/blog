@@ -20,8 +20,5 @@ bin/
 *.DS_Store
 .vscode/
 
-# Pyspelling
-dictionary.dic
-
 # Hugo Modules vendor directory
 radblog/_vendor/
