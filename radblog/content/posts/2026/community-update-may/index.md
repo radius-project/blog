@@ -8,7 +8,7 @@ type: blog
 
 Welcome to the May 2026 Radius community update! [Radius](https://radapp.io/) is an open-source cloud-native application platform that helps developers define, deploy, and manage applications across any cloud or on-premises environment. It acts as an abstraction layer between your application and your infrastructure, letting you focus on building your app while platform teams maintain control over how resources are provisioned.
 
-This month brought two releases, a significantly improved getting-started experience, and a new preview feature that lets you validate deployments before they go live.
+This month brought two releases, a streamlined getting-started experience, early CLI support for the next-generation `Radius.Core` resource types, and automated resource type registration on install.
 
 ## Releases
 
