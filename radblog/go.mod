@@ -1,5 +1,5 @@
 module github.com/radius-project/blog
 
-go 1.26.1
+go 1.26.3
 
-require github.com/google/docsy v0.6.0 // indirect
+require github.com/google/docsy v0.15.0 // indirect

@@ -2,7 +2,30 @@
 baseURL = "https://blog.radapp.io"
 languageCode = "en-us"
 title = "Radius Blog"
-theme = "docsy"
+
+# Hugo Modules: pull Docsy from upstream instead of vendoring under themes/.
+[module]
+proxy = "direct"
+[module.hugoVersion]
+extended = true
+min = "0.157.0"
+[[module.imports]]
+path = "github.com/google/docsy"
+[[module.mounts]]
+source = "content"
+target = "content"
+[[module.mounts]]
+source = "static"
+target = "static"
+[[module.mounts]]
+source = "layouts"
+target = "layouts"
+[[module.mounts]]
+source = "assets"
+target = "assets"
+[[module.mounts]]
+source = "archetypes"
+target = "archetypes"
 
 # Configure how URLs look like per section.
 [permalinks]
@@ -13,6 +36,7 @@ posts = "/:section/:year/:month/:day/:slug/"
 id = "G-SZ71KL0YSK"
 
 enableGitInfo = true
+disableFastRender = true
 
 # Allow embedded HTML in pages
 [markup]
@@ -51,9 +75,6 @@ ul_show = 1
 navbar_logo = true
 
 copyright = "Radius"
-
-# Algolia Search
-algolia_docsearch = true
 
 # GitHub Information
 github_repo = "https://github.com/radius-project/blog"
