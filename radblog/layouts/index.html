@@ -1,4 +1,4 @@
-{{ define "main" -}}
+{{- define "main" -}}
 {{ $.Scratch.Set "blog-pages" (where .Site.RegularPages "Section" "posts") -}}
 
 {{ if ($.Scratch.Get "blog-pages") -}}
