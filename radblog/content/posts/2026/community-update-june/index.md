@@ -52,22 +52,40 @@ For full details, see the [v0.59.0 release notes](https://github.com/radius-proj
 
 The following work merged to `main` after the v0.59.0 release and is not yet part of a published release. It offers a preview of what is coming next.
 
-- **Multi-cluster deployment** — A design and first implementation for deploying Applications across multiple Kubernetes clusters landed, laying groundwork for spreading workloads beyond a single cluster. ([#12106](https://github.com/radius-project/radius/pull/12106))
-- **Simpler Resource Type schemas** — Contributors removed the need to add Radius properties into every Resource Type schema explicitly, reducing boilerplate when authoring new Resource Types. ([#12223](https://github.com/radius-project/radius/pull/12223), [#12252](https://github.com/radius-project/radius/pull/12252))
-- **Direct module support for Recipes** — Follow-up implementation work allows Recipes to reference modules directly. ([#12109](https://github.com/radius-project/radius/pull/12109))
-- **Optional NetworkPolicy for the control plane** — A new Helm install flag installs a NetworkPolicy for the Radius control plane, giving operators tighter network isolation. ([#12208](https://github.com/radius-project/radius/pull/12208))
-- **`RADIUS_PREVIEW` environment variable** — You can now enable preview behavior through the `RADIUS_PREVIEW` environment variable in addition to the `--preview` flag. ([#12160](https://github.com/radius-project/radius/pull/12160))
-- **Clearer errors for unregistered Resource Types** — Deployment errors for unregistered Resource Types now explain what went wrong and how to fix it. ([#12183](https://github.com/radius-project/radius/pull/12183))
-- **Preserve Helm values on upgrade** — `rad upgrade kubernetes` now preserves existing Helm release values instead of resetting them. ([#12029](https://github.com/radius-project/radius/pull/12029))
+- **Multi-cluster deployment (v1)** — Until now, Radius always ran Recipes against the same Kubernetes cluster it was installed in. A new `ClusterAccessResolver` seam decides, per Recipe execution, which cluster to deploy to and how to authenticate, and both the Bicep and Terraform Recipe engines now consume that resolved connection instead of assuming the in-cluster config. This first version honors a kubeconfig injected through the `RADIUS_TARGET_KUBECONFIG` environment variable, so you can target an external cluster today. A later phase will add a named-cluster experience (`aws.eksClusterName` / `azure.aksClusterName`) that acquires cloud credentials for you. ([#12106](https://github.com/radius-project/radius/pull/12106))
+- **Less boilerplate in Resource Type schemas** — Every Radius Resource Type needs common properties such as `environment`, `application`, and `connections`, and authors previously had to declare them in every schema by hand. Radius now merges these base properties into all Resource Type schemas automatically, so a new type only declares its own properties while staying consistent with server-side validation. ([#12223](https://github.com/radius-project/radius/pull/12223), [#12252](https://github.com/radius-project/radius/pull/12252))
+- **Direct module support for Recipes** — Today a Terraform or Bicep module used as a Recipe must be wrapped to add a `context` input and a structured `result` output, which blocks using community modules such as those from the Terraform Registry or Azure Verified Modules directly. Recipes can now point their `source` straight at a standard module: Radius resolves `{{context.*}}` parameters, runs the module through the existing driver, and maps its outputs back to Resource Type properties through a new `outputs` field. Existing wrapped Recipes keep working unchanged. ([#12109](https://github.com/radius-project/radius/pull/12109))
+- **Optional NetworkPolicy for the control plane** — A new opt-in `networkPolicies.enabled` Helm value locks down ingress to the `radius-system` control-plane namespace so that arbitrary workloads in the cluster can no longer reach UCP and the resource providers directly, while still allowing traffic between Radius components and from the Kubernetes API server. Enforcement requires a NetworkPolicy-capable CNI such as Calico or Cilium. ([#12208](https://github.com/radius-project/radius/pull/12208))
+- **`RADIUS_PREVIEW` environment variable** — Instead of adding `--preview` to every command while trying the new `Radius.Core` Resource Types, you can now set `RADIUS_PREVIEW=true` once to turn on preview mode for all commands. The `--preview` flag still takes precedence when both are set. ([#12160](https://github.com/radius-project/radius/pull/12160))
+- **Clearer errors for unregistered Resource Types** — Deploying a custom Resource Type that was never registered used to fail with a misleading `not supported by location "global"` message. Radius now reports the real problem — that the Resource Type is not registered — and tells you to register it before deploying resources of that type. ([#12183](https://github.com/radius-project/radius/pull/12183))
+- **Preserve Helm values on upgrade** — `rad upgrade kubernetes` previously reset stored Helm values (for example, `global.azureWorkloadIdentity.enabled`) back to chart defaults on every upgrade. It now starts from the new chart defaults, replays the values you set on the previous release, and then applies any new `--set` overrides, with a `--reset-values` flag to opt out. ([#12029](https://github.com/radius-project/radius/pull/12029))
+
+## Designs for community feedback
+
+Several technical designs were shared this month and are good places to weigh in on where Radius is heading:
+
+- **Multi-cluster deployment** — The design behind the v1 work above. It introduces the `ClusterAccessResolver` seam and documents how named clusters and cloud-derived credentials (EKS and AKS) will follow in a later phase. ([#12106](https://github.com/radius-project/radius/pull/12106))
+- **Output resource identity** — A phased design that gives output resources first-class `providerResourceId` and `providerResourceIdKind` fields, so clients no longer need provider-specific rules to match resources. This improves shared-resource delete warnings and application graph grouping. ([#12074](https://github.com/radius-project/radius/pull/12074))
+- **`Radius.Compute/containerImages`** — The design for a Resource Type that builds and manages container images as part of your Application. ([#11734](https://github.com/radius-project/radius/pull/11734))
+- **Auto-injected base properties for Resource Types** — The proposal behind the schema simplification described above, covering how common properties like `environment`, `application`, and `connections` are merged in automatically. ([#12223](https://github.com/radius-project/radius/pull/12223))
+- **Syncing default Resource Types without a fake Go module** — An open proposal to fetch the default Resource Type manifests from resource-types-contrib by git ref (and later a signed release asset) instead of treating that YAML-only repository as a Go module. This cleans up the dependency graph and supply-chain reports, and it is still open for comments. ([#12236](https://github.com/radius-project/radius/pull/12236))
 
 ## Ecosystem and docs
 
 Activity continued across the wider Radius ecosystem this month:
 
 - **resource-types-contrib** added the `Radius.Compute/containerImages` Resource Type with a Kubernetes Terraform Recipe ([#151](https://github.com/radius-project/resource-types-contrib/pull/151)) and fixed a double-encoding bug in the `Security/secrets` Kubernetes Terraform Recipe ([#178](https://github.com/radius-project/resource-types-contrib/pull/178)).
-- **resource-types-verification**, a new repository for validating Resource Types end-to-end against real cloud infrastructure, added verification tests for PostgreSQL, MySQL, Redis, and Kafka on Azure. ([#1](https://github.com/radius-project/resource-types-verification/pull/1), [#5](https://github.com/radius-project/resource-types-verification/pull/5))
 - **Contributor guides** — A new series of guides covering prerequisites, building the rad CLI, testing, schema changes, and local debugging landed in the radius repository, making it easier to get started. ([#12174](https://github.com/radius-project/radius/pull/12174)–[#12180](https://github.com/radius-project/radius/pull/12180))
 - **Docs** — The how-to guide structure was revamped for easier navigation. ([#1853](https://github.com/radius-project/docs/pull/1853))
+
+## Community
+
+This month's code changes came from returning maintainers and contributors — no first-time contributors merged a change in the v0.59.0 window — but the community stayed active in shaping Radius:
+
+- **A thorough community bug report** — @gergo-hortobagyi filed a detailed issue ([#12259](https://github.com/radius-project/radius/issues/12259)) showing how an `Applications.Core/gateways` Gateway with multiple routes can hang on Kubernetes and Contour when a route child `HTTPProxy` is deployed before its root, complete with reproduction steps and source pointers. Thank you for the careful investigation!
+- **Easier ways to share feedback** — A new User Journey issue template ([#12123](https://github.com/radius-project/radius/pull/12123)) makes it simpler to tell the team how you use Radius and where it can improve.
+
+If you have been thinking about contributing, the new contributor guides above are a great place to start, and the designs open for feedback are an easy way to influence the roadmap.
 
 ## Get involved
 
