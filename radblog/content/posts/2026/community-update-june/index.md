@@ -8,7 +8,7 @@ type: blog
 
 Welcome to the June 2026 Radius community update! [Radius](https://radapp.io/) is an open-source cloud-native application platform that helps developers define, deploy, and manage applications across any cloud or on-premises environment. It acts as an abstraction layer between your application and your infrastructure, letting you focus on building your app while platform teams keep control over how resources are provisioned.
 
-This month delivered the v0.59.0 release, which continues the journey toward extensible compute platforms with the new `Radius.Core` Resource Types. The release adds more CLI support for the preview resource model, automatic Gateway setup for route Recipes, and several bug fixes. Beyond the release, the community landed early work on multi-cluster deployments, simpler Resource Type schemas, and a new set of contributor guides.
+This month delivered the v0.59.0 release, which continues the journey toward extensible compute platforms with the new `Radius.Core` Resource Types. The release adds more CLI support for the preview resource model, automatic Gateway setup for route Recipes, and several bug fixes. Looking ahead, the next release will include early work on multi-cluster deployments, simpler Resource Type schemas, and a new set of contributor guides.
 
 ## Releases
 
@@ -60,15 +60,6 @@ The following work merged to `main` after the v0.59.0 release and is not yet par
 - **Clearer errors for unregistered Resource Types** — Deploying a custom Resource Type that was never registered used to fail with a misleading `not supported by location "global"` message. Radius now reports the real problem — that the Resource Type is not registered — and tells you to register it before deploying resources of that type. ([#12183](https://github.com/radius-project/radius/pull/12183))
 - **Preserve Helm values on upgrade** — `rad upgrade kubernetes` previously reset stored Helm values (for example, `global.azureWorkloadIdentity.enabled`) back to chart defaults on every upgrade. It now starts from the new chart defaults, replays the values you set on the previous release, and then applies any new `--set` overrides, with a `--reset-values` flag to opt out. ([#12029](https://github.com/radius-project/radius/pull/12029))
 
-## Designs for community feedback
-
-Several technical designs were shared this month and are good places to weigh in on where Radius is heading:
-
-- **Multi-cluster deployment** — The design behind the v1 work above. It introduces the `ClusterAccessResolver` seam and documents how named clusters and cloud-derived credentials (EKS and AKS) will follow in a later phase. ([#12106](https://github.com/radius-project/radius/pull/12106))
-- **Output resource identity** — A phased design that gives output resources first-class `providerResourceId` and `providerResourceIdKind` fields, so clients no longer need provider-specific rules to match resources. This improves shared-resource delete warnings and application graph grouping. ([#12074](https://github.com/radius-project/radius/pull/12074))
-- **`Radius.Compute/containerImages`** — The design for a Resource Type that builds and manages container images as part of your Application. ([#11734](https://github.com/radius-project/radius/pull/11734))
-- **Auto-injected base properties for Resource Types** — The proposal behind the schema simplification described above, covering how common properties like `environment`, `application`, and `connections` are merged in automatically. ([#12223](https://github.com/radius-project/radius/pull/12223))
-- **Syncing default Resource Types without a fake Go module** — An open proposal to fetch the default Resource Type manifests from resource-types-contrib by git ref (and later a signed release asset) instead of treating that YAML-only repository as a Go module. This cleans up the dependency graph and supply-chain reports, and it is still open for comments. ([#12236](https://github.com/radius-project/radius/pull/12236))
 
 ## Ecosystem and docs
 
@@ -76,16 +67,7 @@ Activity continued across the wider Radius ecosystem this month:
 
 - **resource-types-contrib** added the `Radius.Compute/containerImages` Resource Type with a Kubernetes Terraform Recipe ([#151](https://github.com/radius-project/resource-types-contrib/pull/151)) and fixed a double-encoding bug in the `Security/secrets` Kubernetes Terraform Recipe ([#178](https://github.com/radius-project/resource-types-contrib/pull/178)).
 - **Contributor guides** — A new series of guides covering prerequisites, building the rad CLI, testing, schema changes, and local debugging landed in the radius repository, making it easier to get started. ([#12174](https://github.com/radius-project/radius/pull/12174)–[#12180](https://github.com/radius-project/radius/pull/12180))
-- **Docs** — The how-to guide structure was revamped for easier navigation. ([#1853](https://github.com/radius-project/docs/pull/1853))
 
-## Community
-
-This month's code changes came from returning maintainers and contributors — no first-time contributors merged a change in the v0.59.0 window — but the community stayed active in shaping Radius:
-
-- **A thorough community bug report** — @gergo-hortobagyi filed a detailed issue ([#12259](https://github.com/radius-project/radius/issues/12259)) showing how an `Applications.Core/gateways` Gateway with multiple routes can hang on Kubernetes and Contour when a route child `HTTPProxy` is deployed before its root, complete with reproduction steps and source pointers. Thank you for the careful investigation!
-- **Easier ways to share feedback** — A new User Journey issue template ([#12123](https://github.com/radius-project/radius/pull/12123)) makes it simpler to tell the team how you use Radius and where it can improve.
-
-If you have been thinking about contributing, the new contributor guides above are a great place to start, and the designs open for feedback are an easy way to influence the roadmap.
 
 ## Get involved
 
