@@ -68,7 +68,6 @@ Activity continued across the wider Radius ecosystem this month:
 - **resource-types-contrib** added the `Radius.Compute/containerImages` Resource Type with a Kubernetes Terraform Recipe ([#151](https://github.com/radius-project/resource-types-contrib/pull/151)) and fixed a double-encoding bug in the `Security/secrets` Kubernetes Terraform Recipe ([#178](https://github.com/radius-project/resource-types-contrib/pull/178)).
 - **Contributor guides** — A new series of guides covering prerequisites, building the rad CLI, testing, schema changes, and local debugging landed in the radius repository, making it easier to get started. ([#12174](https://github.com/radius-project/radius/pull/12174)–[#12180](https://github.com/radius-project/radius/pull/12180))
 
-
 ## Get involved
 
 Whether you are a developer looking to simplify cloud deployments or a platform engineer building golden paths for your team, we would love to have you join the Radius community:
