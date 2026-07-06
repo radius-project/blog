@@ -16,9 +16,9 @@ This month delivered the v0.59.0 release, which continues the journey toward ext
 
 This is the latest release of Radius. Here are the highlights and what they mean for you.
 
-#### CLI support for the new Radius.Core Resource Types
-
 > Note: the new `Radius.Core/*` Resource Types are actively under development and available now only as an early, sparsely documented preview. You can try them with the `--preview` flag on the relevant CLI commands. See the [rad CLI reference](https://docs.radapp.io/reference/cli/) for details.
+
+#### CLI support for the new Radius.Core Resource Types
 
 Radius is introducing a new set of Resource Types under the `Radius.Core` namespace (for example, `Radius.Core/applications` and `Radius.Core/environments`) that will eventually replace the existing `Applications.Core` types. These are served through the `v20250801preview` API surface and represent the next generation of the Radius resource model.
 
@@ -27,11 +27,11 @@ Until now, commands like `rad app graph` and `rad app status` operated only on t
 - **`rad app graph --preview` and `rad app status --preview`** — View the application graph and check status for Applications deployed as `Radius.Core/applications`. ([#11983](https://github.com/radius-project/radius/pull/11983))
 - **`rad workspace create --preview`** — Create workspaces that use `Radius.Core/environments`, so you can pair them with the new Resource Types. ([#11905](https://github.com/radius-project/radius/pull/11905))
 
-#### Explicit Kubernetes namespace for Radius.Core Environments
+#### Explicit Kubernetes namespace for new `Radius.Core/environments`
 
 Previously, Environments created with `Applications.Core/environments` created a new Kubernetes namespace on your behalf. That approach did not match enterprise scenarios where namespace creation is managed by cluster administrators. New `Radius.Core/environments` now require you to pass the Kubernetes namespace you want to use for Application deployments, falling back to `default` if none is specified. ([#12045](https://github.com/radius-project/radius/pull/12045))
 
-#### Default Contour Gateway for route Recipes
+#### Default Contour Gateway for new `Radius.Compute/routes` Recipes
 
 Radius now sets up Gateway API infrastructure automatically when Contour is installed. `rad install kubernetes` creates a shared `GatewayClass/contour` and `Gateway/radius` in the `radius-system` namespace, and the default `Radius.Compute/routes` Recipe is pre-configured to attach route resources to this managed Gateway. Applications no longer need to define their own Gateway resource in the default path. ([#11995](https://github.com/radius-project/radius/pull/11995))
 
