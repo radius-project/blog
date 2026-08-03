@@ -178,6 +178,7 @@ githubRepo
 Gitops
 GKE
 GOAPP
+gomod
 GPT
 grafana
 Guedes
@@ -307,6 +308,7 @@ OAuth
 objectname
 Observability
 OCI
+octo
 OIDC
 oidcIssuer
 onboarding
