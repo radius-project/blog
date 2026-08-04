@@ -8,15 +8,11 @@ type: blog
 
 Welcome to the July 2026 Radius community update! [Radius](https://radapp.io/) is an open-source cloud-native application platform that helps developers define, deploy, and manage applications across any cloud or on-premises environment. It acts as an abstraction layer between your application and your infrastructure, letting you focus on building your app while platform teams keep control over how resources are provisioned.
 
-July was a busy month across the whole organization. The v0.60.0 release candidate shipped, the new `Radius.Core` preview resource model reached more of the CLI, the application graph gained icons and richer relationships, and a new `ai-extensions` repository brought a Radius canvas experience to GitHub Copilot. Community contributions also picked up, with five people landing their first Radius pull requests.
+July was a busy month across the whole organization. The new `Radius.Core` preview resource model reached more of the CLI, the application graph gained icons and richer relationships, and the Resource Type catalog adopted the Recipe pack model. Community contributions also picked up, with five people landing their first Radius pull requests.
 
-## Releases
+## Upcoming features
 
-### Radius v0.60.0-rc1 (July 22)
-
-The release candidate for v0.60.0 is available ([#12466](https://github.com/radius-project/radius/pull/12466)). It gathers the work that landed after v0.59.0, including multi-cluster deployment groundwork, direct module support for Recipes, the optional control-plane NetworkPolicy, and the `RADIUS_PREVIEW` environment variable. See the [v0.60.0-rc1 release notes](https://github.com/radius-project/radius/releases/tag/v0.60.0-rc1) for the full changelog.
-
-## Highlights
+The following work merged to `main` in July and is not yet part of a published release. It offers a preview of what is coming next.
 
 ### More CLI coverage for the preview resource model
 
@@ -31,10 +27,6 @@ Radius continues to build out the `Radius.Core` Resource Types that will eventua
 
 The application graph became easier to read this month. Resource Types can now carry icons, which are synced and registered for built-in types and rendered in both the static and deployed graphs ([#12339](https://github.com/radius-project/radius/pull/12339), [#12351](https://github.com/radius-project/radius/pull/12351), [#12362](https://github.com/radius-project/radius/pull/12362), [#12396](https://github.com/radius-project/radius/pull/12396)). Edges now show `dependsOn` relationships in addition to connections ([#12479](https://github.com/radius-project/radius/pull/12479)), Azure resources link out to the Azure portal ([#12295](https://github.com/radius-project/radius/pull/12295)), and properties marked `x-radius-sensitive` are excluded from the static graph so secrets are not surfaced ([#12448](https://github.com/radius-project/radius/pull/12448)).
 
-### Deploying Radius applications from a repository
-
-Work on running Radius directly from a Git repository moved forward. A repo-based deploy workflow with reusable extension templates and composite actions landed ([#12348](https://github.com/radius-project/radius/pull/12348)), along with custom Recipe pack and delete workflows ([#12367](https://github.com/radius-project/radius/pull/12367)), a pluggable storage backend and an OCI state archive for control-plane state ([#12333](https://github.com/radius-project/radius/pull/12333), [#12364](https://github.com/radius-project/radius/pull/12364)), and GHCR authentication for `rad startup` and `rad shutdown` ([#12472](https://github.com/radius-project/radius/pull/12472), [#12493](https://github.com/radius-project/radius/pull/12493)).
-
 ### Fixes and platform support
 
 - **Windows ARM64 builds** are now produced for the rad CLI ([#12512](https://github.com/radius-project/radius/pull/12512)).
@@ -46,10 +38,6 @@ Work on running Radius directly from a Git repository moved forward. A repo-base
 ### Resource Types and Recipes
 
 The `resource-types-contrib` repository adopted the Recipe pack model across the portable data types, adding Azure Recipe packs for MySQL, Kafka, MongoDB, RabbitMQ, PostgreSQL, SQL Server, and search ([#200](https://github.com/radius-project/resource-types-contrib/pull/200)–[#206](https://github.com/radius-project/resource-types-contrib/pull/206)), plus new `Radius.Data/redisCaches`, `Radius.AI/models`, and object storage types ([#210](https://github.com/radius-project/resource-types-contrib/pull/210), [#212](https://github.com/radius-project/resource-types-contrib/pull/212), [#217](https://github.com/radius-project/resource-types-contrib/pull/217)). A default pack of Kubernetes Recipes authored in Bicep also landed ([#239](https://github.com/radius-project/resource-types-contrib/pull/239)), and `Radius.Compute/containerImages` gained a Bicep Recipe with scoped registry support ([#251](https://github.com/radius-project/resource-types-contrib/pull/251), [#12361](https://github.com/radius-project/radius/pull/12361)).
-
-### Radius in GitHub Copilot
-
-The new [ai-extensions](https://github.com/radius-project/ai-extensions) repository packages Radius as a Copilot plugin with a visual canvas for modeling and deploying applications. July brought the initial marketplace packaging ([#17](https://github.com/radius-project/ai-extensions/pull/17)), a move to React Flow for graph rendering ([#138](https://github.com/radius-project/ai-extensions/pull/138)), source-code references on graph nodes ([#59](https://github.com/radius-project/ai-extensions/pull/59)), and end-to-end Azure OIDC deployment support ([#163](https://github.com/radius-project/ai-extensions/pull/163)).
 
 ## Community
 
