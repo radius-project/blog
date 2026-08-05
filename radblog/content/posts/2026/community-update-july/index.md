@@ -14,13 +14,13 @@ July focused on making the pieces you work with every day easier to use: the pre
 
 The following work merged to `main` in July and is not yet part of a published release. It offers a preview of what is coming next.
 
-### More CLI coverage for the preview resource model
+### CLI support for the new Radius.Core Resource Types
 
 Radius is building a new generation of Resource Types under the `Radius.Core` namespace, which will eventually replace today's `Applications.Core` types. Because both models exist side by side while the work is in progress, the rad CLI needs to know which one you mean. You opt into the new model with the `--preview` flag on a single command, or by setting `RADIUS_PREVIEW=true` once so every command uses it.
 
 In July that preview mode reached more of the CLI. You can now install the control plane, deploy an Application by name, and create or update an Environment against the new model, so a full install-to-deploy loop works end to end without switching back to the old types. Creating an Environment also accepts Recipe packs directly, which means you can point a new Environment at a curated set of Recipes in one step instead of registering them one at a time afterward. Reference documentation for these types is now generated automatically from the Bicep extension, so the new types are documented alongside the existing ones as they evolve.
 
-### A clearer application graph
+### Application graph enhancements 
 
 The application graph is how you see what your Application is actually made of: the Containers, databases, and other resources Radius deployed, and how they connect. Several changes this month make that view easier to interpret.
 
@@ -29,7 +29,6 @@ Resource Types can now carry an icon, so a database, a message broker, and a Con
 ### Fixes and platform support
 
 - The rad CLI is now built for Windows on ARM64, so it runs natively on ARM-based Windows machines.
-- When your Application needs registry credentials to pull an image, Radius passes them through the deployment instead of creating a Secret in the control plane, keeping application credentials with the Application.
 - `rad init` reports progress correctly and exits cleanly when you press Ctrl-C, instead of leaving a partially drawn prompt behind.
 - Gateways no longer hang when a route is deployed before the Gateway it attaches to, a timing problem that could stall an otherwise valid deployment.
 - Building Container images inside the cluster now runs a bounded number of builds at a time, so a large Application cannot exhaust cluster resources by starting every build at once.
