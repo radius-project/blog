@@ -16,15 +16,25 @@ The following work merged to `main` in July and is not yet part of a published r
 
 ### CLI support for the new Radius.Core Resource Types
 
-Radius is building a new generation of Resource Types under the `Radius.Core` namespace, which will eventually replace today's `Applications.Core` types. Because both models exist side by side while the work is in progress, the rad CLI needs to know which one you mean. You opt into the new model with the `--preview` flag on a single command, or by setting `RADIUS_PREVIEW=true` once so every command uses it.
+Radius is building a new generation of Resource Types under the `Radius.Core` namespace, which will eventually replace today's `Applications.Core` types. Because both models exist side by side while the work is in progress, the rad CLI needs to know which one you mean. Add `--preview` to an individual command, or export `RADIUS_PREVIEW=true` in your shell so every command in that session uses the new types. The `--preview` flag wins when both are set.
 
-In July that preview mode reached more of the CLI. You can now install the control plane, deploy an Application by name, and create or update an Environment against the new model, so a full install-to-deploy loop works end to end without switching back to the old types. Creating an Environment also accepts Recipe packs directly, which means you can point a new Environment at a curated set of Recipes in one step instead of registering them one at a time afterward. Reference documentation for these types is now generated automatically from the Bicep extension, so the new types are documented alongside the existing ones as they evolve.
+Last month `rad app graph`, `rad app status`, and `rad workspace create` learned about the new types. In July the rest of the install-to-deploy loop followed:
 
-### Application graph enhancements 
+- **`rad install kubernetes --preview`** — Install the control plane configured for the new Resource Types, so you no longer need a separately prepared cluster to try them.
+- **`rad env create --preview`** — Create a `Radius.Core/environments` Environment. It now also accepts `--recipe-packs`, so you can attach a curated set of Recipes when you create the Environment instead of registering them one at a time afterward.
+- **`rad env update --preview`** — Update those Environments, and honor `RADIUS_PREVIEW` the same way the other commands do.
+- **`rad deploy -a <name> --preview`** — Resolve the `-a` Application name against `Radius.Core/applications` so you can deploy into an Application created with the new model.
 
-The application graph is how you see what your Application is actually made of: the Containers, databases, and other resources Radius deployed, and how they connect. Several changes this month make that view easier to interpret.
+Reference documentation for the new types is now generated from the Bicep extension, so they are documented alongside the existing types as they evolve.
 
-Resource Types can now carry an icon, so a database, a message broker, and a Container are distinguishable at a glance rather than by reading labels. The graph also draws explicit dependency edges, not just connections, so you can tell when one resource had to be provisioned before another. Azure resources link straight to the Azure portal for the deployed resource. Finally, properties that a Resource Type marks as sensitive are left out of the graph entirely, so viewing or sharing your application graph does not expose credentials.
+### Application graph enhancements
+
+The application graph shows what your Application is actually made of — the Containers, databases, and other resources Radius deployed, and how they relate. Run `rad app graph -a <name>` for the deployed view, or `rad app graph ./app.bicep` to build the modeled graph before you deploy. Four improvements landed this month:
+
+- **Icons for Resource Types.** Each type renders with its own icon, so a database, a message broker, and a Container are distinguishable at a glance instead of by reading labels.
+- **Dependency edges.** The graph draws `dependsOn` relationships in addition to connections, so you can see the provisioning order Radius followed, not just which services talk to each other.
+- **Azure portal links.** Azure resources in the graph link to the deployed resource in the Azure portal, so you can jump from the graph to metrics or configuration.
+- **Sensitive properties hidden.** Properties a Resource Type marks as sensitive are omitted from the graph, so you can share `rad app graph` output without exposing credentials.
 
 ### Fixes and platform support
 
@@ -35,9 +45,16 @@ Resource Types can now carry an icon, so a database, a message broker, and a Con
 
 ### More Resource Types and Recipes
 
-Recipes are the infrastructure definitions a platform engineer registers so developers can request a database or a message queue without writing the infrastructure code themselves. A Recipe pack groups those Recipes together so an Environment can adopt a whole curated set at once.
+A Recipe is the infrastructure definition a platform engineer registers so developers can request a database or a message queue without writing infrastructure code themselves. A Recipe pack groups Recipes together so an Environment can adopt a whole curated set at once, using `rad env create --preview --recipe-packs`.
 
-The [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) repository moved its portable data types onto this model in July, publishing Azure Recipe packs for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, Kafka, RabbitMQ, search, and object storage, along with a default pack of Kubernetes Recipes written in Bicep. The practical effect is that a new Environment can start from a working set of Recipes on either Kubernetes or Azure, rather than an empty catalog. The `Radius.Compute/containerImages` type, which builds a Container image from your source code, also gained a Bicep Recipe and support for scoped registries.
+July added a lot to that catalog in [resource-types-contrib](https://github.com/radius-project/resource-types-contrib):
+
+- **Azure Recipe packs** for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, Kafka, RabbitMQ, search, and object storage, so an Environment on Azure starts from a working set of Recipes instead of an empty catalog.
+- **A default Kubernetes Recipe pack** written in Bicep, giving the same coverage for clusters with no cloud provider configured.
+- **New Resource Types** for Redis caches, AI models, and object storage.
+- **A Bicep Recipe for `Radius.Compute/containerImages`**, the type that builds a Container image from your source code, including support for scoped container registries.
+
+Recipes and Resource Types are one of the easiest places to start contributing, because a Recipe is self-contained Bicep or Terraform. If you want to add support for infrastructure you use, browse the [good first issues](https://aka.ms/radius-first-issues).
 
 ## Community
 
