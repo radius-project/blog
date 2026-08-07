@@ -25,7 +25,7 @@ Last month `rad app graph`, `rad app status`, and `rad workspace create` learned
 - **`rad env update --preview`** — Update those Environments, and honor `RADIUS_PREVIEW` the same way the other commands do.
 - **`rad deploy -a <name> --preview`** — Resolve the `-a` Application name against `Radius.Core/applications` so you can deploy into an Application created with the new model.
 
-Reference documentation for the new types is now generated from the Bicep extension, so they are documented alongside the existing types as they evolve.
+Reference documentation for the new types will be automatically generated from the Bicep extension, so they are documented alongside the existing types as they evolve. More to come on this in the next release.
 
 ### Application graph enhancements
 
@@ -39,7 +39,7 @@ The application graph shows what your Application is actually made of — the Co
 ### Fixes and platform support
 
 - The rad CLI is now built for Windows on ARM64, so it runs natively on ARM-based Windows machines.
-- `rad init` reports progress correctly and exits cleanly when you press Ctrl-C, instead of leaving a partially drawn prompt behind.
+- `rad init` reports progress correctly and exits cleanly when you press Ctrl-C.
 - Gateways no longer hang when a route is deployed before the Gateway it attaches to, a timing problem that could stall an otherwise valid deployment.
 - Building Container images inside the cluster now runs a bounded number of builds at a time, so a large Application cannot exhaust cluster resources by starting every build at once.
 
@@ -58,7 +58,7 @@ Recipes and Resource Types are one of the easiest places to start contributing, 
 
 ## Community
 
-**Step challenge sample.** Will Velida published [step-challenge](https://github.com/willvelida/step-challenge), a sample application that shows Dapr, Radius, and Drasi working together. Radius describes the four .NET and Vue services, their Dapr components, and an in-cluster Postgres database as a single deployable unit in `infra/app.bicep`, so the same definition runs on a local kind cluster or on Azure with one `rad deploy`. Dapr handles pub/sub, cron bindings, and secrets between the services, while Drasi watches Postgres over logical replication and turns database changes into live contest events. It is a good end-to-end read if you want to see Radius composed with other cloud-native projects.
+**Step challenge sample.** [@willvelida](https://github.com/willvelida) published [step-challenge](https://github.com/willvelida/step-challenge), a sample application that shows Dapr, Radius, and Drasi working together. Radius describes the four .NET and Vue services, their Dapr components, and an in-cluster Postgres database as a single deployable unit in `infra/app.bicep`, so the same definition runs on a local kind cluster or on Azure with one `rad deploy`. Dapr handles pub/sub, cron bindings, and secrets between the services, while Drasi watches Postgres over logical replication and turns database changes into live contest events. It is a good end-to-end read if you want to see Radius composed with other cloud-native projects.
 
 **Welcome to our new contributors.** Five people made their first contribution to a Radius repository this month:
 
