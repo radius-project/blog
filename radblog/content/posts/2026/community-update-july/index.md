@@ -1,5 +1,5 @@
 ---
-date: "2026-08-06T07:00:00-07:00"
+date: "2026-08-07T07:00:00-07:00"
 title: "Radius Community Update: July 2026"
 linkTitle: "Community Update July 2026"
 author: "Radius Maintainers"
