@@ -18,7 +18,6 @@ August was a big month. Radius v0.60.0 shipped the first preview of the fully ex
 
 Radius v0.60 introduces preview versions of a new set of Resource Types under the Radius.* namespace. Radius.* Resource Types are completely recipe driven and fully customizable. These new Resource Types are available by using the --preview flag on common Radius CLI commands such as `rad init. For more details, visit the newly rewritten documentation at https://edge.docs.radapp.io/.
 
-
 #### Direct IaC module support
 
 Until now, a Bicep or Terraform module used as a Recipe had to be wrapped to accept a `context` input and return a structured `result` output, which meant you could not point Radius straight at an Azure Verified Module or a Terraform Registry module. You can now reference a standard module as a Recipe: Radius resolves `{{context.*}}` parameters, runs the module through the existing driver, and maps its outputs back onto Resource Type properties. Existing wrapped Recipes keep working unchanged. See [referencing an existing module](https://edge.docs.radapp.io/management/existing-recipes/#reference-an-existing-module) for details.
