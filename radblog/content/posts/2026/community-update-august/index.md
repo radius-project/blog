@@ -14,7 +14,6 @@ August was a big month. Radius v0.60.0 shipped the first preview of the fully ex
 
 ### Radius v0.60.0 (August 19)
 
-
 #### Preview release of fully extensible Resource Types
 
 Radius v0.60 introduces preview versions of a new set of Resource Types under the Radius.* namespace. Radius.* Resource Types are completely recipe driven and fully customizable. These new Resource Types are available by using the --preview flag on common Radius CLI commands such as `rad init. For more details, visit the newly rewritten documentation at https://edge.docs.radapp.io/.
