@@ -14,13 +14,11 @@ August was a big month. Radius v0.60.0 shipped the first preview of the fully ex
 
 ### Radius v0.60.0 (August 19)
 
-This is the latest minor release of Radius. Here are the highlights and what they mean for you.
 
 #### Preview release of fully extensible Resource Types
 
-Radius v0.60 introduces preview versions of a new set of Resource Types under the `Radius.*` namespace, such as `Radius.Core/applications`, `Radius.Compute/containers`, and `Radius.Data/redisCaches`. Unlike the `Applications.*` types they replace, these types are completely Recipe driven and fully customizable, so a platform engineer decides what infrastructure backs each type instead of accepting a fixed implementation.
+Radius v0.60 introduces preview versions of a new set of Resource Types under the Radius.* namespace. Radius.* Resource Types are completely recipe driven and fully customizable. These new Resource Types are available by using the --preview flag on common Radius CLI commands such as `rad init. For more details, visit the newly rewritten documentation at https://edge.docs.radapp.io/.
 
-Add `--preview` to common rad CLI commands such as `rad init`, `rad env create`, and `rad deploy` to work with the new types, or set `RADIUS_PREVIEW=true` once so every command in that shell session uses them. Documentation for the new model has been rewritten and is published at [edge.docs.radapp.io](https://edge.docs.radapp.io/).
 
 #### Direct IaC module support
 
@@ -40,7 +38,7 @@ You can upgrade by updating your rad CLI and running `rad upgrade kubernetes`. O
 
 ### Recipes and samples
 
-The [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) catalog grew alongside the release. Azure Container Instances gained Recipes, `Radius.Messaging/rabbitMQ` now provisions a real broker on Azure, and the Azure database Recipes report the details applications actually need, including a `port` property for MySQL, PostgreSQL, and SQL Server, and a Redis access key exposed separately from the connection URL.
+The [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) catalog grew alongside the release. Azure Container Instances Recipes were added, `Radius.Messaging/rabbitMQ` now provisions a real broker on Azure, and the Azure database Recipes report the details applications actually need, including a `port` property for MySQL, PostgreSQL, and SQL Server, and a Redis access key exposed separately from the connection URL.
 
 The [`demo` sample](https://github.com/radius-project/samples/tree/edge/samples/demo) moved to the `Radius.*` Resource Types and gained two variants that connect the demo Container to a managed cache and a managed database, so you can see `connections` in action against `Radius.Data/redisCaches` and `Radius.Data/postgreSqlDatabases`.
 
