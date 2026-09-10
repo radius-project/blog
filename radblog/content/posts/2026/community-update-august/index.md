@@ -57,10 +57,10 @@ The following work merged to `main` in August after the v0.60 release and is not
 - **Deploy a template straight from a URL.** `rad deploy` accepts an `http(s)` URL in addition to a local path, so you can deploy a Bicep or ARM JSON template without downloading it first.
 - **Managed Secrets projected through connections.** A single connection to a Recipe-backed producer can now carry both ordinary values and references to a managed `Radius.Security/secrets` resource, so consuming Recipes read secrets without values ever being copied onto the producer.
 - **`rad env delete --preview` cascades.** Deleting a `Radius.Core` Environment now removes the Applications and resources deployed into it instead of orphaning them, and the confirmation prompt states what will be deleted.
-- **Deprecation warning for `Applications.*` types.** `rad deploy` warns when a template uses a legacy `Applications.*` type, naming the `Radius.*` type that replaces it.
+- **Deprecation warning for `Applications.*` types.** `rad deploy` warns when a bicep template uses a legacy `Applications.*` type and recommends replacing it with the `Radius.*` types.
 - **Recipe packs from another Resource Group.** `rad env create --preview` and `rad env update --preview` accept `--recipe-pack-group`, so a Recipe pack no longer has to live in the Environment's own Resource Group.
 - **Unique Kubernetes namespaces for Environments.** `Radius.Core/environments` now enforce namespace uniqueness, so two Environments can no longer quietly deploy into the same namespace.
-- **More in the default Kubernetes Recipe pack.** RabbitMQ and PostgreSQL joined the default Kubernetes Recipe pack, so an Environment with no cloud provider configured can satisfy those Resource Types out of the box.
+- **More Resource Types and Recipes in the default Kubernetes Recipe pack.** RabbitMQ and PostgreSQL was added to the default Kubernetes Recipe pack.
 
 ## Community
 
