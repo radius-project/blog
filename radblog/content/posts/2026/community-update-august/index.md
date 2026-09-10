@@ -46,9 +46,20 @@ The [`demo` sample](https://github.com/radius-project/samples/tree/edge/samples/
 
 Radius Canvas was announced this month in [Introducing Radius Canvas](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/introducing-radius-canvas-visualize-review-and-deploy-applications-in-the-github/4549760) on the Azure Developer Community Blog, with a [walkthrough video](https://youtu.be/TU1cEIMMIAA) if you would rather watch than read.
 
-Canvas ships in the `radius` plugin for the [GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app) and turns the source code in your repository into a modeled Radius Application without leaving Copilot. It is organized into three areas: **Applications**, which renders your Application as a live graph with modeled, planned, deployed, and diff views; **Environments**, where you create and verify the landing zone your Application deploys to; and **Deployments**, which provisions the infrastructure your Application needs and runs the deployment through a generated GitHub Actions workflow. Canvas is in preview, and the team wants your feedback in the [ai-extensions repository](https://github.com/radius-project/ai-extensions/issues/new/choose).
+As AI accelerates software development, understanding how an application fits together is becoming as important as generating the code itself. Radius Canvas brings that application-level context into the [GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app). It gives you and your agents a shared application model that you can use to:
+
+- Understand the application across its workloads, dependencies, connections, and infrastructure
+- Preview how it will run in a target environment before you deploy
+- Deploy the application and its infrastructure through GitHub Actions
+- Visualize the impact of a code change across services and dependencies as part of code review
+
+The same application model carries that context from development through review, planning, and deployment, so you and your agents do not have to reconstruct it from scattered files and configuration at each stage.
+
+Canvas ships in the `radius` plugin for the GitHub Copilot app and is organized into three areas. **Applications** renders your Application as a live graph with four views: modeled, as you designed it; planned, as you want it deployed; deployed, as it runs in your Environments; and diff, showing what changed between two branches such as a pull request against `main`. **Environments** is where you create and verify the landing zone your Application deploys to. **Deployments** provisions the infrastructure your Application needs and runs the deployment through a generated GitHub Actions workflow.
 
 Most of the work behind the announcement landed during August. On the Radius side, `rad deploy` now publishes deploy status and live resource-state snapshots as workflow artifacts, so the deployed graph updates while a deployment is still running.
+
+Canvas is in preview. Try it from the [ai-extensions repository](https://github.com/radius-project/ai-extensions) and tell the team what you think by [opening an issue](https://github.com/radius-project/ai-extensions/issues/new/choose).
 
 ## Upcoming features
 
