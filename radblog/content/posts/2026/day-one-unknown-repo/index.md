@@ -105,8 +105,8 @@ the application.
 ## Reviewing changes to the application
 
 The same model works on a pull request. Radius can compare the application graph across
-branches, so a change that adds a queue or a second database shows up as a change in
-shape rather than as more lines in a diff.
+branches, so a pull request that adds a queue or a second database tells you that at a
+glance, before you read the diff that explains how.
 
 ## Try it on a repository
 
