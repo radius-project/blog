@@ -30,9 +30,12 @@ morning figuring out what the application is actually made of. Which folders are
 services? What do they talk to? Which databases, caches, and queues are involved, and
 who depends on whom?
 
-> ✏️ **[APP PLACEHOLDER]** Introduce the sample application here: what it does, a link to
-> the repository, how many services it has, and the languages it uses. One or two
-> sentences on why it is a good example of a multi-tier application.
+In this post we will use
+[Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), a sample
+e-commerce application where visitors browse products, add them to a cart, and check
+out. It has ten services written in Go, C#, Node.js, Python, and Java, plus a Redis
+cache for shopping carts. The front end, the business services behind it, and the data
+store make it a good example of a multi-tier application.
 
 The answers are rarely in one place. They are spread across Dockerfiles, compose files,
 Kubernetes manifests, configuration, and the source code itself, each describing a
@@ -49,7 +52,7 @@ do have to remember to keep it up to date.
 After installing the **Radius** plugin in the GitHub Copilot app (open **Customize**,
 select **Plugins**, and search for `radius`), open the repository and ask Copilot:
 
-> Explain this application to me.
+> Show me the application graph.
 
 Radius analyzes the repository and infers the application's structure: its workloads,
 the resources they depend on, the connections between them, and the infrastructure the
@@ -62,9 +65,7 @@ Radius got wrong, commit it, and share it with your team. Instead of every devel
 (or every AI agent) rebuilding an understanding of the application from scratch, there
 is now one model everyone can start from.
 
-> 🖼️ **[VISUAL 1 — PLACEHOLDER]** The Radius plugin responding to "Explain this
-> application to me" in the Copilot app, alongside the generated `.radius/app.bicep`.
-> *Screenshot. To be added.*
+{{< image src="images/chat-and-graph.png" alt="The GitHub Copilot app with a summary of the generated application definition in chat and the Application graph in Radius Canvas" width="100%" >}}
 
 ## Understanding the architecture
 
@@ -82,30 +83,56 @@ A few things to look for the first time you open it:
   is often where the surprises are: a service that bridges two halves of the
   application, or a resource that more services depend on than you expected.
 
-> ✏️ **[APP PLACEHOLDER]** Walk through the graph for the sample application. Call out
-> the tiers (front end, APIs, background processing, data), and one or two insights
-> that are hard to see from the files alone but obvious in the graph, such as a
-> critical service in the middle of the flow or a shared dependency.
+For Online Boutique, the graph has four levels:
 
-> 🖼️ **[VISUAL 2 — PLACEHOLDER] — main image of the post.** The Application graph of
-> the sample application in Radius Canvas, showing its workloads, dependencies, and the
-> connections between them. *Screenshot. To be added.*
+- **Entry point.** `frontend-route` exposes the application, and it connects only to
+  `frontend`.
+- **Front end.** `frontend`, the Go web server, connects to seven of the other nine
+  services.
+- **Business services.** `checkoutservice` connects to six services: cart, currency,
+  email, payment, product catalog, and shipping. `adservice` and
+  `recommendationservice` sit beside it and are called by the front end.
+- **Data.** `redis` is the only data store in the application, and only `cartservice`
+  uses it. The other services keep no state of their own.
+
+Two things are easier to see in the graph than in the files. First, `checkoutservice`
+is where a single order touches most of the application, so a problem in any of its six
+dependencies shows up at checkout. Second, `emailservice` and `paymentservice` are
+only reached through `checkoutservice`, so you will not find them by reading the front
+end.
+
+{{< image src="images/application-graph.png" alt="The Modeled Application graph for Online Boutique, showing frontend-route, frontend, ten services, and Redis" width="100%" >}}
 
 ## Jumping from the graph to the code
 
 Each node in the graph includes a reference to the source code it was inferred from.
 Selecting a node opens the file and lines where that workload or connection is defined.
 
-> ✏️ **[APP PLACEHOLDER]** Pick one interesting node, show where selecting it takes you,
-> and include a short code snippet of the connection being made.
+Each node has two links: **View source code**, which opens the code the node was
+inferred from, and **View app definition**, which opens the matching resource in
+`.radius/app.bicep`.
+
+For `checkoutservice`, the source code link opens `src/checkoutservice/main.go`. A few
+lines below it, the service reads the address of each service it calls:
+
+```go
+mustMapEnv(&svc.shippingSvcAddr, "SHIPPING_SERVICE_ADDR")
+mustMapEnv(&svc.productCatalogSvcAddr, "PRODUCT_CATALOG_SERVICE_ADDR")
+mustMapEnv(&svc.cartSvcAddr, "CART_SERVICE_ADDR")
+mustMapEnv(&svc.currencySvcAddr, "CURRENCY_SERVICE_ADDR")
+mustMapEnv(&svc.emailSvcAddr, "EMAIL_SERVICE_ADDR")
+mustMapEnv(&svc.paymentSvcAddr, "PAYMENT_SERVICE_ADDR")
+```
+
+These six environment variables are the six connections the graph shows for
+`checkoutservice`. In `.radius/app.bicep`, each one is set from the service it points
+to, which is how Radius records the connection.
 
 Everything in the graph comes from the repository, so you could find the same
 information by reading the files. The graph collects it in one view and links each part
 back to its source.
 
-> 🖼️ **[VISUAL 3 — PLACEHOLDER]** A node selected, with its source code reference
-> visible, then the click-through landing on the connection in source.
-> *Short GIF or clip preferred over a screenshot. To be added.*
+{{< image src="images/source-reference.png" alt="The paymentservice node selected in the Application graph, showing links to src/paymentservice/index.js and .radius/app.bicep" width="100%" >}}
 
 ## A few things to keep in mind
 
@@ -123,7 +150,7 @@ is planned next on the
 ## See it in action
 
 > 🎬 **[DEMO — PLACEHOLDER]** A short (2–3 minute) demo of the day-one flow on the
-> sample application: asking Copilot to explain the application, exploring the
+> sample application: asking Copilot to show the application graph, exploring the
 > Application graph, and clicking through from a node to the source code.
 > *Embed a YouTube video with the `{{</* youtube VIDEO_ID */>}}` shortcode. To be added.*
 
