@@ -15,8 +15,9 @@ each one talk to? Which databases, caches, and queues are involved, and who depe
 whom?
 
 The answers are in the Dockerfiles, Kubernetes manifests, Helm charts, configuration,
-and source code, with each file describing part of the application. Some repositories
-also include an architecture diagram.
+and source code, with each file describing part of the application. The application
+graph brings that information together, so you can get the overall idea of the
+application at a glance and then go to the files for the details.
 
 The repository in this example is
 [Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), a sample
