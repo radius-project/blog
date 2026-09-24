@@ -14,12 +14,11 @@ you need to know what the application is made of. Which folders are services? Wh
 each one talk to? Which databases, caches, and queues are involved, and who depends on
 whom?
 
-The answers are rarely in one place. They are spread across Dockerfiles, Kubernetes
-manifests, Helm charts, configuration, and the source code itself, each describing a
-slice of the application for a different purpose. None of these files is hard to read,
-but you have to read many of them, and hold them in your head at once, to get the full
-picture. It is easy to read one service end to end and never learn about a database two
-hops away that it quietly depends on.
+This information is usually spread across Dockerfiles, Kubernetes manifests, Helm
+charts, configuration, and source code. Each file describes part of the application, so
+getting the full picture means reading several of them and connecting the pieces
+yourself. A service's dependencies may only be visible in another service's
+configuration.
 
 Some repositories include an architecture diagram to help. Many don't, and the ones that
 do have to remember to keep it up to date.
