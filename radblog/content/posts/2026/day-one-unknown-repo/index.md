@@ -14,14 +14,9 @@ you need to know what the application is made of. Which folders are services? Wh
 each one talk to? Which databases, caches, and queues are involved, and who depends on
 whom?
 
-This information is usually spread across Dockerfiles, Kubernetes manifests, Helm
-charts, configuration, and source code. Each file describes part of the application, so
-getting the full picture means reading several of them and connecting the pieces
-yourself. A service's dependencies may only be visible in another service's
-configuration.
-
-Some repositories include an architecture diagram to help. Many don't, and the ones that
-do have to remember to keep it up to date.
+The answers are in the Dockerfiles, Kubernetes manifests, Helm charts, configuration,
+and source code, with each file describing part of the application. Some repositories
+also include an architecture diagram.
 
 The repository in this example is
 [Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), a sample
