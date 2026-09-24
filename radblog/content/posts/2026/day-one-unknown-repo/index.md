@@ -68,8 +68,8 @@ is now one model everyone can start from.
 
 ## Understanding the architecture
 
-This is where day one gets a lot easier. The application graph gives you an
-architectural starting point: the whole application on one screen, inferred directly
+The application graph is an architectural starting point for understanding the
+application. It shows the workloads, dependencies, and connections that Radius inferred
 from the repository.
 
 A few things to look for the first time you open it:
@@ -93,17 +93,15 @@ A few things to look for the first time you open it:
 
 ## Jumping from the graph to the code
 
-Each node in the graph includes a reference back to the source code it came from, so
-the graph also works as a map of the repository. When a connection catches your eye,
-select the node and you land on the lines of code where that connection is made.
+Each node in the graph includes a reference to the source code it was inferred from.
+Selecting a node opens the file and lines where that workload or connection is defined.
 
 > ✏️ **[APP PLACEHOLDER]** Pick one interesting node, show where selecting it takes you,
 > and include a short code snippet of the connection being made.
 
-None of this is secret. Everything in the graph can be found by reading the repository.
-The graph just gives you a place to start and a quick way to get to the lines that
-matter, so you can spend your first day learning how the application works instead of
-working out what it is made of.
+Everything in the graph comes from the repository, so you could find the same
+information by reading the files. The graph collects it in one view and links each part
+back to its source.
 
 > 🖼️ **[VISUAL 3 — PLACEHOLDER]** A node selected, with its source code reference
 > visible, then the click-through landing on the connection in source.
