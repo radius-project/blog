@@ -7,38 +7,15 @@ type: blog
 draft: true
 ---
 
-Earlier this month, the Radius team shared the public preview of
-[Radius Canvas for the GitHub Copilot app](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/introducing-radius-canvas-visualize-review-and-deploy-applications-in-the-github/4549760).
-Radius Canvas gives you an application graph: a picture of your application's workloads,
-the resources they depend on, and the connections between them, drawn from an
-application model that lives in your repository.
+Picture your first day on a new team. You clone the repository and find twelve folders
+under `src/` written in five languages, next to Kubernetes manifests, a Helm chart,
+Kustomize overlays, and a Terraform directory. Before you can fix a bug or add a feature,
+you need to know what the application is made of. Which folders are services? What does
+each one talk to? Which databases, caches, and queues are involved, and who depends on
+whom?
 
-We have been using it on our own projects, and we want to share what that looks like
-across the whole developer journey. So this post is the first in a series. Each post
-follows a developer through one stage of working with an application: getting to know
-it, reviewing changes to it, and taking it all the way to the cloud.
-
-We are starting at the very beginning, with **day one in an unknown repository**:
-discovering the application, generating an application model, and understanding its
-architecture before writing a single line of code.
-
-## Getting to know a new repository
-
-Joining a new team, picking up an open source project, or taking over a service from a
-colleague usually starts the same way. You clone the repository and spend the first
-morning figuring out what the application is actually made of. Which folders are
-services? What do they talk to? Which databases, caches, and queues are involved, and
-who depends on whom?
-
-In this post we will use
-[Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), a sample
-e-commerce application where visitors browse products, add them to a cart, and check
-out. It has ten services written in Go, C#, Node.js, Python, and Java, plus a Redis
-cache for shopping carts. The front end, the business services behind it, and the data
-store make it a good example of a multi-tier application.
-
-The answers are rarely in one place. They are spread across Dockerfiles, compose files,
-Kubernetes manifests, configuration, and the source code itself, each describing a
+The answers are rarely in one place. They are spread across Dockerfiles, Kubernetes
+manifests, Helm charts, configuration, and the source code itself, each describing a
 slice of the application for a different purpose. None of these files is hard to read,
 but you have to read many of them, and hold them in your head at once, to get the full
 picture. It is easy to read one service end to end and never learn about a database two
@@ -46,6 +23,28 @@ hops away that it quietly depends on.
 
 Some repositories include an architecture diagram to help. Many don't, and the ones that
 do have to remember to keep it up to date.
+
+The repository in this example is
+[Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), a sample
+e-commerce application where visitors browse products, add them to a cart, and check
+out. Its default deployment runs ten services written in Go, C#, Node.js, Python, and
+Java, plus a Redis cache for shopping carts. With a front end, a layer of business
+services, and a data store, it is a good example of a multi-tier application, and it is
+the one we will use throughout this post.
+
+## About this series
+
+This post is the first in a series about
+[Radius Canvas for the GitHub Copilot app](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/introducing-radius-canvas-visualize-review-and-deploy-applications-in-the-github/4549760).
+Radius Canvas gives you an application graph: a picture of your application's workloads,
+the resources they depend on, and the connections between them, drawn from an
+application model that lives in your repository.
+
+Each post in the series follows a developer through one stage of working with an
+application: getting to know it, reviewing changes to it, and taking it all the way to
+the cloud. We are starting at the beginning, with **day one in an unknown repository**:
+discovering the application, generating an application model, and understanding its
+architecture before writing a single line of code.
 
 ## Generating the application model
 
