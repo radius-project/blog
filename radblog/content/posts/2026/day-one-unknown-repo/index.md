@@ -142,10 +142,7 @@ is planned next on the
 
 ## See it in action
 
-> 🎬 **[DEMO — PLACEHOLDER]** A short (2–3 minute) demo of the day-one flow on the
-> sample application: asking Copilot to show the application graph, exploring the
-> Application graph, and clicking through from a node to the source code.
-> *Embed a YouTube video with the `{{</* youtube VIDEO_ID */>}}` shortcode. To be added.*
+{{< youtube sI-KHmhQW-Y >}}
 
 If you have a repository you have been meaning to get to know, give it a try and let us
 know how the graph looks. We would love to hear what works well and what doesn't.
