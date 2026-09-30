@@ -43,7 +43,7 @@ architecture before writing a single line of code.
 
 ## Generating the application model
 
-Install the Radius plugin in the GitHub Copilot app by opening **Customize**, selecting **Plugins**, and searching for `radius`. Then open the repository and ask Copilot:
+Install the Radius plugin in the GitHub Copilot app by opening **Customize**, selecting **Plugins**, and searching for `radius`. Then open the repository and ask Copilot
 
 > Show me the application graph.
 
@@ -160,7 +160,7 @@ tuned!
 
 ## Learn More
 
-- [GitHub Copilot app integration](https://docs.radapp.io/integrations/github-copilot-app/) in the Radius documentation
+- [GitHub Copilot app integration](https://edge.docs.radapp.io/integrations/github-copilot-app/) in the Radius documentation
 - [Introducing Radius Canvas](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/introducing-radius-canvas-visualize-review-and-deploy-applications-in-the-github/4549760), the public preview announcement
 - [Radius Canvas in the GitHub Copilot app](https://www.youtube.com/watch?v=TU1cEIMMIAA), a video walkthrough
 - [Radius Canvas roadmap](https://github.com/orgs/radius-project/projects/27/views/1), where you can vote on what comes next
