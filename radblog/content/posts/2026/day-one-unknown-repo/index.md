@@ -4,7 +4,6 @@ title: "Day One in an Unknown Repo"
 linkTitle: "Day One in an Unknown Repo"
 author: "[Nithya Subramanian](https://github.com/nithyatsu)"
 type: blog
-draft: true
 ---
 
 On your first day on a new team, you clone the application repository and find twelve folders
