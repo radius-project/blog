@@ -1,5 +1,5 @@
 ---
-date: "2026-09-21T07:00:00-07:00"
+date: "2026-09-30T07:00:00-07:00"
 title: "Day One in an Unknown Repo"
 linkTitle: "Day One in an Unknown Repo"
 author: "[Nithya Subramanian](https://github.com/nithyatsu)"
@@ -7,7 +7,7 @@ type: blog
 draft: true
 ---
 
-Picture your first day on a new team. You clone the repository and find twelve folders
+On your first day on a new team, you clone the application repository and find twelve folders
 under `src/` written in five languages, next to Kubernetes manifests, a Helm chart,
 Kustomize overlays, and a Terraform directory. Before you can fix a bug or add a feature,
 you need to know what the application is made of. Which folders are services? What does
@@ -16,7 +16,7 @@ whom?
 
 The answers are in the Dockerfiles, Kubernetes manifests, Helm charts, configuration,
 and source code, with each file describing part of the application. The application
-graph brings that information together, so you can get the overall idea of the
+graph brings that information together in a single view, so you can get the overall idea of the
 application at a glance and then go to the files for the details.
 
 The repository in this example is
@@ -30,21 +30,20 @@ the one we will use throughout this post.
 ## About this series
 
 This post is the first in a series about
-[Radius Canvas for the GitHub Copilot app](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/introducing-radius-canvas-visualize-review-and-deploy-applications-in-the-github/4549760).
-Radius Canvas gives you an application graph: a picture of your application's workloads,
+[Radius Canvas for the GitHub Copilot app](https://docs.radapp.io/integrations/github-copilot-app/).
+Radius Canvas gives you an application graph: a visualization of your application's workloads,
 the resources they depend on, and the connections between them, drawn from an
 application model that lives in your repository.
 
 Each post in the series follows a developer through one stage of working with an
-application: getting to know it, reviewing changes to it, and taking it all the way to
+application: getting to know it, reviewing AI generated changes, and taking it all the way to
 the cloud. We are starting at the beginning, with **day one in an unknown repository**:
 discovering the application, generating an application model, and understanding its
 architecture before writing a single line of code.
 
 ## Generating the application model
 
-After installing the **Radius** plugin in the GitHub Copilot app (open **Customize**,
-select **Plugins**, and search for `radius`), open the repository and ask Copilot:
+Install the Radius plugin in the GitHub Copilot app by opening **Customize**, selecting **Plugins**, and searching for `radius`. Then open the repository and ask Copilot:
 
 > Show me the application graph.
 
@@ -61,7 +60,7 @@ is now one model everyone can start from.
 
 {{< image src="images/chat-and-graph.png" alt="The GitHub Copilot app with a summary of the generated application definition in chat and the Application graph in Radius Canvas" width="100%" >}}
 
-## Understanding the architecture
+## Understanding the application
 
 The application graph is an architectural starting point for understanding the
 application. It shows the workloads, dependencies, and connections that Radius inferred
@@ -70,7 +69,7 @@ from the repository.
 A few things to look for the first time you open it:
 
 - **Workloads.** Every service in the application, whether it is a front end, an API, or
-  a background worker with no ports and no UI.
+  a background worker.
 - **Dependencies.** The databases, caches, message queues, and other resources each
   workload relies on.
 - **Connections.** Which workload talks to which, and which resources they share. This
@@ -97,7 +96,7 @@ end.
 
 {{< image src="images/application-graph.png" alt="The Modeled Application graph for Online Boutique, showing frontend-route, frontend, ten services, and Redis" width="100%" >}}
 
-## Jumping from the graph to the code
+## From the application graph to source code
 
 Each node in the graph includes a reference to the source code it was inferred from.
 Selecting a node opens the file and lines where that workload or connection is defined.
@@ -161,15 +160,9 @@ tuned!
 
 ## Learn More
 
-- [GitHub Copilot app integration](https://edge.docs.radapp.io/integrations/github-copilot-app/) in the Radius documentation
+- [GitHub Copilot app integration](https://docs.radapp.io/integrations/github-copilot-app/) in the Radius documentation
 - [Introducing Radius Canvas](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/introducing-radius-canvas-visualize-review-and-deploy-applications-in-the-github/4549760), the public preview announcement
 - [Radius Canvas in the GitHub Copilot app](https://www.youtube.com/watch?v=TU1cEIMMIAA), a video walkthrough
 - [Radius Canvas roadmap](https://github.com/orgs/radius-project/projects/27/views/1), where you can vote on what comes next
-
-## Get Involved
-
-We would love for you to join us to help build Radius:
-
-- Join our monthly community meeting to see demos and hear the latest updates (join the [Radius Google Group](https://groups.google.com/g/radapp_io) to get email announcements)
 - Join the discussion or ask for help on the [Radius Discord server](https://aka.ms/radius/discord)
 - Subscribe to the [Radius YouTube channel](https://www.youtube.com/@radapp_io) for more demos
