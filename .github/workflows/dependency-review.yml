@@ -5,22 +5,17 @@
 # Source: https://github.com/radius-project/.github
 # ------------------------------------------------------------------------------
 ---
-name: Spellcheck
+name: Dependency Review
 
 on:
-  workflow_dispatch:
   pull_request:
-    types: [opened, synchronize, reopened]
 
 permissions: {}
 
 jobs:
-  spellcheck:
-    uses: radius-project/.github/.github/workflows/__spellcheck.yml@main
+  dependency-review:
+    uses: radius-project/.github/.github/workflows/__dependency-review.yml@main
     permissions:
       contents: read
       pull-requests: write
-    with:
-      # Check both Markdown docs and the embedded `description` fields in
-      # resource type YAML schemas (and other YAML docs in the repo).
-      glob: "**/*.{md,yaml,yml}"
+      checks: write
