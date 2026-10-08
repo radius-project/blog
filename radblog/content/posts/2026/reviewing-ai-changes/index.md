@@ -1,16 +1,17 @@
 ---
 date: "2026-10-14T07:00:00-07:00"
-title: "Reviewing AI-Generated Changes with the Application Graph"
-linkTitle: "Reviewing AI-Generated Changes with the Application Graph"
+title: "Architecture Changes and Pull Request Review"
+linkTitle: "Architecture Changes and Pull Request Review"
 author: "[Nithya Subramanian](https://github.com/nithyatsu)"
 type: blog
 draft: true
 ---
 
-In the [first post of this series](https://blog.radapp.io/posts/2026/09/30/day-one-in-an-unknown-repo/), we opened an
-unfamiliar repository, generated an application model, and used the application graph
-to get to know [Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo).
-Now it is time to change it.
+In the [first post of this series](https://blog.radapp.io/posts/2026/09/30/day-one-in-an-unknown-repo/),
+we opened an unfamiliar repository, generated an application model, and used the
+application graph to get to know
+[Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo). Now the
+application needs to change.
 
 Say the team wants shoppers to see their past orders. You ask Copilot to build the
 feature, and a few minutes later you have a pull request with 43 changed files and more
@@ -18,21 +19,23 @@ than 7,000 new lines: protocol buffer definitions, generated client code, a new 
 service, changes to two existing services, an HTML template, and Kubernetes manifests,
 a Helm chart, and Kustomize overlays.
 
-Every one of those files deserves a review. But before you read them line by line, it
-helps to know what the change does to the application as a whole. Which services are
-new? Which existing services changed? What do they now depend on? That is what the
-application graph diff shows.
+Every one of those files deserves a review. But before anyone reads them line by line,
+the team needs to agree on what the change does to the application as a whole. Which
+services are new? Which existing services changed? What do they depend on now? Is that
+what we meant to build? That is what the application graph diff in the pull request
+helps with.
 
 ## About this series
 
 This post is the second in a series about
 [Radius Canvas for the GitHub Copilot app](https://docs.radapp.io/integrations/github-copilot-app/).
 Each post follows a developer through one stage of working with an application: getting
-to know it, reviewing AI generated changes, and taking it all the way to the cloud. This
-one is about **reviewing a change**: seeing what an AI-generated pull request does to
-the architecture, and using that to decide where to look closely in the code.
+to know it, changing and reviewing it, and taking it all the way to the cloud. This one
+is about **architecture changes and pull request review**: following the application as
+its architecture evolves, and using the graph diff to understand and validate a proposed
+change before it is merged.
 
-## Making the change
+## Changing the architecture
 
 Starting from the repository and application model from the first post, we asked Copilot
 
@@ -45,29 +48,38 @@ application model in `.radius/app.bicep` to describe the new service, the databa
 the new connections.
 
 Updating the model is part of making the change. The application graph is drawn from
-`.radius/app.bicep`, so a pull request that changes the architecture should change that
-file too.
+`.radius/app.bicep`, so as the architecture evolves, the model evolves with it, in the
+same pull request.
 
-## The application graph diff
+## The graph diff in the pull request
 
-The graph diff compares the application model on two branches, here `main` and the
-pull request branch, and draws one graph with every resource marked by what happened
-to it. To open it, ask Copilot
-
-> Show me the application graph diff for this pull request.
-
-The colors tell you what changed:
+When Copilot opens the pull request, it adds an application graph diff to the top of
+the pull request description. The diff compares the application model on the base
+branch and the pull request branch, and draws one graph with every resource marked by
+what happened to it:
 
 - **Green** resources were added.
 - **Yellow** resources were modified.
 - **Red** resources were removed.
 - **Grey** resources did not change.
 
-> 🖼️ **[IMAGE PLACEHOLDER]** The graph diff for the order history pull request, with
+Because the diff is part of the pull request description, everyone reviewing the change
+sees it on GitHub, including teammates who are not using the GitHub Copilot app. It is
+the first thing they see, before the list of changed files.
+
+> 🖼️ **[IMAGE PLACEHOLDER]** The pull request on GitHub, with the application graph
+> diff at the top of the description.
+
+In the GitHub Copilot app, the same diff opens in Radius Canvas, where you can select
+nodes and follow them to the code. To open it for any pull request, ask Copilot
+
+> Show me the application graph diff for this pull request.
+
+> 🖼️ **[IMAGE PLACEHOLDER]** The graph diff in Radius Canvas, with
 > `orderhistoryservice`, `postgres`, and `postgres-client-credentials` in green and
 > `checkoutservice` and `frontend` in yellow.
 
-## Reading the diff
+## Understanding the change
 
 For the order history change, the diff shows:
 
@@ -79,9 +91,21 @@ For the order history change, the diff shows:
   and `redis`.
 
 Seen this way, a 43-file pull request is one new service with its own database, called
-from two existing services. That matches what we asked for, and it tells us what the
-change does not do. It does not touch the payment, shipping, or cart services, and it
-does not use the existing Redis cache.
+from two existing services. The architecture grew by three resources and four
+connections, and the rest of the application stayed as it was.
+
+## Validating the change
+
+With that picture, the review can start with a few questions the whole team can
+answer, whether or not they know the code:
+
+- **Is this what we asked for?** One new service that stores orders, a page that shows
+  them, and checkout recording each order. Yes.
+- **Did anything change that shouldn't have?** The payment, shipping, and cart services
+  are untouched, and the change does not use the existing Redis cache.
+- **Are the new pieces the right ones?** A new PostgreSQL database is a real decision:
+  it is one more thing to run, back up, and secure. This is the moment to agree on it,
+  before the code is merged rather than after it is deployed.
 
 One connection is worth a closer look: `checkoutservice` now calls
 `orderhistoryservice`. In the first post, we saw that `checkoutservice` is where a single
@@ -130,8 +154,9 @@ container image builds, do not appear in the graph.
 
 ## See it in action
 
-> 🎬 **[DEMO PLACEHOLDER]** A short demo of reviewing the order history pull request
-> with the application graph diff.
+> 🎬 **[DEMO PLACEHOLDER]** A short demo of the order history pull request: the graph
+> diff in the pull request description, the same diff in Radius Canvas, and following
+> `checkoutservice` to the code.
 
 If you have a pull request open on an application of your own, try asking for the
 graph diff and let us know how it looks. We would love to hear what works well and what
@@ -140,8 +165,8 @@ doesn't.
 ## Up next
 
 The change is reviewed and merged. In the next post, we will take it to the cloud:
-comparing the planned application with what is actually deployed, and deploying with
-Radius. Stay tuned!
+planning the rollout, deploying with Radius, and watching each resource's status live
+in the graph as the deployment runs. Stay tuned!
 
 ## Learn More
 
