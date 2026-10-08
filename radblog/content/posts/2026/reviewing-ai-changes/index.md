@@ -67,17 +67,14 @@ Because the diff is part of the pull request description, everyone reviewing the
 sees it on GitHub, including teammates who are not using the GitHub Copilot app. It is
 the first thing they see, before the list of changed files.
 
-> 🖼️ **[IMAGE PLACEHOLDER]** The pull request on GitHub, with the application graph
-> diff at the top of the description.
+{{< image src="images/pr-graph-diff.png" alt="The order history pull request on GitHub, with the application graph diff at the top of the description: 3 added, 2 modified, and 10 unchanged resources" width="100%" >}}
 
 In the GitHub Copilot app, the same diff opens in Radius Canvas, where you can select
 nodes and follow them to the code. To open it for any pull request, ask Copilot
 
 > Show me the application graph diff for this pull request.
 
-> 🖼️ **[IMAGE PLACEHOLDER]** The graph diff in Radius Canvas, with
-> `orderhistoryservice`, `postgres`, and `postgres-client-credentials` in green and
-> `checkoutservice` and `frontend` in yellow.
+{{< image src="images/graph-diff.png" alt="The graph diff in Radius Canvas, with orderhistoryservice, postgres, and postgres-client-credentials in green and checkoutservice and frontend in yellow" width="100%" >}}
 
 ## Understanding the change
 
@@ -134,8 +131,7 @@ a short timeout, or record the order without blocking the response.
 The graph did not find that for us. Reading the code did. What the graph did was point
 us at the one connection where a small detail matters, out of 43 files.
 
-> 🖼️ **[IMAGE PLACEHOLDER]** `checkoutservice` selected in the graph diff, with the
-> link to `src/checkoutservice/main.go`.
+{{< image src="images/source-reference.png" alt="The checkoutservice menu in the graph diff, with links to src/checkoutservice/main.go and to its definition in .radius/app.bicep" width="100%" >}}
 
 ## A few things to keep in mind
 
