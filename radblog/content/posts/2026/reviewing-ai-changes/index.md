@@ -153,10 +153,6 @@ Copilot to update the model as part of the change, as we did here, keeps them in
 changed and how they connect. It does not replace reading the code; it helps you decide
 where to read first.
 
-**Not every resource is drawn.** The diff focuses on workloads, data stores, and the
-connections between them. Some supporting resources in `.radius/app.bicep`, such as
-container image builds, do not appear in the graph.
-
 ## See it in action
 
 > 🎬 **[DEMO PLACEHOLDER]** A short demo of the order history change: the graph diff in
