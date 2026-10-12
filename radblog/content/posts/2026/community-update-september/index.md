@@ -32,7 +32,25 @@ This patch makes the deployment engine honor Bicep conditions for Kubernetes res
 
 ### Radius plugin for the GitHub Copilot app
 
-The [ai-extensions](https://github.com/radius-project/ai-extensions) repository shipped its first releases of the `radius` plugin that powers Radius Canvas. [radius@0.1.0](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.1.0) on September 3 covers the preview experience: exploring an Application across modeled, planned, deployed, and branch-diff views, generating a validated `.radius/app.bicep` from repository source, creating and verifying deploy Environments, and deleting deployments and Environments through tracked, confirmed workflows. [radius@0.1.1](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.1.1) followed the same day with fixes for Secret-backed connection modeling, and [radius@0.2.0](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.2.0) on September 25 added a **Create Environment anyway** action for recoverable credential-verification failures, recognizable provider service names in Application graphs, and deployments that use the latest released Resource Types and Recipe packs.
+The [ai-extensions](https://github.com/radius-project/ai-extensions) repository shipped its first releases of the `radius` plugin that powers Radius Canvas.
+
+[radius@0.1.0](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.1.0) on September 3 is the first published build of the preview experience:
+
+- **Explore an Application** across modeled, planned, deployed, and branch-diff views, with resolved cloud resources, per-resource deployment status and logs, and links to local or remote source definitions.
+- **Generate a validated `.radius/app.bicep`** from repository source, with source references, deployment-aware Container settings, and Secret-connection guidance that matches the managed Radius version. The complete `.radius/` model is published atomically, so an unsuccessful run leaves existing files unchanged.
+- **Create and verify deploy Environments** in a guided, resumable workflow that keeps the selected cloud and GitHub identities visible, validates credentials, and offers retry, continue, and rollback controls with redacted diagnostics.
+- **Delete deployments and Environments** through tracked, confirmed workflows that clean up owned resources in dependency order, preserve shared or manually changed resources, and offer a guarded force-delete when a resource is stuck in progress.
+- **Resolve problems from Canvas** with validated **Copy** and **Run with Copilot** command actions that target the selected identity or branch and require confirmation for state-changing operations.
+
+[radius@0.1.1](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.1.1), published the same day, corrects how generated models handle credentials. Modeling guidance now decides from the schema's `x-radius-sensitive` flag rather than the property name, so a credential is no longer written where a `Radius.Security/secrets` resource ID belongs, and an authored Secret must use the exact data key the consuming schema names. The model checker also rejects a `@secure()` parameter assigned to a property the schema does not mark sensitive. The release additionally rejects invalid Kubernetes namespace names during Environment creation, preserves developer-configured CLI builds during modeling, and updates the plugin installation instructions to use the Copilot app's searchable plugin catalog.
+
+[radius@0.2.0](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.2.0) on September 25 adds:
+
+- **A way past recoverable verification failures.** When credential verification fails for a reason you can accept, such as missing permissions or an unreachable cluster, the panel offers **Create Environment anyway**. The Environment is then listed as `bypassed` rather than verified, so deploys are unblocked without discarding the real result. A later genuine success supersedes the marker.
+- **Credential drift detection on redeploy.** A deploy that fails at its cloud login step now explains that the credentials drifted and offers a **Re-verify credentials** action instead of a raw workflow error.
+- **Recognizable provider service names** in planned and deployed graphs, with the exact concrete Resource Type still available in node details.
+- **The latest released Resource Types and Recipe packs.** Packs now define only Recipes, so the deploy workflow creates the Environment and then attaches the pack. Existing Environments keep their packs and need no action.
+- **Safer graphs and deletes.** Graph artifacts retain only required resource, relationship, and provider-output metadata, and non-null graph-visible `Radius.Security/secrets` data is rejected before a graph is saved or rendered. The delete confirmation now names the resources the delete will destroy.
 
 Radius Canvas is in preview. Try it from the [how-to guide](https://edge.docs.radapp.io/integrations/github-copilot-app/canvas-extension/) and tell us what you think by [opening an issue](https://github.com/radius-project/ai-extensions/issues/new/choose).
 
