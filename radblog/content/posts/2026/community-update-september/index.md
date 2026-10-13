@@ -8,7 +8,7 @@ type: blog
 
 Welcome to the September 2026 Radius community update! [Radius](https://radapp.io/) is an open-source cloud-native application platform that helps developers define, deploy, and manage applications across any cloud or on-premises environment. It acts as an abstraction layer between your application and your infrastructure, letting you focus on building your app while platform teams keep control over how resources are provisioned.
 
-September brought Radius v0.61.0 with a wider set of `Radius.Core` capabilities, the removal of the legacy Kubernetes onboarding controllers, and the first releases of the Radius plugin for the GitHub Copilot app. Read on for what landed, what is coming next, and how to get involved.
+September brought Radius v0.61.0 with a wider set of `Radius.Core` capabilities, the removal of the legacy Kubernetes onboarding controllers, and a new release of the Radius plugin for the GitHub Copilot app. Read on for what landed, what is coming next, and how to get involved.
 
 ## Releases
 
@@ -41,19 +41,7 @@ The [resource-types-contrib](https://github.com/radius-project/resource-types-co
 
 ## Radius plugin for the GitHub Copilot app
 
-The [ai-extensions](https://github.com/radius-project/ai-extensions) repository shipped its first releases of the `radius` plugin that powers Radius Canvas.
-
-[radius@0.1.0](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.1.0) on September 3 is the first published build of the preview experience:
-
-- **Explore an Application** across modeled, planned, deployed, and branch-diff views, with resolved cloud resources, per-resource deployment status and logs, and links to source definitions.
-- **Generate a validated `.radius/app.bicep`** from repository source, with deployment-aware Container settings and Secret-connection guidance that matches the managed Radius version. The model is published atomically, so an unsuccessful run leaves existing files unchanged.
-- **Create and verify deploy Environments** in a guided, resumable workflow that keeps the selected cloud and GitHub identities visible, validates credentials, and offers retry, continue, and rollback controls with redacted diagnostics.
-- **Delete deployments and Environments** through tracked, confirmed workflows that clean up owned resources in dependency order, preserve shared or manually changed resources, and offer a guarded force-delete when a resource is stuck in progress.
-- **Resolve problems from Canvas** with validated **Copy** and **Run with Copilot** command actions that require confirmation for state-changing operations.
-
-[radius@0.1.1](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.1.1), published the same day, corrects how generated models handle credentials. Modeling guidance now decides from the schema's `x-radius-sensitive` flag rather than the property name, so a credential is no longer written where a `Radius.Security/secrets` resource ID belongs, and an authored Secret must use the exact data key the consuming schema names. The release also rejects invalid Kubernetes namespace names during Environment creation and updates the installation instructions to use the Copilot app's searchable plugin catalog.
-
-[radius@0.2.0](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.2.0) on September 25 adds:
+[radius@0.2.0](https://github.com/radius-project/ai-extensions/releases/tag/radius%400.2.0), released on September 25, is the latest version of the `radius` plugin that powers Radius Canvas in the [GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app). It adds:
 
 - **A way past recoverable verification failures.** When credential verification fails for a reason you can accept, such as missing permissions or an unreachable cluster, the panel offers **Create Environment anyway**. The Environment is then listed as `bypassed` rather than verified, so deploys are unblocked without discarding the real result.
 - **Credential drift detection on redeploy.** A deploy that fails at its cloud login step now explains that the credentials drifted and offers a **Re-verify credentials** action instead of a raw workflow error.
