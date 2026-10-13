@@ -37,7 +37,7 @@ This patch makes the deployment engine honor Bicep conditions for Kubernetes res
 
 ### Recipes and Resource Types
 
-The [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) catalog kept growing alongside the release. The Azure Container Instances Recipe pack landed in [#292](https://github.com/radius-project/resource-types-contrib/pull/292), MySQL and PostgreSQL gained a `tls` transport policy property that is enforced on Azure in [#307](https://github.com/radius-project/resource-types-contrib/pull/307) and [#332](https://github.com/radius-project/resource-types-contrib/pull/332), catalog guidance moved to Secret-backed connections in [#303](https://github.com/radius-project/resource-types-contrib/pull/303), and Recipe packs became Environment-independent in [#334](https://github.com/radius-project/resource-types-contrib/pull/334), so a pack defines only Recipes and is attached to an Environment separately.
+The [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) catalog kept growing alongside the release. The [Azure Container Instances Recipe pack](https://github.com/radius-project/resource-types-contrib/tree/main/recipe-packs/azure-aci) is now available, and [MySQL](https://github.com/radius-project/resource-types-contrib/tree/main/Data/mySqlDatabases) and [PostgreSQL](https://github.com/radius-project/resource-types-contrib/tree/main/Data/postgreSqlDatabases) gained a `tls` transport policy property that the Azure Recipes enforce. Catalog guidance also moved to Secret-backed connections, and Recipe packs became Environment-independent, so a pack defines only Recipes and is attached to an Environment separately.
 
 ## Radius plugin for the GitHub Copilot app
 
