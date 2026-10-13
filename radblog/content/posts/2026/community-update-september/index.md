@@ -63,7 +63,7 @@ The following work merged to `main` in September after the v0.61.0 release and i
 
 **Blog.** [Day One in an Unknown Repo](https://blog.radapp.io/posts/2026/09/30/day-one-unknown-repo/) by [Nithya Subramanian](https://github.com/nithyatsu) opens a series on the Application graph. It walks through what you face when you clone an unfamiliar repository, and how the graph pulls Dockerfiles, Kubernetes manifests, Helm charts, configuration, and source code into one view of the Application.
 
-**Docs.** Documentation caught up with Radius Canvas this month, with a how-to guide for the [GitHub Copilot app extension](https://github.com/radius-project/docs/pull/1989) and guidance for [PostgreSQL Secret connections](https://github.com/radius-project/docs/pull/2021).
+**Docs.** Documentation caught up with Radius Canvas this month, with a how-to guide for the [Radius plugin for the GitHub Copilot app](https://docs.radapp.io/integrations/github-copilot-app/canvas-extension/). The getting started walkthrough for [adding a connection](https://docs.radapp.io/getting-started/add-connection/) now models the database password as an authored Secret and connects the container to it.
 
 **Activity.** More than 300 pull requests merged across the public `radius-project` repositories in September. A large share of that work was test, release, and continuous integration hardening: Cloud end-to-end coverage for the Environment and deployment lifecycles in ai-extensions, Conventional Commit and release-parity tooling in the Radius repository, and functional tests for `rad upgrade kubernetes`.
 
