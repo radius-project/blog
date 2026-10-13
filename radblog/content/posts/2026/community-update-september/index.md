@@ -18,11 +18,12 @@ This patch fixes `install.sh` escalating to `sudo` for a user-writable `$HOME/.l
 
 ### Radius v0.61.0 (September 25)
 
-- **Preview Environments and Applications in `rad resource list`.** `rad resource list --preview` now lists `Radius.Core/environments` and `Radius.Core/applications`.
-- **Recipe packs from another Resource Group.** `rad env create --preview` and `rad env update --preview` can reference a Recipe pack that lives outside the Environment's own Resource Group.
-- **Unique Kubernetes namespaces for Environments.** Each `Radius.Core` Environment must use a namespace no other Environment holds, so two Environments can no longer quietly deploy into the same one.
-- **Cascading deletes for preview Environments.** Deleting a `Radius.Core` Environment removes the Applications and resources deployed into it instead of leaving them behind.
-- **A deprecation warning for `Applications.*` types.** `rad deploy` warns when a template uses the older `Applications.*` Resource Types and suggests the `Radius.*` replacement, so you can migrate before support is removed in a later release.
+- **More `Radius.Core` capabilities.** The preview Resource Types gained several updates:
+  - `rad resource list --preview` now lists `Radius.Core/environments` and `Radius.Core/applications`.
+  - `rad env create --preview` and `rad env update --preview` can reference a Recipe pack that lives outside the Environment's own Resource Group.
+  - Each Environment must use a Kubernetes namespace no other Environment holds, so two Environments can no longer quietly deploy into the same one.
+  - Deleting an Environment removes the Applications and resources deployed into it instead of leaving them behind.
+  - `rad deploy` warns when a template uses the older `Applications.*` Resource Types and suggests the `Radius.*` replacement, so you can migrate before support is removed in a later release.
 - **Deploy templates directly from HTTPS URLs.** `rad deploy` accepts a Bicep or ARM JSON template hosted at an HTTPS URL. Radius validates the URL, resolves relative Bicep module references from the remote template's location, and redacts URL credentials from command output.
 - **Share Secrets between connected resources.** Connections to Recipe-backed resources carry both ordinary values and references to producer-managed Secrets. Radius stores Recipe secret outputs in managed `Radius.Security/secrets` resources and makes the references available to consuming Recipes without decrypting or exposing the values.
 - **More services in the default Kubernetes Recipe pack.** The pack now includes PostgreSQL, RabbitMQ, and Redis, so you can deploy those backing services without configuring a custom Recipe pack. You can [download the pack](https://github.com/radius-project/resource-types-contrib/tree/main/recipe-packs/kubernetes) and attach it to an Environment today.
