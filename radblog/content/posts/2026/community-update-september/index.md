@@ -61,7 +61,7 @@ The [ai-extensions](https://github.com/radius-project/ai-extensions) repository 
 - **The latest released Resource Types and Recipe packs.** Packs now define only Recipes, so the deploy workflow creates the Environment and then attaches the pack. Existing Environments keep their packs and need no action.
 - **Safer graphs and deletes.** Graph artifacts retain only required resource, relationship, and provider-output metadata, and graph-visible `Radius.Security/secrets` data is rejected before a graph is saved or rendered. The delete confirmation now names the resources the delete will destroy.
 
-Radius Canvas is in preview. Try it from the [how-to guide](https://edge.docs.radapp.io/integrations/github-copilot-app/canvas-extension/) and tell us what you think by [opening an issue](https://github.com/radius-project/ai-extensions/issues/new/choose).
+Radius Canvas is in preview. Try it from the [how-to guide](https://docs.radapp.io/integrations/github-copilot-app/canvas-extension/) and tell us what you think by [opening an issue](https://github.com/radius-project/ai-extensions/issues/new/choose).
 
 ## Upcoming features
 
