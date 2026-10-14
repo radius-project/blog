@@ -155,9 +155,7 @@ where to read first.
 
 ## See it in action
 
-> 🎬 **[DEMO PLACEHOLDER]** A short demo of the order history change: the graph diff in
-> Radius Canvas, following `checkoutservice` to the code, iterating with Copilot, and the
-> graph diff in the pull request description.
+{{< youtube fK8mHMmcDfE >}}
 
 If you are working on a change to an application of your own, try asking for the
 graph diff and let us know how it looks. We would love to hear what works well and what
