@@ -1,5 +1,5 @@
 ---
-date: "2026-10-14T07:00:00-07:00"
+date: "2026-10-19T07:00:00-07:00"
 title: "Day Two: Reviewing AI-Generated Changes"
 linkTitle: "Day Two: Reviewing AI-Generated Changes"
 author: "[Nithya Subramanian](https://github.com/nithyatsu)"
@@ -47,8 +47,7 @@ Copilot app, ask Copilot
 
 > Show me the application graph diff for this branch.
 
-Radius Canvas compares the application model on the base branch and on your branch, and
-draws one graph with every resource marked by what happened to it:
+Radius Canvas compares the application models on your branch and the base branch, then shows a graph highlighting the changes to the resources:
 
 - **Green** resources were added.
 - **Yellow** resources were modified.
@@ -68,26 +67,23 @@ For the order history change, the diff shows:
 - **Unchanged:** the other ten resources, including `cartservice`, `paymentservice`,
   and `redis`.
 
-Seen this way, a 43-file change is one new service with its own database, called
-from two existing services. The architecture grew by three resources and four
-connections, and the rest of the application stayed as it was.
+Although the change spans 43 files, its architectural impact is concise: three resources added, two services modified, and ten resources unchanged.
 
 ### Validating the change
 
 With that picture, the review can start with a few architectural questions:
 
-- **Is this what we asked for?** One new service that stores orders, a page that shows
-  them, and checkout recording each order. Yes.
+- **Is this what we asked Copilot to do?** The change adds a service that stores orders, a page that shows them, and checkout recording each order. Yes.
 - **Did anything change that shouldn't have?** The payment, shipping, and cart services
   are untouched, and the change does not use the existing Redis cache.
 - **Are the new pieces the right ones?** A new PostgreSQL database is a real decision:
-  it is one more thing to run, back up, and secure. This is the moment to decide on it,
+  it is one more thing to run, back up, and secure. This is the time to decide on it,
   before the code is merged rather than after it is deployed.
 
 One connection is worth a closer look: `checkoutservice` now calls
 `orderhistoryservice`. In the first post, we saw that `checkoutservice` is where a single
 order touches most of the application, and that a problem in any of its dependencies
-shows up at checkout. Now it has a seventh dependency. It is worth asking what happens
+can affect checkout. Now it has a seventh dependency. It's worth checking the code to see what happens
 to checkout if order history is slow or unavailable.
 
 ### From the graph to the code
