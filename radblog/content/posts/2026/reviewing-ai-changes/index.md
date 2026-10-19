@@ -56,7 +56,7 @@ Radius Canvas compares the application models on your branch and the base branch
 
 {{< image src="images/graph-diff.png" alt="The graph diff in Radius Canvas, with orderhistoryservice, postgres, and postgres-client-credentials in green and checkoutservice and frontend in yellow" width="100%" >}}
 
-### Understanding the change
+### Understanding and validating the change
 
 For the order history change, the diff shows:
 
@@ -68,8 +68,6 @@ For the order history change, the diff shows:
   and `redis`.
 
 Although the change spans 43 files, its architectural impact is concise: three resources added, two services modified, and ten resources unchanged.
-
-### Validating the change
 
 With that picture, the review can start with a few architectural questions:
 
@@ -100,16 +98,16 @@ if err := cs.recordOrderHistory(ctx, req.UserId, req.Email, orderResult, &total)
 
 {{< image src="images/source-reference.png" alt="The checkoutservice menu in the graph diff, with links to src/checkoutservice/main.go and to its definition in .radius/app.bicep" width="100%" >}}
 
-If the call fails, checkout logs a warning and the order still goes through, which is
-what we want. But the call is made while the shopper waits, and it has no timeout of
-its own, so a slow order history service makes checkout slow too.
+If the call fails, checkout logs a warning and the order still goes through as intended.
+However, the call happens while the shopper waits, and has no timeout of its own, so a
+slow order history service makes checkout slow too.
 
-The graph did not find that for us. Reading the code did. What the graph did was point
-us at the one connection where a small detail matters, out of 43 files.
+The graph doesn’t reveal that behavior; the code does. The graph points us to the
+connection where this detail matters, among 43 files.
 
 ## Iterating with Copilot
 
-Because we found the issue before opening a pull request, fixing it is one more prompt
+Because we found the issue before opening a pull request, we can ask Copilot to fix it
 in the same session:
 
 > Give the order history call in checkoutservice a short timeout so a slow order history
@@ -146,7 +144,7 @@ alters the architecture without updating the model, the graph will not show it. 
 Copilot to update the model as part of the change, as we did here, keeps them in step.
 
 **The graph shows architecture, not logic.** It tells you which services and resources
-changed and how they connect. It does not replace reading the code; it helps you decide
+changed and how they connect. It does not replace reviewing the code; it helps you decide
 where to read first.
 
 ## See it in action
