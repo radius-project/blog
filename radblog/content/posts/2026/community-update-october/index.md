@@ -26,7 +26,7 @@ Radius now embeds a pinned copy of the [Kubernetes Recipe pack](https://github.c
 
 #### Store Terraform Recipe state in S3 or Azure Blob Storage
 
-Until now, Radius stored Terraform Recipe state only in Kubernetes Secrets. You can now point Radius at an existing S3 bucket or Azure Blob Storage container by adding a `backend` to a `Radius.Core/terraformSettings` resource:
+Until now, Radius stored Terraform Recipe state only in Kubernetes Secrets. Cloud backends are supported for **new Environments only**: create a new `Radius.Core/terraformSettings` resource with a `backend` pointing to an existing S3 bucket or Azure Blob Storage container, then reference its ID from the new Environment's `properties.terraformSettings` before deploying Applications. Existing settings cannot acquire a backend, and changing an existing deployment's settings reference does not migrate its state and can orphan its infrastructure. For example:
 
 ```bicep
 resource settings 'Radius.Core/terraformSettings@2025-08-01-preview' = {
