@@ -86,9 +86,16 @@ The following work merged to `main` in October after the v0.62.0 release and is 
 
 ## Radius at KubeCon
 
-KubeCon + CloudNativeCon North America 2026 takes place November 9–12 in Salt Lake City, Utah.
+Heading to KubeCon + CloudNativeCon North America 2026 in Salt Lake City? Come meet the Radius team and learn how Radius helps developers and platform engineers simplify cloud-native application development and deployment. Here's where you can find us:
 
-<!-- TODO(maintainers): Add the Radius @ KubeCon details (sessions, times, and where to find the team) from https://lnkd.in/p/ghaHqrbF. The link could not be reached when this post was drafted, so no details were added. -->
+- **Microsoft Booth Theater session: _From Code to Cloud: Give AI Agents a Shared Understanding of the Application_**
+  - Tuesday, November 10, 5:05–5:25 PM
+  - Microsoft Azure booth
+- **Radius at the CNCF Project Pavilion**
+  - Wednesday, November 11, 10:15 AM–1:25 PM
+  - Kiosk P-1B, Solutions Showcase, Level 1, Hall 5
+
+Whether you're exploring AI-assisted development, application modeling, or platform engineering, stop by to see Radius in action, share your feedback, and help shape what's next for the project. See you in Salt Lake City!
 
 ## Community
 
