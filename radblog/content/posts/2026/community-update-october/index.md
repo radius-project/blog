@@ -105,7 +105,6 @@ Whether you're exploring AI-assisted development, application modeling, or platf
 
 **New contributors.** Welcome to [@itpropro](https://github.com/itpropro), who made the worker dequeue interval configurable and fixed a case where a DeploymentTemplate spec change made during a deployment was never applied, and to [@allexistence](https://github.com/allexistence), who corrected the custom install location example in the CLI contributing guide.
 
-**Activity.** More than 550 pull requests merged across the public `radius-project` repositories in October. Alongside the features above, much of that work hardened the release process, including build provenance attestations for Radius release artifacts, dashboard images, and published Bicep Recipes.
 
 **Contributing.** A Recipe is self-contained Bicep or Terraform, which makes [resource-types-contrib](https://github.com/radius-project/resource-types-contrib) one of the easiest places to start contributing. If you want to add support for infrastructure you use, browse the [good first issues](https://aka.ms/radius-first-issues).
 
