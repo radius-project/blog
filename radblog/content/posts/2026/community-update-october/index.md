@@ -89,8 +89,11 @@ The following work merged to `main` in October after the v0.62.0 release and is 
 Heading to KubeCon + CloudNativeCon North America 2026 in Salt Lake City? Come meet the Radius team and learn how Radius helps developers and platform engineers simplify cloud-native application development and deployment. Here's where you can find us:
 
 - **Microsoft Booth Theater session: _From Code to Cloud: Give AI Agents a Shared Understanding of the Application_**
-  - Tuesday, November 10, 5:05–5:25 PM
-  - Microsoft Azure booth
+  - Tuesday, November 10, 5:05–5:25PM MST
+  - Level 1: Hall A - Microsoft Booth 117
+- **Microsoft Booth Theater session: _Build Once, Deploy Across local, AKS, and ACI with Radius_**
+  - Thursday, November 12, 12:00-12:20PM MST
+  - Level 1: Hall A - Microsoft Booth 117
 - **Radius at the CNCF Project Pavilion**
   - Wednesday, November 11, 10:15 AM–1:25 PM
   - Kiosk P-1B, Solutions Showcase, Level 1, Hall 5
