@@ -26,7 +26,7 @@ The Docsy theme is pulled in automatically via [Hugo Modules](https://gohugo.io/
 
 1. Make sure you're still in the radblog directory
 1. Run `npm run start:drafts` (or `npm run start` to exclude drafts)
-1. Navigate to `http://localhost:1313/posts`
+1. Navigate to <http://localhost:1313/> to see the posts list. It is also available at `/posts/`.
 
 ## Contributing Blog Posts
 
