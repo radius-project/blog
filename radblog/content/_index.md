@@ -10,4 +10,4 @@ title: "Radius Blog"
 <img src="img/rad-logo.png" alt="Radius Logo" width="400">
 <br /><br />
 
-<font size=6>[**Read Radius Blog Posts**](/posts)</f>
+<font size=6>[**Read Radius Blog Posts**](posts/)</f>

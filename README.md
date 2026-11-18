@@ -4,7 +4,7 @@ The Radius blog is a place to share the latest news, updates, features, customer
 
 ## Overview
 
-The Radius blog is built using [Hugo](https://gohugo.io/) with the [Docsy](https://docsy.dev) theme, hosted on an [Azure static web app](https://docs.microsoft.com/en-us/azure/static-web-apps/overview).
+The Radius blog is built using [Hugo](https://gohugo.io/) with the [Docsy](https://docsy.dev) theme and published to [GitHub Pages](https://pages.github.com/).
 
 The [radblog](./radblog) directory contains the hugo project, markdown files, and theme configurations.
 
@@ -31,3 +31,11 @@ The Docsy theme is pulled in automatically via [Hugo Modules](https://gohugo.io/
 ## Contributing Blog Posts
 
 Follow the [Contribution Guide](./radblog/guide/contribution-guide.md) for more details on writing and formatting blog posts.
+
+## Publishing
+
+The [Publish Blog to GitHub Pages workflow](./.github/workflows/blog.yaml) runs on pushes to `main`, daily at 16:00 UTC, and when run manually on `main`. It builds the site once, uploads it as a Pages artifact, and deploys that artifact without rebuilding. Pull requests produce a downloadable preview instead of deploying.
+
+In [Settings > Pages](https://github.com/radius-project/blog/settings/pages), use **GitHub Actions** as the publishing source and leave **Custom domain** empty to preview at <https://radius-project.github.io/blog/> after the first successful deployment.
+
+When ready to cut over, set `blog.radapp.io` as the Pages custom domain, point its DNS CNAME to `radius-project.github.io`, and rerun the workflow on `main` to rebuild with the new URL. Verify HTTPS after the DNS change.

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Radius project blog serves as a vital communication channel between the Radius community and the broader cloud-native community. This guide establishes standards for creating content that is both technically accurate and accessible to developers worldwide. 
+The Radius project blog serves as a vital communication channel between the Radius community and the broader cloud-native community. This guide establishes standards for creating content that is both technically accurate and accessible to developers worldwide.
 
 All blog contributions must be relevant to Radius and the broader cloud-native ecosystem. Content should provide genuine value to readers through actionable insights, practical examples, or meaningful technical depth.
 
@@ -101,7 +101,7 @@ Blog post content here.
 
 ### Code and Technical Content
 - **Code blocks**: Use fenced blocks with language specification for syntax highlighting
-    
+
     ```bash
     # Example bash code block
     ```
@@ -136,4 +136,4 @@ Blog post content here.
 - **Branch naming**: Use descriptive names (`blog/radius-app-graph`)
 - **Commit messages**: Follow conventional commit format
 - **Description**: Explain post topic, target audience, and key points
-- **Staging site**: A staging site will automatically get created and linked to PR to review and test
+- **Preview**: Download and extract the latest `radblog-preview-*` artifact from the pull request's Actions run. To view it, run `python -m http.server 8000 --bind 127.0.0.1` from the extracted directory and open <http://localhost:8000/>.
