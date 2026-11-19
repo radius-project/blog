@@ -9,6 +9,7 @@ When assigned an issue with the "Monthly Community Update" template, generate a 
 Use the `gh` CLI to gather the following data for the specified date range:
 
 ### 1. Releases
+
 ```bash
 gh api "/orgs/radius-project/repos?per_page=100&type=public" --jq '.[].name' | while read repo; do
   gh release list --repo "radius-project/$repo" --limit 10 | grep -i "<month>"
@@ -16,23 +17,27 @@ done
 ```
 
 ### 2. Merged Pull Requests
+
 ```bash
 gh search prs --org radius-project --merged-at "START_DATE..END_DATE" --limit 50 --json title,number,repository,author,url
 ```
 
 ### 3. New Issues
+
 ```bash
 gh search issues --org radius-project --created "START_DATE..END_DATE" --limit 50 --json title,number,repository,author,url
 ```
 
 ### 4. Contributors
+
 Extract unique authors from the merged PRs above.
 
 ## Blog Post Structure
 
-Create the post at: `radblog/content/posts/<YEAR>/monthly-update-<month>/index.md`
+Create the post at: `site/content/posts/<YEAR>/monthly-update-<month>/index.md`
 
 ### Frontmatter
+
 ```yaml
 ---
 date: "<last-day-of-month>T07:00:00-07:00"
@@ -44,6 +49,7 @@ type: blog
 ```
 
 ### Content Structure
+
 1. **Opening paragraph** (no heading) — summarize the month's highlights in 2-3 sentences
 2. **## Releases** — list any new releases with version, repo, and key changes
 3. **## Highlights** — curate 5-10 most impactful merged PRs grouped by theme (features, fixes, docs). Don't list every PR.
@@ -64,7 +70,8 @@ We would love for you to join us to help build Radius:
 
 ## Style Guide
 
-Follow the contribution guide at `radblog/guide/contribution-guide.md`. Key rules:
+Follow the contribution guide at `site/guide/contribution-guide.md`. Key rules:
+
 - Conversational and friendly tone, user-focused ("you" not "we")
 - Active voice, present tense
 - No promotional language or superlatives
@@ -74,6 +81,7 @@ Follow the contribution guide at `radblog/guide/contribution-guide.md`. Key rule
 - Evidence-based — only include information from actual GitHub data
 
 ## Critical Rules
+
 - **ONLY** include information gathered from the GitHub API — never make up PRs, issues, or contributors
 - **DO NOT** speculate about future plans
 - **DO NOT** include code snippets unless they are directly from a release or PR

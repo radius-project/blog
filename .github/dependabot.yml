@@ -32,7 +32,7 @@ updates:
           - "*"
 
   - package-ecosystem: gomod
-    directory: "/radblog"
+    directory: "/site"
     schedule:
       interval: weekly
     cooldown:
@@ -54,7 +54,7 @@ updates:
           - "*"
 
   - package-ecosystem: npm
-    directory: "/radblog"
+    directory: "/site"
     schedule:
       interval: weekly
     cooldown:

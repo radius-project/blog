@@ -16,13 +16,13 @@ on:
 permissions: {}
 
 concurrency:
-  group: blog-pages-${{ github.ref }}
+  group: pages-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 defaults:
   run:
     shell: bash
-    working-directory: radblog
+    working-directory: site
 
 jobs:
   build:
@@ -51,17 +51,17 @@ jobs:
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
       - name: Setup Go
-        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
         with:
-          go-version-file: radblog/go.mod
-          cache-dependency-path: radblog/go.sum
+          go-version-file: site/go.mod
+          cache-dependency-path: site/go.sum
 
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version-file: radblog/.node-version
+          node-version-file: site/.node-version
           cache: npm
-          cache-dependency-path: radblog/package-lock.json
+          cache-dependency-path: site/package-lock.json
 
       - name: Install Node.js dependencies
         run: npm ci
@@ -70,7 +70,7 @@ jobs:
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/hugo-cache
-          key: hugo-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('radblog/go.sum', 'radblog/package-lock.json') }}
+          key: hugo-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('site/go.sum', 'site/package-lock.json') }}
 
       - name: Build site
         env:
@@ -96,8 +96,8 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: radblog-preview-${{ github.run_attempt }}
-          path: radblog/public
+          name: preview-${{ github.run_attempt }}
+          path: site/public
           if-no-files-found: error
           retention-days: 7
 
@@ -106,7 +106,7 @@ jobs:
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           name: ${{ env.PAGES_ARTIFACT_NAME }}
-          path: radblog/public
+          path: site/public
           retention-days: 7
 
   deploy:

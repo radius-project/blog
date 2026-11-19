@@ -37,7 +37,7 @@ All blog contributions must be relevant to Radius and the broader cloud-native e
 
 ## Location and structure of post content
 
-Create a new markdown file for each blog post in the appropriate year directory under `radblog/content/posts`. The file name should be the title of the blog post, with hyphens in place of spaces. For example, the file name for a blog post titled "Hello world" would be `hello-world.md`.
+Create a new markdown file for each blog post in the appropriate year directory under `site/content/posts`. The file name should be the title of the blog post, with hyphens in place of spaces. For example, the file name for a blog post titled "Hello world" would be `hello-world.md`.
 
 The content of the blog post markdown file should be in the following format:
 
@@ -64,6 +64,7 @@ Blog post content here.
 ## Writing Guidelines
 
 ### Style and Tone
+
 - **Conversational and friendly**: Make technical topics accessible without being frivolous
 - **User-focused**: Write in second person ("you") rather than first person ("we")
 - **Clear and concise**: Use simple, direct language accessible globally
@@ -72,6 +73,7 @@ Blog post content here.
 - **Objective**: Avoid promotional language, superlatives, and unsupported claims
 
 ### Language Standards
+
 - **Global accessibility**: Avoid idioms, cultural references, and region-specific examples
 - **American English spelling**: Use standard conventions consistently
 - **Terminology consistency**: Use established Radius terminology throughout
@@ -81,6 +83,7 @@ Blog post content here.
 - **Conditional clarity**: Put conditions before instructions
 
 ### Content Quality Standards
+
 - **Evidence-based**: Support all claims with documentation, code, or examples
 - **Practical focus**: Include working code examples and step-by-step instructions
 - **No pre-announcements**: Avoid announcing unavailable future features
@@ -92,6 +95,7 @@ Blog post content here.
 ## Formatting Standards
 
 ### Typography
+
 - **Proper nouns**: Capitalize Radius entities including: Applications, Environments, Recipes, Resource Types, Containers, Secrets, Routes, Gateways, Resource Groups
 - **Headings**: Use sentence case (first word and proper nouns only)
 - **File names**: Use kebab-case (`radius-release-guide.md`)
@@ -100,26 +104,31 @@ Blog post content here.
 - **Serial commas**: Use consistently in lists of three or more items
 
 ### Code and Technical Content
+
 - **Code blocks**: Use fenced blocks with language specification for syntax highlighting
 
     ```bash
     # Example bash code block
     ```
+
 - **Commands**: Separate multiple commands into individual blocks
 - **Output**: Show expected output in separate blocks
 - **File paths**: Use backticks for file names and paths
 - **Placeholders**: Use descriptive names and enclose them in angle brackets (`<YOUR-APPLICATION-NAME>` not `app1`)
 
 ### Visual Content
+
 - **Images**: Use high-resolution or vector images with Hugo shortcode `img`
 
-   ```
+   ```text
    {{< image src="images/<your_image_name>" alt="Screenshot of image x" width="500" >}}
    ```
+
 - **Alt text**: Provide descriptive text explaining what images show
 - **Consistency**: Maintain consistent visual styling within posts
 
 ### Links and References
+
 - **Descriptive text**: Use specific descriptions instead of "click here"
 - **Internal links**: Connect to relevant Radius documentation and blog posts
 - **External links**: Point to authoritative, current sources
@@ -128,12 +137,14 @@ Blog post content here.
 ## Submission Process
 
 ### Before Submitting
+
 1. **Self-review**: Check technical accuracy, style adherence, and target audience clarity
 2. **Technical review**: Have domain experts verify accuracy and completeness
 3. **Editorial review**: Ensure clarity, grammar, and style consistency
 
 ### Pull Request Requirements
+
 - **Branch naming**: Use descriptive names (`blog/radius-app-graph`)
 - **Commit messages**: Follow conventional commit format
 - **Description**: Explain post topic, target audience, and key points
-- **Preview**: Download and extract the latest `radblog-preview-*` artifact from the pull request's Actions run. To view it, run `python -m http.server 8000 --bind 127.0.0.1` from the extracted directory and open <http://localhost:8000/>.
+- **Preview**: Download and extract the latest `preview-*` artifact from the pull request's Actions run. To view it, run `python -m http.server 8000 --bind 127.0.0.1` from the extracted directory and open <http://localhost:8000/>.

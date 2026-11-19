@@ -6,7 +6,7 @@ The Radius blog is a place to share the latest news, updates, features, customer
 
 The Radius blog is built using [Hugo](https://gohugo.io/) with the [Docsy](https://docsy.dev) theme and published to [GitHub Pages](https://pages.github.com/).
 
-The [radblog](./radblog) directory contains the hugo project, markdown files, and theme configurations.
+The [site](./site) directory contains the hugo project, markdown files, and theme configurations.
 
 ## Pre-requisites
 
@@ -17,20 +17,20 @@ The [radblog](./radblog) directory contains the hugo project, markdown files, an
 
 1. Ensure pre-requisites are installed
 1. Clone repository
-1. Change to radblog directory: `cd radblog`
+1. Change to site directory: `cd site`
 1. Install npm packages: `npm install`
 
 The Docsy theme is pulled in automatically via [Hugo Modules](https://gohugo.io/hugo-modules/) on first build — no git submodule setup required.
 
 ## Run local server
 
-1. Make sure you're still in the radblog directory
+1. Make sure you're still in the site directory
 1. Run `npm run start:drafts` (or `npm run start` to exclude drafts)
 1. Navigate to <http://localhost:1313/> to see the posts list. It is also available at `/posts/`.
 
 ## Contributing Blog Posts
 
-Follow the [Contribution Guide](./radblog/guide/contribution-guide.md) for more details on writing and formatting blog posts.
+Follow the [Contribution Guide](./site/guide/contribution-guide.md) for more details on writing and formatting blog posts.
 
 ## Publishing
 

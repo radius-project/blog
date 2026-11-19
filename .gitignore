@@ -21,4 +21,4 @@ bin/
 .vscode/
 
 # Hugo Modules vendor directory
-radblog/_vendor/
+site/_vendor/
