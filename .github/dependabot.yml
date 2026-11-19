@@ -32,7 +32,7 @@ updates:
           - "*"
 
   - package-ecosystem: gomod
-    directory: "/site"
+    directory: "/"
     schedule:
       interval: weekly
     cooldown:
@@ -54,7 +54,7 @@ updates:
           - "*"
 
   - package-ecosystem: npm
-    directory: "/site"
+    directory: "/"
     schedule:
       interval: weekly
     cooldown:

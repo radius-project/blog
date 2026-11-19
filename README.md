@@ -6,35 +6,31 @@ The Radius blog is a place to share the latest news, updates, features, customer
 
 The Radius blog is built using [Hugo](https://gohugo.io/) with the [Docsy](https://docsy.dev) theme and published to [GitHub Pages](https://pages.github.com/).
 
-The [site](./site) directory contains the hugo project, markdown files, and theme configurations.
+The Hugo project lives at the repository root. Post sources and images are in [content/posts](./content/posts), and theme overrides are in [layouts](./layouts) and [assets](./assets).
 
-## Pre-requisites
+## Prerequisites
 
-- [Hugo extended version](https://gohugo.io/getting-started/installing)
-- [Node.js](https://nodejs.org/en/)
+- [Node.js](https://nodejs.org/en/) as specified in [`.node-version`](./.node-version)
+- [Go](https://go.dev/dl/) as specified in [`go.mod`](./go.mod), for Hugo Modules
 
 ## Environment setup
 
-1. Ensure pre-requisites are installed
-1. Clone repository
-1. Change to site directory: `cd site`
-1. Install npm packages: `npm install`
-
-The Docsy theme is pulled in automatically via [Hugo Modules](https://gohugo.io/hugo-modules/) on first build — no git submodule setup required.
+Clone the repository and run `npm ci` from its root. The npm dependencies include Hugo Extended. Hugo fetches the Docsy theme via [Hugo Modules](https://gohugo.io/hugo-modules/) on the first build; no Git submodules are required.
 
 ## Run local server
 
-1. Make sure you're still in the site directory
-1. Run `npm run start:drafts` (or `npm run start` to exclude drafts)
+1. From the repository root, run `npm run start:drafts` (or `npm run start` to exclude drafts).
 1. Navigate to <http://localhost:1313/> to see the posts list. It is also available at `/posts/`.
 
 ## Contributing Blog Posts
 
-Follow the [Contribution Guide](./site/guide/contribution-guide.md) for more details on writing and formatting blog posts.
+Follow the [Contribution Guide](./guide/contribution-guide.md) for more details on writing and formatting blog posts.
 
 ## Publishing
 
-The [Publish Blog to GitHub Pages workflow](./.github/workflows/blog.yaml) runs on pushes to `main`, daily at 16:00 UTC, and when run manually on `main`. It builds the site once, uploads it as a Pages artifact, and deploys that artifact without rebuilding. Pull requests produce a downloadable preview instead of deploying.
+Run `npm run build` from the repository root to generate the site in Hugo's [default `public/` directory](https://gohugo.io/getting-started/directory-structure/#directories). This output is ignored by Git.
+
+The [Publish workflow](./.github/workflows/publish.yaml) runs on pushes to `main`, daily at 16:00 UTC, and when run manually on `main`. It builds the site once, uploads only `public/` as a Pages artifact, and deploys that artifact without rebuilding. Pull requests produce a downloadable preview instead of deploying.
 
 In [Settings > Pages](https://github.com/radius-project/blog/settings/pages), use **GitHub Actions** as the publishing source and leave **Custom domain** empty to preview at <https://radius-project.github.io/blog/> after the first successful deployment.
 

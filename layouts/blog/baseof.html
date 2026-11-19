@@ -1,0 +1,56 @@
+{{/*
+  Adapted from Docsy v0.15.0's blog base template (Apache-2.0).
+  Use the posts section for navigation on both index routes, without changing
+  the page context that supplies metadata, content, and pagination.
+*/ -}}
+{{ $navPage := . -}}
+{{ if .IsHome -}}
+  {{ with .Site.GetPage "/posts" -}}
+    {{ $navPage = . -}}
+  {{ else -}}
+    {{ errorf "The blog homepage requires the /posts section for navigation" -}}
+  {{ end -}}
+{{ end -}}
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage"
+    {{- with .Site.Language.LanguageDirection }} dir="{{ . }}" {{- end -}}
+    {{ with .Site.Language.Lang }} lang="{{ . }}" {{- end }} {{/**/ -}}
+    class="no-js"
+    {{- $darkMode := partialCached "dark-mode-config.html" "dark-mode-global" -}}
+    {{- if $darkMode.enable }} data-theme-init{{ end }}>
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="td-{{ $navPage.Kind }} td-blog {{- with $navPage.Params.body_class }} {{ . }}{{ end }}">
+    <header>
+      {{ partial "navbar.html" . }}
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            {{ partial "sidebar.html" $navPage }}
+          </aside>
+          <aside class="td-sidebar-toc">
+            {{ partial "page-meta-links.html" . }}
+            {{ partial "toc.html" . }}
+            {{ partial "taxonomy_terms_clouds.html" . }}
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5 pe-md-4" role="main">
+            {{ with $navPage.CurrentSection.OutputFormats.Get "rss" -}}
+            <a class="td-rss-button" title="RSS" href="{{ .RelPermalink | safeURL }}" target="_blank" rel="noopener">
+              <i class="fa-solid fa-rss" aria-hidden="true"></i>
+            </a>
+            {{ end -}}
+            {{ if not ($navPage.Param "ui.breadcrumb_disable") -}}
+              {{ partial "breadcrumb.html" $navPage -}}
+            {{ end -}}
+            {{ block "main" . }}{{ end }}
+          </main>
+        </div>
+      </div>
+      {{ partial "footer.html" . }}
+    </div>
+    {{ partial "scripts.html" . }}
+  </body>
+</html>

@@ -37,7 +37,7 @@ All blog contributions must be relevant to Radius and the broader cloud-native e
 
 ## Location and structure of post content
 
-Create a new markdown file for each blog post in the appropriate year directory under `site/content/posts`. The file name should be the title of the blog post, with hyphens in place of spaces. For example, the file name for a blog post titled "Hello world" would be `hello-world.md`.
+Create a new markdown file for each blog post in the appropriate year directory under `content/posts`. The file name should be the title of the blog post, with hyphens in place of spaces. For example, the file name for a blog post titled "Hello world" would be `hello-world.md`.
 
 The content of the blog post markdown file should be in the following format:
 

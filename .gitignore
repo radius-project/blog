@@ -1,24 +1,16 @@
-resources/_gen
-node_modules
-public
-.cache/
-obj/
-bin/
-../resources/_gen
-../node_modules
-../public
-../.cache/
-../obj/
-../bin/
-*/resources/_gen
-*/node_modules
-*/public
-*/.cache/
-*/obj/
-*/bin/
+# Hugo build output, caches, and vendored modules
+/public/
+/resources/
+/_gen/
+/_vendor/
+/.hugo_build.lock
+
+# Local dependencies and build output
+node_modules/
+/.cache/
+/dist/
+/obj/
+/bin/
 
 *.DS_Store
 .vscode/
-
-# Hugo Modules vendor directory
-site/_vendor/

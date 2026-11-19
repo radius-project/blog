@@ -78,6 +78,5 @@ copyright = "Radius"
 
 # GitHub Information
 github_repo = "https://github.com/radius-project/blog"
-github_subdir = "blog"
 github_branch = "main"
 github_project_repo = "https://github.com/radius-project/radius"

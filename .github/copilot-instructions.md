@@ -34,7 +34,7 @@ Extract unique authors from the merged PRs above.
 
 ## Blog Post Structure
 
-Create the post at: `site/content/posts/<YEAR>/monthly-update-<month>/index.md`
+Create the post at: `content/posts/<YEAR>/monthly-update-<month>/index.md`
 
 ### Frontmatter
 
@@ -70,7 +70,7 @@ We would love for you to join us to help build Radius:
 
 ## Style Guide
 
-Follow the contribution guide at `site/guide/contribution-guide.md`. Key rules:
+Follow the contribution guide at `guide/contribution-guide.md`. Key rules:
 
 - Conversational and friendly tone, user-focused ("you" not "we")
 - Active voice, present tense
